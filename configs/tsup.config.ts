@@ -1,18 +1,8 @@
 import { defineConfig } from "tsup";
 import * as preset from "tsup-preset-solid";
 
-const defaultConfig: preset.PresetOptions = {
-	entries: [
-		// default entry (index)
-		{
-			// entries with '.tsx' extension will have `solid` export condition generated
-			entry: "src/index.tsx",
-			// set `true` or pass a specific path to generate a development-only entry
-			// dev_entry: "src/dev.tsx",
-			// set `true` or pass a specific path to generate a server-only entry
-			server_entry: true,
-		},
-	],
+export const defaultConfig: preset.PresetOptions = {
+	entries: [],
 	// Setting `true` will remove all `console.*` calls and `debugger` statements
 	drop_console: true,
 	// Setting `true` will generate a CommonJS build alongside ESM (default: `false`)
@@ -24,7 +14,7 @@ export const doubleEntryConfig = (customPresetConfig?: preset.PresetOptions) =>
 		const watching = !!config.watch;
 
 		const parsed_data = preset.parsePresetOptions(
-			{ ...customPresetConfig, ...defaultConfig },
+			{ ...defaultConfig, ...customPresetConfig },
 			watching,
 		);
 
