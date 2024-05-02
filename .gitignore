@@ -50,3 +50,4 @@ packages/**/.turbo
 
 # tsup
 tsup.config.bundled_*.{m,c,}s
+*storybook.log
