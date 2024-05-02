@@ -1,0 +1,34 @@
+{
+  "name": "@saftox-ui/{{componentName}}",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "{{description}}",
+  "keywords": [
+    "{{componentName}}"
+  ],
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "private": true,
+  "type": "module",
+  "typesVersions": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/{{outDir}}/{{componentName}}"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "dev": "vite serve dev",
+    "test": "echo \"test not setup\"",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.1"
+  }
+}
