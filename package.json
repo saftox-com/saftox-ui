@@ -14,12 +14,12 @@
     "packages/*"
   ],
   "scripts": {
-    "sb": "bun --filter @saftox-ui/storybook dev",
     "build:sb": "bun --filter @saftox-ui/storybook build",
-    "start:sb": "bun --filter @saftox-ui/storybook start", 
     "create:cmp": "plop component",
+    "create:hook": "plop hook",
     "create:pkg": "plop package",
-    "create:hook": "plop hook"
+    "sb": "bun --filter @saftox-ui/storybook dev",
+    "start:sb": "bun --filter @saftox-ui/storybook start"
   },
   "lint-staged": {
     "*.{md,json}": [
@@ -52,6 +52,7 @@
     "@testing-library/user-event": "14.5.2",
     "@types/node": "20.12.7",
     "commitizen": "4.3.0",
+    "commitlint-plugin-function-rules": "^4.0.0",
     "concurrently": "^8.2.2",
     "esbuild": "^0.20.2",
     "esbuild-plugin-solid": "^0.5.0",
@@ -63,6 +64,7 @@
     "lint-staged": "15.2.2",
     "plop": "^4.0.1",
     "prettier": "3.2.5",
+    "rimraf": "^5.0.5",
     "solid-js": "^1.8.17",
     "sort-package-json": "2.10.0",
     "ts-jest": "29.1.2",
