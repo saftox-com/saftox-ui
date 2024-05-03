@@ -15,9 +15,14 @@
   ],
   "scripts": {
     "build:sb": "bun --filter @saftox-ui/storybook build",
+    "check": "biome check .",
+    "commit": "git-cz",
     "create:cmp": "plop component",
     "create:hook": "plop hook",
     "create:pkg": "plop package",
+    "dev": "bun sb",
+    "format": "biome format . --write && prettier . --write",
+    "lint": "bun check --apply",
     "sb": "bun --filter @saftox-ui/storybook dev",
     "start:sb": "bun --filter @saftox-ui/storybook start"
   },
