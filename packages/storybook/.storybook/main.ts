@@ -1,6 +1,6 @@
 import type { StorybookConfig } from "storybook-solidjs-vite";
 
-import { join, resolve, dirname } from "node:path";
+import { dirname, join, resolve } from "node:path";
 
 const fg = require("fast-glob");
 
