@@ -14,6 +14,9 @@
     "packages/*"
   ],
   "scripts": {
+    "sb": "bun --filter @saftox-ui/storybook dev",
+    "build:sb": "bun --filter @saftox-ui/storybook build",
+    "start:sb": "bun --filter @saftox-ui/storybook start", 
     "create:cmp": "plop component",
     "create:pkg": "plop package",
     "create:hook": "plop hook"

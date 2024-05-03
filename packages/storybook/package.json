@@ -19,8 +19,9 @@
     "url": "https://github.com/saftox-com/stafna-ui/issues"
   },
   "scripts": {
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
+    "start": "dlx http-server storybook-static"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.3",
