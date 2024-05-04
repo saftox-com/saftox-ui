@@ -1,34 +1,51 @@
 {
-  "name": "@saftox-ui/{{componentName}}",
-  "author": "Serhii Zaitsev <ceo@saftox.com>",
-  "version": "0.0.1",
-  "description": "{{description}}",
-  "keywords": [
-    "{{componentName}}"
-  ],
-  "sideEffects": false,
-  "files": [
-    "dist"
-  ],
-  "private": true,
-  "type": "module",
-  "typesVersions": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/saftox-com/saftox-ui.git",
-    "directory": "packages/{{outDir}}/{{componentName}}"
+	"name": "@saftox-ui/{{componentName}}",
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"version": "0.0.1",
+	"description": "{{description}}",
+	"keywords": ["{{componentName}}"],
+	"sideEffects": false,
+	"files": ["dist"],
+	"private": true,
+	"type": "module",
+	"publishConfig": {
+    "access": "public"
   },
-  "bugs": {
-    "url": "https://github.com/saftox-com/saftox-ui/issues"
-  },
-  "scripts": {
-    "dev": "vite serve dev",
-    "test": "echo \"test not setup\"",
-    "build": "tsup",
-    "typecheck": "tsc --noEmit",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
-  },
-  "peerDependencies": {
-    "solid-js": ">=1.8.1"
-  }
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"browser": {},
+	"exports": {
+		"import": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"require": {
+			"types": "./dist/index.d.cts",
+			"default": "./dist/index.cjs"
+		}
+	},
+	"typesVersions": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/saftox-ui.git",
+		"directory": "packages/{{outDir}}/{{componentName}}"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/saftox-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "bun build:fast --watch",
+		"dev:vite": "vite serve dev",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"peerDependencies": {
+		"solid-js": ">=1.8.1"
+	},
+	"clean-package": "../../../configs/clean-package.config.json"
 }
