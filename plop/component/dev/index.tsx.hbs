@@ -1,0 +1,14 @@
+import { render } from "solid-js/web";
+import { {{capitalize componentName}} } from "../src";
+
+const App = () => {
+	return (
+		<>
+			<{{capitalize componentName}}>
+				<span>Hello Solid</span>
+			</{{capitalize componentName}}>
+		</>
+	);
+};
+
+render(() => <App />, document.getElementById("root")!);
