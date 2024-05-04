@@ -23,9 +23,6 @@ export const doubleEntryConfig = (customPresetConfig?: preset.PresetOptions) =>
 
       console.log(`package.json: \n\n${JSON.stringify(package_fields, null, 2)}\n\n`);
 
-      /*
-            will update ./package.json with the correct export fields
-        */
       preset.writePackageJson(package_fields);
     }
 

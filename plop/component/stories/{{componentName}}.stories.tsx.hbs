@@ -1,35 +1,42 @@
 import * as React from "solid-js";
 
+import type { ComponentProps } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs";
-import type { ComponentProps, JSX } from "solid-js";
 
 import { {{capitalize componentName}} } from "../src";
 
 const meta = {
-  title: "Components/{{capitalize componentName}}",
-  component: {{capitalize componentName}},
-  argTypes: {
-    color: {
-      control: { type: "select" },
-      options: ["default", "primary", "secondary", "success", "warning", "danger"],
-    },
-    radius: {
-      control: { type: "select" },
-      options: ["none", "sm", "md", "lg", "full"],
-    },
-    size: {
-      control: { type: "select" },
-      options: ["sm", "md", "lg"],
-    },
-    isDisabled: {
-      control: {
-        type: "boolean",
-      },
-    },
-  },
-  parameters: {
-    layout: 'centered',
-  },
+	title: "Components/{{capitalize componentName}}",
+	component: {{capitalize componentName}},
+	argTypes: {
+		color: {
+			control: { type: "select" },
+			options: [
+				"default",
+				"primary",
+				"secondary",
+				"success",
+				"warning",
+				"danger",
+			],
+		},
+		radius: {
+			control: { type: "select" },
+			options: ["none", "sm", "md", "lg", "full"],
+		},
+		size: {
+			control: { type: "select" },
+			options: ["sm", "md", "lg"],
+		},
+		isDisabled: {
+			control: {
+				type: "boolean",
+			},
+		},
+	},
+	parameters: {
+		layout: "centered",
+	},
 } satisfies Meta<ComponentProps<any>>;
 
 export default meta;
