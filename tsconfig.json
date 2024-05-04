@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "scripthost"],
     "moduleResolution": "node",
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
@@ -18,7 +18,8 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["solid-js", "vite/client", "node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["packages"],
   "exclude": ["**/node_modules", "**/dist", "**/.tsup"]
