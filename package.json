@@ -35,8 +35,7 @@
 		"start:sb": "bun --filter @saftox-ui/storybook start",
 		"build:sb": "bun --filter @saftox-ui/storybook build",
 		"version": "changeset version",
-		"release": "changeset publish",
-		"postinstall": "husky install && bun --filter @saftox-ui-org/theme build"
+		"release": "changeset publish"
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
