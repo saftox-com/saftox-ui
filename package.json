@@ -10,30 +10,31 @@
 		"name": "Serhii Zaitsev",
 		"email": "ceo@saftox.com"
 	},
-	"workspaces": ["packages/**/*"],
 	"scripts": {
-		"dev": "bun sb",
+		"dev": "pnpm sb",
 		"build": "turbo build --filter=!@saftox-ui/storybook",
 		"build:fast": "turbo build:fast --filter=!@saftox-ui/storybook",
+		"build:packages": "turbo build --filter='./packages/*'",
+		"build:packages:fast": "turbo build:fast --filter='./packages/*'",
 		"commit": "git-cz",
 		"create:cmp": "plop component",
 		"create:hook": "plop hook",
 		"create:pkg": "plop package",
 		"typecheck": "turbo typecheck",
 		"turbo:clean": "turbo clean && rimraf ./node_modules/.cache/turbo",
-		"turbo:graph": "bun build --graph=dependency-graph.png",
-		"clean": "bun turbo:clean && bun clean:jest && bun clean:node-modules && bun clean:lock && bun install --hoist",
-		"clean:node-modules": "rimraf ./apps/**/node_modules && rimraf ./packages/**/**/node_modules && rimraf ./node_modules",
+		"turbo:graph": "pnpm build --graph=dependency-graph.png",
+		"clean": "pnpm turbo:clean && pnpm clean:node-modules && pnpm clean:lock && pnpm install --hoist",
+		"clean:node-modules": "rimraf ./packages/**/**/node_modules && rimraf ./node_modules",
 		"clean:changelogs": "rimraf ./packages/**/**/CHANGELOG.md",
-		"clean:lock": "rimraf ./bun.lockb",
-		"lint": "bun lint:pkg",
+		"clean:lock": "rimraf ./pnpm-lock.yaml",
+		"lint": "pnpm lint:pkg",
 		"lint:pkg": "biome check ./packages",
 		"lint:fix": "biome check ./packages --apply",
 		"format:check": "biome format packages/**/**/src && prettier packages/**/**/src --check --cache",
 		"format:write": "biome format packages/**/**/src --write && prettier packages/**/**/src --write",
-		"sb": "bun --filter @saftox-ui/storybook dev",
-		"start:sb": "bun --filter @saftox-ui/storybook start",
-		"build:sb": "bun --filter @saftox-ui/storybook build",
+		"sb": "pnpm --filter @saftox-ui/storybook dev",
+		"start:sb": "pnpm --filter @saftox-ui/storybook start",
+		"build:sb": "pnpm --filter @saftox-ui/storybook build",
 		"version": "changeset version",
 		"release": "changeset publish"
 	},
@@ -89,6 +90,8 @@
 		"solid-js": ">=1.8.1"
 	},
 	"engines": {
-		"node": ">=20.x"
-	}
+		"node": ">=20.x",
+		"pnpm": ">=8.x"
+	},
+	"packageManager": "pnpm@8.15.6"
 }
