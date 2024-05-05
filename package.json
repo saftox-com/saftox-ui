@@ -26,7 +26,7 @@
 		"clean:node-modules": "rimraf ./apps/**/node_modules && rimraf ./packages/**/**/node_modules && rimraf ./node_modules",
 		"clean:changelogs": "rimraf ./packages/**/**/CHANGELOG.md",
 		"clean:lock": "rimraf ./bun.lockb",
-		"lint": "biome check lint:pkg",
+		"lint": "bun lint:pkg",
 		"lint:pkg": "biome check ./packages",
 		"lint:fix": "biome check ./packages --apply",
 		"format:check": "biome format packages/**/**/src && prettier packages/**/**/src --check --cache",
