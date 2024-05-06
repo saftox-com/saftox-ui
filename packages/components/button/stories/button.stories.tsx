@@ -3,11 +3,11 @@ import * as React from "solid-js";
 import type { ComponentProps } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs";
 
-import { {{capitalize componentName}} } from "../src";
+import { Button } from "../src";
 
 const meta = {
-	title: "Components/{{capitalize componentName}}",
-	component: {{capitalize componentName}},
+	title: "Components/Button",
+	component: Button,
 	argTypes: {
 		color: {
 			control: { type: "select" },
@@ -44,12 +44,12 @@ type Story = StoryObj<typeof meta>;
 
 const defaultProps = {};
 
-const Template = (args: any) => <{{capitalize componentName}} {...args} />;
+const Template = (args: any) => <Button {...args} />;
 
 export const Default: Story = {
 	render: Template,
 	args: {
-		children: {{capitalize componentName}},
+		children: Button,
 		...defaultProps,
 	},
 };

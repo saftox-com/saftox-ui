@@ -1,9 +1,9 @@
 {
-	"name": "@saftox-ui/{{hookName}}",
+	"name": "@saftox-ui/interactions",
 	"author": "Serhii Zaitsev <ceo@saftox.com>",
 	"version": "0.0.1",
-	"description": "{{description}}",
-	"keywords": ["{{hookName}}"],
+	"description": "A collection of low level user interactions primitives.",
+	"keywords": ["interactions"],
 	"sideEffects": false,
 	"files": ["dist"],
 	"private": true,
@@ -29,7 +29,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/{{outDir}}/{{hookName}}"
+		"directory": "packages/hooks/interactions"
 	},
 	"bugs": {
 		"url": "https://github.com/saftox-com/saftox-ui/issues"
@@ -47,10 +47,24 @@
 	"peerDependencies": {
 		"solid-js": ">=1.8.1"
 	},
+	"dependencies": {
+		"@solid-primitives/platform": "^0.1.2",
+		"@solid-primitives/props": "^3.1.11",
+		"@solid-primitives/utils": "^6.2.3"
+	},
+	"devDependencies": {
+		"solid-js": "^1.8.17"
+	},
 	"clean-package": "../../../configs/clean-package.config.json",
 	"tsup": {
 		"clean": true,
 		"target": "es2019",
 		"format": ["cjs", "esm"]
+	},
+	"primitive": {
+		"name": "interactions",
+		"stage": 0,
+		"list": [],
+		"category": ""
 	}
 }
