@@ -29,7 +29,7 @@
 		"clean:lock": "rimraf ./pnpm-lock.yaml",
 		"lint": "pnpm lint:pkg",
 		"lint:pkg": "biome check ./packages",
-		"lint:fix": "biome check ./packages --apply",
+		"lint:fix": "biome check ./packages --apply --no-errors-on-unmatched",
 		"format:check": "biome format packages/**/**/src && prettier packages/**/**/src --check --cache",
 		"format:write": "biome format packages/**/**/src --write && prettier packages/**/**/src --write",
 		"sb": "pnpm --filter @saftox-ui/storybook dev",
@@ -40,8 +40,7 @@
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
-			"biome check . --apply --no-errors-on-unmatched",
-			"prettier . --write"
+			"biome check . --apply --no-errors-on-unmatched"
 		]
 	},
 	"config": {
