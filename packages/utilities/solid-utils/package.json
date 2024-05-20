@@ -1,0 +1,105 @@
+{
+	"name": "@saftox-ui/solid-utils",
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"version": "0.0.1",
+	"description": "A set of utilities for solid on client/server side",
+	"keywords": ["solid-utils"],
+	"sideEffects": false,
+	"files": ["dist"],
+	"private": true,
+	"type": "module",
+	"publishConfig": {
+		"access": "public"
+	},
+	"main": "./dist/index/index.cjs",
+	"module": "./dist/index/index.js",
+	"types": "./dist/index/index.d.ts",
+	"browser": {},
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index/index.d.ts",
+				"default": "./dist/index/index.js"
+			},
+			"require": {
+				"types": "./dist/index/index.d.cts",
+				"default": "./dist/index/index.cjs"
+			}
+		},
+		"./create/*": {
+			"import": {
+				"types": "./dist/create/*/index.d.ts",
+				"default": "./dist/create/*/index.js"
+			},
+			"require": {
+				"types": "./dist/create/*/index.d.cts",
+				"default": "./dist/create/*/index.cjs"
+			}
+		},
+		"./dom": {
+			"import": {
+				"types": "./dist/dom/index.d.ts",
+				"default": "./dist/dom/index.js"
+			},
+			"require": {
+				"types": "./dist/dom/index.d.cts",
+				"default": "./dist/dom/index.cjs"
+			}
+		},
+		"./dynamic": {
+			"import": {
+				"types": "./dist/dynamic/index.d.ts",
+				"default": "./dist/dynamic/index.js"
+			},
+			"require": {
+				"types": "./dist/dynamic/index.d.cts",
+				"default": "./dist/dynamic/index.cjs"
+			}
+		},
+		"./reactivity": {
+			"import": {
+				"types": "./dist/reactivity/index.d.ts",
+				"default": "./dist/reactivity/index.js"
+			},
+			"require": {
+				"types": "./dist/reactivity/index.d.cts",
+				"default": "./dist/reactivity/index.cjs"
+			}
+		}
+	},
+	"typesVersions": {
+		"*": {
+			"create/*": ["./dist/create/*/index.d.ts"],
+			"dom": ["./dist/dom/index.d.ts"],
+			"dynamic": ["./dist/dynamic/index.d.ts"],
+			"reactivity": ["./dist/reactivity/index.d.ts"]
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/saftox-ui.git",
+		"directory": "packages/utilities/solid-utils"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/saftox-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "pnpm build:fast --watch",
+		"dev:vite": "vite serve dev",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"peerDependencies": {
+		"solid-js": ">=1.8.17"
+	},
+	"clean-package": "../../../configs/clean-package.config.json",
+	"tsup": {
+		"clean": true,
+		"target": "es2019",
+		"format": ["cjs", "esm"]
+	}
+}
