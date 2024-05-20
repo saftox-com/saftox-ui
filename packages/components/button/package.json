@@ -45,7 +45,21 @@
 		"postpack": "clean-package restore"
 	},
 	"peerDependencies": {
-		"solid-js": ">=1.8.1"
+		"solid-js": ">=1.8.17",
+		"@saftox-ui/theme": ">=0.0.1",
+		"@saftox-ui/system": ">=0.0.1"
+	},
+	"dependencies": {
+		"@saftox-ui/shared-utils": "0.0.1",
+		"@saftox-ui/solid-utils": "0.0.1",
+		"@saftox-ui/focus": "0.0.1",
+		"@saftox-ui/toggle": "0.0.1",
+		"@saftox-ui/interactions": "0.0.1",
+		"@saftox-ui/utils": "0.0.1",
+		"@saftox-ui/types": "0.0.1",
+		"@solid-primitives/refs": "^1.0.8",
+		"@solid-primitives/props": "^3.1.11",
+		"@solid-primitives/utils": "^6.2.3"
 	},
 	"clean-package": "../../../configs/clean-package.config.json"
 }
