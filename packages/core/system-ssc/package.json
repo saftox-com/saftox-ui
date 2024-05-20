@@ -1,0 +1,56 @@
+{
+	"name": "@saftox-ui/system-ssc",
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"version": "0.0.1",
+	"description": "Saftox-UI system primitives compatibles with SSC imports",
+	"keywords": ["system-ssc"],
+	"sideEffects": false,
+	"files": ["dist"],
+	"private": true,
+	"type": "module",
+	"publishConfig": {
+		"access": "public"
+	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"browser": {},
+	"exports": {
+		"import": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"require": {
+			"types": "./dist/index.d.cts",
+			"default": "./dist/index.cjs"
+		}
+	},
+	"typesVersions": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/saftox-ui.git",
+		"directory": "packages/core/system-ssc"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/saftox-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "pnpm build:fast --watch",
+		"dev:vite": "vite serve dev",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"peerDependencies": {
+		"solid-js": ">=1.8.17"
+	},
+	"clean-package": "../../../configs/clean-package.config.json",
+	"tsup": {
+		"clean": true,
+		"target": "es2019",
+		"format": ["cjs", "esm"]
+	}
+}
