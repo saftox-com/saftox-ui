@@ -28,12 +28,12 @@
 		},
 		"./create/*": {
 			"import": {
-				"types": "./dist/create/*/index.d.ts",
-				"default": "./dist/create/*/index.js"
+				"types": "./dist/create/*.d.ts",
+				"default": "./dist/create/*.js"
 			},
 			"require": {
-				"types": "./dist/create/*/index.d.cts",
-				"default": "./dist/create/*/index.cjs"
+				"types": "./dist/create/*.d.cts",
+				"default": "./dist/create/*.cjs"
 			}
 		},
 		"./dom": {
@@ -69,7 +69,7 @@
 	},
 	"typesVersions": {
 		"*": {
-			"create/*": ["./dist/create/*/index.d.ts"],
+			"create/*": ["./dist/create/*.d.ts"],
 			"dom": ["./dist/dom/index.d.ts"],
 			"dynamic": ["./dist/dynamic/index.d.ts"],
 			"reactivity": ["./dist/reactivity/index.d.ts"]
