@@ -350,6 +350,9 @@ const rules: Rule<SaftoxTheme>[] = [
 	// Margin
 	matchTheme("-?m([xytrbl])?(?:$|-)", "margin", edge("margin")),
 
+	// Margin Inline
+	matchTheme("-?m([se])?(?:$|-)", "margin", edge("margin-inline")),
+
 	// Space Between
 	matchTheme("-?space-(x|y)(?:$|-)", "space", ({ 1: $1, _ }) => ({
 		"&>:not([hidden])~:not([hidden])": {
@@ -1254,7 +1257,9 @@ function position(shorthand: string, separator = "-"): string {
 
 	for (const short of shorthand) {
 		longhand.push(
-			{ t: "top", r: "right", b: "bottom", l: "left" }[short] as string,
+			{ t: "top", r: "right", b: "bottom", l: "left", s: "start", e: "end" }[
+				short
+			] as string,
 		);
 	}
 
@@ -1295,7 +1300,7 @@ function edge(
 	return ({ 1: $1, _ }) => {
 		const edges =
 			{
-				x: "lr",
+				x: "lrse",
 				y: "tb",
 			}[$1 as "x" | "y"] || ($1 ? $1 + $1 : undefined);
 
