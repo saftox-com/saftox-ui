@@ -19,6 +19,7 @@ const buttonInputTypes = [
 	"reset",
 	"submit",
 ];
+
 const isButton = (tagName: string, type?: string) => {
 	if (tagName === "button") return true;
 	if (tagName === "input" && type !== undefined) {

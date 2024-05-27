@@ -1,0 +1,50 @@
+{
+	"remove": ["devDependencies"],
+	"replace": {
+		"main": "dist/index.js",
+		"module": "dist/index.js",
+		"types": "dist/index.d.ts",
+		"browser": {},
+		"exports": {
+			".": {
+				"import": {
+					"types": "./dist/index/index.d.ts",
+					"default": "./dist/index/index.js"
+				}
+			},
+			"./create/*": {
+				"import": {
+					"types": "./dist/create/*.d.ts",
+					"default": "./dist/create/*.js"
+				}
+			},
+			"./dom": {
+				"import": {
+					"types": "./dist/dom/index.d.ts",
+					"default": "./dist/dom/index.js"
+				}
+			},
+			"./dynamic": {
+				"import": {
+					"types": "./dist/dynamic/index.d.ts",
+					"default": "./dist/dynamic/index.js"
+				}
+			},
+			"./reactivity": {
+				"import": {
+					"types": "./dist/reactivity/index.d.ts",
+					"default": "./dist/reactivity/index.js"
+				}
+			},
+			"./package.json": "./package.json"
+		}
+	},
+	"typesVersions": {
+		"*": {
+			"create/*": ["./dist/create/*.d.ts"],
+			"dom": ["./dist/dom/index.d.ts"],
+			"dynamic": ["./dist/dynamic/index.d.ts"],
+			"reactivity": ["./dist/reactivity/index.d.ts"]
+		}
+	}
+}

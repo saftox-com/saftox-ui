@@ -4,75 +4,27 @@
 	"version": "0.0.1",
 	"description": "A set of utilities for solid on client/server side",
 	"keywords": ["solid-utils"],
+	"main": "./src/index.ts",
 	"sideEffects": false,
 	"files": ["dist"],
-	"private": true,
-	"type": "module",
 	"publishConfig": {
 		"access": "public"
 	},
-	"main": "./dist/index/index.cjs",
-	"module": "./dist/index/index.js",
-	"types": "./dist/index/index.d.ts",
-	"browser": {},
 	"exports": {
 		".": {
-			"import": {
-				"types": "./dist/index/index.d.ts",
-				"default": "./dist/index/index.js"
-			},
-			"require": {
-				"types": "./dist/index/index.d.cts",
-				"default": "./dist/index/index.cjs"
-			}
+			"import": "./src/index.ts"
 		},
 		"./create/*": {
-			"import": {
-				"types": "./dist/create/*.d.ts",
-				"default": "./dist/create/*.js"
-			},
-			"require": {
-				"types": "./dist/create/*.d.cts",
-				"default": "./dist/create/*.cjs"
-			}
+			"import": "./src/create/*.ts"
 		},
 		"./dom": {
-			"import": {
-				"types": "./dist/dom/index.d.ts",
-				"default": "./dist/dom/index.js"
-			},
-			"require": {
-				"types": "./dist/dom/index.d.cts",
-				"default": "./dist/dom/index.cjs"
-			}
+			"import": "./src/dom/index.ts"
 		},
 		"./dynamic": {
-			"import": {
-				"types": "./dist/dynamic/index.d.ts",
-				"default": "./dist/dynamic/index.js"
-			},
-			"require": {
-				"types": "./dist/dynamic/index.d.cts",
-				"default": "./dist/dynamic/index.cjs"
-			}
+			"import": "./src/dynamic/index.ts"
 		},
 		"./reactivity": {
-			"import": {
-				"types": "./dist/reactivity/index.d.ts",
-				"default": "./dist/reactivity/index.js"
-			},
-			"require": {
-				"types": "./dist/reactivity/index.d.cts",
-				"default": "./dist/reactivity/index.cjs"
-			}
-		}
-	},
-	"typesVersions": {
-		"*": {
-			"create/*": ["./dist/create/*.d.ts"],
-			"dom": ["./dist/dom/index.d.ts"],
-			"dynamic": ["./dist/dynamic/index.d.ts"],
-			"reactivity": ["./dist/reactivity/index.d.ts"]
+			"import": "./src/reactivity/index.ts"
 		}
 	},
 	"repository": {
@@ -96,7 +48,7 @@
 	"peerDependencies": {
 		"solid-js": ">=1.8.17"
 	},
-	"clean-package": "../../../configs/clean-package.config.json",
+	"clean-package": "./clean-package.config.json",
 	"tsup": {
 		"clean": true,
 		"target": "es2019",

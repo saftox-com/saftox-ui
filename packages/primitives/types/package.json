@@ -4,24 +4,12 @@
 	"version": "0.0.1",
 	"description": "A collection of low level user types primitives.",
 	"keywords": ["types"],
+	"main": "./src/index.ts",
 	"sideEffects": false,
 	"files": ["dist"],
-	"private": true,
-	"type": "module",
 	"publishConfig": {
 		"access": "public"
 	},
-	"main": "./dist/index.js",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"browser": {},
-	"exports": {
-		"import": {
-			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
-		}
-	},
-	"typesVersions": {},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/saftox-com/saftox-ui.git",

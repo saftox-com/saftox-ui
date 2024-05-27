@@ -5,8 +5,6 @@ export const defaultConfig: preset.PresetOptions = {
 	entries: [],
 	// Setting `true` will remove all `console.*` calls and `debugger` statements
 	drop_console: true,
-	// Setting `true` will generate a CommonJS build alongside ESM (default: `false`)
-	cjs: true,
 };
 
 export const doubleEntryConfig = (customPresetConfig?: preset.PresetOptions) =>

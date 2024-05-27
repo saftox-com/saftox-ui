@@ -2,9 +2,9 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "preserve",
     "lib": ["DOM", "DOM.Iterable", "ESNext", "scripthost"],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "declaration": true,
