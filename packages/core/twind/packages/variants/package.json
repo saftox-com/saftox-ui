@@ -5,7 +5,7 @@
 	"description": "first-class variant API",
 	"keywords": ["variants"],
 	"private": true,
-	"main": "./src/index.ts",
+	"main": "src/index.ts",
 	"sideEffects": false,
 	"files": ["dist"],
 	"publishConfig": {
@@ -33,7 +33,7 @@
 		"tailwind-merge": "^2.3.0"
 	},
 	"devDependencies": {
-		"@saftox-ui/preset": "0.0.1"
+		"@saftox-ui/preset": "^0.0.1"
 	},
 	"clean-package": "../../../configs/clean-package.config.json",
 	"tsup": {

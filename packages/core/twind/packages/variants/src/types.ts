@@ -3,12 +3,15 @@ import type {
 	extendTailwindMerge,
 } from "tailwind-merge";
 
-import type * as Screens from "@saftox-ui/preset/dist/tokens/screens";
+import type * as Screens from "@saftox-ui/preset/src/tokens/screens";
 
 export type TVGeneratedScreens = keyof typeof Screens;
 
-type MergeConfig = Parameters<typeof extendTailwindMerge>[0];
-type LegacyMergeConfig = Extract<MergeConfig, { extend?: unknown }>["extend"];
+export type MergeConfig = Parameters<typeof extendTailwindMerge>[0];
+export type LegacyMergeConfig = Extract<
+	MergeConfig,
+	{ extend?: unknown }
+>["extend"];
 
 export type TWMConfig = {
 	/**
@@ -58,11 +61,11 @@ export type ClassProp<V = ClassValue> =
 	| { class?: V; className?: never }
 	| { class?: never; className?: V };
 
-type TVBaseName = "base";
+export type TVBaseName = "base";
 
-type TVScreens = "initial" | TVGeneratedScreens;
+export type TVScreens = "initial" | TVGeneratedScreens;
 
-type TVSlots = Record<string, ClassValue> | undefined;
+export type TVSlots = Record<string, ClassValue> | undefined;
 
 /**
  * ----------------------------------------------------------------------
@@ -78,12 +81,6 @@ export type CnOptions = ClassValue[];
 
 export type CnReturn = string | undefined;
 
-export declare const cnBase: <T extends CnOptions>(...classes: T) => CnReturn;
-
-export declare const cn: <T extends CnOptions>(
-	...classes: T
-) => (config?: TWMConfig) => CnReturn;
-
 // compare if the value is true or array of values
 export type isTrueOrArray<T> = T extends true | unknown[] ? true : false;
 
@@ -95,7 +92,7 @@ export type WithInitialScreen<T extends Array<string>> = ["initial", ...T];
  * ----------------------------------------------------------------------
  */
 
-type TVSlotsWithBase<
+export type TVSlotsWithBase<
 	S extends TVSlots,
 	B extends ClassValue,
 > = B extends undefined ? keyof S : keyof S | TVBaseName;
@@ -415,15 +412,6 @@ export type CreateTV<RV extends TVConfig["responsiveVariants"] = undefined> = <
 	 */
 	config?: C,
 ) => TVReturnType<V, S, B, C & RV, EV, ES, E>;
-
-// main function
-export declare const tv: TV;
-
-export declare function createTV<T extends TVConfig["responsiveVariants"]>(
-	config: TVConfig & T,
-): CreateTV<T>;
-
-export declare const defaultConfig: TVConfig;
 
 export type VariantProps<Component extends (...args: any) => any> = Omit<
 	OmitUndefined<Parameters<Component>[0]>,

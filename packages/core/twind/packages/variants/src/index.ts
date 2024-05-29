@@ -1,6 +1,21 @@
-// @ts-nocheck
-export type * from "./types";
-import type { TV } from "./types";
+import type {
+	ClassValue,
+	CnOptions,
+	CnReturn,
+	CreateTV,
+	LegacyMergeConfig,
+	MergeConfig,
+	TVCompoundSlots,
+	TVCompoundVariants,
+	TVConfig,
+	TVDefaultVariants,
+	TVProps,
+	TVReturnType,
+	TVSlots,
+	TVVariantKeys,
+	TVVariants,
+	TWMConfig,
+} from "./types";
 
 import { extendTailwindMerge, twMerge as twMergeBase } from "tailwind-merge";
 
@@ -12,26 +27,32 @@ import {
 	isEqual,
 	mergeObjects,
 	removeExtraSpaces,
-} from "./utils.js";
+} from "./utils";
 
-export const defaultConfig = {
+export type * from "./types";
+
+export const defaultConfig: TVConfig = {
 	twMerge: true,
 	twMergeConfig: {},
 	responsiveVariants: false,
 };
 
-export const voidEmpty = (value) => (value ? value : undefined);
+export const voidEmpty = (value: string | undefined) =>
+	value ? value : undefined;
 
-export const cnBase = (...classes) =>
+export const cnBase = <T extends CnOptions>(...classes: T): CnReturn =>
 	voidEmpty(flatArray(classes).filter(Boolean).join(" "));
 
-let cachedTwMerge = null;
-let cachedTwMergeConfig = {};
+let cachedTwMerge: any = null;
+let cachedTwMergeConfig: MergeConfig &
+	LegacyMergeConfig & {
+		extend?: any;
+	};
 let didTwMergeConfigChange = false;
 
 export const cn =
-	(...classes) =>
-	(config) => {
+	<T extends CnOptions>(...classes: T) =>
+	(config: TWMConfig): CnReturn => {
 		if (!config.twMerge) {
 			return cnBase(classes);
 		}
@@ -59,7 +80,7 @@ export const cn =
 		return voidEmpty(cachedTwMerge(cnBase(classes)));
 	};
 
-const joinObjects = (obj1, obj2) => {
+const joinObjects = (obj1: any, obj2: any) => {
 	for (const key in obj2) {
 		if (Object.prototype.hasOwnProperty.call(obj1, key)) {
 			obj1[key] = cnBase(obj1[key], obj2[key]);
@@ -71,7 +92,38 @@ const joinObjects = (obj1, obj2) => {
 	return obj1;
 };
 
-export const tv: TV = (options, configProp) => {
+export const tv = <
+	V extends TVVariants<S, B, EV>,
+	CV extends TVCompoundVariants<V, S, B, EV, ES>,
+	DV extends TVDefaultVariants<V, S, EV, ES>,
+	C extends TVConfig<V, EV>,
+	B extends ClassValue = undefined,
+	S extends TVSlots = undefined,
+	// @ts-expect-error
+	E extends TVReturnType = TVReturnType<
+		V,
+		S,
+		B,
+		C,
+		// @ts-expect-error
+		EV extends undefined ? {} : EV,
+		// @ts-expect-error
+		ES extends undefined ? {} : ES
+	>,
+	EV extends TVVariants<ES, B, E["variants"], ES> = E["variants"],
+	ES extends TVSlots = E["slots"] extends TVSlots ? E["slots"] : undefined,
+>(
+	options: {
+		extend?: E;
+		base?: B;
+		slots?: S;
+		variants?: V;
+		compoundVariants?: CV;
+		compoundSlots?: TVCompoundSlots<V, S, B>;
+		defaultVariants?: DV;
+	},
+	configProp?: C,
+): TVReturnType<V, S, B, C, EV, ES, E> => {
 	const {
 		extend = null,
 		slots: slotProps = {},
@@ -86,14 +138,16 @@ export const tv: TV = (options, configProp) => {
 	const base = extend?.base
 		? cnBase(extend.base, options?.base)
 		: options?.base;
-	const variants =
+
+	const variants: V =
 		extend?.variants && !isEmptyObject(extend.variants)
-			? mergeObjects(variantsProps, extend.variants)
-			: variantsProps;
-	const defaultVariants =
+			? (mergeObjects(variantsProps, extend.variants) as V)
+			: (variantsProps as V);
+
+	const defaultVariants: DV =
 		extend?.defaultVariants && !isEmptyObject(extend.defaultVariants)
-			? { ...extend.defaultVariants, ...defaultVariantsProps }
-			: defaultVariantsProps;
+			? ({ ...extend.defaultVariants, ...defaultVariantsProps } as DV)
+			: (defaultVariantsProps as DV);
 
 	// save twMergeConfig to the cache
 	if (
@@ -101,7 +155,7 @@ export const tv: TV = (options, configProp) => {
 		!isEqual(config.twMergeConfig, cachedTwMergeConfig)
 	) {
 		didTwMergeConfigChange = true;
-		cachedTwMergeConfig = config.twMergeConfig;
+		cachedTwMergeConfig = config.twMergeConfig || cachedTwMergeConfig;
 	}
 
 	const isExtendedSlotsEmpty = isEmptyObject(extend?.slots);
@@ -115,20 +169,20 @@ export const tv: TV = (options, configProp) => {
 
 	// merge slots with the "extended" slots
 	const slots = isExtendedSlotsEmpty
-		? componentSlots
-		: joinObjects(
+		? (componentSlots as S)
+		: (joinObjects(
 				{ ...extend?.slots },
 				isEmptyObject(componentSlots)
 					? { base: options?.base }
 					: componentSlots,
-			);
+			) as S);
 
 	// merge compoundVariants with the "extended" compoundVariants
-	const compoundVariants = isEmptyObject(extend?.compoundVariants)
-		? compoundVariantsProps
-		: flatMergeArrays(extend?.compoundVariants, compoundVariantsProps);
+	const compoundVariants: CV = isEmptyObject(extend?.compoundVariants)
+		? (compoundVariantsProps as CV)
+		: (flatMergeArrays(extend?.compoundVariants, compoundVariantsProps) as CV);
 
-	const component = (props) => {
+	const component: TVReturnType<V, S, B, C, EV, ES, E> = (props) => {
 		if (
 			isEmptyObject(variants) &&
 			isEmptyObject(slotProps) &&
@@ -150,23 +204,25 @@ export const tv: TV = (options, configProp) => {
 		}
 
 		const getScreenVariantValues = (
-			screen,
-			screenVariantValue,
-			// biome-ignore lint/style/useDefaultParameterLast: <explanation>
-			acc = [],
-			slotKey,
+			screen: string,
+			screenVariantValue:
+				| string
+				| { [key: string]: any }[]
+				| { [key: string]: any },
+			acc: { [key: string]: any }[] & { [key: string]: any },
+			slotKey: keyof S | string | null,
 		) => {
-			let result = acc;
+			let result = acc || [];
 
 			if (typeof screenVariantValue === "string") {
 				result = result.concat(
 					removeExtraSpaces(screenVariantValue)
 						.split(" ")
-						.map((v) => `${screen}:${v}`),
+						.map((v: string) => `${screen}:${v}`),
 				);
 			} else if (Array.isArray(screenVariantValue)) {
 				result = result.concat(
-					screenVariantValue.reduce((acc, v) => {
+					screenVariantValue.reduce((acc: string[], v: string) => {
 						return acc.concat(`${screen}:${v}`);
 					}, []),
 				);
@@ -186,15 +242,15 @@ export const tv: TV = (options, configProp) => {
 
 							if (result[slotKey]) {
 								result[slotKey] = result[slotKey].concat(
-									fixedValue.split(" ").map((v) => `${screen}:${v}`),
+									fixedValue.split(" ").map((v: string) => `${screen}:${v}`),
 								);
 							} else {
 								result[slotKey] = fixedValue
 									.split(" ")
-									.map((v) => `${screen}:${v}`);
+									.map((v: string) => `${screen}:${v}`);
 							}
 						} else if (Array.isArray(value) && value.length > 0) {
-							result[slotKey] = value.reduce((acc, v) => {
+							result[slotKey] = value.reduce((acc: string[], v: string) => {
 								return acc.concat(`${screen}:${v}`);
 							}, []);
 						}
@@ -206,11 +262,12 @@ export const tv: TV = (options, configProp) => {
 		};
 
 		const getVariantValue = (
-			variant,
+			variant: keyof V | string,
 			vrs = variants,
-			slotKey = null,
-			slotProps = null,
+			slotKey?: keyof S | string,
+			slotProps?: TVProps<V, S, C, EV, ES>,
 		) => {
+			const slotKeyDefault = slotKey || null;
 			const variantObj = vrs[variant];
 
 			if (!variantObj || isEmptyObject(variantObj)) {
@@ -230,7 +287,7 @@ export const tv: TV = (options, configProp) => {
 				config.responsiveVariants === true;
 
 			let defaultVariantProp = defaultVariants?.[variant];
-			let screenValues = [];
+			let screenValues: any = [];
 
 			if (typeof variantKey === "object" && responsiveVarsEnabled) {
 				for (const [screen, screenVariantKey] of Object.entries(variantKey)) {
@@ -253,7 +310,7 @@ export const tv: TV = (options, configProp) => {
 						screen,
 						screenVariantValue,
 						screenValues,
-						slotKey,
+						slotKeyDefault,
 					);
 				}
 			}
@@ -262,10 +319,10 @@ export const tv: TV = (options, configProp) => {
 			// we use the variant key and ignore the default variant.
 			const key =
 				variantKey != null && typeof variantKey !== "object"
-					? variantKey
-					: falsyToString(defaultVariantProp);
+					? (variantKey as V[keyof V])
+					: (falsyToString(defaultVariantProp) as V[keyof V]);
 
-			const value = variantObj[key || "false"];
+			const value = variantObj[key];
 
 			if (
 				typeof screenValues === "object" &&
@@ -292,7 +349,10 @@ export const tv: TV = (options, configProp) => {
 			return Object.keys(variants).map((vk) => getVariantValue(vk, variants));
 		};
 
-		const getVariantClassNamesBySlotKey = (slotKey, slotProps) => {
+		const getVariantClassNamesBySlotKey = (
+			slotKey: keyof S | string,
+			slotProps: TVProps<V, S, C, EV, ES>,
+		) => {
 			if (!variants || typeof variants !== "object") {
 				return null;
 			}
@@ -320,7 +380,7 @@ export const tv: TV = (options, configProp) => {
 			return result;
 		};
 
-		const propsWithoutUndefined = {};
+		const propsWithoutUndefined: any = {};
 
 		for (const prop in props) {
 			if (props[prop] !== undefined) {
@@ -328,7 +388,10 @@ export const tv: TV = (options, configProp) => {
 			}
 		}
 
-		const getCompleteProps = (key, slotProps) => {
+		const getCompleteProps = (
+			key: string,
+			slotProps: TVProps<V, S, C, EV, ES> | null,
+		) => {
 			const initialProp =
 				typeof props?.[key] === "object"
 					? {
@@ -344,19 +407,23 @@ export const tv: TV = (options, configProp) => {
 			};
 		};
 
-		// biome-ignore lint/style/useDefaultParameterLast: <explanation>
-		const getCompoundVariantsValue = (cv = [], slotProps) => {
+		const getCompoundVariantsValue = (
+			cv: CV,
+			slotProps?: TVProps<V, S, C, EV, ES>,
+		) => {
+			const defaultCV = cv ?? [];
+			const defaultSlotProps = slotProps ?? null;
 			const result = [];
 
 			for (const {
 				class: tvClass,
 				className: tvClassName,
 				...compoundVariantOptions
-			} of cv) {
+			} of defaultCV) {
 				let isValid = true;
 
 				for (const [key, value] of Object.entries(compoundVariantOptions)) {
-					const completeProps = getCompleteProps(key, slotProps);
+					const completeProps = getCompleteProps(key, defaultSlotProps);
 
 					if (Array.isArray(value)) {
 						if (!value.includes(completeProps[key])) {
@@ -380,7 +447,9 @@ export const tv: TV = (options, configProp) => {
 			return result;
 		};
 
-		const getCompoundVariantClassNamesBySlot = (slotProps) => {
+		const getCompoundVariantClassNamesBySlot = (
+			slotProps: TVProps<V, S, C, EV, ES>,
+		) => {
 			const compoundClassNames = getCompoundVariantsValue(
 				compoundVariants,
 				slotProps,
@@ -390,7 +459,7 @@ export const tv: TV = (options, configProp) => {
 				return compoundClassNames;
 			}
 
-			const result = {};
+			const result = {} as any;
 
 			for (const className of compoundClassNames) {
 				if (typeof className === "string") {
@@ -403,16 +472,17 @@ export const tv: TV = (options, configProp) => {
 					}
 				}
 			}
-
 			return result;
 		};
 
-		const getCompoundSlotClassNameBySlot = (slotProps) => {
+		const getCompoundSlotClassNameBySlot = (
+			slotProps: TVProps<V, S, C, EV, ES>,
+		) => {
 			if (compoundSlots.length < 1) {
 				return null;
 			}
 
-			const result = {};
+			const result: any = {};
 
 			for (const {
 				slots = [],
@@ -429,7 +499,7 @@ export const tv: TV = (options, configProp) => {
 						if (
 							completePropsValue === undefined ||
 							(Array.isArray(slotVariants[key])
-								? !slotVariants[key].includes(completePropsValue)
+								? !slotVariants[key]?.includes(completePropsValue)
 								: slotVariants[key] !== completePropsValue)
 						) {
 							isValid = false;
@@ -453,11 +523,11 @@ export const tv: TV = (options, configProp) => {
 
 		// with slots
 		if (!isEmptyObject(slotProps) || !isExtendedSlotsEmpty) {
-			const slotsFns = {};
+			const slotsFns: any = {};
 
 			if (typeof slots === "object" && !isEmptyObject(slots)) {
 				for (const slotKey of Object.keys(slots)) {
-					slotsFns[slotKey] = (slotProps) =>
+					slotsFns[slotKey] = (slotProps: TVProps<V, S, C, EV, ES>) =>
 						cn(
 							slots[slotKey],
 							getVariantClassNamesBySlotKey(slotKey, slotProps),
@@ -488,9 +558,9 @@ export const tv: TV = (options, configProp) => {
 		return Object.keys(variants);
 	};
 
-	component.variantKeys = getVariantKeys();
-	component.extend = extend;
-	component.base = base;
+	component.variantKeys = getVariantKeys() as TVVariantKeys<V, S>;
+	component.extend = extend as E;
+	component.base = base as B;
 	component.slots = slots;
 	component.variants = variants;
 	component.defaultVariants = defaultVariants;
@@ -500,7 +570,9 @@ export const tv: TV = (options, configProp) => {
 	return component;
 };
 
-export const createTV = (configProp) => {
+export const createTV = <T extends TVConfig["responsiveVariants"]>(
+	configProp: TVConfig & T,
+): CreateTV<T> => {
 	return (options, config) =>
 		tv(options, config ? mergeObjects(configProp, config) : configProp);
 };
