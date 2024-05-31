@@ -1,4 +1,11 @@
 {
   "extends": "../../../tsconfig.json",
-  "include": ["src", "dev", "__tests__", "env.d.ts"]
-}
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "paths": {
+      "@saftox-ui/variants": ["../theme/node_modules/@saftox-ui/variants/src/index.ts"]
+    }
+  },
+  "include": ["src", "index.ts"],
+  "exclude": ["src/scripts/**", "src/index.ts.backup"]}

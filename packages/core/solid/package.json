@@ -33,12 +33,10 @@
 		"solid-js": ">=1.8.17"
 	},
 	"dependencies": {
-		"@saftox-ui/button": "0.0.1"
+		"@saftox-ui/system": "workspace:*",
+		"@saftox-ui/theme": "workspace:*",
+		"@saftox-ui/button": "workspace:*",
+		"@saftox-ui/spinner": "workspace:*"
 	},
-	"clean-package": "../../../configs/clean-package.config.json",
-	"tsup": {
-		"clean": true,
-		"target": "es2019",
-		"format": ["cjs", "esm"]
-	}
+	"clean-package": "../../../configs/clean-package.config.json"
 }
