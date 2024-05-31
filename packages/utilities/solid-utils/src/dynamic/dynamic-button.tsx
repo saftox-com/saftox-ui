@@ -3,10 +3,10 @@ import type { Ref } from "../dom";
 import type { DynamicProps } from "./types";
 
 import { createMemo, createSignal, splitProps } from "solid-js";
-import Dynamic from "./Dynamic";
+import Dynamic from "./dynamic";
 
 import { isButton } from "../assertions";
-import createTagName from "../create/tagName";
+import createTagName from "../create/tag-name";
 import { mergeRefs } from "../reactivity";
 
 const DEFAULT_DYNAMIC_BUTTON_ELEMENT = "button";

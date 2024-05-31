@@ -2,11 +2,11 @@ import type {
 	DynamicButtonElementProps,
 	DynamicButtonProps,
 	DynamicButtonSharedElementProps,
-} from "./DynamicButton";
+} from "./dynamic-button";
 import type { DynamicAttributes, DynamicProps } from "./types";
 
-import Dynamic from "./Dynamic";
-import DynamicButton from "./DynamicButton";
+import Dynamic from "./dynamic";
+import DynamicButton from "./dynamic-button";
 
 export type {
 	DynamicAttributes,

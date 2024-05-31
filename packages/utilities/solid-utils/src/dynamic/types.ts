@@ -8,7 +8,7 @@ type DynamicAttributes<
 	 * Component to render the dynamic component as.
 	 * @defaultValue `div`
 	 */
-	as?: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+	as?:
 		| (T extends Component<any>
 				? (
 						props: Omit<ComponentProps<T>, keyof ElementProps> & ElementProps,
