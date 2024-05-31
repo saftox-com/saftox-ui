@@ -1,7 +1,7 @@
 import type { Component } from "solid-js";
 
 import { Show } from "solid-js";
-import type { UseSpinnerProps } from "./use-spinner";
+import type { UseSpinnerProps } from "./spinner-types";
 import { useSpinner } from "./use-spinner";
 
 export interface SpinnerProps extends UseSpinnerProps {}
