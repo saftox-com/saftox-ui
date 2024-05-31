@@ -3,12 +3,16 @@ import * as preset from "tsup-preset-solid";
 
 export const defaultConfig: preset.PresetOptions = {
 	entries: [],
-	// Setting `true` will remove all `console.*` calls and `debugger` statements
 	drop_console: true,
+	cjs: true,
 };
 
-export const doubleEntryConfig = (customPresetConfig?: preset.PresetOptions) =>
+export const doubleEntryConfig = (
+	customPresetConfig?: preset.PresetOptions,
+	generatePackageExports?: boolean,
+) =>
 	defineConfig((config) => {
+		const isAllowedGeneratePackageExports = generatePackageExports ?? false;
 		const watching = !!config.watch;
 
 		const parsed_data = preset.parsePresetOptions(
@@ -16,8 +20,8 @@ export const doubleEntryConfig = (customPresetConfig?: preset.PresetOptions) =>
 			watching,
 		);
 
-		if (!watching) {
-			const package_fields = preset.generatePackageExports(parsed_data);
+		if (!watching && isAllowedGeneratePackageExports) {
+			const package_fields = preset.generatePackageExports({ ...parsed_data });
 
 			console.log(
 				`package.json: \n\n${JSON.stringify(package_fields, null, 2)}\n\n`,

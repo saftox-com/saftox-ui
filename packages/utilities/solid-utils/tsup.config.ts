@@ -8,7 +8,7 @@ export default doubleEntryConfig({
 		},
 		{
 			name: "create/*",
-			entry: "src/create/*.ts",
+			entry: "src/create/*",
 		},
 		{
 			name: "dom",
