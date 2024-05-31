@@ -1,0 +1,62 @@
+{
+	"name": "@saftox-ui/solid-utils",
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"version": "0.0.1",
+	"description": "A set of utilities for solid on client/server side",
+	"keywords": ["solid-utils"],
+	"main": "src/index.ts",
+	"sideEffects": false,
+	"files": ["dist"],
+	"publishConfig": {
+		"access": "public"
+	},
+	"exports": {
+		".": {
+			"import": "./src/index.ts"
+		},
+		"./create/*": {
+			"import": "./src/create/*.ts"
+		},
+		"./dom": {
+			"import": "./src/dom/index.ts"
+		},
+		"./dynamic": {
+			"import": "./src/dynamic/index.ts"
+		},
+		"./reactivity": {
+			"import": "./src/reactivity/index.ts"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/saftox-ui.git",
+		"directory": "packages/utilities/solid-utils"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/saftox-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "pnpm build:fast --watch",
+		"dev:vite": "vite serve dev",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"peerDependencies": {
+		"solid-js": ">=1.8.17"
+	},
+	"dependencies": {
+		"@solid-primitives/refs": "^1.0.8",
+		"@solid-primitives/props": "^3.1.11",
+		"@solid-primitives/utils": "^6.2.3"
+	},
+	"clean-package": "./clean-package.config.json",
+	"tsup": {
+		"clean": true,
+		"target": "es2019",
+		"format": ["cjs", "esm"]
+	}
+}

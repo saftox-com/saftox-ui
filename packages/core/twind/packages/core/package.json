@@ -1,0 +1,42 @@
+{
+	"name": "@saftox-ui/twind",
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"version": "0.0.1",
+	"description": "The core twind engine without any presets.",
+	"keywords": ["twind"],
+	"private": true,
+	"main": "./src/index.ts",
+	"sideEffects": false,
+	"files": ["dist"],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/saftox-ui.git",
+		"directory": "packages/core/twind/packages/core"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/saftox-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "pnpm build:fast --watch",
+		"dev:vite": "vite serve dev",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"devDependencies": {
+		"distilt": "^0.19.2",
+		"csstype": "^3.1.3"
+	},
+	"clean-package": "../../../configs/clean-package.config.json",
+	"tsup": {
+		"clean": true,
+		"target": "es2019",
+		"format": ["cjs", "esm"]
+	}
+}

@@ -4,45 +4,31 @@
 	"version": "0.0.1",
 	"description": "A collection of low level user types primitives.",
 	"keywords": ["types"],
+	"main": "./src/index.ts",
 	"sideEffects": false,
 	"files": ["dist"],
-	"private": true,
-	"type": "module",
 	"publishConfig": {
 		"access": "public"
 	},
-	"main": "./dist/index.cjs",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"browser": {},
-	"exports": {
-		"import": {
-			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
-		},
-		"require": {
-			"types": "./dist/index.d.cts",
-			"default": "./dist/index.cjs"
-		}
-	},
-	"typesVersions": {},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/hooks/types"
+		"directory": "packages/primitives/types"
 	},
 	"bugs": {
 		"url": "https://github.com/saftox-com/saftox-ui/issues"
 	},
 	"scripts": {
 		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "bun build:fast --watch",
 		"clean": "rimraf dist .turbo",
 		"typecheck": "tsc --noEmit",
 		"prepack": "clean-package",
 		"postpack": "clean-package restore"
 	},
 	"peerDependencies": {
-		"solid-js": ">=1.8.1"
+		"solid-js": ">=1.8.17"
 	},
 	"dependencies": {
 		"@solid-primitives/platform": "^0.1.2",
