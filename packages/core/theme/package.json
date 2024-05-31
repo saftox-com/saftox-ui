@@ -29,6 +29,9 @@
 		"prepack": "clean-package",
 		"postpack": "clean-package restore"
 	},
+	"peerDependencies": {
+		"@saftox-ui/twind": ">=0.0.1"
+	},
 	"dependencies": {
 		"@saftox-ui/variants": "0.0.1",
 		"tailwind-merge": "^2.3.0"

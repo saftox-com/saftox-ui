@@ -3,9 +3,9 @@ import * as React from "solid-js";
 import type { ComponentProps, JSX } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs";
 
+import { Camera, HeadphonesIcon, Notification } from "@saftox-ui/shared-icons";
 import { button } from "@saftox-ui/theme";
 import { createSignal } from "solid-js";
-// import {HeadphonesIcon, Notification, Camera} from "@saftox-ui/shared-icons";
 
 import { Button, type ButtonProps } from "../src";
 
@@ -20,6 +20,7 @@ const meta = {
 			options: [
 				"solid",
 				"bordered",
+				"glow",
 				"light",
 				"flat",
 				"faded",
@@ -95,7 +96,6 @@ const StateTemplate = (args: ButtonProps) => {
 	const [isOpen, setIsOpen] = createSignal(false);
 
 	const handlePress = () => {
-		// eslint-disable-next-line no-console
 		console.log("Pressed");
 		setIsOpen((prev) => !prev);
 	};
@@ -136,8 +136,8 @@ export const IsDisabled: Story = {
 export const WithIcons: Story = {
 	args: {
 		...defaultProps,
-		// startContent: <Notification class="fill-current" />,
-		// endContent: <Camera class="fill-current" />,
+		startContent: <Notification class="fill-current" />,
+		endContent: <Camera class="fill-current" />,
 	},
 };
 
@@ -145,7 +145,11 @@ export const IconButton: Story = {
 	args: {
 		...defaultProps,
 		isIconOnly: true,
-		children: <>{/* <HeadphonesIcon class="w-5 h-5" /> */}</>,
+		children: (
+			<>
+				<HeadphonesIcon class="w-5 h-5" />
+			</>
+		),
 	},
 };
 

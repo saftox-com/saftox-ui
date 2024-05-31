@@ -1,3 +1,4 @@
+import type { Ref } from "@saftox-ui/solid-utils/dom";
 import type { HTMLSaftoxUIProps, PropGetter } from "@saftox-ui/system";
 import type {
 	ButtonGroupVariantProps,
@@ -11,7 +12,6 @@ import type {
 	FocusableProps,
 	PressEvents,
 } from "@saftox-ui/types";
-import type { Ref } from "@solid-primitives/refs";
 import type { JSX } from "solid-js";
 
 interface ButtonProps extends PressEvents, FocusableProps {
@@ -112,7 +112,7 @@ interface Props extends HTMLSaftoxUIProps<"button"> {
 	/**
 	 * Ref to the DOM node.
 	 */
-	ref?: Ref<HTMLButtonElement> | HTMLButtonElement | undefined;
+	ref?: Ref;
 	/**
 	 * The button start content.
 	 */
@@ -152,7 +152,7 @@ interface ButtonGroupProps extends HTMLSaftoxUIProps, ButtonGroupVariantProps {
 	/**
 	 * Ref to the DOM node.
 	 */
-	ref?: Ref<HTMLDivElement | undefined>;
+	ref?: Ref;
 	/**
 	 * Whether the buttons are disabled.
 	 * @default false

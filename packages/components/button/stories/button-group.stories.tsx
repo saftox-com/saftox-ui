@@ -1,12 +1,12 @@
 import * as React from "solid-js"; // for type checking
 
-import type { Component, ComponentProps } from "solid-js";
+import type { ComponentProps } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs";
+import { Button, ButtonGroup } from "../src";
 
 import { button, buttonGroup } from "@saftox-ui/theme";
 
 import type { ButtonGroupProps } from "../src";
-import { Button, ButtonGroup } from "../src";
 
 export default {
 	title: "Components/ButtonGroup",
@@ -16,7 +16,16 @@ export default {
 			control: {
 				type: "select",
 			},
-			options: ["solid", "bordered", "light", "flat", "shadow", "ghost"],
+			options: [
+				"solid",
+				"bordered",
+				"glow",
+				"light",
+				"flat",
+				"faded",
+				"shadow",
+				"ghost",
+			],
 		},
 		color: {
 			control: {

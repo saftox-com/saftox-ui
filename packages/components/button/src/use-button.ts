@@ -1,44 +1,45 @@
+import type { SpinnerProps } from "@saftox-ui/spinner";
 import type { PropGetter } from "@saftox-ui/system";
 import type { JSX } from "solid-js";
 import type { AriaButtonProps, UseButtonProps } from "./button-types";
 
-import {
-	children,
-	createMemo,
-	createSignal,
-	mergeProps,
-	splitProps,
-} from "solid-js";
+import { children, createSignal, mergeProps, splitProps } from "solid-js";
 
 import { button } from "@saftox-ui/theme";
 
 import { createFocusRing } from "@saftox-ui/focus";
 import { createHover } from "@saftox-ui/interactions";
+import { Spinner } from "@saftox-ui/spinner";
 import { filterDOMProps } from "@saftox-ui/utils";
 
-import { dataAttr } from "@saftox-ui/shared-utils";
-import { chain, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
+import { clsx, dataAttr } from "@saftox-ui/shared-utils";
+import {
+	chain,
+	combineProps,
+	mergeRefs,
+} from "@saftox-ui/solid-utils/reactivity";
 
 import { createButton } from "./createButton";
 
 import { useButtonGroupContext } from "./button-group-context";
 
-import { combineProps } from "@solid-primitives/props";
-
 export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
-	const groupContext = useButtonGroupContext();
+	const [domRef, setDomRef] = createSignal<HTMLElement | undefined>();
 
+	const groupContext = useButtonGroupContext();
 	const defaultProps: UseButtonProps = {
+		variant: "glow",
 		color: "default",
+		size: "md",
+		spinnerPlacement: "start",
 		disableAnimation: false,
 		fullWidth: false,
 		isDisabled: false,
 		isIconOnly: false,
 		isLoading: false,
-		size: "md",
-		spinnerPlacement: "start",
-		variant: "solid",
 	};
+
+	const spinner = () => Spinner({ color: "current", size: spinnerSize() });
 
 	const propsWithDefault = mergeProps(defaultProps, groupContext, props);
 
@@ -69,8 +70,6 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 		],
 	);
 
-	const [domRef, setDomRef] = createSignal<HTMLButtonElement | undefined>();
-
 	const component = local.as || "button";
 	const shouldFilterDOMProps = typeof component === "string";
 
@@ -82,17 +81,16 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 	const isDisabled = () => local.isDisabled || local.isLoading;
 	const isLoading = () => local.isLoading;
 
-	const styles = createMemo(() => {
+	const slots = () => {
 		return button(
 			combineProps(variantProps, {
 				get isInGroup() {
 					return !!groupContext;
 				},
 				isDisabled: isDisabled(),
-				class: local.class,
 			}),
 		);
-	});
+	};
 
 	const handleClick: JSX.EventHandlerUnion<T, MouseEvent> = () => {
 		if (isDisabled() || variantProps.disableAnimation) return;
@@ -117,6 +115,11 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 	const getButtonProps: PropGetter<HTMLButtonElement> = (props = {}) => {
 		const buttonLolcaProps = {
 			ref: mergeRefs(local.ref, setDomRef),
+			get class() {
+				return slots().base({
+					class: clsx(props.class, local.class),
+				});
+			},
 			get "data-disabled"() {
 				return dataAttr(isDisabled);
 			},
@@ -133,7 +136,7 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 				return dataAttr(isHovered);
 			},
 			get "data-loading"() {
-				return dataAttr(local.isLoading);
+				return dataAttr(isLoading);
 			},
 		};
 
@@ -157,15 +160,35 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 	const startContent = getIconClone(local.startContent);
 	const endContent = getIconClone(local.endContent);
 
+	const spinnerSize = () => {
+		const buttonSpinnerSizeMap: Record<string, SpinnerProps["size"]> = {
+			sm: "sm",
+			md: "sm",
+			lg: "md",
+		};
+
+		return buttonSpinnerSizeMap[
+			variantProps.size as keyof typeof buttonSpinnerSizeMap
+		];
+	};
+
 	return {
+		domRef,
 		component,
-		styles,
+		slots,
 		startContent,
 		endContent,
 		isLoading,
-		isIconOnly: variantProps.isIconOnly,
-		spinnerPlacement: local.spinnerPlacement,
+		isDisabled,
+		get isIconOnly() {
+			return variantProps.isIconOnly;
+		},
+		get spinnerPlacement() {
+			return () => local.spinnerPlacement;
+		},
 		getButtonProps,
+		propsWithDefault,
+		spinner,
 	};
 }
 

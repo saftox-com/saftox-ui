@@ -7,47 +7,58 @@ import {
 } from "../utils";
 import { tv } from "../utils/tv";
 
+import { radiusClasses } from "../utils/classes";
+
 /**
- * Button wrapper **Tailwind Variants** component
+ * Button wrapper **Variants** component
  *
- * const classNames = button({...})
+ * const slots = () => button({...})
  *
  * @example
  * <button
- *  className={classNames())}
+ *  class={slots())}
  *  data-pressed={true/false}
  *  data-hover={true/false}
  *  data-focus={true/false}
  *  data-focus-visible={true/false}
  * >
+ * // glow effect component
+ * <div class={slots().innerWrapper())}>
  *   Button
+ * </div>
  * </button>
  */
+
 const button = tv({
-	base: [
-		"z-0",
-		"group",
-		"relative",
-		"inline-flex",
-		"items-center",
-		"justify-center",
-		"box-border",
-		"appearance-none",
-		"outline-none",
-		"select-none",
-		"whitespace-nowrap",
-		"min-w-max",
-		"font-normal",
-		"subpixel-antialiased",
-		"overflow-hidden",
-		"tap-highlight-transparent",
-		// focus ring
-		...dataFocusVisibleClasses,
-	],
+	slots: {
+		base: [
+			"z-0",
+			"group",
+			"relative",
+			"inline-flex",
+			"items-center",
+			"justify-center",
+			"box-border",
+			"appearance-none",
+			"outline-none",
+			"select-none",
+			"whitespace-nowrap",
+			"min-w-max",
+			"font-normal",
+			"subpixel-antialiased",
+			"overflow-hidden",
+			"tap-highlight-transparent",
+			// focus ring
+			...dataFocusVisibleClasses,
+		],
+		innerWrapper: "relative overflow-hidden flex items-center justify-center",
+		glowEffect: "absolute z-5 h-28 w-28 -translate-x-1/2 -translate-y-1/2",
+	},
 	variants: {
 		variant: {
 			solid: "",
 			bordered: "border-medium bg-transparent",
+			glow: "",
 			light: "bg-transparent",
 			flat: "",
 			faded: "border-medium",
@@ -55,9 +66,21 @@ const button = tv({
 			ghost: "border-medium bg-transparent",
 		},
 		size: {
-			sm: "px-3 min-w-16 h-8 text-tiny gap-2 rounded-small",
-			md: "px-4 min-w-20 h-10 text-small gap-2 rounded-medium",
-			lg: "px-6 min-w-24 h-12 text-medium gap-3 rounded-large",
+			sm: {
+				base: "min-w-16 h-8 text-tiny rounded-small",
+				innerWrapper:
+					"px-3 gap-2 rounded-[calc(theme(borderRadius.small)-2px)]",
+			},
+			md: {
+				base: "min-w-20 h-10 text-small rounded-medium",
+				innerWrapper:
+					"px-4 gap-2 rounded-[calc(theme(borderRadius.medium)-2px)]",
+			},
+			lg: {
+				base: " min-w-24 h-12 text-medium rounded-large",
+				innerWrapper:
+					"px-6 gap-3 rounded-[calc(theme(borderRadius.large)-2px)]",
+			},
 		},
 		color: {
 			default: "",
@@ -68,11 +91,26 @@ const button = tv({
 			danger: "",
 		},
 		radius: {
-			none: "rounded-none",
-			sm: "rounded-lmall",
-			md: "rounded-medium",
-			lg: "rounded-large",
-			full: "rounded-full",
+			none: {
+				base: "rounded-none",
+				innerWrapper: "rounded-[calc(theme(borderRadius.none)-2px)]",
+			},
+			sm: {
+				base: "rounded-small",
+				innerWrapper: "rounded-[calc(theme(borderRadius.small)-2px)]",
+			},
+			md: {
+				base: "rounded-medium",
+				innerWrapper: "rounded-[calc(theme(borderRadius.medium)-2px)]",
+			},
+			lg: {
+				base: "rounded-large",
+				innerWrapper: "rounded-[calc(theme(borderRadius.large)-2px)]",
+			},
+			full: {
+				base: "rounded-full",
+				innerWrapper: "rounded-[calc(theme(borderRadius.full)-2px)]",
+			},
 		},
 		fullWidth: {
 			true: "w-full",
@@ -84,8 +122,10 @@ const button = tv({
 			true: "![&:not(:first-child):not(:last-child)]:rounded-none",
 		},
 		isIconOnly: {
-			true: "!(px-0 gap-0)",
-			false: "[&>svg]:max-w-[theme(spacing.unit-8)]",
+			true: {
+				innerWrapper: "px-0 gap-0",
+			},
+			// false: "[&>svg]:max-w-[theme(spacing.8)]",
 		},
 		disableAnimation: {
 			true: "!transition-none",
@@ -95,7 +135,7 @@ const button = tv({
 	},
 	defaultVariants: {
 		size: "md",
-		variant: "solid",
+		variant: "glow",
 		color: "default",
 		fullWidth: false,
 		isDisabled: false,
@@ -103,6 +143,20 @@ const button = tv({
 		disableAnimation: false,
 	},
 	compoundVariants: [
+		// glow
+		{
+			variant: "glow",
+			class: {
+				innerWrapper: ["z-10 backdrop-blur-sm bg-background/90 w-full h-full"],
+			},
+		},
+		{
+			variant: "glow",
+			isInGroup: false,
+			class: {
+				base: [colorVariants.glow.default, "p-0.5"],
+			},
+		},
 		// solid / color
 		{
 			variant: "solid",
@@ -262,12 +316,16 @@ const button = tv({
 		{
 			variant: "light",
 			color: "default",
-			class: [colorVariants.light.default, "data-[hover=true]:bg-default/40"],
+			class: {
+				base: [colorVariants.light.default, "data-[hover=true]:bg-default/40"],
+			},
 		},
 		{
 			variant: "light",
 			color: "primary",
-			class: [colorVariants.light.primary, "data-[hover=true]:bg-primary/20"],
+			class: {
+				base: [colorVariants.light.primary, "data-[hover=true]:bg-primary/20"],
+			},
 		},
 		{
 			variant: "light",
@@ -280,17 +338,23 @@ const button = tv({
 		{
 			variant: "light",
 			color: "success",
-			class: [colorVariants.light.success, "data-[hover=true]:bg-success/20"],
+			class: {
+				base: [colorVariants.light.success, "data-[hover=true]:bg-success/20"],
+			},
 		},
 		{
 			variant: "light",
 			color: "warning",
-			class: [colorVariants.light.warning, "data-[hover=true]:bg-warning/20"],
+			class: {
+				base: [colorVariants.light.warning, "data-[hover=true]:bg-warning/20"],
+			},
 		},
 		{
 			variant: "light",
 			color: "danger",
-			class: [colorVariants.light.danger, "data-[hover=true]:bg-danger/20"],
+			class: {
+				base: [colorVariants.light.danger, "data-[hover=true]:bg-danger/20"],
+			},
 		},
 		// ghost / color
 		{
@@ -326,7 +390,10 @@ const button = tv({
 		// isInGroup / radius / size <-- radius not provided
 		{
 			isInGroup: true,
-			class: "rounded-none first:rounded-l-medium last:rounded-r-medium",
+			class: {
+				base: "rounded-none first:rounded-l-medium last:rounded-r-medium",
+				innerWrapper: "rounded-none",
+			},
 		},
 		{
 			isInGroup: true,
@@ -341,7 +408,9 @@ const button = tv({
 		{
 			isInGroup: true,
 			size: "lg",
-			class: "rounded-none first:rounded-l-large last:rounded-r-large",
+			class: {
+				base: "rounded-none first:rounded-l-large last:rounded-r-large",
+			},
 		},
 		{
 			isInGroup: true,
@@ -367,49 +436,51 @@ const button = tv({
 		{
 			isInGroup: true,
 			radius: "lg",
-			class: "rounded-none first:rounded-l-large last:rounded-r-large",
+			class: {
+				base: "rounded-none first:rounded-l-large last:rounded-r-large",
+			},
 		},
 		{
 			isInGroup: true,
 			radius: "full",
-			class: "rounded-none first:rounded-l-full last:rounded-r-full",
+			class: { base: "rounded-none first:rounded-l-full last:rounded-r-full" },
 		},
 		// isInGroup / bordered / ghost
 		{
 			isInGroup: true,
 			variant: ["ghost", "bordered"],
 			color: "default",
-			className: collapseAdjacentVariantBorders.default,
+			class: collapseAdjacentVariantBorders.default,
 		},
 		{
 			isInGroup: true,
 			variant: ["ghost", "bordered"],
 			color: "primary",
-			className: collapseAdjacentVariantBorders.primary,
+			class: collapseAdjacentVariantBorders.primary,
 		},
 		{
 			isInGroup: true,
 			variant: ["ghost", "bordered"],
 			color: "secondary",
-			className: collapseAdjacentVariantBorders.secondary,
+			class: collapseAdjacentVariantBorders.secondary,
 		},
 		{
 			isInGroup: true,
 			variant: ["ghost", "bordered"],
 			color: "success",
-			className: collapseAdjacentVariantBorders.success,
+			class: collapseAdjacentVariantBorders.success,
 		},
 		{
 			isInGroup: true,
 			variant: ["ghost", "bordered"],
 			color: "warning",
-			className: collapseAdjacentVariantBorders.warning,
+			class: collapseAdjacentVariantBorders.warning,
 		},
 		{
 			isInGroup: true,
 			variant: ["ghost", "bordered"],
 			color: "danger",
-			className: collapseAdjacentVariantBorders.danger,
+			class: collapseAdjacentVariantBorders.danger,
 		},
 		{
 			isIconOnly: true,
@@ -434,32 +505,47 @@ const button = tv({
 	],
 });
 
-// size: {
-//   sm: "px-3 h-8 text-small",
-//   md: "px-4 h-10 text-medium",
-//   lg: "px-6 h-12 text-medium",
-// },
-
 /**
- * ButtonGroup wrapper **Tailwind Variants** component
+ * ButtonGroup wrapper **Variants** component
  *
- * const classNames = buttonGroup({...})
+ * const slots = () => buttonGroup({...})
  *
  * @example
- * <div role="group" className={classNames())}>
- *   // button elements
+ * <div role="group" class={slots().base())}>
+ * 	// glow effect component
+ *	<div class={slots().innerWrapper())}>
+ *    // button elements
+ *  </div>
  * </div>
  */
 const buttonGroup = tv({
-	base: "inline-flex items-center justify-center h-auto",
+	slots: {
+		base: ["relative"],
+		innerWrapper: "inline-flex items-center justify-center h-auto",
+	},
 	variants: {
 		fullWidth: {
 			true: "w-full",
 		},
+		variant: {
+			glow: "",
+		},
+		radius: radiusClasses,
 	},
 	defaultVariants: {
 		fullWidth: false,
+		variant: "glow",
+		radius: "md",
 	},
+	compoundVariants: [
+		{
+			variant: "glow",
+			class: {
+				base: [colorVariants.glow.default, "p-0.5"],
+				innerWrapper: ["gap-0.5"],
+			},
+		},
+	],
 });
 
 export type ButtonGroupVariantProps = VariantProps<typeof buttonGroup>;

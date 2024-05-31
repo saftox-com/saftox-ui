@@ -1,21 +1,14 @@
-import type { PropGetter } from "@saftox-ui/system";
 import type { ContextType, UseButtonGroupProps } from "./button-types";
 
-import {
-	createEffect,
-	createMemo,
-	createSignal,
-	mergeProps,
-	splitProps,
-} from "solid-js";
+import { createEffect, createSignal, mergeProps, splitProps } from "solid-js";
 
 import { mapPropsVariants } from "@saftox-ui/system";
 import { buttonGroup } from "@saftox-ui/theme";
-import { combineProps } from "@solid-primitives/props";
-import { mergeRefs } from "@solid-primitives/refs";
+
+import { combineProps, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
 
 export function useButtonGroup(originalProps: UseButtonGroupProps) {
-	const [props, variantProps] = mapPropsVariants(
+	const [_, variantProps] = mapPropsVariants(
 		originalProps,
 		buttonGroup.variantKeys,
 	);
@@ -23,14 +16,14 @@ export function useButtonGroup(originalProps: UseButtonGroupProps) {
 	const defaultProps: UseButtonGroupProps = {
 		size: "md",
 		color: "default",
-		variant: "solid",
+		variant: "glow",
 		radius: "md",
 		isDisabled: false,
 		disableAnimation: false,
 		isIconOnly: false,
 	};
 
-	const propsWithDefault = mergeProps(defaultProps, props);
+	const propsWithDefault = mergeProps(defaultProps, originalProps);
 
 	const [local, contexts, otherProps] = splitProps(
 		propsWithDefault,
@@ -49,11 +42,10 @@ export function useButtonGroup(originalProps: UseButtonGroupProps) {
 
 	const component = local.as || "div";
 
-	const [domRef, setDomRef] = createSignal<HTMLDivElement | undefined>();
+	const [domRef, setDomRef] = createSignal<HTMLElement | undefined>();
 
-	const classNames = createMemo(() =>
-		buttonGroup(combineProps(variantProps, { class: contexts.class })),
-	);
+	const slots = () =>
+		buttonGroup(combineProps(variantProps(), { class: contexts.class }));
 
 	const context: ContextType = combineProps(contexts, {
 		get fullWidth() {
@@ -73,7 +65,7 @@ export function useButtonGroup(originalProps: UseButtonGroupProps) {
 		component,
 		domRef,
 		context,
-		classNames,
+		slots,
 		getButtonGroupProps,
 	};
 }

@@ -12,6 +12,7 @@ export type VariantColors = {
 	solid: VariantColor;
 	shadow: VariantColor;
 	bordered: VariantColor;
+	glow: VariantColor;
 	flat: VariantColor;
 	faded: VariantColor;
 	light: VariantColor;
@@ -49,6 +50,16 @@ const bordered = {
 	foreground: "bg-transparent border-foreground text-foreground",
 };
 
+const glow = {
+	default: "bg-default border-default text-foreground",
+	primary: "bg-transparent border-primary text-primary",
+	secondary: "bg-transparent border-secondary text-secondary",
+	success: "bg-transparent border-success text-success",
+	warning: "bg-transparent border-warning text-warning",
+	danger: "bg-transparent border-danger text-danger",
+	foreground: "bg-transparent border-foreground text-foreground",
+};
+
 const flat = {
 	default: "bg-default/40 text-default-foreground",
 	primary: "bg-primary/20 text-primary",
@@ -60,13 +71,13 @@ const flat = {
 };
 
 const faded = {
-	default: "border-default bg-default-100 text-default-foreground",
-	primary: "border-default bg-default-100 text-primary",
-	secondary: "border-default bg-default-100 text-secondary",
-	success: "border-default bg-default-100 text-success",
-	warning: "border-default bg-default-100 text-warning",
-	danger: "border-default bg-default-100 text-danger",
-	foreground: "border-default bg-default-100 text-foreground",
+	default: "border-default bg-default-200 text-default-foreground",
+	primary: "border-default bg-default-200 text-primary",
+	secondary: "border-default bg-default-200 text-secondary",
+	success: "border-default bg-default-200 text-success",
+	warning: "border-default bg-default-200 text-warning",
+	danger: "border-default bg-default-200 text-danger",
+	foreground: "border-default bg-default-200 text-foreground",
 };
 
 const light = {
@@ -98,6 +109,7 @@ export const colorVariants: VariantColors = {
 	solid,
 	shadow,
 	bordered,
+	glow,
 	flat,
 	faded,
 	light,
