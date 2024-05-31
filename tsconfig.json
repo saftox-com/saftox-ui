@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "target": "ESNext",
-    "module": "preserve",
-    "lib": ["DOM", "DOM.Iterable", "ESNext", "scripthost"],
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "moduleResolution": "bundler",
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
@@ -19,7 +19,7 @@
     "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["solid-js", "vite/client", "node", "jest", "@testing-library/jest-dom"]
+    "types": ["solid-js", "vite/client", "node", "@testing-library/jest-dom"]
   },
   "include": ["packages"],
   "exclude": ["**/node_modules", "**/dist", "**/.tsup", "**/.turbo"]
