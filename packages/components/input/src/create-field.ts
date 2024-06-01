@@ -4,8 +4,8 @@ import type { JSX } from "solid-js";
 import { combineProps } from "@saftox-ui/solid-utils/reactivity";
 import { ID_PREFIX, createSlotId } from "@saftox-ui/utils";
 
-import { createLabel } from "./createLabel";
-import type { AriaLabelProps, LabelAria } from "./createLabel";
+import { createLabel } from "./create-label";
+import type { AriaLabelProps, LabelAria } from "./create-label";
 
 export interface AriaFieldProps
 	extends AriaLabelProps,
