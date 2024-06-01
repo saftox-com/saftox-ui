@@ -30,10 +30,22 @@
 		"postpack": "clean-package restore"
 	},
 	"peerDependencies": {
-		"solid-js": ">=1.8.17"
+		"solid-js": ">=1.8.17",
+		"@saftox-ui/theme": ">=0.0.1",
+		"@saftox-ui/system": ">=0.0.1"
+	},
+	"dependencies": {
+		"@saftox-ui/solid-utils": "^0.0.1",
+		"@saftox-ui/shared-utils": "^0.0.1",
+		"@saftox-ui/interactions": "^0.0.1",
+		"@saftox-ui/focus": "^0.0.1",
+		"@saftox-ui/utils": "^0.0.1",
+		"@saftox-ui/types": "^0.0.1"
 	},
 	"devDependencies": {
-		"@saftox-ui/variants": "0.0.1"
+		"@saftox-ui/theme": "workspace:*",
+		"@saftox-ui/system": "workspace:*",
+		"@saftox-ui/variants": "workspace:*"
 	},
 	"clean-package": "../../../configs/clean-package.config.json"
 }
