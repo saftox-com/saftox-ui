@@ -2,7 +2,9 @@
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "lib": ["ESNext", "DOM"]
+    "paths": {
+      "@saftox-ui/variants": ["./node_modules/@saftox-ui/variants"]
+    }
   },
-  "include": ["src", "dev", "__tests__", "env.d.ts"]
+  "include": ["src", "dev", "__tests__"]
 }
