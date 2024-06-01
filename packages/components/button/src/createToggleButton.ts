@@ -4,9 +4,8 @@ import type { Accessor, JSX } from "solid-js";
 import type { AriaToggleButtonProps } from "./button-types";
 import type { ButtonAria } from "./createButton";
 
+import { chain, combineProps } from "@saftox-ui/solid-utils/reactivity";
 import { createToggleState } from "@saftox-ui/toggle";
-import { combineProps } from "@solid-primitives/props";
-import { chain } from "@solid-primitives/utils";
 import { mergeProps } from "solid-js";
 
 import { createButton } from "./createButton";
