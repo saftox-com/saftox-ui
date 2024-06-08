@@ -261,6 +261,9 @@ importers:
       '@saftox-ui/i18n':
         specifier: 0.0.1
         version: link:../../primitives/i18n
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
       '@saftox-ui/system-ssc':
         specifier: 0.0.1
         version: link:../system-ssc
