@@ -1,0 +1,59 @@
+{
+	"name": "@saftox-ui/storybook-solid-vite",
+	"version": "0.0.1",
+	"description": "",
+	"keywords": ["solid", "storybook"],
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"homepage": "https://saftox.com",
+	"exports": {
+		".": {
+			"node": "./dist/index.js",
+			"require": "./dist/index.js",
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.ts"
+		},
+		"./preview": {
+			"require": "./dist/config.js",
+			"import": "./dist/config.mjs",
+			"types": "./dist/config.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"files": ["dist/**/*", "template/**/*", "README.md", "*.js", "*.d.ts"],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/stafna-ui.git",
+		"directory": "packages/components/storybook/solid-vite"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/stafna-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "pnpm build:fast --watch",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"dependencies": {
+		"@storybook/builder-vite": "next",
+		"storybook-solidjs": "^1.0.0-beta.2",
+		"vite-plugin-solid": "^2.10.2",
+		"@saftox-ui/storybook-solid": "workspace:*"
+	},
+	"devDependencies": {
+		"magic-string": "^0.30.10"
+	},
+	"bundler": {
+		"entries": ["./src/index.ts", "./src/config.ts"],
+		"platform": "browser"
+	}
+}
