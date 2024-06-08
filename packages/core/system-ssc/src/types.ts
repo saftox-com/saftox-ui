@@ -29,7 +29,7 @@ type DataAttributes = {
 };
 
 /** All DOM attributes supported across both HTML and SVG elements. */
-export type DOMAttributes<T = DOMElement> = JSX.HTMLAttributes<T> &
+export type DOMAttributes<T = DOMElement, E = JSX.HTMLAttributes<T>> = E &
 	DataAttributes;
 
 export type OmitCommonProps<
@@ -79,16 +79,24 @@ export type HTMLSaftoxUIProps<
 	as?: As;
 };
 
-export type PropGetter<
-	P extends DOMElements | HTMLElement = "div",
-	R = P extends DOMElements
-		? DOMAttributes<IntrinsicHTMLElements[P]>
-		: DOMAttributes<P>,
-> = (props?: R, ref?: Ref<any>) => R;
+type Key = string | number;
 
-// & {
-//   ref?: Ref<P extends DOMElements ? IntrinsicHTMLElements[P] : P>;
-// };
+interface Attributes {
+	key?: Key | null | undefined;
+}
+
+interface RefAttributes<T> extends Attributes {
+	ref?: Ref<T extends DOMElements ? IntrinsicHTMLElements[T] : T>;
+}
+
+export type PropGetter<
+	T = DOMElement,
+	P = Record<string, unknown>,
+	R = DOMAttributes<T>,
+> = (
+	props?: Merge<R, P>,
+	ref?: Ref<any>,
+) => Omit<R, "ref"> & RefAttributes<T | any>;
 
 // ----
 
