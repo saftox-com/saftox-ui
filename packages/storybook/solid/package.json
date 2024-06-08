@@ -1,0 +1,82 @@
+{
+	"name": "@saftox-ui/storybook-solid",
+	"version": "0.0.1",
+	"description": "Storybook SolidJS renderer",
+	"keywords": ["solid", "storybook"],
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"homepage": "https://saftox.com",
+	"type": "module",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"node": "./dist/index.js",
+			"require": "./dist/index.js",
+			"import": "./dist/index.mjs"
+		},
+		"./preset": "./preset.js",
+		"./dist/entry-preview.mjs": "./dist/entry-preview.mjs",
+		"./package.json": "./package.json"
+	},
+	"typesVersions": {
+		"*": {
+			"*": ["dist/index.d.ts"]
+		}
+	},
+	"files": [
+		"dist/**/*",
+		"template/cli/**/*",
+		"README.md",
+		"*.js",
+		"*.d.ts",
+		"!src/**/*"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/stafna-ui.git",
+		"directory": "packages/components/storybook/solid"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/stafna-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup --dts",
+		"install-local": "pnpm install --registry http://localhost:6006 --no-lockfile",
+		"publish-local": "pnpm publish --registry http://localhost:6006",
+		"unpublish-local": "pnpm unpublish storybook-solidjs@1.0.0-beta.2 --registry http://localhost:6006",
+		"build:fast": "tsup",
+		"dev": "pnpm build:fast --watch",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"peerDependencies": {
+		"babel-preset-solid": "^1.8.17",
+		"solid-js": ">=1.8.17"
+	},
+	"devDependencies": {
+		"@storybook/docs-tools": "next",
+		"@storybook/global": "^5.0.0",
+		"@storybook/preview-api": "next",
+		"@storybook/csf": "^0.1.8",
+		"@storybook/builder-vite": "next",
+		"@storybook/types": "next",
+		"@storybook/test": "next",
+		"ts-node": "^10.9.2",
+		"type-fest": "^4.19.0",
+		"babel-preset-solid": "^1.8.17",
+		"esbuild-plugin-alias": "^0.2.1",
+		"esbuild-plugin-solid": "^0.6.0",
+		"esbuild-plugin-polyfill-node": "^0.3.0"
+	},
+	"bundler": {
+		"entries": ["./src/index.ts", "./src/preset.ts", "./src/entry-preview.ts"],
+		"platform": "browser"
+	}
+}
