@@ -19,7 +19,7 @@ import {
 	mergeRefs,
 } from "@saftox-ui/solid-utils/reactivity";
 
-import { createButton } from "./createButton";
+import { createButton } from "./create-button";
 
 import { useButtonGroupContext } from "./button-group-context";
 
