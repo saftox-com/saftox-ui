@@ -3,6 +3,6 @@ type EventHandlerEvent<T, E extends Event> = E & {
 	target: Element;
 };
 
-type Ref = HTMLElement | ((element: HTMLElement) => void);
+type Ref<T = HTMLElement> = T | ((el: T) => void) | undefined;
 
 export type { EventHandlerEvent, Ref };

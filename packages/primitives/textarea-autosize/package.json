@@ -1,11 +1,12 @@
 {
-	"name": "@saftox-ui/preset",
-	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"name": "@saftox-ui/textarea-autosize",
 	"version": "0.0.1",
-	"description": "",
-	"keywords": ["preset"],
+	"description": "Textarea component for Solid which grows with content",
+	"keywords": ["textarea", "autosize"],
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"homepage": "https://ui.saftox.com",
 	"private": true,
-	"main": "./src/index.ts",
+	"main": "src/index.ts",
 	"sideEffects": false,
 	"files": ["dist"],
 	"publishConfig": {
@@ -14,7 +15,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/core/twind/packages/preset"
+		"directory": "packages/primitives/textarea-autosize"
 	},
 	"bugs": {
 		"url": "https://github.com/saftox-com/saftox-ui/issues"
@@ -29,10 +30,8 @@
 		"prepack": "clean-package",
 		"postpack": "clean-package restore"
 	},
-	"dependencies": {
-		"@saftox-ui/twind": "0.0.1",
-		"color2k": "^2.0.3",
-		"deepmerge": "4.3.1"
+	"peerDependencies": {
+		"solid-js": ">=1.8.17"
 	},
 	"clean-package": "../../../configs/clean-package.config.json",
 	"tsup": {

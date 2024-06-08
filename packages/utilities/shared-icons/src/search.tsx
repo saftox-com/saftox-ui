@@ -1,6 +1,7 @@
+import type { ParentComponent } from "solid-js";
 import type { IconSvgProps } from "./types";
 
-export const SearchIcon = (props: IconSvgProps) => (
+export const SearchIcon: ParentComponent<IconSvgProps> = (props) => (
 	<svg
 		aria-hidden="true"
 		fill="none"

@@ -79,6 +79,7 @@
 		"solid-js": "^1.8.17",
 		"sort-package-json": "2.10.0",
 		"storybook-solidjs": "^1.0.0-beta.2",
+		"@saftox-ui/storybook-solid": "workspace:*",
 		"tsup": "^8.0.2",
 		"tsup-preset-solid": "^2.2.0",
 		"tsx": "^4.11.0",

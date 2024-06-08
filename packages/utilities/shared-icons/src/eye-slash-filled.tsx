@@ -1,6 +1,7 @@
+import type { ParentComponent } from "solid-js";
 import type { IconSvgProps } from "./types";
 
-export const EyeSlashFilledIcon = (props: IconSvgProps) => (
+export const EyeSlashFilledIcon: ParentComponent<IconSvgProps> = (props) => (
 	<svg
 		aria-hidden="true"
 		fill="none"
