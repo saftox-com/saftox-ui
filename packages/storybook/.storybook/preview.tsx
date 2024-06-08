@@ -1,29 +1,42 @@
-import type { Preview } from "storybook-solidjs";
+/* @refresh reload */
 
-import * as React from "solid-js";
+import type { Preview } from "@saftox-ui/storybook-solid";
+
 import { createEffect, createSignal } from "solid-js";
 
 import { themeConfig } from "@saftox-ui/preset";
-import { css, defineConfig, install } from "@saftox-ui/twind";
+import { css, install } from "@saftox-ui/twind";
 
 import { themes } from "@storybook/theming";
+
+import { SaftoxUIProvider } from "@saftox-ui/system";
 
 const isProd = process.env.NODE_ENV === "production";
 
 install(
 	themeConfig({
 		preflight: css`
-    body {
-      @apply bg-background;
-    },
-  `,
+		body {
+			@apply bg-background;
+		},
+		`,
 		ignorelist: [/^((css|s?c|svelte|sb)-|(sprinkles)?_|go\d)|-sc-/, "dark"],
 		hash: isProd,
-	}),
+	}) as any,
 );
 
-const parameters: Preview["parameters"] = {
-	layout: "centered",
+const commonTheme = {
+	brandTitle: "Saftox UI",
+};
+
+const parameters = {
+	actions: { argTypesRegex: "^on[A-Z].*" },
+	options: {
+		storySort: {
+			method: "alphabetical",
+			order: ["Foundations", "Components"],
+		},
+	},
 	controls: {
 		matchers: {
 			color: /(background|color)$/i,
@@ -36,13 +49,21 @@ const parameters: Preview["parameters"] = {
 		darkClass: "dark",
 		lightClass: "light",
 		classTarget: "html",
-	},
-	parameters: {
-		controls: {
-			matchers: {
-				color: /(background|color)$/i,
-				date: /Date$/i,
-			},
+		dark: {
+			...themes.dark,
+			...commonTheme,
+			appBg: "#161616",
+			barBg: "black",
+			background: "black",
+			appContentBg: "black",
+			appBorderRadius: 14,
+			brandImage: "/dark-logo.svg",
+		},
+		light: {
+			...themes.light,
+			...commonTheme,
+			appBorderRadius: 14,
+			brandImage: "/light-logo.svg",
 		},
 	},
 };
@@ -126,10 +147,21 @@ const globalTypes = {
 			})),
 		},
 	},
+	disableAnimation: {
+		name: "Disable Animation",
+		description: "Disable all animations in the stories",
+		toolbar: {
+			icon: "photodrag",
+			items: [
+				{ value: true, title: "True" },
+				{ value: false, title: "False" },
+			],
+		},
+	},
 };
 
 const decorators: Preview["decorators"] = [
-	(Story, { globals: { locale } }) => {
+	(Story, { globals: { locale, disableAnimation } }) => {
 		const direction =
 			// @ts-ignore
 			locale && new Intl.Locale(locale)?.textInfo?.direction === "rtl"
@@ -137,11 +169,13 @@ const decorators: Preview["decorators"] = [
 				: undefined;
 
 		return (
-			<ThemeWrapper locale={locale}>
-				<div lang={locale} dir={direction}>
-					<Story />
-				</div>
-			</ThemeWrapper>
+			<SaftoxUIProvider locale={locale} disableAnimation={disableAnimation}>
+				<ThemeWrapper locale={locale}>
+					<div lang={locale} dir={direction}>
+						<Story />
+					</div>
+				</ThemeWrapper>
+			</SaftoxUIProvider>
 		);
 	},
 ];
@@ -150,4 +184,4 @@ export default {
 	decorators,
 	parameters,
 	globalTypes,
-} satisfies Preview;
+} as Preview;
