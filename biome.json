@@ -23,7 +23,8 @@
 				"noAssignInExpressions": "off"
 			},
 			"style": {
-				"noNonNullAssertion": "off"
+				"noNonNullAssertion": "off",
+				"useDefaultParameterLast": "off"
 			},
 			"complexity": {
 				"noBannedTypes": "off"

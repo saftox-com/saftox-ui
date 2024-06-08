@@ -49,7 +49,7 @@ const Template = (args: any) => <{{capitalize componentName}} {...args} />;
 export const Default: Story = {
 	render: Template,
 	args: {
-		children: {{capitalize componentName}},
+		children: "{{capitalize componentName}}",
 		...defaultProps,
 	},
 };
