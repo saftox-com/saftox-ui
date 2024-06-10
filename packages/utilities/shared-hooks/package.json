@@ -1,0 +1,73 @@
+{
+	"name": "@saftox-ui/shared-hooks",
+	"version": "0.0.1",
+	"description": "A set of utilities for hooks",
+	"keywords": [""],
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"homepage": "https://saftox.com",
+	"main": "src/index.ts",
+	"sideEffects": false,
+	"files": ["dist"],
+	"publishConfig": {
+		"access": "public"
+	},
+	"exports": {
+		".": {
+			"import": "./src/index.ts"
+		},
+		"./to-value": {
+			"import": "./src/to-value/index.ts"
+		},
+		"./try-on-cleanup": {
+			"import": "./src/try-on-cleanup/index.ts"
+		},
+		"./use-debounce-fn": {
+			"import": "./src/use-debounce-fn/index.ts"
+		},
+		"./use-throttle-fn": {
+			"import": "./src/use-throttle-fn/index.ts"
+		},
+		"./use-timeout-fn": {
+			"import": "./src/use-timeout-fn/index.ts"
+		},
+		"./util": {
+			"import": "./src/util/index.ts"
+		},
+		"./utils": {
+			"import": "./src/utils/index.ts"
+		},
+		"./utils/*": {
+			"import": "./src/utils/*.ts"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/saftox-ui.git",
+		"directory": "packages/utilities/shared-hooks"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/saftox-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "pnpm build:fast --watch",
+		"dev:vite": "vite serve dev",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"dependencies": {
+		"@solidjs-use/shared": "^2.3.0"
+	},
+	"peerDependencies": {
+		"solid-js": ">=1.8.17"
+	},
+	"clean-package": "./clean-package.config.json",
+	"tsup": {
+		"clean": true,
+		"target": "es2019",
+		"format": ["cjs", "esm"]
+	}
+}
