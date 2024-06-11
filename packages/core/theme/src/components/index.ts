@@ -7,3 +7,4 @@ export * from "./avatar";
 export * from "./user";
 export * from "./link";
 export * from "./divider";
+export * from "./badge";
