@@ -1,13 +1,14 @@
-import {
-	createEffect,
-	createMemo,
-	createSignal,
-	mergeProps,
-	splitProps,
-} from "solid-js";
-
-import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
 import type { PropGetter } from "@saftox-ui/system";
+import type { UseTextfieldProps } from "./textfield-types";
+
+import { createMemo, createSignal, mergeProps, splitProps } from "solid-js";
+
+import { createFocusRing } from "@saftox-ui/focus";
+import { combineProps, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
+import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
+import { textfield } from "@saftox-ui/theme";
+import { createControllableSignal, filterDOMProps } from "@saftox-ui/utils";
+import { createTextField } from "./create-textfield";
 
 import {
 	chain,
@@ -16,20 +17,12 @@ import {
 	isEmpty,
 	safeAriaLabel,
 } from "@saftox-ui/shared-utils";
-import { combineProps, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
-import { textfield } from "@saftox-ui/theme";
 
-import { createFocusRing } from "@saftox-ui/focus";
 import {
 	createFocusWithin,
 	createHover,
 	createPress,
 } from "@saftox-ui/interactions";
-import { createTextField } from "./create-textfield";
-
-import { createControllableSignal, filterDOMProps } from "@saftox-ui/utils";
-
-import type { UseTextfieldProps } from "./textfield-types";
 
 export function useTextfield<
 	T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement,
@@ -101,28 +94,7 @@ export function useTextfield<
 		domRef()?.focus();
 	};
 
-	const disableAnimation = () =>
-		originalProps.disableAnimation ?? globalContext.disableAnimation ?? false;
-
-	const state = {
-		get isFilledByDefault() {
-			return ["date", "time", "month", "week", "range"].includes(local.type!);
-		},
-		get isFilled() {
-			return !isEmpty(inputValue()) || this.isFilledByDefault;
-		},
-		get isFilledWithin() {
-			return this.isFilled || isFocusWithin();
-		},
-		get isMultiline() {
-			return originalProps.isMultiline;
-		},
-	};
-
-	const baseStyles = () =>
-		clsx(local.classes?.base, local.class, states.isFilled && "is-filled");
-
-	// ARIA
+	// Aria Primitives
 
 	const mergeCreateTextFieldProps = mergeProps(originalProps as any, {
 		autoCapitalize: originalProps.autoCapitalize,
@@ -137,7 +109,7 @@ export function useTextfield<
 			);
 		},
 		get inputElementType() {
-			return states.isMultiline ? "textarea" : "input";
+			return reactiveStates.isMultiline ? "textarea" : "input";
 		},
 		onChange: setInputValue,
 		onInput: (e: InputEvent) => setInputValue((e.target as T).value),
@@ -169,7 +141,35 @@ export function useTextfield<
 		onPress: handleClear,
 	});
 
-	const states = combineProps(state, {
+	// .Aria Primitives
+
+	const reactiveStates = {
+		get disableAnimation() {
+			return (
+				originalProps.disableAnimation ??
+				globalContext.disableAnimation ??
+				false
+			);
+		},
+		get baseStyles() {
+			return clsx(
+				local.classes?.base,
+				local.class,
+				this.isFilled && "is-filled",
+			);
+		},
+		get isFilledByDefault() {
+			return ["date", "time", "month", "week", "range"].includes(local.type!);
+		},
+		get isFilled() {
+			return !isEmpty(inputValue()) || this.isFilledByDefault;
+		},
+		get isFilledWithin() {
+			return this.isFilled || isFocusWithin();
+		},
+		get isMultiline() {
+			return originalProps.isMultiline;
+		},
 		get errorMessage() {
 			return originalProps.errorMessage;
 		},
@@ -245,19 +245,19 @@ export function useTextfield<
 		get hasEndContent() {
 			return "endContent" in originalProps;
 		},
-	});
+	};
 
 	const slots = createMemo(() => {
 		return textfield(
 			combineProps(variantsProps, {
 				get isInvalid() {
-					return states.isInvalid;
+					return reactiveStates.isInvalid;
 				},
 				get isClearable() {
-					return states.isClearable;
+					return reactiveStates.isClearable;
 				},
 				get disableAnimation() {
-					return disableAnimation();
+					return reactiveStates.disableAnimation;
 				},
 			}),
 		);
@@ -267,23 +267,23 @@ export function useTextfield<
 		return mergeProps(
 			{
 				get class() {
-					return slots().base({ class: baseStyles() });
+					return slots().base({ class: reactiveStates.baseStyles });
 				},
 				"data-slot": "base",
 				get "data-filled"() {
 					return dataAttr(
-						states.isFilled ||
-							states.hasPlaceholder ||
-							states.hasStartContent ||
-							states.isPlaceholderShown,
+						reactiveStates.isFilled ||
+							reactiveStates.hasPlaceholder ||
+							reactiveStates.hasStartContent ||
+							reactiveStates.isPlaceholderShown,
 					);
 				},
 				get "data-filled-within"() {
 					return dataAttr(
-						states.isFilledWithin ||
-							states.hasPlaceholder ||
-							states.hasStartContent ||
-							states.isPlaceholderShown,
+						reactiveStates.isFilledWithin ||
+							reactiveStates.hasPlaceholder ||
+							reactiveStates.hasStartContent ||
+							reactiveStates.isPlaceholderShown,
 					);
 				},
 				get "data-focus-within"() {
@@ -292,32 +292,33 @@ export function useTextfield<
 				get "data-focus-visible"() {
 					return dataAttr(isFocusVisible);
 				},
-				get "data-readonly"() {
-					return dataAttr(originalProps.isReadOnly);
-				},
+
 				get "data-focus"() {
 					return dataAttr(isFocused);
 				},
 				get "data-hover"() {
 					return dataAttr(isHovered);
 				},
-				get "data-invalid"() {
-					return dataAttr(states.isInvalid);
+				get "data-readonly"() {
+					return dataAttr(originalProps.isReadOnly);
 				},
 				get "data-disabled"() {
 					return dataAttr(originalProps.isDisabled);
 				},
+				get "data-invalid"() {
+					return dataAttr(reactiveStates.isInvalid);
+				},
 				get "data-has-elements"() {
-					return dataAttr(states.hasElements);
+					return dataAttr(reactiveStates.hasElements);
 				},
 				get "data-has-helper"() {
-					return dataAttr(states.hasHelper);
+					return dataAttr(reactiveStates.hasHelper);
 				},
 				get "data-has-label"() {
-					return dataAttr(states.hasLabel);
+					return dataAttr(reactiveStates.hasLabel);
 				},
 				get "data-has-value"() {
-					return dataAttr(!states.isPlaceholderShown);
+					return dataAttr(!reactiveStates.isPlaceholderShown);
 				},
 			},
 			focusWithinProps,
@@ -346,20 +347,23 @@ export function useTextfield<
 			{
 				"data-slot": "input",
 				get "data-filled"() {
-					return dataAttr(states.isFilled);
+					return dataAttr(reactiveStates.isFilled);
 				},
 				get "data-filled-within"() {
-					return dataAttr(states.isFilledWithin);
+					return dataAttr(reactiveStates.isFilledWithin);
 				},
 				get "data-has-start-content"() {
-					return dataAttr(states.hasStartContent);
+					return dataAttr(reactiveStates.hasStartContent);
 				},
 				get "data-has-end-content"() {
 					return dataAttr(!!local.endContent);
 				},
 				get class() {
 					return slots().input({
-						class: clsx(local.classes?.input, states.isFilled && "is-filled"),
+						class: clsx(
+							local.classes?.input,
+							reactiveStates.isFilled && "is-filled",
+						),
 					});
 				},
 			},
@@ -399,7 +403,7 @@ export function useTextfield<
 					return slots().inputWrapper({
 						class: clsx(
 							local.classes?.inputWrapper,
-							states.isFilled && "is-filled",
+							reactiveStates.isFilled && "is-filled",
 						),
 					});
 				},
@@ -502,24 +506,21 @@ export function useTextfield<
 		);
 	};
 
-	return combineProps(
-		{ states: states },
-		{
-			Component,
-			domRef,
-			getBaseProps,
-			getLabelProps,
-			getInputProps,
-			getInputWrapperProps,
-			getInnerWrapperProps,
-			getMainWrapperProps,
-			getHelperWrapperProps,
-			getDescriptionProps,
-			getErrorMessageProps,
-			getClearButtonProps,
-		},
-		local,
-	);
+	return {
+		Component,
+		reactiveStates,
+		domRef,
+		getBaseProps,
+		getLabelProps,
+		getInputProps,
+		getInputWrapperProps,
+		getInnerWrapperProps,
+		getMainWrapperProps,
+		getHelperWrapperProps,
+		getDescriptionProps,
+		getErrorMessageProps,
+		getClearButtonProps,
+	};
 }
 
 export type UseTextfieldReturn = ReturnType<typeof useTextfield>;

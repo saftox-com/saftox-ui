@@ -2,7 +2,7 @@ import { Dynamic } from "@saftox-ui/solid-utils/dynamic";
 import type { Component } from "solid-js";
 import type { UseTextfieldProps } from "./textfield-types";
 
-import { Match, Show, Switch, createEffect } from "solid-js";
+import { Match, Show, Switch } from "solid-js";
 import { useTextfield } from "./use-textfield";
 
 import { CloseFilledIcon } from "@saftox-ui/shared-icons";
@@ -12,12 +12,8 @@ export interface TextfieldProps
 
 const Textfield: Component<TextfieldProps> = (props) => {
 	const {
-		states,
 		Component,
-		label,
-		description,
-		startContent,
-		endContent,
+		reactiveStates,
 		getBaseProps,
 		getLabelProps,
 		getInputProps,
@@ -33,42 +29,48 @@ const Textfield: Component<TextfieldProps> = (props) => {
 	return (
 		<Dynamic as={Component} {...getBaseProps()}>
 			{/* labelContent */}
-			<Show when={states.isOutsideLeft}>
-				<label {...getLabelProps()}>{label}</label>
+			<Show when={reactiveStates.isOutsideLeft}>
+				<label {...getLabelProps()}>{props.label}</label>
 			</Show>
 
 			<Show
-				when={states.shouldLabelBeOutside}
+				when={reactiveStates.shouldLabelBeOutside}
 				fallback={
 					<>
 						<div {...getInputWrapperProps()}>
 							{/* labelContent */}
-							<label {...getLabelProps()}>{label}</label>
+							<label {...getLabelProps()}>{props.label}</label>
 
 							{/* innerWrapper */}
 							<div {...getInnerWrapperProps()}>
-								{startContent}
+								{props.startContent}
 								<input {...getInputProps()} />
 
 								{/* endContent */}
-								<Show when={states.isClearable}>
+								<Show when={reactiveStates.isClearable}>
 									<span {...getClearButtonProps()}>
-										{endContent || <CloseFilledIcon />}
+										{props.description || <CloseFilledIcon />}
 									</span>
 								</Show>
 							</div>
 						</div>
 
 						{/* helperWrapper */}
-						<Show when={states.hasHelper}>
+						<Show when={reactiveStates.hasHelper}>
 							<div {...getHelperWrapperProps()}>
 								<Switch>
-									<Match when={states.isInvalid && states.errorMessage}>
-										<div {...getErrorMessageProps()}>{states.errorMessage}</div>
+									<Match
+										when={
+											reactiveStates.isInvalid && reactiveStates.errorMessage
+										}
+									>
+										<div {...getErrorMessageProps()}>
+											{reactiveStates.errorMessage}
+										</div>
 									</Match>
 
-									<Match when={description}>
-										<div {...getDescriptionProps()}>{description}</div>
+									<Match when={props.description}>
+										<div {...getDescriptionProps()}>{props.description}</div>
 									</Match>
 								</Switch>
 							</div>
@@ -80,34 +82,38 @@ const Textfield: Component<TextfieldProps> = (props) => {
 				<div {...getMainWrapperProps()}>
 					<div {...getInputWrapperProps()}>
 						{/* labelContent */}
-						<Show when={!states.isOutsideLeft}>
-							<label {...getLabelProps()}>{label}</label>
+						<Show when={!reactiveStates.isOutsideLeft}>
+							<label {...getLabelProps()}>{props.label}</label>
 						</Show>
 
 						{/* innerWrapper */}
 						<div {...getInnerWrapperProps()}>
-							{startContent}
+							{props.startContent}
 							<input {...getInputProps()} />
 
 							{/* endContent */}
-							<Show when={states.isClearable}>
+							<Show when={reactiveStates.isClearable}>
 								<span {...getClearButtonProps()}>
-									{endContent || <CloseFilledIcon />}
+									{props.endContent || <CloseFilledIcon />}
 								</span>
 							</Show>
 						</div>
 					</div>
 
 					{/* helperWrapper */}
-					<Show when={states.hasHelper}>
+					<Show when={reactiveStates.hasHelper}>
 						<div {...getHelperWrapperProps()}>
 							<Switch>
-								<Match when={states.isInvalid && states.errorMessage}>
-									<div {...getErrorMessageProps()}>{states.errorMessage}</div>
+								<Match
+									when={reactiveStates.isInvalid && reactiveStates.errorMessage}
+								>
+									<div {...getErrorMessageProps()}>
+										{reactiveStates.errorMessage}
+									</div>
 								</Match>
 
-								<Match when={description}>
-									<div {...getDescriptionProps()}>{description}</div>
+								<Match when={props.description}>
+									<div {...getDescriptionProps()}>{props.description}</div>
 								</Match>
 							</Switch>
 						</div>
