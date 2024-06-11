@@ -5,28 +5,26 @@ import type { AriaButtonProps, UseButtonProps } from "./button-types";
 
 import { children, createSignal, mergeProps, splitProps } from "solid-js";
 
-import { button } from "@saftox-ui/theme";
-
 import { createFocusRing } from "@saftox-ui/focus";
 import { createHover } from "@saftox-ui/interactions";
-import { Spinner } from "@saftox-ui/spinner";
-import { filterDOMProps } from "@saftox-ui/utils";
-
 import { clsx, dataAttr } from "@saftox-ui/shared-utils";
 import {
 	chain,
 	combineProps,
 	mergeRefs,
 } from "@saftox-ui/solid-utils/reactivity";
-
-import { createButton } from "./create-button";
+import { Spinner } from "@saftox-ui/spinner";
+import { button } from "@saftox-ui/theme";
+import { filterDOMProps } from "@saftox-ui/utils";
 
 import { useButtonGroupContext } from "./button-group-context";
+import { createButton } from "./create-button";
 
-export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
-	const [domRef, setDomRef] = createSignal<HTMLElement | undefined>();
-
+export function useButton<T extends HTMLButtonElement>(
+	originalProps: UseButtonProps,
+) {
 	const groupContext = useButtonGroupContext();
+
 	const defaultProps: UseButtonProps = {
 		variant: "glow",
 		color: "default",
@@ -41,10 +39,10 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 
 	const spinner = () => Spinner({ color: "current", size: spinnerSize() });
 
-	const propsWithDefault = mergeProps(defaultProps, groupContext, props);
+	const props = mergeProps(defaultProps, groupContext, originalProps);
 
 	const [local, variantProps, rest] = splitProps(
-		propsWithDefault,
+		props,
 		[
 			"ref",
 			"as",
@@ -70,16 +68,30 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 		],
 	);
 
-	const component = local.as || "button";
-	const shouldFilterDOMProps = typeof component === "string";
+	const [domRef, setDomRef] = createSignal<HTMLElement | undefined>();
+
+	const Component = local.as || "button";
+	const shouldFilterDOMProps = typeof Component === "string";
 
 	const { isFocusVisible, isFocused, focusProps } = createFocusRing({
 		autofocus: local.autofocus,
 		isTextInput: false,
 	});
 
-	const isDisabled = () => local.isDisabled || local.isLoading;
-	const isLoading = () => local.isLoading;
+	const reactiveStates = {
+		get isDisabled() {
+			return local.isDisabled || local.isLoading;
+		},
+		get isLoading() {
+			return local.isLoading;
+		},
+		get isIconOnly() {
+			return variantProps.isIconOnly;
+		},
+		get spinnerPlacement() {
+			return local.spinnerPlacement;
+		},
+	};
 
 	const slots = () => {
 		return button(
@@ -87,20 +99,20 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 				get isInGroup() {
 					return !!groupContext;
 				},
-				isDisabled: isDisabled(),
+				isDisabled: reactiveStates.isDisabled,
 			}),
 		);
 	};
 
 	const handleClick: JSX.EventHandlerUnion<T, MouseEvent> = () => {
-		if (isDisabled() || variantProps.disableAnimation) return;
+		if (reactiveStates.isDisabled || variantProps.disableAnimation) return;
 	};
 
 	const { buttonProps, isPressed } = createButton(
 		combineProps(
 			{
-				elementType: component,
-				isDisabled: isDisabled(),
+				elementType: Component,
+				isDisabled: reactiveStates.isDisabled,
 				onClick: chain([handleClick, local.onClick]),
 			},
 			rest,
@@ -109,7 +121,7 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 	);
 
 	const { isHovered, hoverProps } = createHover({
-		isDisabled,
+		isDisabled: reactiveStates.isDisabled,
 	});
 
 	const getButtonProps: PropGetter<HTMLButtonElement> = (props = {}) => {
@@ -121,7 +133,7 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 				});
 			},
 			get "data-disabled"() {
-				return dataAttr(isDisabled);
+				return dataAttr(reactiveStates.isDisabled);
 			},
 			get "data-focus"() {
 				return dataAttr(isFocused);
@@ -136,7 +148,7 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 				return dataAttr(isHovered);
 			},
 			get "data-loading"() {
-				return dataAttr(isLoading);
+				return dataAttr(reactiveStates.isLoading);
 			},
 		};
 
@@ -153,7 +165,7 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 
 	const getIconClone = (icon: JSX.Element) => {
 		const i = children(() => icon);
-
+		// TODO: add some aria props
 		return i();
 	};
 
@@ -173,21 +185,13 @@ export function useButton<T extends HTMLButtonElement>(props: UseButtonProps) {
 	};
 
 	return {
-		domRef,
-		component,
-		slots,
+		Component,
+		reactiveStates,
 		startContent,
 		endContent,
-		isLoading,
-		isDisabled,
-		get isIconOnly() {
-			return variantProps.isIconOnly;
-		},
-		get spinnerPlacement() {
-			return () => local.spinnerPlacement;
-		},
+		domRef,
+		slots,
 		getButtonProps,
-		propsWithDefault,
 		spinner,
 	};
 }
