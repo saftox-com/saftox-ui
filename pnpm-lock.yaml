@@ -130,6 +130,43 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.12.12)(jsdom@24.1.0)
 
+  packages/components/avatar:
+    dependencies:
+      '@saftox-ui/focus':
+        specifier: 0.0.1
+        version: link:../../primitives/focus
+      '@saftox-ui/interactions':
+        specifier: 0.0.1
+        version: link:../../primitives/interactions
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/system':
+        specifier: 0.0.1
+        version: link:../../core/system
+      '@saftox-ui/theme':
+        specifier: 0.0.1
+        version: link:../../core/theme
+      '@saftox-ui/use-image':
+        specifier: 0.0.1
+        version: link:../../hooks/use-image
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../../primitives/utils
+      '@saftox-ui/variants':
+        specifier: 0.0.1
+        version: link:../../core/twind/packages/variants
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+    devDependencies:
+      '@saftox-ui/shared-icons':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-icons
+
   packages/components/button:
     dependencies:
       '@saftox-ui/focus':
