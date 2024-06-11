@@ -1,6 +1,6 @@
 import type { ContextType, UseButtonGroupProps } from "./button-types";
 
-import { createEffect, createSignal, mergeProps, splitProps } from "solid-js";
+import { createSignal, mergeProps, splitProps } from "solid-js";
 
 import { mapPropsVariants } from "@saftox-ui/system";
 import { buttonGroup } from "@saftox-ui/theme";

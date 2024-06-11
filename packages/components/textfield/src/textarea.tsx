@@ -8,7 +8,6 @@ import {
 	Match,
 	Show,
 	Switch,
-	createEffect,
 	createSignal,
 	mergeProps,
 	splitProps,
@@ -41,22 +40,16 @@ const Textarea: Component<TextAreaProps> = (originalProps) => {
 	]);
 
 	const {
-		states,
 		Component,
-		label,
-		description,
-		startContent,
-		endContent,
+		reactiveStates,
 		getBaseProps,
 		getLabelProps,
 		getInputProps,
 		getInputWrapperProps,
 		getInnerWrapperProps,
-		getMainWrapperProps,
 		getHelperWrapperProps,
 		getDescriptionProps,
 		getErrorMessageProps,
-		getClearButtonProps,
 	} = useTextfield<HTMLTextAreaElement>(
 		combineProps(rest, { isMultiline: true }),
 	);
@@ -68,7 +61,7 @@ const Textarea: Component<TextAreaProps> = (originalProps) => {
 	const inputProps = getInputProps();
 
 	const labelContent = () =>
-		label ? <label {...getLabelProps()}>{label}</label> : null;
+		props.label ? <label {...getLabelProps()}>{props.label}</label> : null;
 
 	const content = () => (
 		<Show
@@ -91,13 +84,13 @@ const Textarea: Component<TextAreaProps> = (originalProps) => {
 
 	const innerWrapper = () => (
 		<Show
-			when={startContent || endContent}
+			when={props.startContent || props.endContent}
 			fallback={<div {...getInnerWrapperProps()}>{content()}</div>}
 		>
 			<div {...getInnerWrapperProps()}>
-				{startContent}
+				{props.startContent}
 				{content()}
-				{endContent}
+				{props.endContent}
 			</div>
 		</Show>
 	);
@@ -121,29 +114,33 @@ const Textarea: Component<TextAreaProps> = (originalProps) => {
 	return (
 		<Dynamic as={Component} {...getBaseProps()}>
 			{/* labelContent */}
-			<Show when={states.isOutsideLeft}>{labelContent()}</Show>
+			<Show when={reactiveStates.isOutsideLeft}>{labelContent()}</Show>
 
 			<div
 				{...getInputWrapperProps()}
 				data-has-multiple-rows={dataAttr(hasMultipleRows)}
 			>
 				{/* labelContent */}
-				<Show when={states.shouldLabelBeInside}>{labelContent()}</Show>
+				<Show when={reactiveStates.shouldLabelBeInside}>{labelContent()}</Show>
 
 				{/* innerWrapper */}
 				{innerWrapper()}
 			</div>
 
 			{/* helperWrapper */}
-			<Show when={states.hasHelper}>
+			<Show when={reactiveStates.hasHelper}>
 				<div {...getHelperWrapperProps()}>
 					<Switch>
-						<Match when={states.isInvalid && states.errorMessage}>
-							<div {...getErrorMessageProps()}>{states.errorMessage}</div>
+						<Match
+							when={reactiveStates.isInvalid && reactiveStates.errorMessage}
+						>
+							<div {...getErrorMessageProps()}>
+								{reactiveStates.errorMessage}
+							</div>
 						</Match>
 
-						<Match when={description}>
-							<div {...getDescriptionProps()}>{description}</div>
+						<Match when={props.description}>
+							<div {...getDescriptionProps()}>{props.description}</div>
 						</Match>
 					</Switch>
 				</div>

@@ -12,37 +12,53 @@ export interface ButtonProps extends UseButtonProps {}
 
 const Button: Component<ButtonProps> = (props) => {
 	const {
-		component,
-		domRef,
-		endContent,
-		getButtonProps,
-		isIconOnly,
-		isLoading,
-		isDisabled,
-		slots,
-		spinnerPlacement,
+		Component,
+		reactiveStates,
 		startContent,
+		endContent,
+		domRef,
+		getButtonProps,
+		slots,
 		spinner,
 	} = useButton(props);
 
 	return (
-		<Dynamic as={component} {...getButtonProps()}>
-			<Show when={props.variant === "glow" && !isLoading() && !isDisabled()}>
+		<Dynamic as={Component} {...getButtonProps()}>
+			<Show
+				when={
+					props.variant === "glow" &&
+					!reactiveStates.isLoading &&
+					!reactiveStates.isDisabled
+				}
+			>
 				<GlowEffect ref={domRef} color={props.color} radius={props.radius} />
 			</Show>
 
 			<div class={slots().innerWrapper()}>
 				<Show when={startContent}>{startContent}</Show>
 
-				<Show when={isLoading() && spinnerPlacement() === "start"}>
+				<Show
+					when={
+						reactiveStates.isLoading &&
+						reactiveStates.spinnerPlacement === "start"
+					}
+				>
 					{spinner()}
 				</Show>
 
-				<Show when={isLoading() && isIconOnly} fallback={props.children}>
+				<Show
+					when={reactiveStates.isLoading && reactiveStates.isIconOnly}
+					fallback={props.children}
+				>
 					{null}
 				</Show>
 
-				<Show when={isLoading() && spinnerPlacement() === "end"}>
+				<Show
+					when={
+						reactiveStates.isLoading &&
+						reactiveStates.spinnerPlacement === "end"
+					}
+				>
 					{spinner()}
 				</Show>
 

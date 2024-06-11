@@ -1,7 +1,7 @@
 import type { ComponentProps, JSX } from "solid-js";
 import type { Meta, StoryObj } from "storybook-solidjs";
 
-import { Show, createEffect, createMemo, createSignal } from "solid-js";
+import { Show, createMemo, createSignal } from "solid-js";
 
 import { Textfield, useTextfield } from "../src";
 import type { TextfieldProps } from "../src/textfield";
@@ -474,15 +474,11 @@ const CustomWithClassNamesTemplate = (args: TextfieldProps) => (
 	</div>
 );
 
-const CustomWithHooksTemplate = (args: TextfieldProps) => {
+const CustomWithHooksTemplate = (props: TextfieldProps) => {
 	const {
-		states,
 		Component,
-		label,
+		reactiveStates,
 		domRef,
-		description,
-		startContent,
-		endContent,
 		getBaseProps,
 		getLabelProps,
 		getInputProps,
@@ -492,7 +488,7 @@ const CustomWithHooksTemplate = (args: TextfieldProps) => {
 		getErrorMessageProps,
 		getClearButtonProps,
 	} = useTextfield(
-		combineProps(args, {
+		combineProps(props, {
 			classes: {
 				label: "text-black/50 dark:text-white text-tiny",
 				input: [
@@ -517,25 +513,25 @@ const CustomWithHooksTemplate = (args: TextfieldProps) => {
 		}),
 	);
 
-	const labelContent = <label {...getLabelProps()}>{label}</label>;
+	const labelContent = <label {...getLabelProps()}>{props.label}</label>;
 
 	const end = createMemo(() => {
-		if (states.isClearable) {
+		if (reactiveStates.isClearable) {
 			return (
 				<span {...getClearButtonProps()}>
-					{endContent || <CloseFilledIcon />}
+					{props.endContent || <CloseFilledIcon />}
 				</span>
 			);
 		}
 
-		return endContent;
+		return props.endContent;
 	});
 
 	const innerWrapper = createMemo(() => {
-		if (startContent || end) {
+		if (props.startContent || end()) {
 			return (
 				<div {...getInnerWrapperProps()}>
-					{startContent}
+					{props.startContent}
 					<input {...getInputProps()} />
 					{end()}
 				</div>
@@ -548,7 +544,7 @@ const CustomWithHooksTemplate = (args: TextfieldProps) => {
 	return (
 		<div class="w-[340px] h-[300px] px-8 rounded-2xl flex justify-center items-center bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
 			<Dynamic as={Component} {...getBaseProps()}>
-				{states.shouldLabelBeOutside ? labelContent : null}
+				{reactiveStates.shouldLabelBeOutside ? labelContent : null}
 				<div
 					{...getInputWrapperProps()}
 					role="button"
@@ -556,12 +552,14 @@ const CustomWithHooksTemplate = (args: TextfieldProps) => {
 						domRef()?.focus();
 					}}
 				>
-					{states.shouldLabelBeInside ? labelContent : null}
+					{reactiveStates.shouldLabelBeInside ? labelContent : null}
 					{innerWrapper()}
 				</div>
-				{description && <div {...getDescriptionProps()}>{description}</div>}
-				{states.errorMessage && (
-					<div {...getErrorMessageProps()}>{states.errorMessage}</div>
+				{props.description && (
+					<div {...getDescriptionProps()}>{props.description}</div>
+				)}
+				{reactiveStates.errorMessage && (
+					<div {...getErrorMessageProps()}>{reactiveStates.errorMessage}</div>
 				)}
 			</Dynamic>
 		</div>
