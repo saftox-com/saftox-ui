@@ -1,0 +1,64 @@
+import type { UseKbdProps } from "./kbd-types";
+import type { PropGetter } from "@saftox-ui/system";
+
+import { createSignal, mergeProps, splitProps } from "solid-js";
+import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
+import { clsx } from "@saftox-ui/shared-utils";
+import { {{componentName}} } from "@saftox-ui/theme";
+
+export function use{{capitalize componentName}}(originalProps: Use{{capitalize componentName}}Props) {
+	const globalContext = useProviderContext();
+
+	const [omitVariantProps, variantProps] = mapPropsVariants(
+		originalProps,
+		{{componentName}}.variantKeys,
+	);
+
+	const defaultProps = {
+		class: {},
+	};
+
+	const props = mergeProps(defaultProps, omitVariantProps);
+
+	const [local, rest] = splitProps(
+		props,
+		[
+			"ref",
+			"as",
+			"class",
+			"classes"
+		],
+	);
+
+	const Component = local.as || "div";
+
+	const classes = () =>
+		{{componentName}}(
+			mergeProps(variantProps, {
+				get class() {
+					return local.class;
+				},
+			}),
+		);
+
+	const baseStyles = clsx(local.classes?.base, local.class);	
+
+	const get{{capitalize componentName}}Props: PropGetter = (props = {}) =>
+		mergeProps(
+			{
+				ref: local.ref,
+				get class() {
+					return classes();
+				},
+			},
+			rest,
+			props
+		);
+
+	return {
+		Component,
+		get{{capitalize componentName}}Props,
+	};
+}
+
+export type Use{{capitalize componentName}}Return = ReturnType<typeof use{{capitalize componentName}}>;

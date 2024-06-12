@@ -1,7 +1,17 @@
-import type { FlowComponent } from "solid-js";
+import type { Component } from "solid-js";
+import type { {{capitalize componentName}}Props } from "./{{componentName}}-types";
 
-const {{capitalize componentName}}: FlowComponent = (props) => {
-	return <div {...props}>{props.children}</div>;
+import { use{{capitalize componentName}} } from "./use-{{componentName}}";
+import { Dynamic } from "@saftox-ui/solid-utils/dynamic";
+
+const {{capitalize componentName}}: Component<{{capitalize componentName}}Props> = (props) => {
+	const { Component } = use{{capitalize componentName}}(props);
+
+	return (
+		<>
+			<Dynamic as={Component}>{props.children}</Dynamic>
+		</>
+	);
 };
 
 export default {{capitalize componentName}};
