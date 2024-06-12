@@ -91,6 +91,7 @@ This project is heavily inspired by the following awesome projects.
 - [Twind](https://twind.style) - For runtime TailwindCSS generation. The source code was also integrated into SaftoxUI codebase as the last commit was 2 years ago, and TailwindCSS presets have since changed.
 - [Tailwind-Variants](https://github.com/tailwindlabs/tailwindcss-variants) - Tailwindcss first-class variant API. The source code was integrated into SaftoxUI codebase as it was not compatible with [Twind](https://twind.style), and require adaptation for use in the project.
 - [SolidJS-USE](https://solidjs-use.github.io/solidjs-use) - is a collection of SolidJS utilities inspired completely by [VueUse](https://vueuse.org).
+- [Corvu](https://corvu.dev) - Is a collection of open source UI primitives.
 
 <!-- Authors -->
 ## 👥 Authors
