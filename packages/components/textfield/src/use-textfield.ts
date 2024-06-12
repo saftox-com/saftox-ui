@@ -29,7 +29,7 @@ export function useTextfield<
 >(originalProps: UseTextfieldProps<T>) {
 	const globalContext = useProviderContext();
 
-	const [props, variantsProps] = mapPropsVariants(
+	const [ommitVariantProps, variantsProps] = mapPropsVariants(
 		originalProps,
 		textfield.variantKeys,
 	);
@@ -42,9 +42,9 @@ export function useTextfield<
 		onValueInput: () => {},
 	};
 
-	const propsWithDefault = mergeProps(defaultProps, props);
+	const props = mergeProps(defaultProps, ommitVariantProps);
 
-	const [local, rest] = splitProps(propsWithDefault, [
+	const [local, rest] = splitProps(props, [
 		"ref",
 		"as",
 		"type",

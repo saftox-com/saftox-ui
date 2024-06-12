@@ -7,7 +7,7 @@ import type {
 } from "@saftox-ui/theme";
 
 import { clsx } from "@saftox-ui/shared-utils";
-import { combineProps, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
+import { combineProps } from "@saftox-ui/solid-utils/reactivity";
 import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
 import { badge } from "@saftox-ui/theme";
 import { mergeProps, splitProps } from "solid-js";
@@ -51,7 +51,7 @@ export function useBadge(originalProps: UseBadgeProps) {
 		badge.variantKeys,
 	);
 
-	const [local, rest] = splitProps(omitVariantProps(), [
+	const [local, rest] = splitProps(omitVariantProps, [
 		"ref",
 		"as",
 		"children",
