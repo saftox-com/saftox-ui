@@ -31,7 +31,7 @@ Expect unique implementations and features that differentiate SaftoxUI from its 
 
 #### **🎨 Dynamic Styling with Twind**
 
-Unlike NextUI, which generates all styles at build time, SaftoxUI uses [Twind](https://twind.dev/) to generate TailwindCSS styles at runtime.
+Unlike NextUI, which generates all styles at build time, SaftoxUI uses [Twind](https://twind.style/) to generate TailwindCSS styles at runtime.
 
 <details>
   <summary><strong>Other features</strong></summary>
@@ -77,7 +77,7 @@ The development of comprehensive documentation will commence once all components
 
 ## 📊 Storybook
 
-[ui.saftox.com](https://ui.saftox.com) to view the storybook for all components.
+Explore the full range of our components by visiting the [SaftoxUI Storybook](https://ui.saftox.com).
 
 ## 🌸 Credits
 
@@ -90,7 +90,7 @@ This project is heavily inspired by the following awesome projects.
 - [Solid Aria](https://github.com/solidjs-community/solid-aria) - The SolidJS implementation of React Aria. The source code primitives was adapted into SaftoxUI codebase as the last update was 2 years ago and the library did not complete the adaptation of primitives. This was done to ensure the completion of all primitives and better maintain the codebase.
 - [Twind](https://twind.style) - For runtime TailwindCSS generation. The source code was also integrated into SaftoxUI codebase as the last commit was 2 years ago, and TailwindCSS presets have since changed.
 - [Tailwind-Variants](https://github.com/tailwindlabs/tailwindcss-variants) - Tailwindcss first-class variant API. The source code was integrated into SaftoxUI codebase as it was not compatible with [Twind](https://twind.style), and require adaptation for use in the project.
-- [SolidJS-USE](solidjs-use.github.io/solidjs-use) - is a collection of SolidJS utilities inspired completely by [VueUse](https://vueuse.org).
+- [SolidJS-USE](https://solidjs-use.github.io/solidjs-use) - is a collection of SolidJS utilities inspired completely by [VueUse](https://vueuse.org).
 
 <!-- Authors -->
 ## 👥 Authors
