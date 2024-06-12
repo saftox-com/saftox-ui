@@ -13,25 +13,29 @@ import { useImage } from "@saftox-ui/use-image";
 import { filterDOMProps } from "@saftox-ui/utils";
 import { useAvatarGroupContext } from "./avatar-group-context";
 
-export function useAvatar(originalProps: UseAvatarProps = {}) {
+import { AvatarIcon } from "./avatar-icon";
+
+export function useAvatar(originalProps: UseAvatarProps) {
 	const globalContext = useProviderContext();
 	const groupContext = useAvatarGroupContext();
 
 	const defaultProps: UseAvatarProps = {
-		alt: "avatar",
+		get alt() {
+			return originalProps.name || "avatar";
+		},
+		icon: AvatarIcon(),
 		color: "default",
 		radius: "full",
 		size: "md",
 		isBordered: false,
 		isDisabled: false,
 		isFocusable: false,
-		getInitials: safeText,
 		ignoreFallback: false,
 		showFallback: false,
 		ImgComponent: "img",
 	};
 
-	const props = mergeProps(originalProps, defaultProps, groupContext);
+	const props = mergeProps(defaultProps, groupContext, originalProps);
 
 	const [local, rest] = splitProps(props, [
 		"as",
@@ -132,7 +136,7 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
 					return dataAttr(isHovered);
 				},
 				get "data-focus"() {
-					return dataAttr(isFocusVisible);
+					return dataAttr(isFocused);
 				},
 				get "data-focus-visible"() {
 					return dataAttr(isFocusVisible);
@@ -144,6 +148,11 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
 				},
 			},
 		);
+	};
+
+	const getInitials = (name: string | undefined) => {
+		if (!name) return;
+		return local.getInitials ? local.getInitials(name) : safeText(name);
 	};
 
 	const getImageProps: PropGetter = (props = {}) => {
@@ -178,24 +187,8 @@ export function useAvatar(originalProps: UseAvatarProps = {}) {
 	return {
 		Component,
 		reactiveStates,
-		get ImgComponent() {
-			return local.ImgComponent;
-		},
-		get src() {
-			return local.src;
-		},
-		get alt() {
-			return local.alt;
-		},
-		get icon() {
-			return local.icon;
-		},
-		get name() {
-			return local.name;
-		},
-		get getInitials() {
-			return local.getInitials;
-		},
+		local,
+		getInitials,
 		domRef,
 		imgRef,
 		slots,

@@ -5,6 +5,7 @@ import type {
 	BadgeVariantProps,
 	SlotsToClasses,
 } from "@saftox-ui/theme";
+import type { JSX } from "solid-js";
 
 import { clsx } from "@saftox-ui/shared-utils";
 import { combineProps } from "@saftox-ui/solid-utils/reactivity";
@@ -54,7 +55,6 @@ export function useBadge(originalProps: UseBadgeProps) {
 	const [local, rest] = splitProps(omitVariantProps, [
 		"ref",
 		"as",
-		"children",
 		"class",
 		"classes",
 		"content",
@@ -117,9 +117,7 @@ export function useBadge(originalProps: UseBadgeProps) {
 	return {
 		Component,
 		reactivityProps,
-		get content() {
-			return local.content;
-		},
+		local,
 		slots,
 		getBadgeProps,
 	};

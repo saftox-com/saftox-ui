@@ -8,12 +8,12 @@ import { Show } from "solid-js";
 import { useLink } from "./use-link";
 
 const Link: Component<LinkProps> = (props) => {
-	const { Component, showAnchorIcon, getLinkProps } = useLink(props);
+	const { Component, local, getLinkProps } = useLink(props);
 
 	return (
 		<Dynamic as={Component} {...getLinkProps()}>
 			{props.children}
-			<Show when={showAnchorIcon}>
+			<Show when={local.showAnchorIcon}>
 				<Show
 					when={props.anchorIcon}
 					fallback={<LinkIcon class={linkAnchorClasses} />}
