@@ -56,7 +56,7 @@ export const Default = {
 export const WithText = {
 	args: {
 		...defaultProps,
-		name: "JW",
+		name: "SZ",
 		color: "danger",
 	},
 };
@@ -107,7 +107,7 @@ export const Custom = {
 		...defaultProps,
 		icon: <Activity fill="currentColor" size={20} />,
 		radius: "xl",
-		classNames: {
+		classes: {
 			base: "shadow-lg bg-cyan-200 dark:bg-cyan-800",
 		},
 	},
@@ -116,7 +116,7 @@ export const Custom = {
 export const CustomSize = {
 	args: {
 		...defaultProps,
-		classNames: {
+		classes: {
 			base: "w-32 h-32 text-base",
 		},
 	},
@@ -126,8 +126,8 @@ export const CustomSizeImg = {
 	args: {
 		...defaultProps,
 		src: "https://i.pravatar.cc/300?u=a042581f4e29026705d",
-		name: "Junior",
-		classNames: {
+		name: "Serhii",
+		classes: {
 			base: "w-32 h-32 text-base",
 		},
 	},
@@ -136,7 +136,7 @@ export const CustomSizeImg = {
 export const DefaultIcon = {
 	args: {
 		...defaultProps,
-		classNames: {
+		classes: {
 			icon: "text-default-400",
 		},
 	},
@@ -154,7 +154,7 @@ export const InitialsFallback = {
 	args: {
 		...defaultProps,
 		src: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6",
-		name: "Junior",
+		name: "Serhii",
 		showFallback: true,
 	},
 };
@@ -178,7 +178,7 @@ export const BrokenImage = {
 	args: {
 		...defaultProps,
 		src: "https://images.unsplash.com/broken-image",
-		name: "Junior",
+		name: "Serhii",
 		showFallback: true,
 	},
 };
