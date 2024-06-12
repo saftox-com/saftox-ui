@@ -10,3 +10,4 @@ export * from "./divider";
 export * from "./badge";
 export * from "./spacer";
 export * from "./skeleton";
+export * from "./kbd";

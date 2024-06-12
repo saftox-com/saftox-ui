@@ -13,7 +13,7 @@ import { combineProps, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
 export function useImage(originalProps: UseImageProps) {
 	const globalContext = useProviderContext();
 
-	const [props, variantProps] = mapPropsVariants(
+	const [ommitVariantProps, variantProps] = mapPropsVariants(
 		originalProps,
 		image.variantKeys,
 	);
@@ -25,9 +25,9 @@ export function useImage(originalProps: UseImageProps) {
 		removeWrapper: false,
 	};
 
-	const propsWithDefault = mergeProps(defaultProps, props);
+	const props = mergeProps(defaultProps, ommitVariantProps);
 
-	const [local, rest] = splitProps(propsWithDefault, [
+	const [local, rest] = splitProps(props, [
 		"ref",
 		"as",
 		"src",

@@ -2,40 +2,35 @@ import type { UseSpinnerProps } from "./spinner-types";
 
 import { createMemo, splitProps } from "solid-js";
 
+import { clsx } from "@saftox-ui/shared-utils";
+import { combineProps } from "@saftox-ui/solid-utils/reactivity";
 import { mapPropsVariants } from "@saftox-ui/system-ssc";
 import { spinner } from "@saftox-ui/theme";
 
-import { clsx } from "@saftox-ui/shared-utils";
-import { combineProps } from "@saftox-ui/solid-utils/reactivity";
-
 export function useSpinner(originalProps: UseSpinnerProps) {
-	const [_, variantProps] = mapPropsVariants(
+	const [omitVariantProps, variantProps] = mapPropsVariants(
 		originalProps,
 		spinner.variantKeys,
 	);
 
-	const [local, otherProps] = splitProps(originalProps, [
+	const [local, rest] = splitProps(omitVariantProps, [
 		"class",
 		"classes",
 		"label",
 		"children",
 	]);
 
-	const slots = createMemo(() => spinner(variantProps()));
+	const slots = createMemo(() => spinner(variantProps));
 
 	const label = () => local.label || local.children;
 
-	const ariaLabel = (): string => {
-		if (label() && typeof label() === "string") {
-			return label() as string;
-		}
-
-		return !otherProps["aria-label"] ? "Loading" : "";
-	};
-
-	const getSpinnerProps = combineProps(otherProps, {
+	const getSpinnerProps = combineProps(rest, {
 		get "aria-label"() {
-			return ariaLabel();
+			if (label() && typeof label() === "string") {
+				return label() as string;
+			}
+
+			return !rest["aria-label"] ? "Loading" : "";
 		},
 		class: slots().base({
 			class: clsx(local.classes?.base, local.class),
@@ -45,9 +40,6 @@ export function useSpinner(originalProps: UseSpinnerProps) {
 	return {
 		label,
 		slots,
-		get classes() {
-			return local.classes;
-		},
 		getSpinnerProps,
 	};
 }

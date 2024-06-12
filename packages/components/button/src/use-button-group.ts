@@ -8,7 +8,7 @@ import { buttonGroup } from "@saftox-ui/theme";
 import { combineProps, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
 
 export function useButtonGroup(originalProps: UseButtonGroupProps) {
-	const [_, variantProps] = mapPropsVariants(
+	const [omitVariantProps, variantProps] = mapPropsVariants(
 		originalProps,
 		buttonGroup.variantKeys,
 	);
@@ -23,35 +23,22 @@ export function useButtonGroup(originalProps: UseButtonGroupProps) {
 		isIconOnly: false,
 	};
 
-	const propsWithDefault = mergeProps(defaultProps, originalProps);
+	const props = mergeProps(defaultProps, omitVariantProps);
 
 	const [local, contexts, otherProps] = splitProps(
-		propsWithDefault,
+		props,
 		["ref", "as", "fullWidth"],
-		[
-			"class",
-			"size",
-			"color",
-			"variant",
-			"radius",
-			"isDisabled",
-			"disableAnimation",
-			"isIconOnly",
-		],
+		["class", "size", "color", "isDisabled", "disableAnimation", "isIconOnly"],
 	);
 
 	const component = local.as || "div";
 
-	const [domRef, setDomRef] = createSignal<HTMLElement | undefined>();
+	const [domRef, setDomRef] = createSignal<HTMLElement>();
 
 	const slots = () =>
-		buttonGroup(combineProps(variantProps(), { class: contexts.class }));
+		buttonGroup(combineProps(variantProps, { class: contexts.class }));
 
-	const context: ContextType = combineProps(contexts, {
-		get fullWidth() {
-			return !!local.fullWidth;
-		},
-	});
+	const context: ContextType = combineProps(contexts, variantProps);
 
 	const getButtonGroupProps = combineProps(
 		{
