@@ -102,9 +102,7 @@ export function useLink(originalProps: UseLinkProps) {
 
 	return {
 		Component,
-		get showAnchorIcon() {
-			return local.showAnchorIcon;
-		},
+		local,
 		getLinkProps,
 	};
 }
