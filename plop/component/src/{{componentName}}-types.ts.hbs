@@ -1,0 +1,26 @@
+import type {
+	{{capitalize componentName}}VariantProps,
+	{{capitalize componentName}}Slots,
+	SlotsToClasses,
+} from "@saftox-ui/theme";
+import type { HTMLSaftoxUIProps } from "@saftox-ui/system";
+import type { Ref } from "@saftox-ui/solid-utils/dom";
+
+interface Props extends HTMLSaftoxUIProps<"div"> {
+  /**
+   * Ref to the DOM node.
+   */
+  ref?: Ref;
+  /**
+   * class or List of classes to change the classes of the element.
+   * if `class` is passed, it will be added to the base slot.
+   *
+   * @example
+   * ```ts
+   * ```
+   */
+  classes?: SlotsToClasses<{{capitalize componentName}}Slots>;
+}
+
+export type Use{{capitalize componentName}}Props = Props & {{capitalize componentName}}VariantProps;
+export interface {{capitalize componentName}}Props extends Use{{capitalize componentName}}Props {}

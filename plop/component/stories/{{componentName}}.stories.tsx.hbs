@@ -1,8 +1,7 @@
-import * as React from "solid-js";
+import type { Meta, StoryObj } from "@saftox-ui/storybook-solid";
+import type { {{capitalize componentName}}Props } from "../src";
 
-import type { ComponentProps } from "solid-js";
-import type { Meta, StoryObj } from "storybook-solidjs";
-
+import { {{componentName}} } from "@saftox-ui/theme";
 import { {{capitalize componentName}} } from "../src";
 
 const meta = {
@@ -37,14 +36,14 @@ const meta = {
 	parameters: {
 		layout: "centered",
 	},
-} satisfies Meta<ComponentProps<any>>;
+} as Meta<typeof {{capitalize componentName}}>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultProps = {};
 
-const Template = (args: any) => <{{capitalize componentName}} {...args} />;
+const Template = (args: {{capitalize componentName}}Props) => <{{capitalize componentName}} {...args} />;
 
 export const Default: Story = {
 	render: Template,
