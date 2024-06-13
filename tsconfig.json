@@ -15,8 +15,6 @@
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
     "types": ["solid-js", "vite/client", "node", "@testing-library/jest-dom"]

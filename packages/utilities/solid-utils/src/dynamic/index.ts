@@ -5,8 +5,8 @@ import type {
 } from "./dynamic-button";
 import type { DynamicAttributes, DynamicProps } from "./types";
 
-import Dynamic from "./dynamic";
-import DynamicButton from "./dynamic-button";
+import { Dynamic } from "./dynamic";
+import { DynamicButton } from "./dynamic-button";
 
 export type {
 	DynamicAttributes,

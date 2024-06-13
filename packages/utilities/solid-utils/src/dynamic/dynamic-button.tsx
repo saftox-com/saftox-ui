@@ -3,11 +3,10 @@ import type { Ref } from "../dom";
 import type { DynamicProps } from "./types";
 
 import { createMemo, createSignal, splitProps } from "solid-js";
-import Dynamic from "./dynamic";
-
 import { isButton } from "../assertions";
-import createTagName from "../create/tag-name";
+import { createTagName } from "../create/tag-name";
 import { mergeRefs } from "../reactivity";
+import { Dynamic } from "./dynamic";
 
 const DEFAULT_DYNAMIC_BUTTON_ELEMENT = "button";
 
@@ -23,7 +22,7 @@ export type DynamicButtonElementProps = DynamicButtonSharedElementProps & {
 export type DynamicButtonProps = Partial<DynamicButtonSharedElementProps>;
 
 /** An accessible button that sets `type` and `role` properly based on if it's a native button. */
-const DynamicButton = <
+export const DynamicButton = <
 	T extends ValidComponent = typeof DEFAULT_DYNAMIC_BUTTON_ELEMENT,
 >(
 	props: DynamicProps<T, DynamicButtonProps, DynamicButtonElementProps>,
@@ -52,5 +51,3 @@ const DynamicButton = <
 		/>
 	);
 };
-
-export default DynamicButton;
