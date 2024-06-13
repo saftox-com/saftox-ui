@@ -10,7 +10,7 @@ import { type MaybeAccessor, access } from "../reactivity";
  * Accessor<string>
  * ```
  */
-const createTagName = (props: {
+export const createTagName = (props: {
 	element: MaybeAccessor<HTMLElement | null>;
 	fallback: string;
 }) => {
@@ -20,5 +20,3 @@ const createTagName = (props: {
 
 	return tagName;
 };
-
-export default createTagName;

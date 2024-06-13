@@ -11,7 +11,7 @@ import type { DynamicAttributes } from "./types";
 const DEFAULT_DYNAMIC_ELEMENT = "div";
 
 /** corvu's version of Solid's `Dynamic` component. Renders as a div by default and can be overridden with the `as` property. */
-const Dynamic = <ElementProps,>(
+export const Dynamic = <ElementProps,>(
 	props: DynamicAttributes<ValidComponent> & ElementProps,
 ) => {
 	const [localProps, otherProps] = splitProps(props, ["as"]);
@@ -31,5 +31,3 @@ const Dynamic = <ElementProps,>(
 
 	return memoizedDynamic as unknown as JSX.Element;
 };
-
-export default Dynamic;
