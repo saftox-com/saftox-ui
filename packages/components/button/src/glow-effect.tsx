@@ -1,18 +1,18 @@
-import { createEffect, createSignal, splitProps } from "solid-js";
-import type { Accessor } from "solid-js";
-
 import type { MaybeAccessor } from "@saftox-ui/solid-utils/reactivity";
-import { access } from "@saftox-ui/solid-utils/reactivity";
 import type { GlowEffectVariantProps } from "@saftox-ui/theme";
-import { glowEffect } from "@saftox-ui/theme";
+import type { Component } from "solid-js";
 
-type GlowEffectProps = {
-	ref: MaybeAccessor<HTMLElement | undefined>;
-	color: GlowEffectVariantProps["color"];
-	radius: GlowEffectVariantProps["radius"];
+import { access } from "@saftox-ui/solid-utils/reactivity";
+import { glowEffect } from "@saftox-ui/theme";
+import { createEffect, createSignal, splitProps } from "solid-js";
+
+export type GlowEffectProps = {
+	ref?: MaybeAccessor<HTMLElement | undefined>;
+	color?: GlowEffectVariantProps["color"];
+	radius?: GlowEffectVariantProps["radius"];
 };
 
-const GlowEffect = (props: GlowEffectProps) => {
+const GlowEffect: Component<GlowEffectProps> = (props) => {
 	const [mousePosition, setMousePosition] = createSignal({
 		x: "-100%",
 		y: "-100%",

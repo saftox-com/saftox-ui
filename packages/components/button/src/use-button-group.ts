@@ -1,6 +1,8 @@
+import type { PropGetter } from "@saftox-ui/system";
 import type { ContextType, UseButtonGroupProps } from "./button-types";
+import type { GlowEffectProps } from "./glow-effect";
 
-import { createSignal, mergeProps, splitProps } from "solid-js";
+import { createEffect, createSignal, mergeProps, splitProps } from "solid-js";
 
 import { mapPropsVariants } from "@saftox-ui/system";
 import { buttonGroup } from "@saftox-ui/theme";
@@ -25,35 +27,63 @@ export function useButtonGroup(originalProps: UseButtonGroupProps) {
 
 	const props = mergeProps(defaultProps, omitVariantProps);
 
-	const [local, contexts, otherProps] = splitProps(
+	const [local, contextProps, rest] = splitProps(
 		props,
-		["ref", "as", "fullWidth"],
-		["class", "size", "color", "isDisabled", "disableAnimation", "isIconOnly"],
+		["ref", "as"],
+		[
+			"class",
+			"size",
+			"color",
+			"fullWidth",
+			"isDisabled",
+			"disableAnimation",
+			"isIconOnly",
+		],
 	);
 
-	const component = local.as || "div";
+	const Component = local.as || "div";
 
 	const [domRef, setDomRef] = createSignal<HTMLElement>();
 
 	const slots = () =>
-		buttonGroup(combineProps(variantProps, { class: contexts.class }));
+		buttonGroup(
+			combineProps(variantProps, {
+				class: contextProps.class,
+				get fillWidth() {
+					return contextProps.fullWidth;
+				},
+			}),
+		);
 
-	const context: ContextType = combineProps(contexts, variantProps);
+	const context: ContextType = combineProps(contextProps, variantProps);
 
-	const getButtonGroupProps = combineProps(
-		{
-			ref: mergeRefs(local.ref, setDomRef),
-			role: "group",
+	const getButtonGroupProps: PropGetter = () => {
+		return combineProps(
+			{
+				ref: mergeRefs(local.ref, setDomRef),
+				role: "group",
+			},
+			rest,
+		);
+	};
+
+	const getGlowEffectProps: GlowEffectProps = {
+		ref: domRef,
+		get radius() {
+			return variantProps.radius;
 		},
-		otherProps,
-	);
+		get color() {
+			return contextProps.color;
+		},
+	};
 
 	return {
-		component,
+		Component,
 		domRef,
-		context,
 		slots,
+		context,
 		getButtonGroupProps,
+		getGlowEffectProps,
 	};
 }
 
