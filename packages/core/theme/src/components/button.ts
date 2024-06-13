@@ -130,7 +130,7 @@ const button = tv({
 		disableAnimation: {
 			true: "!transition-none",
 			false:
-				"data-[pressed=true]:top-0.5 transition-transform-colors-opacity motion-reduce:transition-none",
+				"data-[pressed=true]:scale-[0.97] transition-transform-colors-opacity motion-reduce:transition-none",
 		},
 	},
 	defaultVariants: {
@@ -520,12 +520,14 @@ const button = tv({
  */
 const buttonGroup = tv({
 	slots: {
-		base: ["relative"],
+		base: "relative inline-block",
 		innerWrapper: "inline-flex items-center justify-center h-auto",
 	},
 	variants: {
 		fullWidth: {
-			true: "w-full",
+			true: {
+				innerWrapper: "w-full",
+			},
 		},
 		variant: {
 			glow: "",
@@ -533,7 +535,6 @@ const buttonGroup = tv({
 		radius: radiusClasses,
 	},
 	defaultVariants: {
-		fullWidth: false,
 		variant: "glow",
 		radius: "md",
 	},

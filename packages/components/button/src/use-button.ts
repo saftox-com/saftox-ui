@@ -2,8 +2,7 @@ import type { SpinnerProps } from "@saftox-ui/spinner";
 import type { PropGetter } from "@saftox-ui/system";
 import type { JSX } from "solid-js";
 import type { AriaButtonProps, UseButtonProps } from "./button-types";
-
-import { children, createSignal, mergeProps, splitProps } from "solid-js";
+import type { GlowEffectProps } from "./glow-effect";
 
 import { createFocusRing } from "@saftox-ui/focus";
 import { createHover } from "@saftox-ui/interactions";
@@ -16,7 +15,7 @@ import {
 import { Spinner } from "@saftox-ui/spinner";
 import { button } from "@saftox-ui/theme";
 import { filterDOMProps } from "@saftox-ui/utils";
-
+import { children, createSignal, mergeProps, splitProps } from "solid-js";
 import { useButtonGroupContext } from "./button-group-context";
 import { createButton } from "./create-button";
 
@@ -97,9 +96,11 @@ export function useButton<T extends HTMLButtonElement>(
 		return button(
 			combineProps(variantProps, {
 				get isInGroup() {
-					return !!groupContext;
+					return Boolean(groupContext);
 				},
-				isDisabled: reactiveStates.isDisabled,
+				get isDisabled() {
+					return reactiveStates.isDisabled;
+				},
 			}),
 		);
 	};
@@ -163,6 +164,16 @@ export function useButton<T extends HTMLButtonElement>(
 		return combineProps(mergeButtonProps, buttonLolcaProps);
 	};
 
+	const getGlowEffectProps: GlowEffectProps = {
+		ref: domRef,
+		get radius() {
+			return variantProps.radius;
+		},
+		get color() {
+			return variantProps.color;
+		},
+	};
+
 	const getIconClone = (icon: JSX.Element) => {
 		const i = children(() => icon);
 		// TODO: add some aria props
@@ -191,8 +202,9 @@ export function useButton<T extends HTMLButtonElement>(
 		endContent,
 		domRef,
 		slots,
-		getButtonProps,
 		spinner,
+		getButtonProps,
+		getGlowEffectProps,
 	};
 }
 

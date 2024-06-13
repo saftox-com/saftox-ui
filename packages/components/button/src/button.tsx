@@ -16,10 +16,10 @@ const Button: Component<ButtonProps> = (props) => {
 		reactiveStates,
 		startContent,
 		endContent,
-		domRef,
-		getButtonProps,
 		slots,
 		spinner,
+		getButtonProps,
+		getGlowEffectProps,
 	} = useButton(props);
 
 	return (
@@ -31,7 +31,7 @@ const Button: Component<ButtonProps> = (props) => {
 					!reactiveStates.isDisabled
 				}
 			>
-				<GlowEffect ref={domRef} color={props.color} radius={props.radius} />
+				<GlowEffect {...getGlowEffectProps} />
 			</Show>
 
 			<div class={slots().innerWrapper()}>

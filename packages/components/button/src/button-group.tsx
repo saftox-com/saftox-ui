@@ -2,30 +2,28 @@ import type { Component } from "solid-js";
 import type { UseButtonGroupProps } from "./button-types";
 
 import { Dynamic } from "@saftox-ui/solid-utils/dynamic";
-import { Show, splitProps } from "solid-js";
-
+import { omitProps } from "@saftox-ui/solid-utils/reactivity";
+import { Show, createEffect } from "solid-js";
 import { createButtonGroupContext } from "./button-group-context";
-import { useButtonGroup } from "./use-button-group";
-
 import { GlowEffect } from "./glow-effect";
+import { useButtonGroup } from "./use-button-group";
 
 export interface ButtonGroupProps extends UseButtonGroupProps {}
 
-const ButtonGroup: Component<ButtonGroupProps> = (props) => {
+const ButtonGroup: Component<ButtonGroupProps> = (originalProps) => {
 	const ButtonGroupContext = createButtonGroupContext();
+	const omitedProps = omitProps(originalProps, ["children"]);
 
-	const [_, otherProps] = splitProps(props, ["children"]);
-
-	const { component, domRef, context, slots, getButtonGroupProps } =
-		useButtonGroup(otherProps);
+	const { Component, slots, context, getButtonGroupProps, getGlowEffectProps } =
+		useButtonGroup(omitedProps);
 
 	return (
 		<ButtonGroupContext.Provider value={context}>
-			<Dynamic as={component} class={slots().base()} {...getButtonGroupProps}>
-				<Show when={props.variant === "glow"}>
-					<GlowEffect ref={domRef} color={props.color} radius={props.radius} />
+			<Dynamic as={Component} class={slots().base()} {...getButtonGroupProps}>
+				<Show when={context.variant === "glow"}>
+					<GlowEffect {...getGlowEffectProps} />
 				</Show>
-				<div class={slots().innerWrapper()}>{props.children}</div>
+				<div class={slots().innerWrapper()}>{originalProps.children}</div>
 			</Dynamic>
 		</ButtonGroupContext.Provider>
 	);
