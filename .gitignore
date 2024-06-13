@@ -52,4 +52,5 @@ packages/**/.turbo
 tsup.config.bundled_*.{m,c,}s
 *storybook.log
 
-.trunk
+# Local Netlify folder
+.netlify
