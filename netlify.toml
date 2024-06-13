@@ -1,0 +1,4 @@
+[build]
+  base = "/"
+  publish = "packages/storybook/storybook-static"
+  command = "pnpm run build && pnpm run build:sb"

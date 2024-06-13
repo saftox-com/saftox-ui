@@ -21,7 +21,6 @@ const config: StorybookConfig = {
 				docs: false,
 			},
 		},
-		getAbsolutePath("@chromatic-com/storybook"),
 		getAbsolutePath("@storybook/addon-interactions"),
 	],
 	framework: {

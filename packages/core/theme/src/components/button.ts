@@ -526,6 +526,7 @@ const buttonGroup = tv({
 	variants: {
 		fullWidth: {
 			true: {
+				base: "w-full",
 				innerWrapper: "w-full",
 			},
 		},
