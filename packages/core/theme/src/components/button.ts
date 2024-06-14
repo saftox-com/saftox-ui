@@ -51,7 +51,8 @@ const button = tv({
 			// focus ring
 			...dataFocusVisibleClasses,
 		],
-		innerWrapper: "relative overflow-hidden flex items-center justify-center",
+		innerWrapper:
+			"relative overflow-hidden flex items-center justify-center w-full h-full",
 		glowEffect: "absolute z-5 h-28 w-28 -translate-x-1/2 -translate-y-1/2",
 	},
 	variants: {
@@ -147,7 +148,7 @@ const button = tv({
 		{
 			variant: "glow",
 			class: {
-				innerWrapper: ["z-10 backdrop-blur-sm bg-background/90 w-full h-full"],
+				innerWrapper: ["z-10 backdrop-blur-sm bg-background/90"],
 			},
 		},
 		{
