@@ -397,6 +397,43 @@ importers:
         specifier: workspace:*
         version: link:../../core/twind/packages/variants
 
+  packages/components/snippet:
+    dependencies:
+      '@saftox-ui/button':
+        specifier: 0.0.1
+        version: link:../button
+      '@saftox-ui/focus':
+        specifier: 0.0.1
+        version: link:../../primitives/focus
+      '@saftox-ui/shared-icons':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-icons
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/use-clipboard':
+        specifier: 0.0.1
+        version: link:../../hooks/use-clipboard
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../../primitives/utils
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+    devDependencies:
+      '@saftox-ui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@saftox-ui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      '@saftox-ui/variants':
+        specifier: workspace:*
+        version: link:../../core/twind/packages/variants
+
   packages/components/spacer:
     dependencies:
       '@saftox-ui/shared-utils':
@@ -601,6 +638,27 @@ importers:
         version: link:../preset
 
   packages/hooks/use-async-state:
+    dependencies:
+      '@saftox-ui/shared-hooks':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-hooks
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+
+  packages/hooks/use-clipboard:
+    dependencies:
+      '@saftox-ui/shared-hooks':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-hooks
+      '@saftox-ui/use-event-listener':
+        specifier: 0.0.1
+        version: link:../use-event-listener
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+
+  packages/hooks/use-event-listener:
     dependencies:
       '@saftox-ui/shared-hooks':
         specifier: 0.0.1
