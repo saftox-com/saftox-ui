@@ -12,3 +12,4 @@ export * from "./spacer";
 export * from "./skeleton";
 export * from "./kbd";
 export * from "./code";
+export * from "./snippet";
