@@ -13,3 +13,4 @@ export * from "./skeleton";
 export * from "./kbd";
 export * from "./code";
 export * from "./snippet";
+export * from "./chip";

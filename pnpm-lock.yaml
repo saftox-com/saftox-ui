@@ -238,6 +238,46 @@ importers:
         specifier: 0.0.1
         version: link:../../core/twind/packages/variants
 
+  packages/components/chip:
+    dependencies:
+      '@saftox-ui/focus':
+        specifier: 0.0.1
+        version: link:../../primitives/focus
+      '@saftox-ui/interactions':
+        specifier: 0.0.1
+        version: link:../../primitives/interactions
+      '@saftox-ui/shared-icons':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-icons
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/types':
+        specifier: 0.0.1
+        version: link:../../primitives/types
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../../primitives/utils
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+    devDependencies:
+      '@saftox-ui/avatar':
+        specifier: workspace:*
+        version: link:../avatar
+      '@saftox-ui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@saftox-ui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      '@saftox-ui/variants':
+        specifier: 0.0.1
+        version: link:../../core/twind/packages/variants
+
   packages/components/code:
     dependencies:
       '@saftox-ui/shared-utils':
