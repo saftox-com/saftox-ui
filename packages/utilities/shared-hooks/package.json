@@ -18,11 +18,23 @@
 		"./to-value": {
 			"import": "./src/to-value/index.ts"
 		},
+		"./to-accessor": {
+			"import": "./src/to-accessor/index.ts"
+		},
+		"./to-accessors": {
+			"import": "./src/to-accessors/index.ts"
+		},
 		"./try-on-cleanup": {
 			"import": "./src/try-on-cleanup/index.ts"
 		},
 		"./use-debounce-fn": {
 			"import": "./src/use-debounce-fn/index.ts"
+		},
+		"./use-supported": {
+			"import": "./src/use-supported/index.ts"
+		},
+		"./use-mounted": {
+			"import": "./src/use-mounted/index.ts"
 		},
 		"./use-throttle-fn": {
 			"import": "./src/use-throttle-fn/index.ts"
@@ -32,6 +44,9 @@
 		},
 		"./util": {
 			"import": "./src/util/index.ts"
+		},
+		"./watch": {
+			"import": "./src/watch/index.ts"
 		},
 		"./utils": {
 			"import": "./src/utils/index.ts"

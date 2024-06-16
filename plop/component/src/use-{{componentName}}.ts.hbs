@@ -1,4 +1,4 @@
-import type { UseKbdProps } from "./kbd-types";
+import type { Use{{capitalize componentName}}Props } from "./{{componentName}}-types";
 import type { PropGetter } from "@saftox-ui/system";
 
 import { createSignal, mergeProps, splitProps } from "solid-js";
@@ -14,21 +14,11 @@ export function use{{capitalize componentName}}(originalProps: Use{{capitalize c
 		{{componentName}}.variantKeys,
 	);
 
-	const defaultProps = {
-		class: {},
-	};
+	const defaultProps = {};
 
 	const props = mergeProps(defaultProps, omitVariantProps);
 
-	const [local, rest] = splitProps(
-		props,
-		[
-			"ref",
-			"as",
-			"class",
-			"classes"
-		],
-	);
+	const [local, rest] = splitProps(props, ["ref", "as", "class", "classes"]);
 
 	const Component = local.as || "div";
 
@@ -41,15 +31,11 @@ export function use{{capitalize componentName}}(originalProps: Use{{capitalize c
 			}),
 		);
 
-	const baseStyles = clsx(local.classes?.base, local.class);	
-
 	const get{{capitalize componentName}}Props: PropGetter = (props = {}) =>
 		mergeProps(
 			{
 				ref: local.ref,
-				get class() {
-					return classes();
-				},
+				get class() {},
 			},
 			rest,
 			props

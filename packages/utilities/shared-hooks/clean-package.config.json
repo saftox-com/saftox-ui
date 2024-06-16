@@ -16,6 +16,16 @@
 					"default": "./dist/index/index.js"
 				}
 			},
+			"./to-accessors": {
+				"import": {
+					"types": "./dist/to-accessors/index.d.mts",
+					"default": "./dist/to-accessors/index.mjs"
+				},
+				"require": {
+					"types": "./dist/to-accessors/index.d.ts",
+					"default": "./dist/to-accessors/index.js"
+				}
+			},
 			"./to-value": {
 				"import": {
 					"types": "./dist/to-value/index.d.mts",
@@ -34,6 +44,26 @@
 				"require": {
 					"types": "./dist/try-on-cleanup/index.d.ts",
 					"default": "./dist/try-on-cleanup/index.js"
+				}
+			},
+			"./use-supported": {
+				"import": {
+					"types": "./dist/use-supported/index.d.mts",
+					"default": "./dist/use-supported/index.mjs"
+				},
+				"require": {
+					"types": "./dist/use-supported/index.d.ts",
+					"default": "./dist/use-supported/index.js"
+				}
+			},
+			"./use-mounted": {
+				"import": {
+					"types": "./dist/use-mounted/index.d.mts",
+					"default": "./dist/use-mounted/index.mjs"
+				},
+				"require": {
+					"types": "./dist/use-mounted/index.d.ts",
+					"default": "./dist/use-mounted/index.js"
 				}
 			},
 			"./use-debounce-fn": {
@@ -84,6 +114,16 @@
 				"require": {
 					"types": "./dist/utils/index.d.ts",
 					"default": "./dist/utils/index.js"
+				}
+			},
+			"./watch": {
+				"import": {
+					"types": "./dist/watch/index.d.mts",
+					"default": "./dist/watch/index.mjs"
+				},
+				"require": {
+					"types": "./dist/watch/index.d.ts",
+					"default": "./dist/watch/index.js"
 				}
 			},
 			"./utils/*": {
