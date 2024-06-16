@@ -1,0 +1,52 @@
+{
+	"name": "@saftox-ui/visually-hidden",
+	"author": "Serhii Zaitsev <ceo@saftox.com>",
+	"version": "0.0.1",
+	"description": "Primitive for creating visually hidden element that is still visible to assistive technology.",
+	"keywords": ["visually-hidden"],
+	"main": "./src/index.ts",
+	"sideEffects": false,
+	"files": ["dist"],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/saftox-com/saftox-ui.git",
+		"directory": "packages/primitives/visually-hidden"
+	},
+	"bugs": {
+		"url": "https://github.com/saftox-com/saftox-ui/issues"
+	},
+	"scripts": {
+		"build": "tsup src --dts",
+		"build:fast": "tsup src",
+		"dev": "pnpm build:fast --watch",
+		"dev:vite": "vite serve dev",
+		"clean": "rimraf dist .turbo",
+		"typecheck": "tsc --noEmit",
+		"prepack": "clean-package",
+		"postpack": "clean-package restore"
+	},
+	"peerDependencies": {
+		"solid-js": ">=1.8.17"
+	},
+	"dependencies": {
+		"@saftox-ui/interactions": "0.0.1",
+		"@saftox-ui/solid-utils": "0.0.1",
+		"@saftox-ui/utils": "0.0.1",
+		"@saftox-ui/types": "0.0.1"
+	},
+	"clean-package": "../../../configs/clean-package.config.json",
+	"tsup": {
+		"clean": true,
+		"target": "es2019",
+		"format": ["cjs", "esm"]
+	},
+	"primitive": {
+		"name": "visually-hidden",
+		"stage": 0,
+		"list": [],
+		"category": ""
+	}
+}

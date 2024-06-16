@@ -6,7 +6,7 @@ import type {
 	InputBase,
 	Validation,
 } from "@saftox-ui/types";
-import type { Accessor, JSX, from } from "solid-js";
+import type { Accessor, JSX } from "solid-js";
 import type { CreateToggleStateProps, ToggleState } from "./createToggleState";
 
 import { createMemo, mergeProps } from "solid-js";
@@ -14,8 +14,6 @@ import { createMemo, mergeProps } from "solid-js";
 import { createFocusable } from "@saftox-ui/focus";
 import { createPress } from "@saftox-ui/interactions";
 import { filterDOMProps } from "@saftox-ui/utils";
-
-import { combineProps } from "@solid-primitives/props";
 
 import { createToggleState } from "./createToggleState";
 
@@ -55,7 +53,10 @@ export interface ToggleAria {
 	 * Props to be spread on the input element.
 	 */
 	inputProps: JSX.InputHTMLAttributes<HTMLInputElement>;
-
+	/**
+	 * Whether the target is currently pressed.
+	 */
+	isPressed: Accessor<boolean>;
 	/**
 	 * State for the toggle element, as returned by `createToggleState`.
 	 */
@@ -100,7 +101,7 @@ export function createToggle(
 	};
 
 	// This handles focusing the input on pointer down, which Safari does not do by default.
-	const { pressProps } = createPress<HTMLInputElement>({
+	const { pressProps, isPressed } = createPress<HTMLInputElement>({
 		isDisabled: () => props.isDisabled,
 	});
 
@@ -139,12 +140,12 @@ export function createToggle(
 		onChange,
 	};
 
-	const inputProps = combineProps(
+	const inputProps = mergeProps(
 		domProps,
 		baseToggleProps,
 		pressProps,
 		focusableProps,
 	);
 
-	return { inputProps, state };
+	return { inputProps, isPressed, state };
 }
