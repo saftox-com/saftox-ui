@@ -518,6 +518,52 @@ importers:
         specifier: 0.0.1
         version: link:../../core/twind/packages/variants
 
+  packages/components/switch:
+    dependencies:
+      '@saftox-ui/focus':
+        specifier: 0.0.1
+        version: link:../../primitives/focus
+      '@saftox-ui/interactions':
+        specifier: 0.0.1
+        version: link:../../primitives/interactions
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/toggle':
+        specifier: 0.0.1
+        version: link:../../primitives/toggle
+      '@saftox-ui/types':
+        specifier: 0.0.1
+        version: link:../../primitives/types
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../../primitives/utils
+      '@saftox-ui/visually-hidden':
+        specifier: 0.0.1
+        version: link:../../primitives/visually-hidden
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+    devDependencies:
+      '@modular-forms/solid':
+        specifier: ^0.20.0
+        version: 0.20.0(solid-js@1.8.17)
+      '@saftox-ui/shared-icons':
+        specifier: workspace:*
+        version: link:../../utilities/shared-icons
+      '@saftox-ui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@saftox-ui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      '@saftox-ui/variants':
+        specifier: workspace:*
+        version: link:../../core/twind/packages/variants
+
   packages/components/textfield:
     dependencies:
       '@saftox-ui/focus':
@@ -844,6 +890,24 @@ importers:
         specifier: ^6.2.3
         version: 6.2.3(solid-js@1.8.17)
     devDependencies:
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+
+  packages/primitives/visually-hidden:
+    dependencies:
+      '@saftox-ui/interactions':
+        specifier: 0.0.1
+        version: link:../interactions
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/types':
+        specifier: 0.0.1
+        version: link:../types
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../utils
       solid-js:
         specifier: 1.8.17
         version: 1.8.17

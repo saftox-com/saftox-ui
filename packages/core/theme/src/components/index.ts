@@ -14,3 +14,4 @@ export * from "./kbd";
 export * from "./code";
 export * from "./snippet";
 export * from "./chip";
+export * from "./toggle";
