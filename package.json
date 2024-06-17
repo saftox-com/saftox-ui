@@ -2,6 +2,7 @@
 	"name": "saftox-ui",
 	"version": "0.0.1",
 	"private": true,
+	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/saftox.com/saftox-ui"
