@@ -1,7 +1,7 @@
 import type { PropGetter } from "@saftox-ui/system";
 import type { UseAvatarProps } from "./avatar-types";
 
-import { createSignal, mergeProps, splitProps } from "solid-js";
+import { createMemo, createSignal, mergeProps, splitProps } from "solid-js";
 
 import { createFocusRing } from "@saftox-ui/focus";
 import { createHover } from "@saftox-ui/interactions";
@@ -87,7 +87,7 @@ export function useAvatar(originalProps: UseAvatarProps) {
 		{ onError: local.onError },
 	);
 
-	const reactiveStates = {
+	const properties = {
 		get disableAnimation() {
 			return (
 				originalProps.disableAnimation ??
@@ -109,8 +109,8 @@ export function useAvatar(originalProps: UseAvatarProps) {
 		},
 	};
 
-	const slots = () => {
-		return avatar(
+	const slots = createMemo(() =>
+		avatar(
 			combineProps(variantProps, {
 				get isInGroup() {
 					return !!groupContext;
@@ -119,18 +119,18 @@ export function useAvatar(originalProps: UseAvatarProps) {
 					return !!groupContext?.isGrid || false;
 				},
 			}),
-		);
-	};
+		),
+	);
 
 	const getAvatarProps: PropGetter = (props = {}) => {
 		return mergeProps(
-			reactiveStates.canBeFocused ? focusProps : {},
+			properties.canBeFocused ? focusProps : {},
 			hoverProps,
 			rest,
 			{
 				ref: mergeRefs(local.ref, setDomRef),
 				get tabIndex() {
-					return reactiveStates.canBeFocused ? 0 : -1;
+					return properties.canBeFocused ? 0 : -1;
 				},
 				get "data-hover"() {
 					return dataAttr(isHovered);
@@ -143,7 +143,7 @@ export function useAvatar(originalProps: UseAvatarProps) {
 				},
 				get class() {
 					return slots().base({
-						class: clsx(reactiveStates.baseStyles, props?.class),
+						class: clsx(properties.baseStyles, props?.class),
 					});
 				},
 			},
@@ -161,7 +161,7 @@ export function useAvatar(originalProps: UseAvatarProps) {
 				ref: mergeRefs(local.imgRef, setImgRef),
 				src: local.src,
 				get "data-loaded"() {
-					return dataAttr(reactiveStates.isImgLoaded);
+					return dataAttr(properties.isImgLoaded);
 				},
 				get class() {
 					return slots().img({
@@ -172,7 +172,7 @@ export function useAvatar(originalProps: UseAvatarProps) {
 			filterDOMProps(
 				{
 					get disableAnimation() {
-						return reactiveStates.disableAnimation;
+						return properties.disableAnimation;
 					},
 				},
 				{
@@ -186,7 +186,7 @@ export function useAvatar(originalProps: UseAvatarProps) {
 
 	return {
 		Component,
-		reactiveStates,
+		properties,
 		local,
 		getInitials,
 		domRef,

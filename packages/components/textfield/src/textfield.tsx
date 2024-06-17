@@ -13,7 +13,7 @@ export interface TextfieldProps
 const Textfield: Component<TextfieldProps> = (props) => {
 	const {
 		Component,
-		reactiveStates,
+		properties,
 		getBaseProps,
 		getLabelProps,
 		getInputProps,
@@ -29,12 +29,12 @@ const Textfield: Component<TextfieldProps> = (props) => {
 	return (
 		<Dynamic as={Component} {...getBaseProps()}>
 			{/* labelContent */}
-			<Show when={reactiveStates.isOutsideLeft}>
+			<Show when={properties.isOutsideLeft}>
 				<label {...getLabelProps()}>{props.label}</label>
 			</Show>
 
 			<Show
-				when={reactiveStates.shouldLabelBeOutside}
+				when={properties.shouldLabelBeOutside}
 				fallback={
 					<>
 						<div {...getInputWrapperProps()}>
@@ -47,7 +47,7 @@ const Textfield: Component<TextfieldProps> = (props) => {
 								<input {...getInputProps()} />
 
 								{/* endContent */}
-								<Show when={reactiveStates.isClearable}>
+								<Show when={properties.isClearable}>
 									<span {...getClearButtonProps()}>
 										{props.description || <CloseFilledIcon />}
 									</span>
@@ -56,16 +56,12 @@ const Textfield: Component<TextfieldProps> = (props) => {
 						</div>
 
 						{/* helperWrapper */}
-						<Show when={reactiveStates.hasHelper}>
+						<Show when={properties.hasHelper}>
 							<div {...getHelperWrapperProps()}>
 								<Switch>
-									<Match
-										when={
-											reactiveStates.isInvalid && reactiveStates.errorMessage
-										}
-									>
+									<Match when={properties.isInvalid && properties.errorMessage}>
 										<div {...getErrorMessageProps()}>
-											{reactiveStates.errorMessage}
+											{properties.errorMessage}
 										</div>
 									</Match>
 
@@ -82,7 +78,7 @@ const Textfield: Component<TextfieldProps> = (props) => {
 				<div {...getMainWrapperProps()}>
 					<div {...getInputWrapperProps()}>
 						{/* labelContent */}
-						<Show when={!reactiveStates.isOutsideLeft}>
+						<Show when={!properties.isOutsideLeft}>
 							<label {...getLabelProps()}>{props.label}</label>
 						</Show>
 
@@ -92,7 +88,7 @@ const Textfield: Component<TextfieldProps> = (props) => {
 							<input {...getInputProps()} />
 
 							{/* endContent */}
-							<Show when={reactiveStates.isClearable}>
+							<Show when={properties.isClearable}>
 								<span {...getClearButtonProps()}>
 									{props.endContent || <CloseFilledIcon />}
 								</span>
@@ -101,14 +97,12 @@ const Textfield: Component<TextfieldProps> = (props) => {
 					</div>
 
 					{/* helperWrapper */}
-					<Show when={reactiveStates.hasHelper}>
+					<Show when={properties.hasHelper}>
 						<div {...getHelperWrapperProps()}>
 							<Switch>
-								<Match
-									when={reactiveStates.isInvalid && reactiveStates.errorMessage}
-								>
+								<Match when={properties.isInvalid && properties.errorMessage}>
 									<div {...getErrorMessageProps()}>
-										{reactiveStates.errorMessage}
+										{properties.errorMessage}
 									</div>
 								</Match>
 

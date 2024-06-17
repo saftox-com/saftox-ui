@@ -2,7 +2,13 @@ import type { PropGetter } from "@saftox-ui/system";
 import type { ContextType, UseButtonGroupProps } from "./button-types";
 import type { GlowEffectProps } from "./glow-effect";
 
-import { createEffect, createSignal, mergeProps, splitProps } from "solid-js";
+import {
+	createEffect,
+	createMemo,
+	createSignal,
+	mergeProps,
+	splitProps,
+} from "solid-js";
 
 import { mapPropsVariants } from "@saftox-ui/system";
 import { buttonGroup } from "@saftox-ui/theme";
@@ -45,7 +51,7 @@ export function useButtonGroup(originalProps: UseButtonGroupProps) {
 
 	const [domRef, setDomRef] = createSignal<HTMLElement>();
 
-	const slots = () =>
+	const slots = createMemo(() =>
 		buttonGroup(
 			combineProps(variantProps, {
 				class: contextProps.class,
@@ -53,7 +59,8 @@ export function useButtonGroup(originalProps: UseButtonGroupProps) {
 					return contextProps.fullWidth;
 				},
 			}),
-		);
+		),
+	);
 
 	const context: ContextType = combineProps(contextProps, variantProps);
 

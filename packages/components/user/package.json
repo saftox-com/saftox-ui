@@ -4,7 +4,6 @@
 	"version": "0.0.1",
 	"description": "Flexible User Profile Component.",
 	"keywords": ["user"],
-	"private": true,
 	"main": "./src/index.ts",
 	"sideEffects": false,
 	"files": ["dist"],

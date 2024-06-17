@@ -41,7 +41,7 @@ const Textarea: Component<TextAreaProps> = (originalProps) => {
 
 	const {
 		Component,
-		reactiveStates,
+		properties,
 		getBaseProps,
 		getLabelProps,
 		getInputProps,
@@ -114,29 +114,25 @@ const Textarea: Component<TextAreaProps> = (originalProps) => {
 	return (
 		<Dynamic as={Component} {...getBaseProps()}>
 			{/* labelContent */}
-			<Show when={reactiveStates.isOutsideLeft}>{labelContent()}</Show>
+			<Show when={properties.isOutsideLeft}>{labelContent()}</Show>
 
 			<div
 				{...getInputWrapperProps()}
 				data-has-multiple-rows={dataAttr(hasMultipleRows)}
 			>
 				{/* labelContent */}
-				<Show when={reactiveStates.shouldLabelBeInside}>{labelContent()}</Show>
+				<Show when={properties.shouldLabelBeInside}>{labelContent()}</Show>
 
 				{/* innerWrapper */}
 				{innerWrapper()}
 			</div>
 
 			{/* helperWrapper */}
-			<Show when={reactiveStates.hasHelper}>
+			<Show when={properties.hasHelper}>
 				<div {...getHelperWrapperProps()}>
 					<Switch>
-						<Match
-							when={reactiveStates.isInvalid && reactiveStates.errorMessage}
-						>
-							<div {...getErrorMessageProps()}>
-								{reactiveStates.errorMessage}
-							</div>
+						<Match when={properties.isInvalid && properties.errorMessage}>
+							<div {...getErrorMessageProps()}>{properties.errorMessage}</div>
 						</Match>
 
 						<Match when={props.description}>

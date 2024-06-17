@@ -6,7 +6,7 @@ import { clsx, dataAttr } from "@saftox-ui/shared-utils";
 import { mergeRefs } from "@saftox-ui/solid-utils/reactivity";
 import { user } from "@saftox-ui/theme";
 import { filterDOMProps } from "@saftox-ui/utils";
-import { createSignal, mergeProps, splitProps } from "solid-js";
+import { createMemo, createSignal, mergeProps, splitProps } from "solid-js";
 
 export function useUser(originalProps: UseUserProps) {
 	const defaultProps = {
@@ -41,9 +41,7 @@ export function useUser(originalProps: UseUserProps) {
 
 	const { isFocusVisible, isFocused, focusProps } = createFocusRing({});
 
-	const slots = () => {
-		return user();
-	};
+	const slots = createMemo(() => user());
 
 	const canBeFocused = () => local.isFocusable || local.as === "button";
 	const baseStyles = () => clsx(local.classes?.base, local.class);

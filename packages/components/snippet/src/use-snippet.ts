@@ -2,19 +2,19 @@ import type { ButtonProps } from "@saftox-ui/button";
 import type { PropGetter } from "@saftox-ui/system";
 import type { UseSnippetProps } from "./snippet-types";
 
-import {
-	createSignal,
-	mergeProps,
-	children as resoleveChildren,
-	splitProps,
-} from "solid-js";
-
 import { createFocusRing } from "@saftox-ui/focus";
 import { clsx, dataAttr } from "@saftox-ui/shared-utils";
 import { mergeRefs } from "@saftox-ui/solid-utils/reactivity";
 import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
 import { useClipboard } from "@saftox-ui/use-clipboard";
 import { filterDOMProps } from "@saftox-ui/utils";
+import {
+	createMemo,
+	createSignal,
+	mergeProps,
+	children as resoleveChildren,
+	splitProps,
+} from "solid-js";
 
 import { CheckLinearIcon, CopyLinearIcon } from "@saftox-ui/shared-icons";
 import { snippet } from "@saftox-ui/theme";
@@ -78,14 +78,15 @@ export function useSnippet(originalProps: UseSnippetProps) {
 		autofocus: local.autofocus,
 	});
 
-	const slots = () =>
+	const slots = createMemo(() =>
 		snippet(
 			mergeProps(variantProps, {
 				get disableAnimation() {
 					return disableAnimation();
 				},
 			}),
-		);
+		),
+	);
 
 	const symbolBefore = () => {
 		if (!local.symbol || typeof local.symbol !== "string") return local.symbol;
@@ -163,8 +164,8 @@ export function useSnippet(originalProps: UseSnippetProps) {
 	};
 
 	return {
-		children,
 		Component,
+		children,
 		local,
 		domRef,
 		setPreRef,

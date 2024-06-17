@@ -7,16 +7,15 @@ import type {
 } from "@saftox-ui/theme";
 
 import { clsx, dataAttr } from "@saftox-ui/shared-utils";
-import { combineProps } from "@saftox-ui/solid-utils/reactivity";
 import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
 import { skeleton } from "@saftox-ui/theme";
-import { mergeProps, splitProps } from "solid-js";
+import { createMemo, mergeProps, splitProps } from "solid-js";
 
 interface Props extends HTMLSaftoxUIProps<"div"> {
 	/**
 	 * Ref to the DOM node.
 	 */
-	ref?: Ref<HTMLElement | null>;
+	ref?: Ref;
 	/**
 	 * The skeleton will be visible while isLoading is `false`.
 	 * @default false
@@ -47,7 +46,7 @@ export function useSkeleton(originalProps: UseSkeletonProps) {
 		skeleton.variantKeys,
 	);
 
-	const defaultProps = {
+	const defaultProps: UseSkeletonProps = {
 		isLoaded: false,
 	};
 
@@ -63,25 +62,34 @@ export function useSkeleton(originalProps: UseSkeletonProps) {
 
 	const Component = local.as || "div";
 
-	const disableAnimation =
-		originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false;
+	const properties = {
+		get disableAnimation() {
+			return (
+				originalProps.disableAnimation ??
+				globalContext?.disableAnimation ??
+				false
+			);
+		},
+	};
 
-	const slots = () =>
+	const slots = createMemo(() =>
 		skeleton({
-			...variantProps,
-			disableAnimation,
-		});
-
-	const baseStyles = clsx(local.classes?.base, local.class);
+			get disableAnimation() {
+				return properties.disableAnimation;
+			},
+		}),
+	);
 
 	const getSkeletonProps: PropGetter = (props = {}) => {
-		return combineProps(
+		return mergeProps(
 			{
 				get "data-loaded"() {
 					return dataAttr(local.isLoaded);
 				},
 				get class() {
-					return slots().base({ class: clsx(baseStyles, props?.className) });
+					return slots().base({
+						class: clsx(clsx(local.classes?.base, local.class), props?.class),
+					});
 				},
 			},
 			rest,

@@ -5,7 +5,6 @@
 	"keywords": ["textarea", "autosize"],
 	"author": "Serhii Zaitsev <ceo@saftox.com>",
 	"homepage": "https://ui.saftox.com",
-	"private": true,
 	"main": "src/index.ts",
 	"sideEffects": false,
 	"files": ["dist"],

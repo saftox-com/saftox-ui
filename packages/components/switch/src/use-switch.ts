@@ -9,6 +9,7 @@ import { mergeRefs, pickProps } from "@saftox-ui/solid-utils/reactivity";
 import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
 import { toggle } from "@saftox-ui/theme";
 import {
+	createMemo,
 	createSignal,
 	createUniqueId,
 	mergeProps,
@@ -143,15 +144,15 @@ export function useSwitch(originalProps: UseSwitchProps) {
 		},
 	};
 
-	const slots = () => {
-		return toggle(
+	const slots = createMemo(() =>
+		toggle(
 			mergeProps(variantProps, {
 				get disableAnimation() {
 					return properties.disableAnimation;
 				},
 			}),
-		);
-	};
+		),
+	);
 
 	const getBaseProps: PropGetter = (props) => {
 		return mergeProps(hoverProps, pressProps, rest, props, {

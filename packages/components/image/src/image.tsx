@@ -11,7 +11,7 @@ export interface ImageProps extends UseImageProps {}
 const Image: Component<ImageProps> = (props) => {
 	const {
 		Component,
-		reactiveStates,
+		properties,
 		removeWrapper,
 		disableSkeleton,
 		domRef,
@@ -39,10 +39,10 @@ const Image: Component<ImageProps> = (props) => {
 		</div>
 	);
 
-	if (reactiveStates.isBlurred) {
+	if (properties.isBlurred) {
 		return (
 			<div {...getWrapperProps()}>
-				<Show when={reactiveStates.isZoomed} fallback={img()}>
+				<Show when={properties.isZoomed} fallback={img()}>
 					{zoomed()}
 				</Show>
 				{img(getBlurredImgProps())}
@@ -50,10 +50,10 @@ const Image: Component<ImageProps> = (props) => {
 		);
 	}
 
-	if (reactiveStates.isZoomed || !disableSkeleton || props.fallbackSrc) {
+	if (properties.isZoomed || !disableSkeleton || props.fallbackSrc) {
 		return (
 			<div {...getWrapperProps()}>
-				<Show when={reactiveStates.isZoomed} fallback={img()}>
+				<Show when={properties.isZoomed} fallback={img()}>
 					{zoomed()}
 				</Show>
 			</div>

@@ -2,13 +2,12 @@ import type { PropGetter } from "@saftox-ui/system";
 import type { UseImageProps } from "./image-types";
 
 import { clsx, dataAttr } from "@saftox-ui/shared-utils";
+import { mergeRefs } from "@saftox-ui/solid-utils/reactivity";
 import { useProviderContext } from "@saftox-ui/system";
 import { mapPropsVariants } from "@saftox-ui/system";
 import { image } from "@saftox-ui/theme";
 import { useImage as useImageBase } from "@saftox-ui/use-image";
-import { createSignal, mergeProps, splitProps } from "solid-js";
-
-import { combineProps, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
+import { createMemo, createSignal, mergeProps, splitProps } from "solid-js";
 
 export function useImage(originalProps: UseImageProps) {
 	const globalContext = useProviderContext();
@@ -64,7 +63,7 @@ export function useImage(originalProps: UseImageProps) {
 		},
 	);
 
-	const reactiveStates = {
+	const properties = {
 		get isDisableAnimation() {
 			return (
 				originalProps.disableAnimation ??
@@ -108,18 +107,18 @@ export function useImage(originalProps: UseImageProps) {
 
 	const [domRef, setDomRef] = createSignal<HTMLImageElement>();
 
-	const slots = () => {
-		return image(
-			combineProps(variantProps, {
+	const slots = createMemo(() =>
+		image(
+			mergeProps(variantProps, {
 				get disableAnimation() {
-					return reactiveStates.isDisableAnimation;
+					return properties.isDisableAnimation;
 				},
 				get showSkeleton() {
-					return reactiveStates.showSkeleton;
+					return properties.showSkeleton;
 				},
 			}),
-		);
-	};
+		),
+	);
 
 	const getImgProps: PropGetter<HTMLImageElement> = (props = {}) => {
 		return mergeProps(rest, {
@@ -127,11 +126,11 @@ export function useImage(originalProps: UseImageProps) {
 			src: local.src,
 			srcSet: local.srcSet,
 			get "data-loaded"() {
-				return dataAttr(reactiveStates.isImgLoaded);
+				return dataAttr(properties.isImgLoaded);
 			},
 			get class() {
 				return slots().img({
-					class: clsx(reactiveStates.baseStyles, props?.class),
+					class: clsx(properties.baseStyles, props?.class),
 				});
 			},
 			get loading() {
@@ -158,7 +157,7 @@ export function useImage(originalProps: UseImageProps) {
 			}),
 			style: {
 				...fallbackStyle(),
-				"max-width": reactiveStates.width.w,
+				"max-width": properties.width.w,
 			},
 		};
 	};
@@ -175,7 +174,7 @@ export function useImage(originalProps: UseImageProps) {
 
 	return {
 		Component,
-		reactiveStates,
+		properties,
 		get disableSkeleton() {
 			return local.disableSkeleton;
 		},

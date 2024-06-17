@@ -16,8 +16,7 @@ import type {
 	ValueBase,
 } from "@saftox-ui/types";
 
-import { combineProps } from "@saftox-ui/solid-utils/reactivity";
-import { createEffect, createMemo, mergeProps } from "solid-js";
+import { createMemo, mergeProps } from "solid-js";
 
 import { createFocusable } from "@saftox-ui/focus";
 import { callHandler, filterDOMProps } from "@saftox-ui/utils";
