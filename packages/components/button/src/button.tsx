@@ -13,7 +13,7 @@ export interface ButtonProps extends UseButtonProps {}
 const Button: Component<ButtonProps> = (props) => {
 	const {
 		Component,
-		reactiveStates,
+		properties,
 		startContent,
 		endContent,
 		slots,
@@ -27,8 +27,8 @@ const Button: Component<ButtonProps> = (props) => {
 			<Show
 				when={
 					props.variant === "glow" &&
-					!reactiveStates.isLoading &&
-					!reactiveStates.isDisabled
+					!properties.isLoading &&
+					!properties.isDisabled
 				}
 			>
 				<GlowEffect {...getGlowEffectProps} />
@@ -38,26 +38,20 @@ const Button: Component<ButtonProps> = (props) => {
 				<Show when={startContent}>{startContent}</Show>
 
 				<Show
-					when={
-						reactiveStates.isLoading &&
-						reactiveStates.spinnerPlacement === "start"
-					}
+					when={properties.isLoading && properties.spinnerPlacement === "start"}
 				>
 					{spinner()}
 				</Show>
 
 				<Show
-					when={reactiveStates.isLoading && reactiveStates.isIconOnly}
+					when={properties.isLoading && properties.isIconOnly}
 					fallback={props.children}
 				>
 					{null}
 				</Show>
 
 				<Show
-					when={
-						reactiveStates.isLoading &&
-						reactiveStates.spinnerPlacement === "end"
-					}
+					when={properties.isLoading && properties.spinnerPlacement === "end"}
 				>
 					{spinner()}
 				</Show>

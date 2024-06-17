@@ -4,7 +4,7 @@ import type { UseTextfieldProps } from "./textfield-types";
 import { createMemo, createSignal, mergeProps, splitProps } from "solid-js";
 
 import { createFocusRing } from "@saftox-ui/focus";
-import { combineProps, mergeRefs } from "@saftox-ui/solid-utils/reactivity";
+import { mergeRefs } from "@saftox-ui/solid-utils/reactivity";
 import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
 import { textfield } from "@saftox-ui/theme";
 import { createControllableSignal, filterDOMProps } from "@saftox-ui/utils";
@@ -94,8 +94,6 @@ export function useTextfield<
 		domRef()?.focus();
 	};
 
-	// Aria Primitives
-
 	const mergeCreateTextFieldProps = mergeProps(originalProps as any, {
 		autoCapitalize: originalProps.autoCapitalize,
 		get value() {
@@ -109,7 +107,7 @@ export function useTextfield<
 			);
 		},
 		get inputElementType() {
-			return reactiveStates.isMultiline ? "textarea" : "input";
+			return properties.isMultiline ? "textarea" : "input";
 		},
 		onChange: setInputValue,
 		onInput: (e: InputEvent) => setInputValue((e.target as T).value),
@@ -141,9 +139,7 @@ export function useTextfield<
 		onPress: handleClear,
 	});
 
-	// .Aria Primitives
-
-	const reactiveStates = {
+	const properties = {
 		get disableAnimation() {
 			return (
 				originalProps.disableAnimation ??
@@ -247,43 +243,43 @@ export function useTextfield<
 		},
 	};
 
-	const slots = createMemo(() => {
-		return textfield(
-			combineProps(variantsProps, {
+	const slots = createMemo(() =>
+		textfield(
+			mergeProps(variantsProps, {
 				get isInvalid() {
-					return reactiveStates.isInvalid;
+					return properties.isInvalid;
 				},
 				get isClearable() {
-					return reactiveStates.isClearable;
+					return properties.isClearable;
 				},
 				get disableAnimation() {
-					return reactiveStates.disableAnimation;
+					return properties.disableAnimation;
 				},
 			}),
-		);
-	});
+		),
+	);
 
 	const getBaseProps: PropGetter = (props = {}, ref) => {
 		return mergeProps(
 			{
-				get class() {
-					return slots().base({ class: reactiveStates.baseStyles });
-				},
 				"data-slot": "base",
+				get class() {
+					return slots().base({ class: properties.baseStyles });
+				},
 				get "data-filled"() {
 					return dataAttr(
-						reactiveStates.isFilled ||
-							reactiveStates.hasPlaceholder ||
-							reactiveStates.hasStartContent ||
-							reactiveStates.isPlaceholderShown,
+						properties.isFilled ||
+							properties.hasPlaceholder ||
+							properties.hasStartContent ||
+							properties.isPlaceholderShown,
 					);
 				},
 				get "data-filled-within"() {
 					return dataAttr(
-						reactiveStates.isFilledWithin ||
-							reactiveStates.hasPlaceholder ||
-							reactiveStates.hasStartContent ||
-							reactiveStates.isPlaceholderShown,
+						properties.isFilledWithin ||
+							properties.hasPlaceholder ||
+							properties.hasStartContent ||
+							properties.isPlaceholderShown,
 					);
 				},
 				get "data-focus-within"() {
@@ -306,19 +302,19 @@ export function useTextfield<
 					return dataAttr(originalProps.isDisabled);
 				},
 				get "data-invalid"() {
-					return dataAttr(reactiveStates.isInvalid);
+					return dataAttr(properties.isInvalid);
 				},
 				get "data-has-elements"() {
-					return dataAttr(reactiveStates.hasElements);
+					return dataAttr(properties.hasElements);
 				},
 				get "data-has-helper"() {
-					return dataAttr(reactiveStates.hasHelper);
+					return dataAttr(properties.hasHelper);
 				},
 				get "data-has-label"() {
-					return dataAttr(reactiveStates.hasLabel);
+					return dataAttr(properties.hasLabel);
 				},
 				get "data-has-value"() {
-					return dataAttr(!reactiveStates.isPlaceholderShown);
+					return dataAttr(!properties.isPlaceholderShown);
 				},
 			},
 			focusWithinProps,
@@ -347,13 +343,13 @@ export function useTextfield<
 			{
 				"data-slot": "input",
 				get "data-filled"() {
-					return dataAttr(reactiveStates.isFilled);
+					return dataAttr(properties.isFilled);
 				},
 				get "data-filled-within"() {
-					return dataAttr(reactiveStates.isFilledWithin);
+					return dataAttr(properties.isFilledWithin);
 				},
 				get "data-has-start-content"() {
-					return dataAttr(reactiveStates.hasStartContent);
+					return dataAttr(properties.hasStartContent);
 				},
 				get "data-has-end-content"() {
 					return dataAttr(!!local.endContent);
@@ -362,7 +358,7 @@ export function useTextfield<
 					return slots().input({
 						class: clsx(
 							local.classes?.input,
-							reactiveStates.isFilled && "is-filled",
+							properties.isFilled && "is-filled",
 						),
 					});
 				},
@@ -403,7 +399,7 @@ export function useTextfield<
 					return slots().inputWrapper({
 						class: clsx(
 							local.classes?.inputWrapper,
-							reactiveStates.isFilled && "is-filled",
+							properties.isFilled && "is-filled",
 						),
 					});
 				},
@@ -508,7 +504,7 @@ export function useTextfield<
 
 	return {
 		Component,
-		reactiveStates,
+		properties,
 		domRef,
 		getBaseProps,
 		getLabelProps,

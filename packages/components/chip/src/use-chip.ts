@@ -10,6 +10,7 @@ import type {
 
 import {
 	type FlowComponent,
+	createMemo,
 	createSignal,
 	mergeProps,
 	children as resolveChildren,
@@ -80,11 +81,9 @@ export function useChip(originalProps: UseChipProps) {
 		},
 	};
 
-	const slots = () => {
-		return chip(
-			mergeProps(variantProps, properties, isCloseButtonFocusVisible),
-		);
-	};
+	const slots = createMemo(() =>
+		chip(mergeProps(variantProps, properties, isCloseButtonFocusVisible)),
+	);
 
 	const getChipProps: PropGetter = () => {
 		return mergeProps(

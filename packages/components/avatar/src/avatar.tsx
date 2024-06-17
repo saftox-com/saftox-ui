@@ -8,7 +8,7 @@ import { useAvatar } from "./use-avatar";
 const Avatar: Component<AvatarProps> = (props) => {
 	const {
 		Component,
-		reactiveStates,
+		properties,
 		local,
 		slots,
 		getInitials,
@@ -47,7 +47,7 @@ const Avatar: Component<AvatarProps> = (props) => {
 					</Show>
 				}
 			>
-				<Match when={!reactiveStates.showFlallback && local.src}>{null}</Match>
+				<Match when={!properties.showFlallback && local.src}>{null}</Match>
 				<Match when={props.fallback}>
 					<div
 						aria-label={local.alt}

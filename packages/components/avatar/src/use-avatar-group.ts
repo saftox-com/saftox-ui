@@ -3,7 +3,13 @@ import type { JSX } from "solid-js";
 import type { UseAvatarGroupProps } from "./avatar-group-types";
 import type { AvatarProps } from "./avatar-types";
 
-import { children, createSignal, mergeProps, splitProps } from "solid-js";
+import {
+	children,
+	createMemo,
+	createSignal,
+	mergeProps,
+	splitProps,
+} from "solid-js";
 
 import { clsx } from "@saftox-ui/shared-utils";
 import { isBrowserElement, isElement } from "@saftox-ui/solid-utils";
@@ -55,16 +61,16 @@ export function useAvatarGroup(originalProps: UseAvatarGroupProps = {}) {
 	const [domRef, setDomRef] = createSignal<HTMLDivElement>();
 	const [remainingCount, setRemainingCount] = createSignal<number>();
 
-	const slots = () => {
-		return avatarGroup({
+	const slots = createMemo(() =>
+		avatarGroup({
 			get class() {
 				return local.class;
 			},
 			get isGrid() {
 				return context.isGrid;
 			},
-		});
-	};
+		}),
+	);
 
 	const clones = (children: JSX.Element) => {
 		const validChildren = () => getValidChildren(children);

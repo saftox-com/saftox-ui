@@ -477,7 +477,7 @@ const CustomWithClassNamesTemplate = (args: TextfieldProps) => (
 const CustomWithHooksTemplate = (props: TextfieldProps) => {
 	const {
 		Component,
-		reactiveStates,
+		properties,
 		domRef,
 		getBaseProps,
 		getLabelProps,
@@ -516,7 +516,7 @@ const CustomWithHooksTemplate = (props: TextfieldProps) => {
 	const labelContent = <label {...getLabelProps()}>{props.label}</label>;
 
 	const end = createMemo(() => {
-		if (reactiveStates.isClearable) {
+		if (properties.isClearable) {
 			return (
 				<span {...getClearButtonProps()}>
 					{props.endContent || <CloseFilledIcon />}
@@ -544,7 +544,7 @@ const CustomWithHooksTemplate = (props: TextfieldProps) => {
 	return (
 		<div class="w-[340px] h-[300px] px-8 rounded-2xl flex justify-center items-center bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
 			<Dynamic as={Component} {...getBaseProps()}>
-				{reactiveStates.shouldLabelBeOutside ? labelContent : null}
+				{properties.shouldLabelBeOutside ? labelContent : null}
 				<div
 					{...getInputWrapperProps()}
 					role="button"
@@ -552,14 +552,14 @@ const CustomWithHooksTemplate = (props: TextfieldProps) => {
 						domRef()?.focus();
 					}}
 				>
-					{reactiveStates.shouldLabelBeInside ? labelContent : null}
+					{properties.shouldLabelBeInside ? labelContent : null}
 					{innerWrapper()}
 				</div>
 				{props.description && (
 					<div {...getDescriptionProps()}>{props.description}</div>
 				)}
-				{reactiveStates.errorMessage && (
-					<div {...getErrorMessageProps()}>{reactiveStates.errorMessage}</div>
+				{properties.errorMessage && (
+					<div {...getErrorMessageProps()}>{properties.errorMessage}</div>
 				)}
 			</Dynamic>
 		</div>

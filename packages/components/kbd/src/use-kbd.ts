@@ -4,7 +4,7 @@ import type { UseKbdProps } from "./kbd-types";
 import { clsx } from "@saftox-ui/shared-utils";
 import { mapPropsVariants } from "@saftox-ui/system";
 import { kbd } from "@saftox-ui/theme";
-import { mergeProps, splitProps } from "solid-js";
+import { createMemo, mergeProps, splitProps } from "solid-js";
 
 export function useKbd(originalProps: UseKbdProps) {
 	const [omitVariantProps, variantProps] = mapPropsVariants(
@@ -23,7 +23,7 @@ export function useKbd(originalProps: UseKbdProps) {
 
 	const Component = local.as || "div";
 
-	const slots = () => kbd(variantProps);
+	const slots = createMemo(() => kbd(variantProps));
 
 	const baseStyles = () => clsx(local.classes?.base, local.class);
 

@@ -11,7 +11,7 @@ import { clsx } from "@saftox-ui/shared-utils";
 import { combineProps } from "@saftox-ui/solid-utils/reactivity";
 import { mapPropsVariants, useProviderContext } from "@saftox-ui/system";
 import { badge } from "@saftox-ui/theme";
-import { mergeProps, splitProps } from "solid-js";
+import { createMemo, mergeProps, splitProps } from "solid-js";
 
 interface Props extends HTMLSaftoxUIProps<"span", "content"> {
 	/**
@@ -84,7 +84,7 @@ export function useBadge(originalProps: UseBadgeProps) {
 		},
 	};
 
-	const slots = () =>
+	const slots = createMemo(() =>
 		badge(
 			mergeProps(variantProps, {
 				get showOutline() {
@@ -97,7 +97,8 @@ export function useBadge(originalProps: UseBadgeProps) {
 					return reactivityProps.isDot;
 				},
 			}),
-		);
+		),
+	);
 
 	const getBadgeProps: PropGetter = () => {
 		return combineProps(

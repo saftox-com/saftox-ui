@@ -15,7 +15,13 @@ import {
 import { Spinner } from "@saftox-ui/spinner";
 import { button } from "@saftox-ui/theme";
 import { filterDOMProps } from "@saftox-ui/utils";
-import { children, createSignal, mergeProps, splitProps } from "solid-js";
+import {
+	children,
+	createMemo,
+	createSignal,
+	mergeProps,
+	splitProps,
+} from "solid-js";
 import { useButtonGroupContext } from "./button-group-context";
 import { createButton } from "./create-button";
 
@@ -77,7 +83,7 @@ export function useButton<T extends HTMLButtonElement>(
 		isTextInput: false,
 	});
 
-	const reactiveStates = {
+	const properties = {
 		get isDisabled() {
 			return local.isDisabled || local.isLoading;
 		},
@@ -92,28 +98,28 @@ export function useButton<T extends HTMLButtonElement>(
 		},
 	};
 
-	const slots = () => {
-		return button(
+	const slots = createMemo(() =>
+		button(
 			combineProps(variantProps, {
 				get isInGroup() {
 					return Boolean(groupContext);
 				},
 				get isDisabled() {
-					return reactiveStates.isDisabled;
+					return properties.isDisabled;
 				},
 			}),
-		);
-	};
+		),
+	);
 
 	const handleClick: JSX.EventHandlerUnion<T, MouseEvent> = () => {
-		if (reactiveStates.isDisabled || variantProps.disableAnimation) return;
+		if (properties.isDisabled || variantProps.disableAnimation) return;
 	};
 
 	const { buttonProps, isPressed } = createButton(
 		combineProps(
 			{
 				elementType: Component,
-				isDisabled: reactiveStates.isDisabled,
+				isDisabled: properties.isDisabled,
 				onClick: chain([handleClick, local.onClick]),
 			},
 			rest,
@@ -122,7 +128,7 @@ export function useButton<T extends HTMLButtonElement>(
 	);
 
 	const { isHovered, hoverProps } = createHover({
-		isDisabled: reactiveStates.isDisabled,
+		isDisabled: properties.isDisabled,
 	});
 
 	const getButtonProps: PropGetter<HTMLButtonElement> = (props = {}) => {
@@ -134,7 +140,7 @@ export function useButton<T extends HTMLButtonElement>(
 				});
 			},
 			get "data-disabled"() {
-				return dataAttr(reactiveStates.isDisabled);
+				return dataAttr(properties.isDisabled);
 			},
 			get "data-focus"() {
 				return dataAttr(isFocused);
@@ -149,7 +155,7 @@ export function useButton<T extends HTMLButtonElement>(
 				return dataAttr(isHovered);
 			},
 			get "data-loading"() {
-				return dataAttr(reactiveStates.isLoading);
+				return dataAttr(properties.isLoading);
 			},
 		};
 
@@ -197,7 +203,7 @@ export function useButton<T extends HTMLButtonElement>(
 
 	return {
 		Component,
-		reactiveStates,
+		properties,
 		startContent,
 		endContent,
 		domRef,
