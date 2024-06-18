@@ -22,10 +22,7 @@ import {
 import { combineProps } from "@solid-primitives/props";
 import { access } from "@solid-primitives/utils";
 
-import {
-	disableTextSelection,
-	restoreTextSelection,
-} from "./textSelection_temp";
+import { disableTextSelection, restoreTextSelection } from "./text-selection";
 import { isVirtualClick } from "./utils";
 
 export interface CreatePressProps extends PressEvents {

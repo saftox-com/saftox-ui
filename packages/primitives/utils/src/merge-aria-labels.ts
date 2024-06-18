@@ -3,7 +3,7 @@ import type { MaybeAccessor } from "@solid-primitives/utils";
 
 import { access } from "@solid-primitives/utils";
 
-import { createId } from "./createId_temp";
+import { createId } from "./create-id";
 
 export interface MergeAriaLabelsProps {
 	/**

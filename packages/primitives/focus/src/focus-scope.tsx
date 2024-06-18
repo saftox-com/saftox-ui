@@ -11,8 +11,8 @@ import {
 	useContext,
 } from "solid-js";
 
-import { focusSafely } from "./focusSafely_temp";
-import { isElementVisible } from "./isElementVisible_temp";
+import { focusSafely } from "./focus-safely";
+import { isElementVisible } from "./is-element-visible";
 
 interface FocusScopeProps {
 	/**
