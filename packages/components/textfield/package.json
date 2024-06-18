@@ -39,6 +39,7 @@
 		"@saftox-ui/shared-icons": "^0.0.1",
 		"@saftox-ui/interactions": "^0.0.1",
 		"@saftox-ui/textarea-autosize": "^0.0.1",
+		"@saftox-ui/label": "^0.0.1",
 		"@saftox-ui/focus": "^0.0.1",
 		"@saftox-ui/utils": "^0.0.1",
 		"@saftox-ui/types": "^0.0.1"

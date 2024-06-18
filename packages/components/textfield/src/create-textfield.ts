@@ -21,7 +21,7 @@ import { createMemo, mergeProps } from "solid-js";
 import { createFocusable } from "@saftox-ui/focus";
 import { callHandler, filterDOMProps } from "@saftox-ui/utils";
 
-import { createField } from "./create-field";
+import { createField } from "@saftox-ui/label";
 
 type DefaultElementType = "input";
 
