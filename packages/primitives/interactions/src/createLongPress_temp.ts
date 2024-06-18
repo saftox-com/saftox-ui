@@ -9,7 +9,7 @@ import { createDescription, createGlobalListeners } from "@saftox-ui/utils";
 import { combineProps } from "@solid-primitives/props";
 import { access } from "@solid-primitives/utils";
 
-import { createPress } from "./createPress";
+import { createPress } from "./createPress_temp";
 
 interface CreateLongPressProps {
 	/**

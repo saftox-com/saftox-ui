@@ -7,7 +7,10 @@ import type {
 	Validation,
 } from "@saftox-ui/types";
 import type { Accessor, JSX } from "solid-js";
-import type { CreateToggleStateProps, ToggleState } from "./createToggleState";
+import type {
+	CreateToggleStateProps,
+	ToggleState,
+} from "./createToggleState_temp";
 
 import { createMemo, mergeProps } from "solid-js";
 
@@ -15,7 +18,7 @@ import { createFocusable } from "@saftox-ui/focus";
 import { createPress } from "@saftox-ui/interactions";
 import { filterDOMProps } from "@saftox-ui/utils";
 
-import { createToggleState } from "./createToggleState";
+import { createToggleState } from "./createToggleState_temp";
 
 export interface AriaToggleProps
 	extends Omit<CreateToggleStateProps, "isReadOnly">,

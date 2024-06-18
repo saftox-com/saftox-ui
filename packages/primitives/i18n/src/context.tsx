@@ -1,9 +1,9 @@
 import type { Accessor, JSX } from "solid-js";
-import type { Locale } from "./createDefaultLocale";
+import type { Locale } from "./createDefaultLocale_temp";
 
 import { createContext, createMemo, useContext } from "solid-js";
 
-import { createDefaultLocale } from "./createDefaultLocale";
+import { createDefaultLocale } from "./createDefaultLocale_temp";
 import { getReadingDirection } from "./utils";
 
 export interface I18nProviderProps {
