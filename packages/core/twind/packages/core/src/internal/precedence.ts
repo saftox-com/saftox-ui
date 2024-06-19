@@ -1,9 +1,9 @@
-import type { ParsedRule } from "../parse";
-import type { BaseTheme, Context } from "../types";
+import type { ParsedRule } from '../parse'
+import type { BaseTheme, Context } from '../types'
 
-import { asArray, mql } from "../utils";
+import { asArray, mql } from '../utils'
 
-import { toClassName } from "./to-class-name";
+import { toClassName } from './to-class-name'
 
 // Based on https://github.com/kripod/otion
 // License MIT
@@ -18,39 +18,39 @@ import { toClassName } from "./to-class-name";
 // }
 
 export const Layer = {
-	/**
-	 * 1. `default` (public)
-	 */
-	d /* efaults */: 0b000 << 27 /* Shifts.layer */,
+  /**
+   * 1. `default` (public)
+   */
+  d /* efaults */: 0b000 << 27 /* Shifts.layer */,
 
-	/**
-	 * 2. `base` (public) — for things like reset rules or default styles applied to plain HTML elements.
-	 */
-	b /* ase */: 0b001 << 27 /* Shifts.layer */,
+  /**
+   * 2. `base` (public) — for things like reset rules or default styles applied to plain HTML elements.
+   */
+  b /* ase */: 0b001 << 27 /* Shifts.layer */,
 
-	/**
-	 * 3. `components` (public, used by `style()`) — is for class-based styles that you want to be able to override with utilities.
-	 */
-	c /* omponents */: 0b010 << 27 /* Shifts.layer */,
-	// reserved for style():
-	// - props: 0b011
-	// - when: 0b100
+  /**
+   * 3. `components` (public, used by `style()`) — is for class-based styles that you want to be able to override with utilities.
+   */
+  c /* omponents */: 0b010 << 27 /* Shifts.layer */,
+  // reserved for style():
+  // - props: 0b011
+  // - when: 0b100
 
-	/**
-	 * 6. `aliases` (public, used by `apply()`) — `~(...)`
-	 */
-	a /* liases */: 0b101 << 27 /* Shifts.layer */,
+  /**
+   * 6. `aliases` (public, used by `apply()`) — `~(...)`
+   */
+  a /* liases */: 0b101 << 27 /* Shifts.layer */,
 
-	/**
-	 * 6. `utilities` (public) — for small, single-purpose classes
-	 */
-	u /* tilities */: 0b110 << 27 /* Shifts.layer */,
+  /**
+   * 6. `utilities` (public) — for small, single-purpose classes
+   */
+  u /* tilities */: 0b110 << 27 /* Shifts.layer */,
 
-	/**
-	 * 7. `overrides` (public, used by `css()`)
-	 */
-	o /* verrides */: 0b111 << 27 /* Shifts.layer */,
-} as const;
+  /**
+   * 7. `overrides` (public, used by `css()`)
+   */
+  o /* verrides */: 0b111 << 27 /* Shifts.layer */,
+} as const
 
 /*
 To have a predictable styling the styles must be ordered.
@@ -123,8 +123,8 @@ Ensure shorthand properties are inserted before longhand properties; eg longhand
 */
 
 export function moveToLayer(precedence: number, layer: number): number {
-	// Set layer (first reset, than set)
-	return (precedence & ~Layer.o) | layer;
+  // Set layer (first reset, than set)
+  return (precedence & ~Layer.o) | layer
 }
 
 /*
@@ -167,39 +167,39 @@ supports bit shift up to 32 bits.
 
 // Colon and dash count of string (ascending)
 export function seperatorPrecedence(string: string): number {
-	return string.match(/[-=:;]/g)?.length || 0;
+  return string.match(/[-=:;]/g)?.length || 0
 }
 
 export function atRulePrecedence(css: string): number {
-	// 0 - 15: 4 bits (max 144rem or 2304px)
-	// rem -> bit
-	// <20 ->  0 (<320px)
-	//  20 ->  1 (320px)
-	//  24 ->  2 (384px)
-	//  28 ->  3 (448px)
-	//  32 ->  4 (512px)
-	//  36 ->  5 (576px)
-	//  42 ->  6 (672px)
-	//  48 ->  7 (768px)
-	//  56 ->  8 (896px)
-	//  64 ->  9 (1024px)
-	//  72 -> 10 (1152px)
-	//  80 -> 11 (1280px)
-	//  96 -> 12 (1536px)
-	// 112 -> 13 (1792px)
-	// 128 -> 14 (2048px)
-	// 144 -> 15 (2304px)
-	// https://www.dcode.fr/function-equation-finder
-	return (
-		(Math.min(
-			/(?:^|width[^\d]+)(\d+(?:.\d+)?)(p)?/.test(css)
-				? Math.max(0, 29.63 * (+RegExp.$1 / (RegExp.$2 ? 15 : 1)) ** 0.137 - 43)
-				: 0,
-			15,
-		) <<
-			22) /* Shifts.responsive */ |
-		(Math.min(seperatorPrecedence(css), 15) << 18) /* Shifts.atRules */
-	);
+  // 0 - 15: 4 bits (max 144rem or 2304px)
+  // rem -> bit
+  // <20 ->  0 (<320px)
+  //  20 ->  1 (320px)
+  //  24 ->  2 (384px)
+  //  28 ->  3 (448px)
+  //  32 ->  4 (512px)
+  //  36 ->  5 (576px)
+  //  42 ->  6 (672px)
+  //  48 ->  7 (768px)
+  //  56 ->  8 (896px)
+  //  64 ->  9 (1024px)
+  //  72 -> 10 (1152px)
+  //  80 -> 11 (1280px)
+  //  96 -> 12 (1536px)
+  // 112 -> 13 (1792px)
+  // 128 -> 14 (2048px)
+  // 144 -> 15 (2304px)
+  // https://www.dcode.fr/function-equation-finder
+  return (
+    (Math.min(
+      /(?:^|width[^\d]+)(\d+(?:.\d+)?)(p)?/.test(css)
+        ? Math.max(0, 29.63 * (+RegExp.$1 / (RegExp.$2 ? 15 : 1)) ** 0.137 - 43)
+        : 0,
+      15,
+    ) <<
+      22) /* Shifts.responsive */ |
+    (Math.min(seperatorPrecedence(css), 15) << 18) /* Shifts.atRules */
+  )
 }
 
 // Pesudo variant presedence
@@ -216,37 +216,37 @@ export function atRulePrecedence(css: string): number {
 // - https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/defaultConfig.stub.js#L931
 
 const PRECEDENCES_BY_PSEUDO_CLASS = [
-	/* fi */ "rst-c" /* hild: 0 */,
-	/* la */ "st-ch" /* ild: 1 */,
-	// even and odd use: nth-child
-	/* nt */ "h-chi" /* ld: 2 */,
-	/* an */ "y-lin" /* k: 3 */,
-	/* li */ "nk" /* : 4 */,
-	/* vi */ "sited" /* : 5 */,
-	/* ch */ "ecked" /* : 6 */,
-	/* em */ "pty" /* : 7 */,
-	/* re */ "ad-on" /* ly: 8 */,
-	/* fo */ "cus-w" /* ithin : 9 */,
-	/* ho */ "ver" /* : 10 */,
-	/* fo */ "cus" /* : 11 */,
-	/* fo */ "cus-v" /* isible : 12 */,
-	/* ac */ "tive" /* : 13 */,
-	/* di */ "sable" /* d : 14 */,
-	/* op */ "tiona" /* l: 15 */,
-	/* re */ "quire" /* d: 16 */,
-];
+  /* fi */ 'rst-c' /* hild: 0 */,
+  /* la */ 'st-ch' /* ild: 1 */,
+  // even and odd use: nth-child
+  /* nt */ 'h-chi' /* ld: 2 */,
+  /* an */ 'y-lin' /* k: 3 */,
+  /* li */ 'nk' /* : 4 */,
+  /* vi */ 'sited' /* : 5 */,
+  /* ch */ 'ecked' /* : 6 */,
+  /* em */ 'pty' /* : 7 */,
+  /* re */ 'ad-on' /* ly: 8 */,
+  /* fo */ 'cus-w' /* ithin : 9 */,
+  /* ho */ 'ver' /* : 10 */,
+  /* fo */ 'cus' /* : 11 */,
+  /* fo */ 'cus-v' /* isible : 12 */,
+  /* ac */ 'tive' /* : 13 */,
+  /* di */ 'sable' /* d : 14 */,
+  /* op */ 'tiona' /* l: 15 */,
+  /* re */ 'quire' /* d: 16 */,
+]
 
 function pseudoPrecedence(selector: string): number {
-	// use first found pseudo-class
+  // use first found pseudo-class
 
-	return (
-		1 <<
-		~(
-			(/:([a-z-]+)/.test(selector) &&
-				~PRECEDENCES_BY_PSEUDO_CLASS.indexOf(RegExp.$1.slice(2, 7))) ||
-			~17
-		)
-	);
+  return (
+    1 <<
+    ~(
+      (/:([a-z-]+)/.test(selector) &&
+        ~PRECEDENCES_BY_PSEUDO_CLASS.indexOf(RegExp.$1.slice(2, 7))) ||
+      ~17
+    )
+  )
 }
 
 // https://github.com/kripod/otion/blob/main/packages/otion/src/propertyMatchers.ts
@@ -288,67 +288,63 @@ function pseudoPrecedence(selector: string): number {
 // 0 - 15 => 4 bits
 // Ignore vendor prefixed and custom properties
 export function declarationPropertyPrecedence(property: string): number {
-	return property[0] === "-"
-		? 0
-		: seperatorPrecedence(property) +
-				(/^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7,8}$)|([fl].{5}l|g.{8}$|pl))/.test(
-					property,
-				)
-					? +!!RegExp.$1 /* +1 */ || -!!RegExp.$2 /* -1 */
-					: 0) +
-				1;
+  return property[0] === '-'
+    ? 0
+    : seperatorPrecedence(property) +
+        (/^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7,8}$)|([fl].{5}l|g.{8}$|pl))/.test(property)
+          ? +!!RegExp.$1 /* +1 */ || -!!RegExp.$2 /* -1 */
+          : 0) +
+        1
 }
 
 export interface ConvertedRule {
-	/** The name to use for `&` expansion in selectors. Maybe empty for at-rules like `@import`, `@font-face`, `@media`, ... */
-	n?: string | undefined;
+  /** The name to use for `&` expansion in selectors. Maybe empty for at-rules like `@import`, `@font-face`, `@media`, ... */
+  n?: string | undefined
 
-	/** The calculated precedence taking all variants into account. */
-	p: number;
+  /** The calculated precedence taking all variants into account. */
+  p: number
 
-	/** The rulesets (selectors and at-rules). expanded variants `@media ...`, `@supports ...`, `&:focus`, `.dark &` */
-	r?: string[];
+  /** The rulesets (selectors and at-rules). expanded variants `@media ...`, `@supports ...`, `&:focus`, `.dark &` */
+  r?: string[]
 
-	/** Is this rule `!important` eg something like `!underline` or `!bg-red-500` or `!red-500` */
-	i?: boolean | undefined;
+  /** Is this rule `!important` eg something like `!underline` or `!bg-red-500` or `!red-500` */
+  i?: boolean | undefined
 }
 
 export function convert<Theme extends BaseTheme = BaseTheme>(
-	{ n: name, i: important, v: variants = [] }: Partial<ParsedRule>,
-	context: Context<Theme>,
-	originalPrecedence: number,
-	conditions?: string[],
+  { n: name, i: important, v: variants = [] }: Partial<ParsedRule>,
+  context: Context<Theme>,
+  originalPrecedence: number,
+  conditions?: string[],
 ): ConvertedRule {
-	let convertedName = name;
-	let convertedPrecedence = originalPrecedence;
-	const convertedConditions = [...asArray(conditions)];
+  let convertedName = name
+  let convertedPrecedence = originalPrecedence
+  const convertedConditions = [...asArray(conditions)]
 
-	if (name) {
-		convertedName = toClassName({ n: name, i: important, v: variants });
-	}
+  if (name) {
+    convertedName = toClassName({ n: name, i: important, v: variants })
+  }
 
-	for (const variant of variants) {
-		const screen = context.theme("screens", variant);
+  for (const variant of variants) {
+    const screen = context.theme('screens', variant)
 
-		for (const condition of asArray(
-			(screen && mql(screen)) || context.v(variant),
-		)) {
-			convertedConditions.push(condition);
+    for (const condition of asArray((screen && mql(screen)) || context.v(variant))) {
+      convertedConditions.push(condition)
 
-			convertedPrecedence |= screen
-				? (1 << 26) /* Shifts.screens */ | atRulePrecedence(condition)
-				: variant === "dark"
-					? 1 << 30 /* Shifts.darkMode */
-					: condition[0] === "@"
-						? atRulePrecedence(condition)
-						: pseudoPrecedence(condition);
-		}
-	}
+      convertedPrecedence |= screen
+        ? (1 << 26) /* Shifts.screens */ | atRulePrecedence(condition)
+        : variant === 'dark'
+          ? 1 << 30 /* Shifts.darkMode */
+          : condition[0] === '@'
+            ? atRulePrecedence(condition)
+            : pseudoPrecedence(condition)
+    }
+  }
 
-	return {
-		n: convertedName,
-		p: convertedPrecedence,
-		r: convertedConditions,
-		i: important,
-	};
+  return {
+    n: convertedName,
+    p: convertedPrecedence,
+    r: convertedConditions,
+    i: important,
+  }
 }

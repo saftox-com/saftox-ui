@@ -1,7 +1,7 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup'
 
 export default defineConfig({
-	clean: true,
-	target: "es2019",
-	format: ["cjs", "esm"],
-});
+  clean: true,
+  target: 'es2019',
+  format: ['cjs', 'esm'],
+})

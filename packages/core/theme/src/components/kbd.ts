@@ -1,6 +1,6 @@
-import type { VariantProps } from "@saftox-ui/variants";
+import type { VariantProps } from '@saftox-ui/variants'
 
-import { tv } from "../utils/tv";
+import { tv } from '../utils/tv'
 
 /**
  * Keyboard Key wrapper **Variants** component
@@ -33,31 +33,31 @@ import { tv } from "../utils/tv";
  * </kbd>
  */
 const kbd = tv({
-	slots: {
-		base: [
-			"px-1.5",
-			"py-0.5",
-			"inline-flex",
-			"space-x-0.5",
-			"rtl:space-x-reverse",
-			"items-center",
-			"font-sans",
-			"font-normal",
-			"text-center",
-			"text-small",
-			"shadow-small",
-			"bg-default-100",
-			"text-foreground-600",
-			"rounded-small",
-		],
-		abbr: "no-underline",
-		content: "",
-	},
-	variants: {},
-	defaultVariants: {},
-});
+  slots: {
+    base: [
+      'px-1.5',
+      'py-0.5',
+      'inline-flex',
+      'space-x-0.5',
+      'rtl:space-x-reverse',
+      'items-center',
+      'font-sans',
+      'font-normal',
+      'text-center',
+      'text-small',
+      'shadow-small',
+      'bg-default-100',
+      'text-foreground-600',
+      'rounded-small',
+    ],
+    abbr: 'no-underline',
+    content: '',
+  },
+  variants: {},
+  defaultVariants: {},
+})
 
-export type KbdVariantProps = VariantProps<typeof kbd>;
-export type KbdSlots = keyof ReturnType<typeof kbd>;
+export type KbdVariantProps = VariantProps<typeof kbd>
+export type KbdSlots = keyof ReturnType<typeof kbd>
 
-export { kbd };
+export { kbd }

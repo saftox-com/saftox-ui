@@ -1,49 +1,49 @@
 {
-	"name": "@saftox-ui/avatar",
-	"author": "Serhii Zaitsev <ceo@saftox.com>",
-	"version": "0.0.1",
-	"description": "The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.",
-	"keywords": ["avatar"],
-	"main": "./src/index.ts",
-	"sideEffects": false,
-	"files": ["dist"],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/components/avatar"
-	},
-	"bugs": {
-		"url": "https://github.com/saftox-com/saftox-ui/issues"
-	},
-	"scripts": {
-		"build": "tsup src --dts",
-		"build:fast": "tsup src",
-		"dev": "pnpm build:fast --watch",
-		"dev:vite": "vite serve dev",
-		"clean": "rimraf dist .turbo",
-		"typecheck": "tsc --noEmit",
-		"prepack": "clean-package",
-		"postpack": "clean-package restore"
-	},
-	"peerDependencies": {
-		"solid-js": ">=1.8.17",
-		"@saftox-ui/system": "0.0.1",
-		"@saftox-ui/theme": "0.0.1"
-	},
-	"dependencies": {
-		"@saftox-ui/shared-utils": "0.0.1",
-		"@saftox-ui/solid-utils": "0.0.1",
-		"@saftox-ui/use-image": "0.0.1",
-		"@saftox-ui/interactions": "0.0.1",
-		"@saftox-ui/focus": "0.0.1",
-		"@saftox-ui/utils": "0.0.1",
-		"@saftox-ui/variants": "0.0.1"
-	},
-	"devDependencies": {
-		"@saftox-ui/shared-icons": "0.0.1"
-	},
-	"clean-package": "../../../configs/clean-package.config.json"
+  "name": "@saftox-ui/avatar",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.",
+  "keywords": ["avatar"],
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/components/avatar"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "dev": "pnpm build:fast --watch",
+    "dev:vite": "vite serve dev",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.17",
+    "@saftox-ui/system": "0.0.1",
+    "@saftox-ui/theme": "0.0.1"
+  },
+  "dependencies": {
+    "@saftox-ui/shared-utils": "0.0.1",
+    "@saftox-ui/solid-utils": "0.0.1",
+    "@saftox-ui/use-image": "0.0.1",
+    "@saftox-ui/interactions": "0.0.1",
+    "@saftox-ui/focus": "0.0.1",
+    "@saftox-ui/utils": "0.0.1",
+    "@saftox-ui/variants": "0.0.1"
+  },
+  "devDependencies": {
+    "@saftox-ui/shared-icons": "0.0.1"
+  },
+  "clean-package": "../../../configs/clean-package.config.json"
 }

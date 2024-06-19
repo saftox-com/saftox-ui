@@ -1,5 +1,5 @@
-import type { ClassValue } from "@saftox-ui/variants";
+import type { ClassValue } from '@saftox-ui/variants'
 
 export type SlotsToClasses<S extends string> = {
-	[key in S]?: ClassValue;
-};
+  [key in S]?: ClassValue
+}

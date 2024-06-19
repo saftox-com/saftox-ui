@@ -1,20 +1,20 @@
-import type { MaybeArray, ScreenValue } from "./types";
+import type { MaybeArray, ScreenValue } from './types'
 
 /**
  * @internal
  */
 
 export const escapeClassName =
-	(typeof CSS !== "undefined" && CSS.escape) ||
-	// Simplified: escaping only special characters
-	// Needed for NodeJS and Edge <79 (https://caniuse.com/mdn-api_css_escape)
-	((className: string): string =>
-		className
-			// Simplifed escape testing only for chars that we know happen to be in tailwind directives
-			.replace(/[!"'`*+.,;:\\/<=>?@#$%&^|~()[\]{}]/g, "\\$&")
-			// If the character is the first character and is in the range [0-9] (2xl, ...)
-			// https://drafts.csswg.org/cssom/#escape-a-character-as-code-point
-			.replace(/^\d/, "\\3$& "));
+  (typeof CSS !== 'undefined' && CSS.escape) ||
+  // Simplified: escaping only special characters
+  // Needed for NodeJS and Edge <79 (https://caniuse.com/mdn-api_css_escape)
+  ((className: string): string =>
+    className
+      // Simplifed escape testing only for chars that we know happen to be in tailwind directives
+      .replace(/[!"'`*+.,;:\\/<=>?@#$%&^|~()[\]{}]/g, '\\$&')
+      // If the character is the first character and is in the range [0-9] (2xl, ...)
+      // https://drafts.csswg.org/cssom/#escape-a-character-as-code-point
+      .replace(/^\d/, '\\3$& '))
 
 // Based on https://stackoverflow.com/a/52171480
 /**
@@ -23,13 +23,13 @@ export const escapeClassName =
  * @returns
  */
 export function hash(value: string): string {
-	// eslint-disable-next-line no-var
-	let h = 9; // Declare 'h' before the for loop
-	for (let index = value.length; index--; ) {
-		h = Math.imul(h ^ value.charCodeAt(index), 0x5f356495);
-	}
+  // eslint-disable-next-line no-var
+  let h = 9 // Declare 'h' before the for loop
+  for (let index = value.length; index--; ) {
+    h = Math.imul(h ^ value.charCodeAt(index), 0x5f356495)
+  }
 
-	return `#${((h ^ (h >>> 9)) >>> 0).toString(36)}`;
+  return `#${((h ^ (h >>> 9)) >>> 0).toString(36)}`
 }
 
 /**
@@ -38,33 +38,25 @@ export function hash(value: string): string {
  * @param prefix
  * @returns
  */
-export function mql(
-	screen: MaybeArray<ScreenValue>,
-	prefix = "@media ",
-): string {
-	return (
-		prefix +
-		asArray(screen)
-			.map((s) => {
-				let screen = s;
-				if (typeof screen === "string") {
-					screen = { min: screen };
-				}
+export function mql(screen: MaybeArray<ScreenValue>, prefix = '@media '): string {
+  return (
+    prefix +
+    asArray(screen)
+      .map((s) => {
+        let screen = s
+        if (typeof screen === 'string') {
+          screen = { min: screen }
+        }
 
-				return (
-					(screen as { raw?: string }).raw ||
-					Object.keys(screen)
-						.map(
-							(feature) =>
-								`(${feature}-width:${
-									(screen as Record<string, string>)[feature]
-								})`,
-						)
-						.join(" and ")
-				);
-			})
-			.join(",")
-	);
+        return (
+          (screen as { raw?: string }).raw ||
+          Object.keys(screen)
+            .map((feature) => `(${feature}-width:${(screen as Record<string, string>)[feature]})`)
+            .join(' and ')
+        )
+      })
+      .join(',')
+  )
 }
 
 /**
@@ -72,12 +64,10 @@ export function mql(
  * @param value
  * @returns
  */
-export function asArray<T>(
-	value: T = [] as unknown as T,
-): T extends Array<any> ? T : T[] {
-	return (
-		Array.isArray(value) ? value : value == null ? [] : [value]
-	) as T extends Array<any> ? T : T[];
+export function asArray<T>(value: T = [] as unknown as T): T extends Array<any> ? T : T[] {
+  return (Array.isArray(value) ? value : value == null ? [] : [value]) as T extends Array<any>
+    ? T
+    : T[]
 }
 
 /**
@@ -86,12 +76,12 @@ export function asArray<T>(
  * @returns
  */
 export function identity<T>(value: T): T {
-	return value;
+  return value
 }
 
 /**
  * @internal
  */
 export function noop(): void {
-	// no-op
+  // no-op
 }

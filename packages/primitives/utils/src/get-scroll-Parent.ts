@@ -1,35 +1,23 @@
-export function getScrollParent(
-	node: Element,
-	checkForOverflow?: boolean,
-): Element {
-	let scrollableNode: Element | null = node;
-	if (isScrollable(scrollableNode, checkForOverflow)) {
-		scrollableNode = scrollableNode.parentElement;
-	}
+export function getScrollParent(node: Element, checkForOverflow?: boolean): Element {
+  let scrollableNode: Element | null = node
+  if (isScrollable(scrollableNode, checkForOverflow)) {
+    scrollableNode = scrollableNode.parentElement
+  }
 
-	while (scrollableNode && !isScrollable(scrollableNode, checkForOverflow)) {
-		scrollableNode = scrollableNode.parentElement;
-	}
+  while (scrollableNode && !isScrollable(scrollableNode, checkForOverflow)) {
+    scrollableNode = scrollableNode.parentElement
+  }
 
-	return (
-		scrollableNode || document.scrollingElement || document.documentElement
-	);
+  return scrollableNode || document.scrollingElement || document.documentElement
 }
 
-export function isScrollable(
-	node: Element,
-	checkForOverflow?: boolean,
-): boolean {
-	const style = window.getComputedStyle(node);
-	let isScrollable = /(auto|scroll)/.test(
-		style.overflow + style.overflowX + style.overflowY,
-	);
+export function isScrollable(node: Element, checkForOverflow?: boolean): boolean {
+  const style = window.getComputedStyle(node)
+  let isScrollable = /(auto|scroll)/.test(style.overflow + style.overflowX + style.overflowY)
 
-	if (isScrollable && checkForOverflow) {
-		isScrollable =
-			node.scrollHeight !== node.clientHeight ||
-			node.scrollWidth !== node.clientWidth;
-	}
+  if (isScrollable && checkForOverflow) {
+    isScrollable = node.scrollHeight !== node.clientHeight || node.scrollWidth !== node.clientWidth
+  }
 
-	return isScrollable;
+  return isScrollable
 }

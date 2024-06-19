@@ -1,2 +1,2 @@
-export * from "./create-field";
-export * from "./create-label";
+export * from './create-field'
+export * from './create-label'

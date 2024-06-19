@@ -1,10 +1,10 @@
-import type { NumberFormatOptions } from "@internationalized/number";
-import type { Accessor } from "solid-js";
+import type { NumberFormatOptions } from '@internationalized/number'
+import type { Accessor } from 'solid-js'
 
-import { NumberFormatter } from "@internationalized/number";
-import { createMemo } from "solid-js";
+import { NumberFormatter } from '@internationalized/number'
+import { createMemo } from 'solid-js'
 
-import { useLocale } from "./context";
+import { useLocale } from './context'
 
 /**
  * Provides localized number formatting for the current locale. Automatically updates when the locale changes,
@@ -12,13 +12,11 @@ import { useLocale } from "./context";
  * @param options - Formatting options.
  */
 export function createNumberFormatter(
-	options: Accessor<NumberFormatOptions>,
+  options: Accessor<NumberFormatOptions>,
 ): Accessor<Intl.NumberFormat> {
-	const locale = useLocale();
+  const locale = useLocale()
 
-	const formatter = createMemo(
-		() => new NumberFormatter(locale().locale, options()),
-	);
+  const formatter = createMemo(() => new NumberFormatter(locale().locale, options()))
 
-	return formatter;
+  return formatter
 }

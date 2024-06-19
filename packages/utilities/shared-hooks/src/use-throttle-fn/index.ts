@@ -1,1 +1,1 @@
-export { useThrottleFn } from "@solidjs-use/shared";
+export { useThrottleFn } from '@solidjs-use/shared'

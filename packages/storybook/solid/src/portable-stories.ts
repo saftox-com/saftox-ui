@@ -1,20 +1,20 @@
 import {
-	composeStories as originalComposeStories,
-	composeStory as originalComposeStory,
-	setProjectAnnotations as originalSetProjectAnnotations,
-} from "@storybook/preview-api";
+  composeStories as originalComposeStories,
+  composeStory as originalComposeStory,
+  setProjectAnnotations as originalSetProjectAnnotations,
+} from '@storybook/preview-api'
 import type {
-	Args,
-	NamedOrDefaultProjectAnnotations,
-	ProjectAnnotations,
-	Store_CSFExports,
-	StoriesWithPartialProps,
-	StoryAnnotationsOrFn,
-} from "@storybook/types";
+  Args,
+  NamedOrDefaultProjectAnnotations,
+  ProjectAnnotations,
+  Store_CSFExports,
+  StoriesWithPartialProps,
+  StoryAnnotationsOrFn,
+} from '@storybook/types'
 
-import * as reactProjectAnnotations from "./entry-preview";
-import type { Meta } from "./public-types";
-import type { SolidRenderer } from "./types";
+import * as reactProjectAnnotations from './entry-preview'
+import type { Meta } from './public-types'
+import type { SolidRenderer } from './types'
 
 /** Function that sets the globalConfig of your storybook. The global config is the preview module of your .storybook folder.
  *
@@ -32,16 +32,16 @@ import type { SolidRenderer } from "./types";
  * @param projectAnnotations - e.g. (import * as projectAnnotations from '../.storybook/preview')
  */
 export function setProjectAnnotations(
-	projectAnnotations:
-		| NamedOrDefaultProjectAnnotations<SolidRenderer>
-		| NamedOrDefaultProjectAnnotations<SolidRenderer>[],
+  projectAnnotations:
+    | NamedOrDefaultProjectAnnotations<SolidRenderer>
+    | NamedOrDefaultProjectAnnotations<SolidRenderer>[],
 ) {
-	originalSetProjectAnnotations<SolidRenderer>(projectAnnotations);
+  originalSetProjectAnnotations<SolidRenderer>(projectAnnotations)
 }
 
 // This will not be necessary once we have auto preset loading
 export const INTERNAL_DEFAULT_PROJECT_ANNOTATIONS: ProjectAnnotations<SolidRenderer> =
-	reactProjectAnnotations;
+  reactProjectAnnotations
 
 /**
  * Function that will receive a story along with meta (e.g. a default export from a .stories file)
@@ -71,18 +71,18 @@ export const INTERNAL_DEFAULT_PROJECT_ANNOTATIONS: ProjectAnnotations<SolidRende
  * @param [exportsName] - in case your story does not contain a name and you want it to have a name.
  */
 export function composeStory<TArgs extends Args = Args>(
-	story: StoryAnnotationsOrFn<SolidRenderer, TArgs>,
-	componentAnnotations: Meta<TArgs | any>,
-	projectAnnotations?: ProjectAnnotations<SolidRenderer>,
-	exportsName?: string,
+  story: StoryAnnotationsOrFn<SolidRenderer, TArgs>,
+  componentAnnotations: Meta<TArgs | any>,
+  projectAnnotations?: ProjectAnnotations<SolidRenderer>,
+  exportsName?: string,
 ) {
-	return originalComposeStory<SolidRenderer, TArgs>(
-		story as StoryAnnotationsOrFn<SolidRenderer, Args>,
-		componentAnnotations,
-		projectAnnotations,
-		INTERNAL_DEFAULT_PROJECT_ANNOTATIONS,
-		exportsName,
-	);
+  return originalComposeStory<SolidRenderer, TArgs>(
+    story as StoryAnnotationsOrFn<SolidRenderer, Args>,
+    componentAnnotations,
+    projectAnnotations,
+    INTERNAL_DEFAULT_PROJECT_ANNOTATIONS,
+    exportsName,
+  )
 }
 
 /**
@@ -110,18 +110,19 @@ export function composeStory<TArgs extends Args = Args>(
  * @param csfExports - e.g. (import * as stories from './Button.stories')
  * @param [projectAnnotations] - e.g. (import * as projectAnnotations from '../.storybook/preview') this can be applied automatically if you use `setProjectAnnotations` in your setup files.
  */
-export function composeStories<
-	TModule extends Store_CSFExports<SolidRenderer, any>,
->(csfExports: TModule, projectAnnotations?: ProjectAnnotations<SolidRenderer>) {
-	const composedStories = originalComposeStories(
-		// @ts-expect-error (Converted from ts-ignore)
-		csfExports,
-		projectAnnotations,
-		composeStory,
-	);
+export function composeStories<TModule extends Store_CSFExports<SolidRenderer, any>>(
+  csfExports: TModule,
+  projectAnnotations?: ProjectAnnotations<SolidRenderer>,
+) {
+  const composedStories = originalComposeStories(
+    // @ts-expect-error (Converted from ts-ignore)
+    csfExports,
+    projectAnnotations,
+    composeStory,
+  )
 
-	return composedStories as unknown as Omit<
-		StoriesWithPartialProps<SolidRenderer, TModule>,
-		keyof Store_CSFExports
-	>;
+  return composedStories as unknown as Omit<
+    StoriesWithPartialProps<SolidRenderer, TModule>,
+    keyof Store_CSFExports
+  >
 }

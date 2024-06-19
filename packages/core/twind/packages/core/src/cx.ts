@@ -1,8 +1,8 @@
-import type { Class } from "./types";
+import type { Class } from './types'
 
-import { format } from "./internal/format";
-import { interpolate } from "./internal/interpolate";
-import { parse } from "./parse";
+import { format } from './internal/format'
+import { interpolate } from './internal/interpolate'
+import { parse } from './parse'
 
 /**
  * Constructs `class` strings conditionally.
@@ -15,10 +15,7 @@ import { parse } from "./parse";
  * @param interpolations
  * @returns
  */
-export function cx(
-	strings: TemplateStringsArray,
-	...interpolations: Class[]
-): string;
+export function cx(strings: TemplateStringsArray, ...interpolations: Class[]): string
 
 /**
  * Constructs `class` strings conditionally.
@@ -29,11 +26,8 @@ export function cx(
  * @group Class Name Generators
  * @param input
  */
-export function cx(...input: Class[]): string;
+export function cx(...input: Class[]): string
 
-export function cx(
-	strings: TemplateStringsArray | Class,
-	...interpolations: Class[]
-): string {
-	return format(parse(interpolate(strings, interpolations)), " ");
+export function cx(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
+  return format(parse(interpolate(strings, interpolations)), ' ')
 }

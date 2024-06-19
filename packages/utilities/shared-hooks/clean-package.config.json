@@ -1,152 +1,152 @@
 {
-	"remove": ["devDependencies"],
-	"replace": {
-		"main": "dist/index.js",
-		"module": "dist/index.mjs",
-		"types": "dist/index.d.ts",
-		"browser": {},
-		"exports": {
-			".": {
-				"import": {
-					"types": "./dist/index/index.d.mts",
-					"default": "./dist/index/index.mjs"
-				},
-				"require": {
-					"types": "./dist/index/index.d.ts",
-					"default": "./dist/index/index.js"
-				}
-			},
-			"./to-accessors": {
-				"import": {
-					"types": "./dist/to-accessors/index.d.mts",
-					"default": "./dist/to-accessors/index.mjs"
-				},
-				"require": {
-					"types": "./dist/to-accessors/index.d.ts",
-					"default": "./dist/to-accessors/index.js"
-				}
-			},
-			"./to-value": {
-				"import": {
-					"types": "./dist/to-value/index.d.mts",
-					"default": "./dist/to-value/index.mjs"
-				},
-				"require": {
-					"types": "./dist/to-value/index.d.ts",
-					"default": "./dist/to-value/index.js"
-				}
-			},
-			"./try-on-cleanup": {
-				"import": {
-					"types": "./dist/try-on-cleanup/index.d.mts",
-					"default": "./dist/try-on-cleanup/index.mjs"
-				},
-				"require": {
-					"types": "./dist/try-on-cleanup/index.d.ts",
-					"default": "./dist/try-on-cleanup/index.js"
-				}
-			},
-			"./use-supported": {
-				"import": {
-					"types": "./dist/use-supported/index.d.mts",
-					"default": "./dist/use-supported/index.mjs"
-				},
-				"require": {
-					"types": "./dist/use-supported/index.d.ts",
-					"default": "./dist/use-supported/index.js"
-				}
-			},
-			"./use-mounted": {
-				"import": {
-					"types": "./dist/use-mounted/index.d.mts",
-					"default": "./dist/use-mounted/index.mjs"
-				},
-				"require": {
-					"types": "./dist/use-mounted/index.d.ts",
-					"default": "./dist/use-mounted/index.js"
-				}
-			},
-			"./use-debounce-fn": {
-				"import": {
-					"types": "./dist/use-debounce-fn/index.d.mts",
-					"default": "./dist/use-debounce-fn/index.mjs"
-				},
-				"require": {
-					"types": "./dist/use-debounce-fn/index.d.ts",
-					"default": "./dist/use-debounce-fn/index.js"
-				}
-			},
-			"./use-throttle-fn": {
-				"import": {
-					"types": "./dist/use-throttle-fn/index.d.mts",
-					"default": "./dist/use-throttle-fn/index.mjs"
-				},
-				"require": {
-					"types": "./dist/use-throttle-fn/index.d.ts",
-					"default": "./dist/use-throttle-fn/index.js"
-				}
-			},
-			"./use-timeout-fn": {
-				"import": {
-					"types": "./dist/use-timeout-fn/index.d.mts",
-					"default": "./dist/use-timeout-fn/index.mjs"
-				},
-				"require": {
-					"types": "./dist/use-timeout-fn/index.d.ts",
-					"default": "./dist/use-timeout-fn/index.js"
-				}
-			},
-			"./utilxs": {
-				"import": {
-					"types": "./dist/util/index.d.mts",
-					"default": "./dist/util/index.mjs"
-				},
-				"require": {
-					"types": "./dist/util/index.d.ts",
-					"default": "./dist/util/index.js"
-				}
-			},
-			"./utils": {
-				"import": {
-					"types": "./dist/utils/index.d.mts",
-					"default": "./dist/utils/index.mjs"
-				},
-				"require": {
-					"types": "./dist/utils/index.d.ts",
-					"default": "./dist/utils/index.js"
-				}
-			},
-			"./watch": {
-				"import": {
-					"types": "./dist/watch/index.d.mts",
-					"default": "./dist/watch/index.mjs"
-				},
-				"require": {
-					"types": "./dist/watch/index.d.ts",
-					"default": "./dist/watch/index.js"
-				}
-			},
-			"./utils/*": {
-				"import": {
-					"types": "./dist/utils/*.d.mts",
-					"default": "./dist/utils/*.mjs"
-				},
-				"require": {
-					"types": "./dist/utils/*.d.ts",
-					"default": "./dist/utils/*.js"
-				}
-			},
-			"./package.json": "./package.json"
-		}
-	},
-	"typesVersions": {
-		"*": {
-			"to-value": ["./dist/to-value/index.d.ts"],
-			"try-on-cleanup": ["./dist/try-on-cleanup/index.d.ts"],
-			"use-debounce-fn": ["./dist/use-debounce-fn/index.d.ts"],
-			"use-throttle-fn": ["./dist/use-throttle-fn/index.d.ts"],
-			"use-timeout-fn": ["./dist/use-timeout-fn/index.d.ts"],
-			"utils/*": ["./dist/utils/*.d.ts"]
-		}
-	}
+  "remove": ["devDependencies"],
+  "replace": {
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "browser": {},
+    "exports": {
+      ".": {
+        "import": {
+          "types": "./dist/index/index.d.mts",
+          "default": "./dist/index/index.mjs"
+        },
+        "require": {
+          "types": "./dist/index/index.d.ts",
+          "default": "./dist/index/index.js"
+        }
+      },
+      "./to-accessors": {
+        "import": {
+          "types": "./dist/to-accessors/index.d.mts",
+          "default": "./dist/to-accessors/index.mjs"
+        },
+        "require": {
+          "types": "./dist/to-accessors/index.d.ts",
+          "default": "./dist/to-accessors/index.js"
+        }
+      },
+      "./to-value": {
+        "import": {
+          "types": "./dist/to-value/index.d.mts",
+          "default": "./dist/to-value/index.mjs"
+        },
+        "require": {
+          "types": "./dist/to-value/index.d.ts",
+          "default": "./dist/to-value/index.js"
+        }
+      },
+      "./try-on-cleanup": {
+        "import": {
+          "types": "./dist/try-on-cleanup/index.d.mts",
+          "default": "./dist/try-on-cleanup/index.mjs"
+        },
+        "require": {
+          "types": "./dist/try-on-cleanup/index.d.ts",
+          "default": "./dist/try-on-cleanup/index.js"
+        }
+      },
+      "./use-supported": {
+        "import": {
+          "types": "./dist/use-supported/index.d.mts",
+          "default": "./dist/use-supported/index.mjs"
+        },
+        "require": {
+          "types": "./dist/use-supported/index.d.ts",
+          "default": "./dist/use-supported/index.js"
+        }
+      },
+      "./use-mounted": {
+        "import": {
+          "types": "./dist/use-mounted/index.d.mts",
+          "default": "./dist/use-mounted/index.mjs"
+        },
+        "require": {
+          "types": "./dist/use-mounted/index.d.ts",
+          "default": "./dist/use-mounted/index.js"
+        }
+      },
+      "./use-debounce-fn": {
+        "import": {
+          "types": "./dist/use-debounce-fn/index.d.mts",
+          "default": "./dist/use-debounce-fn/index.mjs"
+        },
+        "require": {
+          "types": "./dist/use-debounce-fn/index.d.ts",
+          "default": "./dist/use-debounce-fn/index.js"
+        }
+      },
+      "./use-throttle-fn": {
+        "import": {
+          "types": "./dist/use-throttle-fn/index.d.mts",
+          "default": "./dist/use-throttle-fn/index.mjs"
+        },
+        "require": {
+          "types": "./dist/use-throttle-fn/index.d.ts",
+          "default": "./dist/use-throttle-fn/index.js"
+        }
+      },
+      "./use-timeout-fn": {
+        "import": {
+          "types": "./dist/use-timeout-fn/index.d.mts",
+          "default": "./dist/use-timeout-fn/index.mjs"
+        },
+        "require": {
+          "types": "./dist/use-timeout-fn/index.d.ts",
+          "default": "./dist/use-timeout-fn/index.js"
+        }
+      },
+      "./utilxs": {
+        "import": {
+          "types": "./dist/util/index.d.mts",
+          "default": "./dist/util/index.mjs"
+        },
+        "require": {
+          "types": "./dist/util/index.d.ts",
+          "default": "./dist/util/index.js"
+        }
+      },
+      "./utils": {
+        "import": {
+          "types": "./dist/utils/index.d.mts",
+          "default": "./dist/utils/index.mjs"
+        },
+        "require": {
+          "types": "./dist/utils/index.d.ts",
+          "default": "./dist/utils/index.js"
+        }
+      },
+      "./watch": {
+        "import": {
+          "types": "./dist/watch/index.d.mts",
+          "default": "./dist/watch/index.mjs"
+        },
+        "require": {
+          "types": "./dist/watch/index.d.ts",
+          "default": "./dist/watch/index.js"
+        }
+      },
+      "./utils/*": {
+        "import": {
+          "types": "./dist/utils/*.d.mts",
+          "default": "./dist/utils/*.mjs"
+        },
+        "require": {
+          "types": "./dist/utils/*.d.ts",
+          "default": "./dist/utils/*.js"
+        }
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "to-value": ["./dist/to-value/index.d.ts"],
+      "try-on-cleanup": ["./dist/try-on-cleanup/index.d.ts"],
+      "use-debounce-fn": ["./dist/use-debounce-fn/index.d.ts"],
+      "use-throttle-fn": ["./dist/use-throttle-fn/index.d.ts"],
+      "use-timeout-fn": ["./dist/use-timeout-fn/index.d.ts"],
+      "utils/*": ["./dist/utils/*.d.ts"]
+    }
+  }
 }

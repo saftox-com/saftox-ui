@@ -1,43 +1,43 @@
 {
-	"name": "@saftox-ui/use-async-state",
-	"author": "Serhii Zaitsev <ceo@saftox.com>",
-	"version": "0.0.1",
-	"description": "Reactive async state. Will not block your setup function and will trigger changes once the promise is ready.",
-	"keywords": ["use-async-state"],
-	"main": "./src/index.ts",
-	"sideEffects": false,
-	"files": ["dist"],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/hooks/use-async-state"
-	},
-	"bugs": {
-		"url": "https://github.com/saftox-com/saftox-ui/issues"
-	},
-	"scripts": {
-		"build": "tsup src --dts",
-		"build:fast": "tsup src",
-		"dev": "pnpm build:fast --watch",
-		"dev:vite": "vite serve dev",
-		"clean": "rimraf dist .turbo",
-		"typecheck": "tsc --noEmit",
-		"prepack": "clean-package",
-		"postpack": "clean-package restore"
-	},
-	"peerDependencies": {
-		"solid-js": ">=1.8.17"
-	},
-	"dependencies": {
-		"@saftox-ui/shared-hooks": "0.0.1"
-	},
-	"clean-package": "../../../configs/clean-package.config.json",
-	"tsup": {
-		"clean": true,
-		"target": "es2019",
-		"format": ["cjs", "esm"]
-	}
+  "name": "@saftox-ui/use-async-state",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "Reactive async state. Will not block your setup function and will trigger changes once the promise is ready.",
+  "keywords": ["use-async-state"],
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/hooks/use-async-state"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "dev": "pnpm build:fast --watch",
+    "dev:vite": "vite serve dev",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.17"
+  },
+  "dependencies": {
+    "@saftox-ui/shared-hooks": "0.0.1"
+  },
+  "clean-package": "../../../configs/clean-package.config.json",
+  "tsup": {
+    "clean": true,
+    "target": "es2019",
+    "format": ["cjs", "esm"]
+  }
 }

@@ -1,27 +1,19 @@
-import type { CSSBase, CSSObject, CSSValue } from "./types";
+import type { CSSBase, CSSObject, CSSValue } from './types'
 
-import { css } from "./css";
-import { astish } from "./internal/astish";
-import { tw as tw$ } from "./runtime";
+import { css } from './css'
+import { astish } from './internal/astish'
+import { tw as tw$ } from './runtime'
 
 export interface InjectGlobalFunction {
-	(style: CSSBase | string): void;
+  (style: CSSBase | string): void
 
-	(strings: TemplateStringsArray, ...interpolations: readonly CSSValue[]): void;
+  (strings: TemplateStringsArray, ...interpolations: readonly CSSValue[]): void
 
-	bind(
-		thisArg?: ((tokens: string) => string) | undefined,
-	): InjectGlobalFunction;
+  bind(thisArg?: ((tokens: string) => string) | undefined): InjectGlobalFunction
 
-	call(
-		thisArg: ((tokens: string) => string) | undefined,
-		style: CSSBase | string,
-	): void;
+  call(thisArg: ((tokens: string) => string) | undefined, style: CSSBase | string): void
 
-	apply(
-		thisArg: ((tokens: string) => string) | undefined,
-		args: [CSSBase | string],
-	): void;
+  apply(thisArg: ((tokens: string) => string) | undefined, args: [CSSBase | string]): void
 }
 
 /**
@@ -32,15 +24,15 @@ export interface InjectGlobalFunction {
  * @group Style Injectors
  */
 export const injectGlobal: InjectGlobalFunction = function injectGlobal(
-	this: ((tokens: string) => string) | undefined,
-	strings: CSSBase | string | TemplateStringsArray,
-	...interpolations: readonly CSSValue[]
+  this: ((tokens: string) => string) | undefined,
+  strings: CSSBase | string | TemplateStringsArray,
+  ...interpolations: readonly CSSValue[]
 ): void {
-	const tw = typeof this === "function" ? this : tw$;
+  const tw = typeof this === 'function' ? this : tw$
 
-	tw(
-		css({
-			"@layer base": astish(strings as CSSObject, interpolations),
-		} as CSSObject),
-	);
-};
+  tw(
+    css({
+      '@layer base': astish(strings as CSSObject, interpolations),
+    } as CSSObject),
+  )
+}

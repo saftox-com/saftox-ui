@@ -1,40 +1,36 @@
 function isStyleVisible(element: Element) {
-	if (!(element instanceof HTMLElement) && !(element instanceof SVGElement)) {
-		return false;
-	}
+  if (!(element instanceof HTMLElement) && !(element instanceof SVGElement)) {
+    return false
+  }
 
-	const { display, visibility } = element.style;
+  const { display, visibility } = element.style
 
-	let isVisible =
-		display !== "none" && visibility !== "hidden" && visibility !== "collapse";
+  let isVisible = display !== 'none' && visibility !== 'hidden' && visibility !== 'collapse'
 
-	if (isVisible) {
-		if (!element.ownerDocument.defaultView) {
-			return isVisible;
-		}
+  if (isVisible) {
+    if (!element.ownerDocument.defaultView) {
+      return isVisible
+    }
 
-		const { getComputedStyle } = element.ownerDocument.defaultView;
-		const { display: computedDisplay, visibility: computedVisibility } =
-			getComputedStyle(element);
+    const { getComputedStyle } = element.ownerDocument.defaultView
+    const { display: computedDisplay, visibility: computedVisibility } = getComputedStyle(element)
 
-		isVisible =
-			computedDisplay !== "none" &&
-			computedVisibility !== "hidden" &&
-			computedVisibility !== "collapse";
-	}
+    isVisible =
+      computedDisplay !== 'none' &&
+      computedVisibility !== 'hidden' &&
+      computedVisibility !== 'collapse'
+  }
 
-	return isVisible;
+  return isVisible
 }
 
 function isAttributeVisible(element: Element, childElement?: Element) {
-	return (
-		!element.hasAttribute("hidden") &&
-		(element.nodeName === "DETAILS" &&
-		childElement &&
-		childElement.nodeName !== "SUMMARY"
-			? element.hasAttribute("open")
-			: true)
-	);
+  return (
+    !element.hasAttribute('hidden') &&
+    (element.nodeName === 'DETAILS' && childElement && childElement.nodeName !== 'SUMMARY'
+      ? element.hasAttribute('open')
+      : true)
+  )
 }
 
 /**
@@ -43,14 +39,11 @@ function isAttributeVisible(element: Element, childElement?: Element) {
  * Licensed under the MIT License.
  * @param element - Element to evaluate for display or visibility.
  */
-export function isElementVisible(
-	element: Element,
-	childElement?: Element,
-): boolean {
-	return (
-		element.nodeName !== "#comment" &&
-		isStyleVisible(element) &&
-		isAttributeVisible(element, childElement) &&
-		(!element.parentElement || isElementVisible(element.parentElement, element))
-	);
+export function isElementVisible(element: Element, childElement?: Element): boolean {
+  return (
+    element.nodeName !== '#comment' &&
+    isStyleVisible(element) &&
+    isAttributeVisible(element, childElement) &&
+    (!element.parentElement || isElementVisible(element.parentElement, element))
+  )
 }

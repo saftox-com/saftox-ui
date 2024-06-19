@@ -1,16 +1,13 @@
-import {
-	enhanceArgTypes,
-	extractComponentDescription,
-} from "@storybook/docs-tools";
-import { jsxDecorator } from "./jsxDecorator";
+import { enhanceArgTypes, extractComponentDescription } from '@storybook/docs-tools'
+import { jsxDecorator } from './jsxDecorator'
 
-export const decorators = [jsxDecorator];
+export const decorators = [jsxDecorator]
 
 export const parameters = {
-	docs: {
-		story: { inline: true },
-		extractComponentDescription, //TODO solid-docgen plugin needs to be created.
-	},
-};
+  docs: {
+    story: { inline: true },
+    extractComponentDescription, //TODO solid-docgen plugin needs to be created.
+  },
+}
 
-export const argTypesEnhancers = [enhanceArgTypes];
+export const argTypesEnhancers = [enhanceArgTypes]

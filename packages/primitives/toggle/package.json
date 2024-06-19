@@ -1,57 +1,57 @@
 {
-	"name": "@saftox-ui/toggle",
-	"author": "Serhii Zaitsev <ceo@saftox.com>",
-	"version": "0.0.1",
-	"description": "Primitives for building toggle components like checkboxes and switches.",
-	"keywords": ["toggle"],
-	"main": "./src/index.ts",
-	"sideEffects": false,
-	"files": ["dist"],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/primitives/toggle"
-	},
-	"bugs": {
-		"url": "https://github.com/saftox-com/saftox-ui/issues"
-	},
-	"scripts": {
-		"build": "tsup src --dts",
-		"build:fast": "tsup src",
-		"dev": "pnpm build:fast --watch",
-		"dev:vite": "vite serve dev",
-		"clean": "rimraf dist .turbo",
-		"typecheck": "tsc --noEmit",
-		"prepack": "clean-package",
-		"postpack": "clean-package restore"
-	},
-	"peerDependencies": {
-		"solid-js": ">=1.8.17"
-	},
-	"dependencies": {
-		"@solid-primitives/props": "^3.1.11",
-		"@solid-primitives/utils": "^6.2.3",
-		"@saftox-ui/interactions": "0.0.1",
-		"@saftox-ui/utils": "0.0.1",
-		"@saftox-ui/types": "0.0.1",
-		"@saftox-ui/focus": "0.0.1"
-	},
-	"devDependencies": {
-		"solid-js": "^1.8.17"
-	},
-	"clean-package": "../../../configs/clean-package.config.json",
-	"tsup": {
-		"clean": true,
-		"target": "es2019",
-		"format": ["cjs", "esm"]
-	},
-	"primitive": {
-		"name": "toggle",
-		"stage": 0,
-		"list": [],
-		"category": ""
-	}
+  "name": "@saftox-ui/toggle",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "Primitives for building toggle components like checkboxes and switches.",
+  "keywords": ["toggle"],
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/primitives/toggle"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "dev": "pnpm build:fast --watch",
+    "dev:vite": "vite serve dev",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.17"
+  },
+  "dependencies": {
+    "@solid-primitives/props": "^3.1.11",
+    "@solid-primitives/utils": "^6.2.3",
+    "@saftox-ui/interactions": "0.0.1",
+    "@saftox-ui/utils": "0.0.1",
+    "@saftox-ui/types": "0.0.1",
+    "@saftox-ui/focus": "0.0.1"
+  },
+  "devDependencies": {
+    "solid-js": "^1.8.17"
+  },
+  "clean-package": "../../../configs/clean-package.config.json",
+  "tsup": {
+    "clean": true,
+    "target": "es2019",
+    "format": ["cjs", "esm"]
+  },
+  "primitive": {
+    "name": "toggle",
+    "stage": 0,
+    "list": [],
+    "category": ""
+  }
 }

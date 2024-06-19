@@ -1,11 +1,11 @@
-import { doubleEntryConfig } from "../../../configs/tsup.config";
+import { doubleEntryConfig } from '../../../configs/tsup.config'
 
 export default doubleEntryConfig({
-	entries: [
-		{
-			name: "index",
-			entry: "src/index.ts",
-		},
-	],
-	cjs: false,
-});
+  entries: [
+    {
+      name: 'index',
+      entry: 'src/index.ts',
+    },
+  ],
+  cjs: false,
+})

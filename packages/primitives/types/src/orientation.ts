@@ -1,1 +1,1 @@
-export type Orientation = "horizontal" | "vertical";
+export type Orientation = 'horizontal' | 'vertical'

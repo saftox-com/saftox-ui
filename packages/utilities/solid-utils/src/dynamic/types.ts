@@ -1,31 +1,23 @@
-import type { Component, ComponentProps, JSX, ValidComponent } from "solid-js";
+import type { Component, ComponentProps, JSX, ValidComponent } from 'solid-js'
 
-type DynamicAttributes<
-	T extends ValidComponent,
-	ElementProps extends object = object,
-> = {
-	/**
-	 * Component to render the dynamic component as.
-	 * @defaultValue `div`
-	 */
-	as?:
-		| (T extends Component<any>
-				? (
-						props: Omit<ComponentProps<T>, keyof ElementProps> & ElementProps,
-					) => JSX.Element
-				: T)
-		| keyof JSX.HTMLElementTags;
-};
+type DynamicAttributes<T extends ValidComponent, ElementProps extends object = object> = {
+  /**
+   * Component to render the dynamic component as.
+   * @defaultValue `div`
+   */
+  as?:
+    | (T extends Component<any>
+        ? (props: Omit<ComponentProps<T>, keyof ElementProps> & ElementProps) => JSX.Element
+        : T)
+    | keyof JSX.HTMLElementTags
+}
 
-type OverrideProps<T, P> = Omit<T, keyof P> & P;
+type OverrideProps<T, P> = Omit<T, keyof P> & P
 
 type DynamicProps<
-	T extends ValidComponent,
-	Props extends object,
-	ElementProps extends object = object,
-> = OverrideProps<
-	ComponentProps<T>,
-	Props & DynamicAttributes<T, ElementProps>
->;
+  T extends ValidComponent,
+  Props extends object,
+  ElementProps extends object = object,
+> = OverrideProps<ComponentProps<T>, Props & DynamicAttributes<T, ElementProps>>
 
-export type { DynamicAttributes, DynamicProps };
+export type { DynamicAttributes, DynamicProps }

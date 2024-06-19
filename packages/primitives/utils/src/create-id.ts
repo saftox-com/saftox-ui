@@ -1,9 +1,9 @@
-import type { Accessor } from "solid-js";
+import type { Accessor } from 'solid-js'
 
-import { isServer, noop } from "@solid-primitives/utils";
-import { createSignal, createUniqueId, getListener, onCleanup } from "solid-js";
+import { isServer, noop } from '@solid-primitives/utils'
+import { createSignal, createUniqueId, getListener, onCleanup } from 'solid-js'
 
-export const ID_PREFIX = "saftox-ui";
+export const ID_PREFIX = 'saftox-ui'
 
 /**
  * Create a universal id that is stable across server/browser.
@@ -11,7 +11,7 @@ export const ID_PREFIX = "saftox-ui";
  * @returns The generated id.
  */
 export function createId(prefix = ID_PREFIX): string {
-	return `${prefix}-${createUniqueId()}`;
+  return `${prefix}-${createUniqueId()}`
 }
 
 /**
@@ -21,22 +21,21 @@ export function createId(prefix = ID_PREFIX): string {
  * @returns An accessor for the generated id.
  */
 export function createSlotId(
-	prefix?: string,
+  prefix?: string,
 ): [id: Accessor<string | undefined>, track: VoidFunction] {
-	const id = createId(prefix);
+  const id = createId(prefix)
 
-	if (isServer) return [() => id, noop];
+  if (isServer) return [() => id, noop]
 
-	const [slotId, setSlotId] = createSignal<string | undefined>(id);
+  const [slotId, setSlotId] = createSignal<string | undefined>(id)
 
-	const updateSlotId = () =>
-		setSlotId(document.getElementById(id) ? id : undefined);
-	queueMicrotask(updateSlotId);
+  const updateSlotId = () => setSlotId(document.getElementById(id) ? id : undefined)
+  queueMicrotask(updateSlotId)
 
-	const track = () => {
-		queueMicrotask(updateSlotId);
-		getListener() && onCleanup(updateSlotId);
-	};
+  const track = () => {
+    queueMicrotask(updateSlotId)
+    getListener() && onCleanup(updateSlotId)
+  }
 
-	return [slotId, track];
+  return [slotId, track]
 }
