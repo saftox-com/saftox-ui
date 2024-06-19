@@ -1,6 +1,5 @@
-import type { ClassNameValue as ClassValue, extendTailwindMerge } from 'tailwind-merge'
-
 import type * as Screens from '@saftox-ui/preset/src/tokens/screens'
+import type { ClassNameValue as ClassValue, extendTailwindMerge } from 'tailwind-merge'
 
 export type TVGeneratedScreens = keyof typeof Screens
 

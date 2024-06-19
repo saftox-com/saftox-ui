@@ -2,9 +2,10 @@ import type { FocusWithinEvents } from '@saftox-ui/types'
 import type { MaybeAccessor } from '@solid-primitives/utils'
 
 import { access } from '@solid-primitives/utils'
-import { createSignal } from 'solid-js'
 
 import { createSyntheticBlurEvent } from './utils'
+
+import { createSignal } from 'solid-js'
 
 export interface CreateFocusWithinProps extends FocusWithinEvents {
   /**

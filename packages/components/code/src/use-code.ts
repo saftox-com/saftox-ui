@@ -1,9 +1,10 @@
-import type { PropGetter } from '@saftox-ui/system'
 import type { UseCodeProps } from './code-types'
+import type { PropGetter } from '@saftox-ui/system'
+
+import { mergeProps, splitProps } from 'solid-js'
 
 import { mapPropsVariants } from '@saftox-ui/system'
 import { code } from '@saftox-ui/theme'
-import { mergeProps, splitProps } from 'solid-js'
 
 export function useCode(originalProps: UseCodeProps) {
   const [omitVariantProps, variantProps] = mapPropsVariants(originalProps, code.variantKeys)

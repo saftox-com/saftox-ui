@@ -2,8 +2,9 @@ import type { MaybeAccessor } from '@saftox-ui/solid-utils/reactivity'
 import type { AriaLabelingProps, DOMProps, LabelableProps } from '@saftox-ui/types'
 import type { JSX } from 'solid-js'
 
-import { createId, mergeAriaLabels } from '@saftox-ui/utils'
 import { mergeProps, splitProps } from 'solid-js'
+
+import { createId, mergeAriaLabels } from '@saftox-ui/utils'
 
 export interface AriaLabelProps extends LabelableProps, DOMProps, AriaLabelingProps {
   /**

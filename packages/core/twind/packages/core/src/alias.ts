@@ -1,8 +1,9 @@
 import type { Class, Nested } from './types'
 
+import { parse } from './parse'
+
 import { format } from './internal/format'
 import { interpolate } from './internal/interpolate'
-import { parse } from './parse'
 
 /**
  * @group Class Name Generators

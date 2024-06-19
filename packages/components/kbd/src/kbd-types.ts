@@ -1,8 +1,7 @@
+import type { KbdKey } from './utils'
 import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps } from '@saftox-ui/system'
 import type { KbdSlots, KbdVariantProps, SlotsToClasses } from '@saftox-ui/theme'
-
-import type { KbdKey } from './utils'
 
 interface Props extends HTMLSaftoxUIProps<'kbd'> {
   /**

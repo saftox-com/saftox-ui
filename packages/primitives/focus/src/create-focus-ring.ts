@@ -2,6 +2,8 @@ import type { FocusResult, FocusWithinResult } from '@saftox-ui/interactions'
 import type { MaybeAccessor } from '@solid-primitives/utils'
 import type { Accessor } from 'solid-js'
 
+import { access } from '@solid-primitives/utils'
+
 import { createMemo, createSignal, mergeProps } from 'solid-js'
 
 import {
@@ -10,8 +12,6 @@ import {
   createFocusWithin,
   isKeyboardFocusVisible,
 } from '@saftox-ui/interactions'
-
-import { access } from '@solid-primitives/utils'
 
 export interface CreateFocusRingProps {
   /**

@@ -79,7 +79,6 @@ export const tw: Twind<any, any> = /* #__PURE__ */ new Proxy(
       if (DEV) {
         // Workaround webpack accessing the prototype in dev mode
         if (!active && property in target) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           return (target as any)[property]
         }
 

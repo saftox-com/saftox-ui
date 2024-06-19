@@ -1,8 +1,8 @@
 import type { Context } from 'solid-js'
 
-import { createContext as createSolidContext, useContext as useSolidContext } from 'solid-js'
-
 import { createKeyedContext, useKeyedContext } from './keyed-context'
+
+import { createContext as createSolidContext, useContext as useSolidContext } from 'solid-js'
 
 export interface CreateContextOptions {
   name: string

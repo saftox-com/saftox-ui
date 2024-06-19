@@ -1,6 +1,5 @@
-import type { MaybeAccessor } from '@solid-primitives/utils'
-
 import type { ItemKey } from './collection'
+import type { MaybeAccessor } from '@solid-primitives/utils'
 
 export interface SingleSelection {
   /** Whether the collection allows empty selection. */

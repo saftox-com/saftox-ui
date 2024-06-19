@@ -1,5 +1,16 @@
-import type { PropGetter } from '@saftox-ui/system'
 import type { SwitchThumbIconProps, UseSwitchProps } from './switch-types'
+import type { PropGetter } from '@saftox-ui/system'
+
+import { createSwitch } from './create-switch'
+
+import {
+  children as resolveChildren,
+  createMemo,
+  createSignal,
+  createUniqueId,
+  mergeProps,
+  splitProps,
+} from 'solid-js'
 
 import { createFocusRing } from '@saftox-ui/focus'
 import { createHover } from '@saftox-ui/interactions'
@@ -8,15 +19,6 @@ import { chain, clsx, dataAttr } from '@saftox-ui/shared-utils'
 import { mergeRefs, pickProps } from '@saftox-ui/solid-utils/reactivity'
 import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
 import { toggle } from '@saftox-ui/theme'
-import {
-  createMemo,
-  createSignal,
-  createUniqueId,
-  mergeProps,
-  children as resolveChildren,
-  splitProps,
-} from 'solid-js'
-import { createSwitch } from './create-switch'
 
 export function useSwitch(originalProps: UseSwitchProps) {
   const globalContext = useProviderContext()

@@ -1,5 +1,3 @@
-import type { Accessor, JSX } from 'solid-js'
-
 import type {
   AriaLabelingProps,
   AriaValidationProps,
@@ -15,13 +13,13 @@ import type {
   Validation,
   ValueBase,
 } from '@saftox-ui/types'
+import type { Accessor, JSX } from 'solid-js'
 
 import { createMemo, mergeProps } from 'solid-js'
 
 import { createFocusable } from '@saftox-ui/focus'
-import { callHandler, filterDOMProps } from '@saftox-ui/utils'
-
 import { createField } from '@saftox-ui/label'
+import { callHandler, filterDOMProps } from '@saftox-ui/utils'
 
 type DefaultElementType = 'input'
 

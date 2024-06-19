@@ -1,5 +1,6 @@
-import { mergeProps, splitProps } from 'solid-js'
 import type { IconSvgProps } from './types'
+
+import { mergeProps, splitProps } from 'solid-js'
 
 export const ChevronUpIcon = (_props: IconSvgProps) => {
   const [props, rest] = splitProps(mergeProps({ 'stroke-width': 1.5 }, _props), ['stroke-width'])

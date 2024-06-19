@@ -2,14 +2,14 @@ import type { LongPressEvent, PressEvent } from '@saftox-ui/types'
 import type { MaybeAccessor } from '@solid-primitives/utils'
 import type { JSX } from 'solid-js'
 
-import { mergeProps } from 'solid-js'
-
-import { createDescription, createGlobalListeners } from '@saftox-ui/utils'
-
 import { combineProps } from '@solid-primitives/props'
 import { access } from '@solid-primitives/utils'
 
 import { createPress } from './create-press'
+
+import { mergeProps } from 'solid-js'
+
+import { createDescription, createGlobalListeners } from '@saftox-ui/utils'
 
 interface CreateLongPressProps {
   /**

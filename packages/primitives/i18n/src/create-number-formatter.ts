@@ -2,9 +2,10 @@ import type { NumberFormatOptions } from '@internationalized/number'
 import type { Accessor } from 'solid-js'
 
 import { NumberFormatter } from '@internationalized/number'
-import { createMemo } from 'solid-js'
 
 import { useLocale } from './context'
+
+import { createMemo } from 'solid-js'
 
 /**
  * Provides localized number formatting for the current locale. Automatically updates when the locale changes,

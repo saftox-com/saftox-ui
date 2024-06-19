@@ -1,9 +1,10 @@
 import type { MaybeAccessor } from '@saftox-ui/solid-utils/reactivity'
 import type { JSX } from 'solid-js'
 
+import { createSignal, mergeProps } from 'solid-js'
+
 import { createFocus } from '@saftox-ui/interactions'
 import { access, isObject } from '@saftox-ui/solid-utils/reactivity'
-import { createSignal, mergeProps } from 'solid-js'
 
 interface AriaVisuallyHiddenProps {
   /**

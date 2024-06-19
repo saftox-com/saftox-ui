@@ -1,8 +1,9 @@
+import type { UseBadgeProps } from './use-badge'
 import type { Component } from 'solid-js'
 
-import { Show } from 'solid-js'
-import type { UseBadgeProps } from './use-badge'
 import { useBadge } from './use-badge'
+
+import { Show } from 'solid-js'
 
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
 

@@ -1,13 +1,13 @@
-import type { Preset } from '@saftox-ui/twind'
 import type { ColorScale, ThemeColors } from '../colors'
 import type { SaftoxTheme } from '../types/types'
-
-import { themeColorsDark } from '../colors/semantic'
+import type { Preset } from '@saftox-ui/twind'
 
 import preflight from './preflight'
 import rules from './rules'
 import theme from './theme'
 import variants from './variants'
+
+import { themeColorsDark } from '../colors/semantic'
 
 export const defaultPreset = (): Preset<SaftoxTheme> => {
   return {

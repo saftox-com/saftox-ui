@@ -1,8 +1,9 @@
+import type { TextareaHeightChangeMeta, TextAreaProps } from './textfield-types'
 import type { Component } from 'solid-js'
-import type { TextAreaProps, TextareaHeightChangeMeta } from './textfield-types'
 
-import { Match, Show, Switch, createSignal, mergeProps, splitProps } from 'solid-js'
 import { useTextfield } from './use-textfield'
+
+import { createSignal, Match, mergeProps, Show, splitProps, Switch } from 'solid-js'
 
 import { dataAttr } from '@saftox-ui/shared-utils'
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'

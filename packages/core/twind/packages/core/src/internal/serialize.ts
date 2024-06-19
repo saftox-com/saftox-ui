@@ -1,29 +1,29 @@
 import type { ParsedRule } from '../parse'
 import type {
   BaseTheme,
-  CSSObject,
   ColorValue,
   Context,
+  CSSObject,
   Falsey,
   MaybeArray,
   TwindRule,
 } from '../types'
 import type { ConvertedRule } from './precedence'
 
-import { toColorValue } from '../colors'
-import { parse } from '../parse'
-import { asArray, hash, mql } from '../utils'
-
 import {
-  Layer,
   atRulePrecedence,
   convert,
   declarationPropertyPrecedence,
+  Layer,
   moveToLayer,
 } from './precedence'
 import { compareTwindRules } from './sorted-insertion-index'
 import { stringify } from './stringify'
 import { translateWith } from './translate'
+
+import { toColorValue } from '../colors'
+import { parse } from '../parse'
+import { asArray, hash, mql } from '../utils'
 
 export function serialize<Theme extends BaseTheme = BaseTheme>(
   style: CSSObject | Falsey,

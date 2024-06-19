@@ -1,12 +1,13 @@
-import type { PropGetter } from '@saftox-ui/system'
 import type { UseUserProps } from './user-types'
+import type { PropGetter } from '@saftox-ui/system'
+
+import { createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
 import { createFocusRing } from '@saftox-ui/focus'
 import { clsx, dataAttr } from '@saftox-ui/shared-utils'
 import { mergeRefs } from '@saftox-ui/solid-utils/reactivity'
 import { user } from '@saftox-ui/theme'
 import { filterDOMProps } from '@saftox-ui/utils'
-import { createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
 export function useUser(originalProps: UseUserProps) {
   const defaultProps = {

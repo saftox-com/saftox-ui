@@ -1,5 +1,5 @@
-import type { ThemeSection, ThemeSectionResolver } from '@saftox-ui/twind'
 import type { SaftoxTheme } from '../types/types'
+import type { ThemeSection, ThemeSectionResolver } from '@saftox-ui/twind'
 
 import borderRadius from '../tokens/border-radius'
 import { colors } from '../tokens/colors'

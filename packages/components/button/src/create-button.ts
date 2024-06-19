@@ -1,14 +1,13 @@
+import type { AriaButtonProps } from './button-types'
 import type { ElementType } from '@saftox-ui/types'
 import type { Accessor, JSX } from 'solid-js'
-import type { AriaButtonProps } from './button-types'
 
 import { createMemo, mergeProps, splitProps } from 'solid-js'
 
 import { createFocusable } from '@saftox-ui/focus'
 import { createPress } from '@saftox-ui/interactions'
-import { filterDOMProps } from '@saftox-ui/utils'
-
 import { combineProps } from '@saftox-ui/solid-utils/reactivity'
+import { filterDOMProps } from '@saftox-ui/utils'
 
 export interface ButtonAria<T> {
   /**

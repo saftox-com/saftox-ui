@@ -1,4 +1,3 @@
-import type { PropGetter } from '@saftox-ui/system'
 import type {
   ContentProps,
   ContentPropsFn,
@@ -7,13 +6,14 @@ import type {
   GetContentCloneProps,
   UseChipProps,
 } from './chip-types'
+import type { PropGetter } from '@saftox-ui/system'
 
 import {
-  type FlowComponent,
+  children as resolveChildren,
   createMemo,
   createSignal,
+  type FlowComponent,
   mergeProps,
-  children as resolveChildren,
   splitProps,
 } from 'solid-js'
 import { spread } from 'solid-js/web'

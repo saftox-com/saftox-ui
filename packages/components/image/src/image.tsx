@@ -1,8 +1,9 @@
-import type { Component } from 'solid-js'
-import { Show, mergeProps } from 'solid-js'
-
 import type { UseImageProps } from './image-types'
+import type { Component } from 'solid-js'
+
 import { useImage } from './use-image'
+
+import { mergeProps, Show } from 'solid-js'
 
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
 

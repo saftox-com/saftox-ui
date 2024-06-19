@@ -1,10 +1,10 @@
 import type { Accessor } from 'solid-js'
 
-import { createMemo } from 'solid-js'
-
 import { combineProps, combineStyle } from '@solid-primitives/props'
 import { mergeRefs } from '@solid-primitives/refs'
 import { access, chain, isObject } from '@solid-primitives/utils'
+
+import { createMemo } from 'solid-js'
 
 const some = (...signals: Accessor<unknown>[]) => {
   return signals.some((signal) => !!signal())

@@ -1,12 +1,10 @@
 import type { PresetProperty } from '@storybook/types'
 
-// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
-import { dirname, join } from 'path'
+import { dirname, join } from 'node:path'
 
 // export const addons: PresetProperty<"addons"> = [];
 
 export const previewAnnotations: PresetProperty<'previewAnnotations'> = async (
-  // biome-ignore lint/style/useDefaultParameterLast: <explanation>
   input = [],
   options,
 ) => {

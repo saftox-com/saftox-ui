@@ -11,14 +11,15 @@ import type {
 } from './types'
 
 import { defineConfig } from './define-config'
+import { parse } from './parse'
+import { asArray } from './utils'
+
 import { createContext } from './internal/context'
 import { Layer } from './internal/precedence'
 import { serialize } from './internal/serialize'
 import { sortedInsertionIndex } from './internal/sorted-insertion-index'
 import { stringify } from './internal/stringify'
 import { translate, translateWith } from './internal/translate'
-import { parse } from './parse'
-import { asArray } from './utils'
 
 /**
  * @group Runtime

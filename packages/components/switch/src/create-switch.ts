@@ -1,8 +1,9 @@
-import type { Accessor, JSX } from 'solid-js'
 import type { AriaSwitchProps, SwitchAria } from './switch-types'
+import type { Accessor, JSX } from 'solid-js'
+
+import { mergeProps } from 'solid-js'
 
 import { createToggle } from '@saftox-ui/toggle'
-import { mergeProps } from 'solid-js'
 
 /**
  * Provides the behavior and accessibility implementation for a switch component.

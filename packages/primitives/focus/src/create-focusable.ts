@@ -2,12 +2,12 @@ import type { CreateFocusProps, CreateKeyboardProps } from '@saftox-ui/interacti
 import type { MaybeAccessor } from '@solid-primitives/utils'
 import type { Accessor, JSX } from 'solid-js'
 
+import { combineProps } from '@solid-primitives/props'
+import { access } from '@solid-primitives/utils'
+
 import { createSignal, onMount } from 'solid-js'
 
 import { createFocus, createKeyboard } from '@saftox-ui/interactions'
-
-import { combineProps } from '@solid-primitives/props'
-import { access } from '@solid-primitives/utils'
 
 export interface CreateFocusableProps extends CreateFocusProps, CreateKeyboardProps {
   /**

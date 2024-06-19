@@ -1,23 +1,23 @@
+import type { UseSnippetProps } from './snippet-types'
 import type { ButtonProps } from '@saftox-ui/button'
 import type { PropGetter } from '@saftox-ui/system'
-import type { UseSnippetProps } from './snippet-types'
 
-import { createFocusRing } from '@saftox-ui/focus'
-import { clsx, dataAttr } from '@saftox-ui/shared-utils'
-import { mergeRefs } from '@saftox-ui/solid-utils/reactivity'
-import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
-import { useClipboard } from '@saftox-ui/use-clipboard'
-import { filterDOMProps } from '@saftox-ui/utils'
 import {
+  children as resoleveChildren,
   createMemo,
   createSignal,
   mergeProps,
-  children as resoleveChildren,
   splitProps,
 } from 'solid-js'
 
+import { createFocusRing } from '@saftox-ui/focus'
 import { CheckLinearIcon, CopyLinearIcon } from '@saftox-ui/shared-icons'
+import { clsx, dataAttr } from '@saftox-ui/shared-utils'
+import { mergeRefs } from '@saftox-ui/solid-utils/reactivity'
+import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
 import { snippet } from '@saftox-ui/theme'
+import { useClipboard } from '@saftox-ui/use-clipboard'
+import { filterDOMProps } from '@saftox-ui/utils'
 
 export function useSnippet(originalProps: UseSnippetProps) {
   const globalContext = useProviderContext()

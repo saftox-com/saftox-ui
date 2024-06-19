@@ -1,10 +1,11 @@
+import type { AriaTextFieldProps, TextFieldAria } from './create-textfield'
 import type { Accessor, JSX } from 'solid-js'
 
-import { combineProps } from '@saftox-ui/solid-utils/reactivity'
+import { createTextField } from './create-textfield'
+
 import { createEffect, on, onCleanup } from 'solid-js'
 
-import { createTextField } from './create-textfield'
-import type { AriaTextFieldProps, TextFieldAria } from './create-textfield'
+import { combineProps } from '@saftox-ui/solid-utils/reactivity'
 
 interface FormattedTextFieldState {
   validate: (val: string) => boolean

@@ -1,3 +1,4 @@
+import type { SolidRenderer } from './types'
 import type {
   AnnotatedStoryFn,
   Args,
@@ -5,15 +6,14 @@ import type {
   ArgsStoryFn,
   ComponentAnnotations,
   DecoratorFunction,
-  StoryContext as GenericStoryContext,
   LoaderFunction,
   ProjectAnnotations,
   StoryAnnotations,
+  StoryContext as GenericStoryContext,
   StrictArgs,
 } from '@storybook/types'
-import type { ComponentProps, Component as ComponentType, JSX } from 'solid-js'
+import type { Component as ComponentType, ComponentProps, JSX } from 'solid-js'
 import type { SetOptional, Simplify } from 'type-fest'
-import type { SolidRenderer } from './types'
 
 export type { Args, ArgTypes, Parameters, StrictArgs } from '@storybook/types'
 export type { SolidRenderer }

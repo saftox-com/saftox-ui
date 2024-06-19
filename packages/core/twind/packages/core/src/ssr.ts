@@ -1,10 +1,11 @@
 import type { Twind } from './types'
 
-import { changed } from './internal/changed'
-import { fixClassList, parseHTML } from './internal/parse-html'
 import { tw as tw$ } from './runtime'
 import { stringify } from './sheets'
 import { identity } from './utils'
+
+import { changed } from './internal/changed'
+import { fixClassList, parseHTML } from './internal/parse-html'
 
 /**
  * Options for {@link inline}

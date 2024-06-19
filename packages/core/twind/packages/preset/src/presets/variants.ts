@@ -1,10 +1,10 @@
+import type { SaftoxTheme } from '../types/types'
 import type {
   AutocompleteItem,
   AutocompleteProvider,
   Variant,
   VariantResolver,
 } from '@saftox-ui/twind'
-import type { SaftoxTheme } from '../types/types'
 
 import { arbitrary, normalize, withAutocomplete } from '@saftox-ui/twind'
 

@@ -6,11 +6,12 @@ import type {
 } from '@saftox-ui/types'
 import type { Accessor } from 'solid-js'
 
+import { createMemo, mergeProps, splitProps } from 'solid-js'
+
 import { createFocusable } from '@saftox-ui/focus'
 import { createPress } from '@saftox-ui/interactions'
 import { combineProps } from '@saftox-ui/solid-utils/reactivity'
 import { filterDOMProps } from '@saftox-ui/utils'
-import { createMemo, mergeProps, splitProps } from 'solid-js'
 
 export interface AriaLinkProps extends AriaLabelingProps, PressEvents, FocusableProps {
   /**

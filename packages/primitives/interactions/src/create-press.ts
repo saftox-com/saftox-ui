@@ -1,7 +1,12 @@
-import type { Accessor, JSX } from 'solid-js'
-
 import type { PointerType, PressEvents } from '@saftox-ui/types'
 import type { MaybeAccessor } from '@solid-primitives/utils'
+import type { Accessor, JSX } from 'solid-js'
+
+import { combineProps } from '@solid-primitives/props'
+import { access } from '@solid-primitives/utils'
+
+import { disableTextSelection, restoreTextSelection } from './text-selection'
+import { isVirtualClick } from './utils'
 
 import {
   createContext,
@@ -14,12 +19,6 @@ import {
 } from 'solid-js'
 
 import { createGlobalListeners, createSyncRef, focusWithoutScrolling } from '@saftox-ui/utils'
-
-import { combineProps } from '@solid-primitives/props'
-import { access } from '@solid-primitives/utils'
-
-import { disableTextSelection, restoreTextSelection } from './text-selection'
-import { isVirtualClick } from './utils'
 
 export interface CreatePressProps extends PressEvents {
   /**

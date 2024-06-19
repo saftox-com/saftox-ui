@@ -1,12 +1,12 @@
-import type { Component } from 'solid-js'
 import type { UseButtonProps } from './button-types'
-
-import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { Show } from 'solid-js'
-
-import { useButton } from './use-button'
+import type { Component } from 'solid-js'
 
 import { GlowEffect } from './glow-effect'
+import { useButton } from './use-button'
+
+import { Show } from 'solid-js'
+
+import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
 
 export interface ButtonProps extends UseButtonProps {}
 

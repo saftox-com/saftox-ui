@@ -1,9 +1,10 @@
 import { DEV } from 'distilt/env'
 
+import { hash } from './utils'
+
 import { define } from './internal/define'
 import { format } from './internal/format'
 import { Layer } from './internal/precedence'
-import { hash } from './utils'
 
 export interface ParsedRule {
   /**
@@ -110,7 +111,6 @@ export function parse(token: string): ParsedRule[] {
     let comment: RegExp | null = null
     let position = 0
 
-    // eslint-disable-next-line no-inner-declarations
     const commit = (isRule?: boolean, endOffset = 0) => {
       if (startIndex !== position) {
         active.push(token.slice(startIndex, position + endOffset))

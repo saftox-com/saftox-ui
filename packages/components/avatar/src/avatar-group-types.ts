@@ -1,11 +1,8 @@
-import type { JSX } from 'solid-js'
-
+import type { AvatarProps } from './avatar-types'
 import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps } from '@saftox-ui/system'
-
 import type { AvatarGroupSlots, AvatarGroupVariantProps, SlotsToClasses } from '@saftox-ui/theme'
-
-import type { AvatarProps } from './avatar-types'
+import type { JSX } from 'solid-js'
 
 interface Props extends HTMLSaftoxUIProps<'div'> {
   /**

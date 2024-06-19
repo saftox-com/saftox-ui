@@ -1,12 +1,13 @@
-import type { Component } from 'solid-js'
 import type { AvatarGroupProps } from './avatar-group-types'
+import type { Component } from 'solid-js'
 
-import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { For, Show, mergeProps, splitProps } from 'solid-js'
+import Avatar from './avatar'
 import { createAvatarGroupContext } from './avatar-group-context'
 import { useAvatarGroup } from './use-avatar-group'
 
-import Avatar from './avatar'
+import { For, mergeProps, Show, splitProps } from 'solid-js'
+
+import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
 
 const AvatarGroup: Component<AvatarGroupProps> = (originalProps) => {
   const AvatarGroupContext = createAvatarGroupContext()

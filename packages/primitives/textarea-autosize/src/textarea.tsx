@@ -1,10 +1,10 @@
 import type { ComponentProps } from 'solid-js'
 
-import { createEffect, createSignal, on } from 'solid-js'
-
 import calculateNodeHeight from './calculate-node-height'
 import getSizingData, { type SizingData } from './get-sizing-data'
 import { useWindowResizeListener } from './hooks'
+
+import { createEffect, createSignal, on } from 'solid-js'
 
 type TextareaProps = ComponentProps<'textarea'>
 

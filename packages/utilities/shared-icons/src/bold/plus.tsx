@@ -1,6 +1,5 @@
-import type { Component } from 'solid-js'
-
 import type { IconSvgProps } from '../types'
+import type { Component } from 'solid-js'
 
 export const PlusFilledIcon: Component<IconSvgProps> = (props) => (
   <svg

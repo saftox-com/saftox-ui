@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import type {
   BaseTheme,
   MaybeColorValue,
@@ -7,9 +6,9 @@ import type {
   ThemeSectionResolverContext,
 } from '../types'
 
-import { toColorValue } from '../colors'
-
 import { resolveThemeFunction } from './serialize'
+
+import { toColorValue } from '../colors'
 
 export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
   extend = {},
@@ -57,7 +56,6 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
 
     if (sectionKey) {
       ;({ 1: sectionKey, 2: opacityValue } =
-        // eslint-disable-next-line no-sparse-arrays
         /^(\S+?)(?:\s*\/\s*([^/]+))?$/.exec(sectionKey) ||
         ([undefined, sectionKey] as [undefined, string]))
 

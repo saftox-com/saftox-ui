@@ -1,10 +1,10 @@
-import type { Accessor, JSX } from 'solid-js'
 import type { Locale } from './creat-default-locale'
-
-import { createContext, createMemo, useContext } from 'solid-js'
+import type { Accessor, JSX } from 'solid-js'
 
 import { createDefaultLocale } from './creat-default-locale'
 import { getReadingDirection } from './utils'
+
+import { createContext, createMemo, useContext } from 'solid-js'
 
 export interface I18nProviderProps {
   /**

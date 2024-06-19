@@ -1,6 +1,7 @@
-import { type JSX, type ValidComponent, createMemo, splitProps, untrack } from 'solid-js'
-import { Dynamic as SolidDynamic } from 'solid-js/web'
 import type { DynamicAttributes } from './types'
+
+import { createMemo, type JSX, splitProps, untrack, type ValidComponent } from 'solid-js'
+import { Dynamic as SolidDynamic } from 'solid-js/web'
 
 const DEFAULT_DYNAMIC_ELEMENT = 'div'
 

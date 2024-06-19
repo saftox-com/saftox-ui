@@ -2,9 +2,10 @@ import type { MaybeAccessor } from '@saftox-ui/solid-utils/reactivity'
 import type { GlowEffectVariantProps } from '@saftox-ui/theme'
 import type { Component } from 'solid-js'
 
+import { createEffect, createSignal, splitProps } from 'solid-js'
+
 import { access } from '@saftox-ui/solid-utils/reactivity'
 import { glowEffect } from '@saftox-ui/theme'
-import { createEffect, createSignal, splitProps } from 'solid-js'
 
 export type GlowEffectProps = {
   ref?: MaybeAccessor<HTMLElement | undefined>

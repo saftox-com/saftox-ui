@@ -1,7 +1,9 @@
-import type { Args, DecoratorFunction, LegacyStoryFn, StoryContext } from '@storybook/csf'
-import { decorators as docsDecorators } from './docs/config'
-import { solidReactivityDecorator } from './render'
 import type { SolidRenderer } from './types'
+import type { Args, DecoratorFunction, LegacyStoryFn, StoryContext } from '@storybook/csf'
+
+import { solidReactivityDecorator } from './render'
+
+import { decorators as docsDecorators } from './docs/config'
 
 export const allDecorators = [solidReactivityDecorator, ...docsDecorators]
 

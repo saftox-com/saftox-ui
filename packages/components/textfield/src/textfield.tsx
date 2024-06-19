@@ -1,11 +1,12 @@
-import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import type { Component } from 'solid-js'
 import type { UseTextfieldProps } from './textfield-types'
+import type { Component } from 'solid-js'
 
-import { Match, Show, Switch } from 'solid-js'
 import { useTextfield } from './use-textfield'
 
+import { Match, Show, Switch } from 'solid-js'
+
 import { CloseFilledIcon } from '@saftox-ui/shared-icons'
+import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
 
 export interface TextfieldProps extends Omit<UseTextfieldProps, 'isMultiline'> {}
 

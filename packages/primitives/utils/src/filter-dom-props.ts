@@ -1,6 +1,8 @@
 import type { AriaLabelingProps, DOMProps } from '@saftox-ui/types'
-import { splitProps } from 'solid-js'
+
 import { DOMEventNames, DOMPropNames } from './dom-props'
+
+import { splitProps } from 'solid-js'
 
 interface Options {
   /**

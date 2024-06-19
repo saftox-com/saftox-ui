@@ -34,7 +34,6 @@ export type CSSProperties = CSS.PropertiesFallback<string | Falsey, string | Fal
 
 export type CSSFontFace = CSS.AtRule.FontFaceFallback & CSS.AtRule.FontFaceHyphenFallback
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CSSNested
   extends Record<string, CSSProperties | MaybeArray<CSSObject | string> | Falsey> {}
 
@@ -196,7 +195,6 @@ export type RuleResolver<
 export type Rule<Theme extends BaseTheme = BaseTheme> =
   | string
   | RegExp
-  // eslint-disable-next-line @typescript-eslint/ban-types
   | [pattern: MaybeArray<string | RegExp>, alias: string & {}]
   | [pattern: MaybeArray<string | RegExp>, css: CSSObject]
   | [pattern: MaybeArray<string | RegExp>, resolve: RuleResolver<Theme>]
@@ -303,7 +301,6 @@ export type HashFunction = (value: string, defaultHash: (value: string) => strin
 export type DarkModeConfig =
   | 'media'
   | 'class'
-  // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {})
   | boolean
   | undefined
@@ -466,7 +463,6 @@ export interface ColorFunctionOptions {
 
 export type ColorFunction = (options: ColorFunctionOptions) => string
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ColorRecord extends Record<string, MaybeColorValue> {
   /* empty */
 }

@@ -1,6 +1,7 @@
 import type { Accessor } from 'solid-js'
 
 import { isServer, noop } from '@solid-primitives/utils'
+
 import { createSignal, createUniqueId, getListener, onCleanup } from 'solid-js'
 
 export const ID_PREFIX = 'saftox-ui'

@@ -1,9 +1,9 @@
 import type { ParsedRule } from '../parse'
 import type { BaseTheme, Context } from '../types'
 
-import { asArray, mql } from '../utils'
-
 import { toClassName } from './to-class-name'
+
+import { asArray, mql } from '../utils'
 
 // Based on https://github.com/kripod/otion
 // License MIT

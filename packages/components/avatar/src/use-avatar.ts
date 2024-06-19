@@ -1,5 +1,8 @@
-import type { PropGetter } from '@saftox-ui/system'
 import type { UseAvatarProps } from './avatar-types'
+import type { PropGetter } from '@saftox-ui/system'
+
+import { useAvatarGroupContext } from './avatar-group-context'
+import { AvatarIcon } from './avatar-icon'
 
 import { createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
@@ -11,9 +14,6 @@ import { useProviderContext } from '@saftox-ui/system'
 import { avatar } from '@saftox-ui/theme'
 import { useImage } from '@saftox-ui/use-image'
 import { filterDOMProps } from '@saftox-ui/utils'
-import { useAvatarGroupContext } from './avatar-group-context'
-
-import { AvatarIcon } from './avatar-icon'
 
 export function useAvatar(originalProps: UseAvatarProps) {
   const globalContext = useProviderContext()

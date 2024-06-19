@@ -1,10 +1,10 @@
-import type { DOMAttributes, HelpTextProps, Validation } from '@saftox-ui/types'
 import type { AriaLabelProps, LabelAria } from './create-label'
-
-import { combineProps } from '@saftox-ui/solid-utils/reactivity'
-import { ID_PREFIX, createSlotId } from '@saftox-ui/utils'
+import type { DOMAttributes, HelpTextProps, Validation } from '@saftox-ui/types'
 
 import { createLabel } from './create-label'
+
+import { combineProps } from '@saftox-ui/solid-utils/reactivity'
+import { createSlotId, ID_PREFIX } from '@saftox-ui/utils'
 
 export interface AriaFieldProps
   extends AriaLabelProps,

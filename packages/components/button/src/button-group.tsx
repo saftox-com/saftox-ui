@@ -1,12 +1,14 @@
-import type { Component } from 'solid-js'
 import type { UseButtonGroupProps } from './button-types'
+import type { Component } from 'solid-js'
 
-import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { omitProps } from '@saftox-ui/solid-utils/reactivity'
-import { Show, createEffect } from 'solid-js'
 import { createButtonGroupContext } from './button-group-context'
 import { GlowEffect } from './glow-effect'
 import { useButtonGroup } from './use-button-group'
+
+import { createEffect, Show } from 'solid-js'
+
+import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
+import { omitProps } from '@saftox-ui/solid-utils/reactivity'
 
 export interface ButtonGroupProps extends UseButtonGroupProps {}
 

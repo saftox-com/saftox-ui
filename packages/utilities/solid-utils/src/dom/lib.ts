@@ -1,6 +1,7 @@
-import type { JSX } from 'solid-js'
-import { isFunction } from '../assertions'
 import type { EventHandlerEvent } from './types'
+import type { JSX } from 'solid-js'
+
+import { isFunction } from '../assertions'
 
 const afterPaint = (fn: () => void) => requestAnimationFrame(() => requestAnimationFrame(fn))
 

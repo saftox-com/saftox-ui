@@ -2,10 +2,11 @@ import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps, PropGetter } from '@saftox-ui/system'
 import type { SkeletonSlots, SkeletonVariantProps, SlotsToClasses } from '@saftox-ui/theme'
 
+import { createMemo, mergeProps, splitProps } from 'solid-js'
+
 import { clsx, dataAttr } from '@saftox-ui/shared-utils'
 import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
 import { skeleton } from '@saftox-ui/theme'
-import { createMemo, mergeProps, splitProps } from 'solid-js'
 
 interface Props extends HTMLSaftoxUIProps<'div'> {
   /**

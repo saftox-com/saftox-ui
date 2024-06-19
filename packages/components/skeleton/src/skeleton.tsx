@@ -1,5 +1,5 @@
-import type { Component } from 'solid-js'
 import type { UseSkeletonProps } from './use-skeleton'
+import type { Component } from 'solid-js'
 
 import { useSkeleton } from './use-skeleton'
 

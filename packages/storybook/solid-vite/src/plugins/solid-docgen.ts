@@ -1,5 +1,6 @@
-import MagicString from 'magic-string'
 import type { PluginOption } from 'vite'
+
+import MagicString from 'magic-string'
 
 export function solidDocgen(): PluginOption {
   const cwd = process.cwd()

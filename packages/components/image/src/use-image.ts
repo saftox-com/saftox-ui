@@ -1,5 +1,7 @@
-import type { PropGetter } from '@saftox-ui/system'
 import type { UseImageProps } from './image-types'
+import type { PropGetter } from '@saftox-ui/system'
+
+import { createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
 import { clsx, dataAttr } from '@saftox-ui/shared-utils'
 import { mergeRefs } from '@saftox-ui/solid-utils/reactivity'
@@ -7,7 +9,6 @@ import { useProviderContext } from '@saftox-ui/system'
 import { mapPropsVariants } from '@saftox-ui/system'
 import { image } from '@saftox-ui/theme'
 import { useImage as useImageBase } from '@saftox-ui/use-image'
-import { createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
 export function useImage(originalProps: UseImageProps) {
   const globalContext = useProviderContext()

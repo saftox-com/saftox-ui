@@ -1,10 +1,12 @@
-import type { Component } from 'solid-js'
 import type { ChipProps } from './chip-types'
+import type { Component } from 'solid-js'
+
+import { useChip } from './use-chip'
+
+import { Show } from 'solid-js'
 
 import { CloseFilledIcon } from '@saftox-ui/shared-icons'
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { Show } from 'solid-js'
-import { useChip } from './use-chip'
 
 const Chip: Component<ChipProps> = (props) => {
   const {

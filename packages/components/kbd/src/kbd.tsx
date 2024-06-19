@@ -1,10 +1,12 @@
-import type { Component } from 'solid-js'
 import type { KbdProps } from './kbd-types'
+import type { Component } from 'solid-js'
 
-import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { For, Show } from 'solid-js'
 import { useKbd } from './use-kbd'
 import { kbdKeysLabelMap, kbdKeysMap } from './utils'
+
+import { For, Show } from 'solid-js'
+
+import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
 
 const Kbd: Component<KbdProps> = (props) => {
   const { Component, slots, keysToRender, getKbdProps } = useKbd(props)

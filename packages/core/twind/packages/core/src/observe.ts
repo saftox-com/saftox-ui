@@ -1,7 +1,8 @@
 import type { BaseTheme, Twind } from './types'
 
-import { changed } from './internal/changed'
 import { tw as tw$ } from './runtime'
+
+import { changed } from './internal/changed'
 
 export interface TwindMutationObserver {
   observe: (target: Node) => void
@@ -92,7 +93,6 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
     observer.observe(target)
 
     // monkey patch tw.destroy to disconnect this observer
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { destroy } = tw
 
     tw.destroy = () => {

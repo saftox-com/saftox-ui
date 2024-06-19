@@ -1,7 +1,8 @@
 import type { TV } from '@saftox-ui/variants'
-import { tv as tvBase } from '@saftox-ui/variants'
 
 import { twMergeConfig } from './tw-merge-config'
+
+import { tv as tvBase } from '@saftox-ui/variants'
 
 export const tv: TV = (options, config) =>
   tvBase(options, {

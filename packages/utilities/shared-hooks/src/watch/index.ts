@@ -1,6 +1,7 @@
 import type { Accessor, AccessorArray, OnOptions } from 'solid-js'
 
 import { createEffect, createSignal, on } from 'solid-js'
+
 import { toAccessors } from '../to-accessors'
 import { isObject } from '../utils'
 

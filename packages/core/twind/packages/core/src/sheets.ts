@@ -1,7 +1,8 @@
 import type { Sheet, SheetRule } from './types'
 
-import { warn } from './internal/warn'
 import { asArray, noop } from './utils'
+
+import { warn } from './internal/warn'
 
 function getStyleElement(selector: string | null | undefined | false): HTMLStyleElement {
   let style = document.querySelector(selector || 'style[data-saftox=""]')
@@ -42,7 +43,6 @@ export function cssom(
         this.clear()
 
         // add all snapshot rules back
-        // eslint-disable-next-line @typescript-eslint/unbound-method
         rules.forEach(this.insert as (cssText: string, index: number) => void)
       }
     },
@@ -100,7 +100,6 @@ export function dom(element?: HTMLStyleElement | string | null | false): Sheet<H
         this.clear()
 
         // add all snapshot rules back
-        // eslint-disable-next-line @typescript-eslint/unbound-method
         rules.forEach(this.insert as (cssText: string, index: number) => void)
       }
     },

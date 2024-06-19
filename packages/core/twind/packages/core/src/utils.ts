@@ -23,7 +23,6 @@ export const escapeClassName =
  * @returns
  */
 export function hash(value: string): string {
-  // eslint-disable-next-line no-var
   let h = 9 // Declare 'h' before the for loop
   for (let index = value.length; index--; ) {
     h = Math.imul(h ^ value.charCodeAt(index), 0x5f356495)

@@ -1,8 +1,8 @@
 import type { Accessor } from 'solid-js'
 
-import { createMemo } from 'solid-js'
-
 import { useLocale } from './context'
+
+import { createMemo } from 'solid-js'
 
 const cache = new Map<string, Intl.Collator>()
 

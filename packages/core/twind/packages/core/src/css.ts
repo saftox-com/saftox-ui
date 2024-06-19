@@ -1,11 +1,12 @@
 import type { CSSObject, CSSValue } from './types'
 
+import { hash } from './utils'
+
 import { astish } from './internal/astish'
 import { merge } from './internal/merge'
 import { Layer } from './internal/precedence'
 import { register } from './internal/registry'
 import { serialize } from './internal/serialize'
-import { hash } from './utils'
 
 /**
  * @group Class Name Generators

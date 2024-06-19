@@ -3,11 +3,12 @@ import type { HTMLSaftoxUIProps, PropGetter } from '@saftox-ui/system'
 import type { BadgeSlots, BadgeVariantProps, SlotsToClasses } from '@saftox-ui/theme'
 import type { JSX } from 'solid-js'
 
+import { createMemo, mergeProps, splitProps } from 'solid-js'
+
 import { clsx } from '@saftox-ui/shared-utils'
 import { combineProps } from '@saftox-ui/solid-utils/reactivity'
 import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
 import { badge } from '@saftox-ui/theme'
-import { createMemo, mergeProps, splitProps } from 'solid-js'
 
 interface Props extends HTMLSaftoxUIProps<'span', 'content'> {
   /**

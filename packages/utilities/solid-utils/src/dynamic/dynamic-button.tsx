@@ -1,12 +1,14 @@
-import type { ValidComponent } from 'solid-js'
 import type { Ref } from '../dom'
 import type { DynamicProps } from './types'
+import type { ValidComponent } from 'solid-js'
+
+import { Dynamic } from './dynamic'
 
 import { createMemo, createSignal, splitProps } from 'solid-js'
+
 import { isButton } from '../assertions'
 import { createTagName } from '../create/tag-name'
 import { mergeRefs } from '../reactivity'
-import { Dynamic } from './dynamic'
 
 const DEFAULT_DYNAMIC_BUTTON_ELEMENT = 'button'
 

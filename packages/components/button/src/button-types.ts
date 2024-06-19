@@ -1,9 +1,7 @@
 import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps } from '@saftox-ui/system'
-import type { CreateToggleStateProps } from '@saftox-ui/toggle'
-import type { JSX } from 'solid-js'
-
 import type { ButtonGroupVariantProps, ButtonVariantProps } from '@saftox-ui/theme'
+import type { CreateToggleStateProps } from '@saftox-ui/toggle'
 import type {
   AriaLabelingProps,
   ElementType,
@@ -11,6 +9,7 @@ import type {
   FocusableProps,
   PressEvents,
 } from '@saftox-ui/types'
+import type { JSX } from 'solid-js'
 
 interface ButtonProps extends PressEvents, FocusableProps {
   /**

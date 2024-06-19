@@ -1,9 +1,10 @@
 import type { Class } from '@saftox-ui/twind'
 
-import { cx } from '@saftox-ui/twind'
 import { extendTailwindMerge } from 'tailwind-merge'
 
 import { twMergeConfig } from './tw-merge-config'
+
+import { cx } from '@saftox-ui/twind'
 
 /**
  * We need to extend the tailwind merge to include SaftoxUI custom classes.

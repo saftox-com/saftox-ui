@@ -1,8 +1,13 @@
+import type { AriaButtonProps, UseButtonProps } from './button-types'
+import type { GlowEffectProps } from './glow-effect'
 import type { SpinnerProps } from '@saftox-ui/spinner'
 import type { PropGetter } from '@saftox-ui/system'
 import type { JSX } from 'solid-js'
-import type { AriaButtonProps, UseButtonProps } from './button-types'
-import type { GlowEffectProps } from './glow-effect'
+
+import { useButtonGroupContext } from './button-group-context'
+import { createButton } from './create-button'
+
+import { children, createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
 import { createFocusRing } from '@saftox-ui/focus'
 import { createHover } from '@saftox-ui/interactions'
@@ -11,9 +16,6 @@ import { chain, combineProps, mergeRefs } from '@saftox-ui/solid-utils/reactivit
 import { Spinner } from '@saftox-ui/spinner'
 import { button } from '@saftox-ui/theme'
 import { filterDOMProps } from '@saftox-ui/utils'
-import { children, createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
-import { useButtonGroupContext } from './button-group-context'
-import { createButton } from './create-button'
 
 export function useButton<T extends HTMLButtonElement>(originalProps: UseButtonProps) {
   const groupContext = useButtonGroupContext()

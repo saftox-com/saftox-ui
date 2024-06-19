@@ -1,10 +1,11 @@
-import type { PropGetter } from '@saftox-ui/system'
 import type { UseKbdProps } from './kbd-types'
+import type { PropGetter } from '@saftox-ui/system'
+
+import { createMemo, mergeProps, splitProps } from 'solid-js'
 
 import { clsx } from '@saftox-ui/shared-utils'
 import { mapPropsVariants } from '@saftox-ui/system'
 import { kbd } from '@saftox-ui/theme'
-import { createMemo, mergeProps, splitProps } from 'solid-js'
 
 export function useKbd(originalProps: UseKbdProps) {
   const [omitVariantProps, variantProps] = mapPropsVariants(originalProps, kbd.variantKeys)

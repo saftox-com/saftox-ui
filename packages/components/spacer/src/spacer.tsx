@@ -1,5 +1,5 @@
-import type { Component } from 'solid-js'
 import type { UseSpacerProps } from './use-spacer'
+import type { Component } from 'solid-js'
 
 import { useSpacer } from './use-spacer'
 

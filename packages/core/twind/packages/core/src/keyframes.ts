@@ -1,9 +1,11 @@
 import type { CSSObject, CSSValue, StringLike } from './types'
 
-import { css } from './css'
-import { astish } from './internal/astish'
 import { tw as tw$ } from './runtime'
 import { escapeClassName, hash } from './utils'
+
+import { astish } from './internal/astish'
+
+import { css } from './css'
 
 export interface KeyframesFunction {
   (style: CSSObject | string): StringLike

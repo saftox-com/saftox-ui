@@ -1,8 +1,9 @@
-import type { Component } from 'solid-js'
 import type { UseDividerProps } from './use-divider'
+import type { Component } from 'solid-js'
+
+import { useDivider } from './use-divider'
 
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { useDivider } from './use-divider'
 
 export interface DividerProps extends Omit<UseDividerProps, 'children'> {}
 

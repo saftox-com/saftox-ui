@@ -1,7 +1,7 @@
-import type { PropGetter } from '@saftox-ui/system'
-import type { JSX } from 'solid-js'
 import type { UseAvatarGroupProps } from './avatar-group-types'
 import type { AvatarProps } from './avatar-types'
+import type { PropGetter } from '@saftox-ui/system'
+import type { JSX } from 'solid-js'
 
 import { children, createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 

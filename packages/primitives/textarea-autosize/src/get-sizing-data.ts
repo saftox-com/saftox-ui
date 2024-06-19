@@ -1,4 +1,5 @@
 import type { JSX } from 'solid-js/jsx-runtime'
+
 import { pick } from './utils'
 
 const SIZING_STYLE = [

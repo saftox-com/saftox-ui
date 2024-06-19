@@ -1,8 +1,8 @@
 import type {
   BaseTheme,
+  Context,
   CSSObject,
   CSSProperties,
-  Context,
   Falsey,
   MatchConverter,
   MatchResult,
@@ -18,11 +18,11 @@ import type {
 
 import { DEV } from 'distilt/env'
 
-import { fromMatch } from '../rules'
-import { asArray, hash as defaultHash, escapeClassName, identity, noop } from '../utils'
-
 import { makeThemeFunction } from './theme'
 import { warn } from './warn'
+
+import { fromMatch } from '../rules'
+import { asArray, escapeClassName, hash as defaultHash, identity, noop } from '../utils'
 
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,

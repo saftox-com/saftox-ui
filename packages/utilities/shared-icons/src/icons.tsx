@@ -1,5 +1,5 @@
-import type { Component } from 'solid-js'
 import type { IconSvgProps } from './types'
+import type { Component } from 'solid-js'
 
 import { mergeProps, splitProps } from 'solid-js'
 interface IconProps extends IconSvgProps {

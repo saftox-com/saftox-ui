@@ -1,5 +1,5 @@
-import type { ParentComponent } from 'solid-js'
 import type { IconSvgProps } from './types'
+import type { ParentComponent } from 'solid-js'
 
 export const MailFilledIcon: ParentComponent<IconSvgProps> = (props) => (
   <svg

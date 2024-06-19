@@ -1,10 +1,12 @@
-import type { Component } from 'solid-js'
 import type { SnippetProps } from './snippet-types'
+import type { Component } from 'solid-js'
+
+import { useSnippet } from './use-snippet'
+
+import { For, Show } from 'solid-js'
 
 import { Button } from '@saftox-ui/button'
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { For, Show } from 'solid-js'
-import { useSnippet } from './use-snippet'
 
 const Snippet: Component<SnippetProps> = (props) => {
   const {

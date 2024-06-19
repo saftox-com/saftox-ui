@@ -1,4 +1,5 @@
 import type { MaybeAccessor } from '@solid-primitives/utils'
+
 import { access } from '@solid-primitives/utils'
 
 export const __DEV__ = process.env.NODE_ENV !== 'production'

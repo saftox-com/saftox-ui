@@ -2,9 +2,9 @@ import type { SemanticBaseColors, ThemeColors } from './types'
 
 import { readableColor } from 'color2k'
 
-import { swapColorValues } from '../utils/object'
-
 import { commonColors as common } from './common'
+
+import { swapColorValues } from '../utils/object'
 
 const base: SemanticBaseColors = {
   light: {

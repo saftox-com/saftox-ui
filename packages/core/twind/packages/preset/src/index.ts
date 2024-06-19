@@ -1,8 +1,9 @@
+import { animations } from './animations'
+import { utilities } from './utilities'
+
 import { defineConfig } from '@saftox-ui/twind'
 
-import { animations } from './animations'
 import { defaultPreset } from './presets/preset'
-import { utilities } from './utilities'
 
 export * from './colors'
 
@@ -10,9 +11,11 @@ export type * from './types'
 export type * from './colors/types'
 
 import deepMerge from 'deepmerge'
+
+import { kebabCase, mapKeys } from './utils'
+
 import { darkLayout, defaultLayout, lightLayout } from './utilities/default-layout'
 import { DEFAULT_TRANSITION_DURATION } from './utilities/transition'
-import { kebabCase, mapKeys } from './utils'
 
 export const themeConfig = (
   { presets = [], preflight = {}, ...userConfig },

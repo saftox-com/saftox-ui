@@ -2,13 +2,14 @@ import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps, PropGetter } from '@saftox-ui/system-ssc'
 import type { SpacerVariantProps } from '@saftox-ui/theme'
 
-import { clsx, dataAttr } from '@saftox-ui/shared-utils'
-import { mapPropsVariants } from '@saftox-ui/system-ssc'
-import { spacer } from '@saftox-ui/theme'
+import { type Space, spacing } from './utils'
+
 import { mergeProps, splitProps } from 'solid-js'
 
+import { clsx, dataAttr } from '@saftox-ui/shared-utils'
 import { combineProps, combineStyle } from '@saftox-ui/solid-utils/reactivity'
-import { type Space, spacing } from './utils'
+import { mapPropsVariants } from '@saftox-ui/system-ssc'
+import { spacer } from '@saftox-ui/theme'
 
 interface Props extends HTMLSaftoxUIProps<'span'> {
   /**

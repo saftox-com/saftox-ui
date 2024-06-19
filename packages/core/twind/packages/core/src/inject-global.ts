@@ -1,8 +1,10 @@
 import type { CSSBase, CSSObject, CSSValue } from './types'
 
-import { css } from './css'
-import { astish } from './internal/astish'
 import { tw as tw$ } from './runtime'
+
+import { astish } from './internal/astish'
+
+import { css } from './css'
 
 export interface InjectGlobalFunction {
   (style: CSSBase | string): void

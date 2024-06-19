@@ -1,12 +1,12 @@
 import type { MaybeAccessor } from '@solid-primitives/utils'
 import type { Accessor } from 'solid-js'
 
-import { createEffect, createSignal, on, onCleanup, onMount } from 'solid-js'
-
 import { isMac } from '@solid-primitives/platform'
 import { access } from '@solid-primitives/utils'
 
 import { isVirtualClick } from './utils'
+
+import { createEffect, createSignal, on, onCleanup, onMount } from 'solid-js'
 
 type Modality = 'keyboard' | 'pointer' | 'virtual'
 type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent
@@ -212,7 +212,6 @@ function isKeyboardFocusEvent(isTextInput: boolean, modality?: Modality, e?: Han
     isTextInput &&
     modality === 'keyboard' &&
     e instanceof KeyboardEvent &&
-    // eslint-disable-next-line
     //@ts-ignore
     !FOCUS_VISIBLE_INPUT_KEYS[e.key]
   )

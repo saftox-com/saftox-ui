@@ -2,12 +2,13 @@ import type { ConfigurableNavigator } from '@saftox-ui/shared-hooks'
 import type { MaybeAccessor } from '@saftox-ui/shared-hooks/utils'
 import type { Accessor } from 'solid-js'
 
+import { createMemo, createSignal } from 'solid-js'
+
 import { defaultNavigator } from '@saftox-ui/shared-hooks'
 import { toValue } from '@saftox-ui/shared-hooks/to-value'
 import { useSupported } from '@saftox-ui/shared-hooks/use-supported'
 import { useTimeoutFn } from '@saftox-ui/shared-hooks/use-timeout-fn'
 import { useEventListener } from '@saftox-ui/use-event-listener'
-import { createMemo, createSignal } from 'solid-js'
 
 export interface UseClipboardOptions<Source> extends ConfigurableNavigator {
   /**

@@ -1,9 +1,8 @@
 import type { VariantProps } from '@saftox-ui/variants'
 
 import { collapseAdjacentVariantBorders, colorVariants, dataFocusVisibleClasses } from '../utils'
-import { tv } from '../utils/tv'
-
 import { radiusClasses } from '../utils/classes'
+import { tv } from '../utils/tv'
 
 /**
  * Button wrapper **Variants** component

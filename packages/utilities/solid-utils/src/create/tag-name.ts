@@ -1,5 +1,6 @@
 import { createMemo } from 'solid-js'
-import { type MaybeAccessor, access } from '../reactivity'
+
+import { access, type MaybeAccessor } from '../reactivity'
 
 /**
  * Returns a memoized signal with the tag name of the element.

@@ -1,11 +1,11 @@
+import type { ProviderContextProps } from './provider-context'
 import type { I18nProviderProps } from '@saftox-ui/i18n'
 import type { DOMAttributes } from '@saftox-ui/system-ssc'
 import type { Component, JSX } from 'solid-js'
 
-import { createMemo, mergeProps, splitProps } from 'solid-js'
-
 import { createProviderContext } from './provider-context'
-import type { ProviderContextProps } from './provider-context'
+
+import { createMemo, mergeProps, splitProps } from 'solid-js'
 
 import { I18nProvider } from '@saftox-ui/i18n'
 

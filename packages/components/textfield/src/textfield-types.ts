@@ -1,9 +1,8 @@
+import type { AriaTextFieldProps } from './create-textfield'
+import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps } from '@saftox-ui/system'
 import type { SlotsToClasses, TextfieldSlots, TextfieldVariantProps } from '@saftox-ui/theme'
 import type { Accessor, JSX, MergeProps } from 'solid-js'
-import type { AriaTextFieldProps } from './create-textfield'
-
-import type { Ref } from '@saftox-ui/solid-utils/dom'
 
 // type Ref<T> = T | ((el: T) => void) | undefined;
 

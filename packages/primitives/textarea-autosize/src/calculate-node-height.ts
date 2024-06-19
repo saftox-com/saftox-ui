@@ -1,5 +1,6 @@
-import forceHiddenStyles from './force-hidden-styles'
 import type { SizingData } from './get-sizing-data'
+
+import forceHiddenStyles from './force-hidden-styles'
 
 export type CalculatedNodeHeights = [height: number, rowHeight: number]
 

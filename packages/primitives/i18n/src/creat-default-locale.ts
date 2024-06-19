@@ -1,10 +1,10 @@
 import type { Direction } from '@saftox-ui/types'
 import type { Accessor } from 'solid-js'
 
+import { getReadingDirection } from './utils'
+
 import { createMemo, createSignal, onCleanup, onMount } from 'solid-js'
 import { isServer } from 'solid-js/web'
-
-import { getReadingDirection } from './utils'
 
 export interface Locale {
   /**

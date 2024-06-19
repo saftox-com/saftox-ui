@@ -1,9 +1,10 @@
 import type { MaybeAccessor } from '@saftox-ui/shared-hooks/utils'
 import type { UseAsyncStateOptions } from '@saftox-ui/use-async-state'
 
+import { createEffect, on } from 'solid-js'
+
 import { toValue } from '@saftox-ui/shared-hooks/to-value'
 import { useAsyncState } from '@saftox-ui/use-async-state'
-import { createEffect, on } from 'solid-js'
 
 export interface UseImageOptions {
   /** Address of the resource */

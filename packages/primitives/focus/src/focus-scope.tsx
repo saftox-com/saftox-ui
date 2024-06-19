@@ -1,5 +1,8 @@
 import type { Accessor, JSX, Setter } from 'solid-js'
 
+import { focusSafely } from './focus-safely'
+import { isElementVisible } from './is-element-visible'
+
 import {
   children,
   createContext,
@@ -10,9 +13,6 @@ import {
   onCleanup,
   useContext,
 } from 'solid-js'
-
-import { focusSafely } from './focus-safely'
-import { isElementVisible } from './is-element-visible'
 
 interface FocusScopeProps {
   /**
@@ -97,7 +97,7 @@ function FocusScopeContainer(props: FocusScopeProps) {
   let endRef: HTMLSpanElement | undefined
 
   // The context always exists because `FocusScopeContainer` is only used in `FocusScope`.
-  // eslint-disable-next-line
+
   const ctx = useContext(FocusContext)!
 
   const resolvedChildren = children(() => props.children)

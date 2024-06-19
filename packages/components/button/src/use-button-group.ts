@@ -1,13 +1,12 @@
-import type { PropGetter } from '@saftox-ui/system'
 import type { ContextType, UseButtonGroupProps } from './button-types'
 import type { GlowEffectProps } from './glow-effect'
+import type { PropGetter } from '@saftox-ui/system'
 
 import { createEffect, createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
+import { combineProps, mergeRefs } from '@saftox-ui/solid-utils/reactivity'
 import { mapPropsVariants } from '@saftox-ui/system'
 import { buttonGroup } from '@saftox-ui/theme'
-
-import { combineProps, mergeRefs } from '@saftox-ui/solid-utils/reactivity'
 
 export function useButtonGroup(originalProps: UseButtonGroupProps) {
   const [omitVariantProps, variantProps] = mapPropsVariants(originalProps, buttonGroup.variantKeys)

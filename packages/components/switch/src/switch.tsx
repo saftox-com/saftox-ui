@@ -1,10 +1,12 @@
-import type { Component } from 'solid-js'
 import type { SwitchProps } from './switch-types'
+import type { Component } from 'solid-js'
+
+import { useSwitch } from './use-switch'
+
+import { Show } from 'solid-js'
 
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
 import { createVisuallyHidden } from '@saftox-ui/visually-hidden'
-import { Show } from 'solid-js'
-import { useSwitch } from './use-switch'
 
 const Switch: Component<SwitchProps> = (props) => {
   const {

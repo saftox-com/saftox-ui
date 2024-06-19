@@ -1,6 +1,7 @@
 import type { Accessor } from 'solid-js'
 
 import { createMemo } from 'solid-js'
+
 import { useMounted } from '../use-mounted'
 
 /**

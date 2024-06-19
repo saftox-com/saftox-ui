@@ -1,9 +1,11 @@
-import type { Component } from 'solid-js'
 import type { AvatarProps } from './avatar-types'
+import type { Component } from 'solid-js'
+
+import { useAvatar } from './use-avatar'
+
+import { Match, Show, Switch } from 'solid-js'
 
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { Match, Show, Switch } from 'solid-js'
-import { useAvatar } from './use-avatar'
 
 const Avatar: Component<AvatarProps> = (props) => {
   const { Component, properties, local, slots, getInitials, getAvatarProps, getImageProps } =

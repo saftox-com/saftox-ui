@@ -2,6 +2,7 @@ import type { MaybeAccessor } from '@solid-primitives/utils'
 import type { Accessor } from 'solid-js'
 
 import { access } from '@solid-primitives/utils'
+
 import { createEffect, createSignal, onCleanup } from 'solid-js'
 
 interface CreateInteractOutsideProps {

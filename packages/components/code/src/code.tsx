@@ -1,8 +1,9 @@
-import type { Component } from 'solid-js'
 import type { CodeProps } from './code-types'
+import type { Component } from 'solid-js'
+
+import { useCode } from './use-code'
 
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { useCode } from './use-code'
 
 const Code: Component<CodeProps> = (props) => {
   const { Component, getCodeProps } = useCode(props)

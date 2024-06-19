@@ -1,6 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-import type { PartialStoryFn, StoryContext } from '@storybook/types'
 import type { SolidRenderer } from '../types'
+import type { PartialStoryFn, StoryContext } from '@storybook/types'
 
 export const jsxDecorator = (
   storyFn: PartialStoryFn<SolidRenderer>,

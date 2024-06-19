@@ -1,9 +1,9 @@
-import type { Component } from 'solid-js'
 import type { UserProps } from './user-types'
+import type { Component } from 'solid-js'
 
-import { Avatar } from '@saftox-ui/avatar'
 import { useUser } from './use-user'
 
+import { Avatar } from '@saftox-ui/avatar'
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
 
 const User: Component<UserProps> = (props) => {

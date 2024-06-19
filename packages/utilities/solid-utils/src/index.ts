@@ -1,3 +1,6 @@
+import type { SSRElement } from './assertions'
+import type { Axis, Side, Size } from './types'
+
 import {
   dataIf,
   isBrowserElement,
@@ -6,8 +9,6 @@ import {
   isFunction,
   isSSRElement,
 } from './assertions'
-import type { SSRElement } from './assertions'
-import type { Axis, Side, Size } from './types'
 
 export type { Axis, Side, Size, SSRElement }
 

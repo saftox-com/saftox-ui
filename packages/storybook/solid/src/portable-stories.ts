@@ -1,8 +1,5 @@
-import {
-  composeStories as originalComposeStories,
-  composeStory as originalComposeStory,
-  setProjectAnnotations as originalSetProjectAnnotations,
-} from '@storybook/preview-api'
+import type { Meta } from './public-types'
+import type { SolidRenderer } from './types'
 import type {
   Args,
   NamedOrDefaultProjectAnnotations,
@@ -12,9 +9,13 @@ import type {
   StoryAnnotationsOrFn,
 } from '@storybook/types'
 
+import {
+  composeStories as originalComposeStories,
+  composeStory as originalComposeStory,
+  setProjectAnnotations as originalSetProjectAnnotations,
+} from '@storybook/preview-api'
+
 import * as reactProjectAnnotations from './entry-preview'
-import type { Meta } from './public-types'
-import type { SolidRenderer } from './types'
 
 /** Function that sets the globalConfig of your storybook. The global config is the preview module of your .storybook folder.
  *

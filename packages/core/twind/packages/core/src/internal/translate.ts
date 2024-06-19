@@ -1,15 +1,15 @@
 import type { ParsedRule } from '../parse'
 import type { BaseTheme, Context, TwindRule } from '../types'
 
-import { parse } from '../parse'
-import { asArray } from '../utils'
-
 import { merge } from './merge'
-import { Layer, convert, moveToLayer } from './precedence'
+import { convert, Layer, moveToLayer } from './precedence'
 import { resolve } from './registry'
 import { serialize } from './serialize'
 import { sortedInsertionIndex } from './sorted-insertion-index'
 import { toClassName } from './to-class-name'
+
+import { parse } from '../parse'
+import { asArray } from '../utils'
 
 export function translate<Theme extends BaseTheme = BaseTheme>(
   rules: readonly ParsedRule[],

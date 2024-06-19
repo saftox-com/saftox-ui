@@ -1,10 +1,10 @@
 import type {
   BaseTheme,
-  CSSObject,
-  CSSProperties,
   ColorFunction,
   ColorValue,
   Context,
+  CSSObject,
+  CSSProperties,
   KebabCase,
   MatchConverter,
   MatchResult,
@@ -24,6 +24,7 @@ import {
   withAutocomplete,
 } from './autocomplete'
 import { toColorValue } from './colors'
+
 import { resolveThemeFunction } from './internal/serialize'
 
 export type ThemeMatchResult<Value> = MatchResult & {
@@ -78,7 +79,6 @@ export function match<Theme extends BaseTheme = BaseTheme>(
  */
 export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
   resolve: (string & {}) | CSSObject,
 ): Rule<Theme>
 
@@ -96,7 +96,6 @@ export function match<Theme extends BaseTheme = BaseTheme>(
 
 export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
-  // eslint-disable-next-line @typescript-eslint/ban-types
   resolve?: RuleResolver<Theme> | (string & {}) | CSSObject | keyof CSSProperties,
   convert?: MatchConverter<Theme>,
 ): Rule<Theme> {

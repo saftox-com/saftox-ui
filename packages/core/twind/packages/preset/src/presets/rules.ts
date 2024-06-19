@@ -1,16 +1,16 @@
+import type { SaftoxTheme } from '../types/types'
 import type {
   AutocompleteProvider,
+  ColorFromThemeValue,
   CSSBase,
   CSSObject,
   CSSProperties,
-  ColorFromThemeValue,
   MatchResult,
   MaybeArray,
   Rule,
   ThemeMatchResult,
   ThemeRuleResolver,
 } from '@saftox-ui/twind'
-import type { SaftoxTheme } from '../types/types'
 
 import {
   arbitrary,
@@ -19,8 +19,8 @@ import {
   matchColor,
   matchTheme,
   mql,
-  toCSS,
   toColorValue,
+  toCSS,
   withAutocomplete,
 } from '@saftox-ui/twind'
 

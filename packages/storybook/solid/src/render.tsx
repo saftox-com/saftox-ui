@@ -1,6 +1,6 @@
+import type { ComponentsData, ContextStore, SolidRenderer, StoryContext } from './types'
 import type { Args, ArgsStoryFn, RenderContext, StoryFn } from '@storybook/types'
 import type { Component } from 'solid-js'
-import type { ComponentsData, ContextStore, SolidRenderer, StoryContext } from './types'
 
 import { ErrorBoundary, onMount } from 'solid-js'
 import { createStore, reconcile } from 'solid-js/store'

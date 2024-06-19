@@ -1,8 +1,9 @@
 import type { MaybeAccessor } from '@solid-primitives/utils'
 import type { Accessor } from 'solid-js'
 
-import { createControllableBooleanSignal } from '@saftox-ui/utils'
 import { access } from '@solid-primitives/utils'
+
+import { createControllableBooleanSignal } from '@saftox-ui/utils'
 
 export interface CreateToggleStateProps {
   /**

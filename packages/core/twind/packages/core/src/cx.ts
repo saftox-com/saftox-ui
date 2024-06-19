@@ -1,8 +1,9 @@
 import type { Class } from './types'
 
+import { parse } from './parse'
+
 import { format } from './internal/format'
 import { interpolate } from './internal/interpolate'
-import { parse } from './parse'
 
 /**
  * Constructs `class` strings conditionally.

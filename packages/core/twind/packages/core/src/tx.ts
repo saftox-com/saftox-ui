@@ -1,7 +1,8 @@
 import type { Class } from './types'
 
-import { interpolate } from './internal/interpolate'
 import { tw as tw$ } from './runtime'
+
+import { interpolate } from './internal/interpolate'
 
 export interface TxFunction {
   (...classes: Class[]): string

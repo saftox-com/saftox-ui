@@ -1,14 +1,15 @@
+import type { AriaToggleButtonProps } from './button-types'
+import type { ButtonAria } from './create-button'
 import type { ToggleState } from '@saftox-ui/toggle'
 import type { ElementType } from '@saftox-ui/types'
 import type { Accessor, JSX } from 'solid-js'
-import type { AriaToggleButtonProps } from './button-types'
-import type { ButtonAria } from './create-button'
+
+import { createButton } from './create-button'
+
+import { mergeProps } from 'solid-js'
 
 import { chain, combineProps } from '@saftox-ui/solid-utils/reactivity'
 import { createToggleState } from '@saftox-ui/toggle'
-import { mergeProps } from 'solid-js'
-
-import { createButton } from './create-button'
 
 export interface ToggleButtonAria<T> extends ButtonAria<T> {
   /**
