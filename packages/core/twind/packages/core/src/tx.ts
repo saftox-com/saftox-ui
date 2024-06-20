@@ -1,31 +1,27 @@
-import type { Class } from "./types";
+import type { Class } from './types'
 
-import { interpolate } from "./internal/interpolate";
-import { tw as tw$ } from "./runtime";
+import { tw as tw$ } from './runtime'
+
+import { interpolate } from './internal/interpolate'
 
 export interface TxFunction {
-	(...classes: Class[]): string;
+  (...classes: Class[]): string
 
-	(strings: TemplateStringsArray, ...interpolations: readonly Class[]): string;
+  (strings: TemplateStringsArray, ...interpolations: readonly Class[]): string
 
-	bind(thisArg?: ((tokens: string) => string) | undefined): TxFunction;
+  bind(thisArg?: ((tokens: string) => string) | undefined): TxFunction
 
-	call(
-		thisArg: ((tokens: string) => string) | undefined,
-		...classes: Class[]
-	): string;
-	call(
-		thisArg: ((tokens: string) => string) | undefined,
-		strings: TemplateStringsArray,
-		...interpolations: readonly Class[]
-	): string;
+  call(thisArg: ((tokens: string) => string) | undefined, ...classes: Class[]): string
+  call(
+    thisArg: ((tokens: string) => string) | undefined,
+    strings: TemplateStringsArray,
+    ...interpolations: readonly Class[]
+  ): string
 
-	apply(
-		thisArg: ((tokens: string) => string) | undefined,
-		classes:
-			| Class[]
-			| [strings: TemplateStringsArray, ...interpolations: readonly Class[]],
-	): string;
+  apply(
+    thisArg: ((tokens: string) => string) | undefined,
+    classes: Class[] | [strings: TemplateStringsArray, ...interpolations: readonly Class[]],
+  ): string
 }
 
 /**
@@ -65,11 +61,11 @@ export interface TxFunction {
  * @returns the class name
  */
 export const tx: TxFunction = function tx(
-	this: ((tokens: string) => string) | undefined,
-	strings: TemplateStringsArray | Class,
-	...interpolations: Class[]
+  this: ((tokens: string) => string) | undefined,
+  strings: TemplateStringsArray | Class,
+  ...interpolations: Class[]
 ): string {
-	const tw = typeof this === "function" ? this : tw$;
+  const tw = typeof this === 'function' ? this : tw$
 
-	return tw(interpolate(strings, interpolations));
-};
+  return tw(interpolate(strings, interpolations))
+}

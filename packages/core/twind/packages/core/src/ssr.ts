@@ -1,24 +1,25 @@
-import type { Twind } from "./types";
+import type { Twind } from './types'
 
-import { changed } from "./internal/changed";
-import { fixClassList, parseHTML } from "./internal/parse-html";
-import { tw as tw$ } from "./runtime";
-import { stringify } from "./sheets";
-import { identity } from "./utils";
+import { tw as tw$ } from './runtime'
+import { stringify } from './sheets'
+import { identity } from './utils'
+
+import { changed } from './internal/changed'
+import { fixClassList, parseHTML } from './internal/parse-html'
 
 /**
  * Options for {@link inline}
  */
 export interface InlineOptions {
-	/**
-	 * {@link Twind} instance to use (default: {@link @saftox-ui/twind.tw})
-	 */
-	tw?: Twind<any, any>;
+  /**
+   * {@link Twind} instance to use (default: {@link @saftox-ui/twind.tw})
+   */
+  tw?: Twind<any, any>
 
-	/**
-	 * Allows to minify the resulting CSS.
-	 */
-	minify?: InlineMinifyFunction;
+  /**
+   * Allows to minify the resulting CSS.
+   */
+  minify?: InlineMinifyFunction
 }
 
 /**
@@ -28,7 +29,7 @@ export interface InlineOptions {
  * @param html the HTML that will be used — allows to only include above-the-fold CSS
  * @return the resulting CSS
  */
-export type InlineMinifyFunction = (css: string, html: string) => string;
+export type InlineMinifyFunction = (css: string, html: string) => string
 
 /**
  * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
@@ -73,33 +74,25 @@ export type InlineMinifyFunction = (css: string, html: string) => string;
  * @param options to customize the processing
  * @returns the resulting HTML
  */
-export function inline(
-	markup: string,
-	options: InlineOptions["tw"] | InlineOptions = {},
-): string {
-	const { tw = tw$, minify = identity } =
-		typeof options === "function"
-			? ({ tw: options } as InlineOptions)
-			: options;
+export function inline(markup: string, options: InlineOptions['tw'] | InlineOptions = {}): string {
+  const { tw = tw$, minify = identity } =
+    typeof options === 'function' ? ({ tw: options } as InlineOptions) : options
 
-	const { html, css } = extract(markup, tw);
+  const { html, css } = extract(markup, tw)
 
-	// inject as last element into the head
-	return html.replace(
-		"</head>",
-		`<style data-stafna>${minify(css, html)}</style></head>`,
-	);
+  // inject as last element into the head
+  return html.replace('</head>', `<style data-stafna>${minify(css, html)}</style></head>`)
 }
 
 /**
  * Result of {@link extract}
  */
 export interface ExtractResult {
-	/** The possibly modified HTML */
-	html: string;
+  /** The possibly modified HTML */
+  html: string
 
-	/** The generated CSS */
-	css: string;
+  /** The generated CSS */
+  css: string
 }
 
 /**
@@ -141,17 +134,14 @@ export interface ExtractResult {
  * @param tw a {@link Twind} instance (default: twind managed tw)
  * @returns the possibly modified html and css
  */
-export function extract(
-	html: string,
-	tw: Twind<any, any> = tw$,
-): ExtractResult {
-	const restore = tw.snapshot();
+export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult {
+  const restore = tw.snapshot()
 
-	const result = { html: consume(html, tw), css: stringify(tw.target) };
+  const result = { html: consume(html, tw), css: stringify(tw.target) }
 
-	restore();
+  restore()
 
-	return result;
+  return result
 }
 
 /**
@@ -217,31 +207,27 @@ export function extract(
  * @param tw a {@link Twind} instance
  * @returns possibly modified HTML
  */
-export function consume(
-	markup: string,
-	tw: (className: string) => string = tw$,
-): string {
-	let result = "";
-	let lastChunkStart = 0;
+export function consume(markup: string, tw: (className: string) => string = tw$): string {
+  let result = ''
+  let lastChunkStart = 0
 
-	parseHTML(markup, (startIndex, endIndex, q) => {
-		const value = markup.slice(startIndex, endIndex);
-		const className = tw(fixClassList(value, q));
+  parseHTML(markup, (startIndex, endIndex, q) => {
+    const value = markup.slice(startIndex, endIndex)
+    const className = tw(fixClassList(value, q))
 
-		// We only need to shift things around if we need to actually change the markup
-		if (changed(value, className)) {
-			// We've hit another mutation boundary
+    // We only need to shift things around if we need to actually change the markup
+    if (changed(value, className)) {
+      // We've hit another mutation boundary
 
-			// Add quote if necessary
-			const quote = q ? "" : '"';
+      // Add quote if necessary
+      const quote = q ? '' : '"'
 
-			result +=
-				markup.slice(lastChunkStart, startIndex) + quote + className + quote;
+      result += markup.slice(lastChunkStart, startIndex) + quote + className + quote
 
-			lastChunkStart = endIndex;
-		}
-	});
+      lastChunkStart = endIndex
+    }
+  })
 
-	// Combine the current result with the tail-end of the input
-	return result + markup.slice(lastChunkStart, markup.length);
+  // Combine the current result with the tail-end of the input
+  return result + markup.slice(lastChunkStart, markup.length)
 }

@@ -1,1 +1,1 @@
-export * from "./_configurable";
+export * from './_configurable'

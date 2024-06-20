@@ -1,0 +1,54 @@
+{
+  "name": "@saftox-ui/label",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "Primitives that provides the accessibility implementation for labels and their associated elements.",
+  "keywords": ["solid", "aria"],
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/primitives/label"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "dev": "pnpm build:fast --watch",
+    "dev:vite": "vite serve dev",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.17"
+  },
+  "dependencies": {
+    "@saftox-ui/solid-utils": "0.0.1",
+    "@saftox-ui/utils": "0.0.1",
+    "@saftox-ui/types": "0.0.1"
+  },
+  "devDependencies": {
+    "solid-js": "^1.8.17"
+  },
+  "clean-package": "../../../configs/clean-package.config.json",
+  "tsup": {
+    "clean": true,
+    "target": "es2019",
+    "format": ["cjs", "esm"]
+  },
+  "primitive": {
+    "name": "focus",
+    "stage": 0,
+    "list": [],
+    "category": ""
+  }
+}

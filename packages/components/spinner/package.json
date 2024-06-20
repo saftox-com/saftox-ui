@@ -1,44 +1,44 @@
 {
-	"name": "@saftox-ui/spinner",
-	"author": "Serhii Zaitsev <ceo@saftox.com>",
-	"version": "0.0.1",
-	"description": "Loaders express an unspecified wait time or display the length of a process.",
-	"keywords": ["spinner"],
-	"main": "./src/index.ts",
-	"sideEffects": false,
-	"files": ["dist"],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/components/spinner"
-	},
-	"bugs": {
-		"url": "https://github.com/saftox-com/saftox-ui/issues"
-	},
-	"scripts": {
-		"build": "tsup src --dts",
-		"build:fast": "tsup src",
-		"dev": "pnpm build:fast --watch",
-		"dev:vite": "vite serve dev",
-		"clean": "rimraf dist .turbo",
-		"typecheck": "tsc --noEmit",
-		"prepack": "clean-package",
-		"postpack": "clean-package restore"
-	},
-	"peerDependencies": {
-		"solid-js": ">=1.8.17",
-		"@saftox-ui/theme": ">=0.0.1"
-	},
-	"dependencies": {
-		"@saftox-ui/system-ssc": "0.0.1",
-		"@saftox-ui/shared-utils": "0.0.1",
-		"@saftox-ui/solid-utils": "0.0.1"
-	},
-	"devDependencies": {
-		"@saftox-ui/variants": "0.0.1"
-	},
-	"clean-package": "../../../configs/clean-package.config.json"
+  "name": "@saftox-ui/spinner",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "Loaders express an unspecified wait time or display the length of a process.",
+  "keywords": ["spinner"],
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/components/spinner"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "dev": "pnpm build:fast --watch",
+    "dev:vite": "vite serve dev",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.17",
+    "@saftox-ui/theme": ">=0.0.1"
+  },
+  "dependencies": {
+    "@saftox-ui/system-ssc": "0.0.1",
+    "@saftox-ui/shared-utils": "0.0.1",
+    "@saftox-ui/solid-utils": "0.0.1"
+  },
+  "devDependencies": {
+    "@saftox-ui/variants": "0.0.1"
+  },
+  "clean-package": "../../../configs/clean-package.config.json"
 }

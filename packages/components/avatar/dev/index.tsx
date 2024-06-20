@@ -1,14 +1,14 @@
-import { render } from "solid-js/web";
-import { Avatar } from "../src";
+import { render } from 'solid-js/web'
+import { Avatar } from '../src'
 
 const App = () => {
-	return (
-		<>
-			<Avatar>
-				<span>Hello Solid</span>
-			</Avatar>
-		</>
-	);
-};
+  return (
+    <>
+      <Avatar>
+        <span>Hello Solid</span>
+      </Avatar>
+    </>
+  )
+}
 
-render(() => <App />, document.getElementById("root")!);
+render(() => <App />, document.getElementById('root')!)

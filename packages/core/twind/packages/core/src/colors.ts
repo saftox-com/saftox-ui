@@ -1,12 +1,7 @@
-import type {
-	ColorFunctionOptions,
-	ColorValue,
-	Context,
-	Falsey,
-} from "./types";
+import type { ColorFunctionOptions, ColorValue, Context, Falsey } from './types'
 
 function parseColorComponent(chars: string, factor: number): number {
-	return Math.round(Number.parseInt(chars, 16) * factor);
+  return Math.round(Number.parseInt(chars, 16) * factor)
 }
 
 /**
@@ -15,39 +10,36 @@ function parseColorComponent(chars: string, factor: number): number {
  * @param options
  * @returns
  */
-export function toColorValue(
-	color: ColorValue,
-	options: ColorFunctionOptions = {},
-): string {
-	if (typeof color === "function") {
-		return color(options);
-	}
+export function toColorValue(color: ColorValue, options: ColorFunctionOptions = {}): string {
+  if (typeof color === 'function') {
+    return color(options)
+  }
 
-	const { opacityValue = "1", opacityVariable } = options;
-	const opacity = opacityVariable ? `var(${opacityVariable})` : opacityValue;
+  const { opacityValue = '1', opacityVariable } = options
+  const opacity = opacityVariable ? `var(${opacityVariable})` : opacityValue
 
-	if (color.includes("<alpha-value>")) {
-		return color.replace("<alpha-value>", opacity);
-	}
+  if (color.includes('<alpha-value>')) {
+    return color.replace('<alpha-value>', opacity)
+  }
 
-	// rgb hex: #0123 and #001122
-	if (color[0] === "#" && (color.length === 4 || color.length === 7)) {
-		const size = (color.length - 1) / 3;
-		const factor = [17, 1, 0.062272][size - 1] || 1;
+  // rgb hex: #0123 and #001122
+  if (color[0] === '#' && (color.length === 4 || color.length === 7)) {
+    const size = (color.length - 1) / 3
+    const factor = [17, 1, 0.062272][size - 1] || 1
 
-		return `rgba(${[
-			parseColorComponent(color.substr(1, size), factor),
-			parseColorComponent(color.substr(1 + size, size), factor),
-			parseColorComponent(color.substr(1 + 2 * size, size), factor),
-			opacity,
-		]})`;
-	}
+    return `rgba(${[
+      parseColorComponent(color.substr(1, size), factor),
+      parseColorComponent(color.substr(1 + size, size), factor),
+      parseColorComponent(color.substr(1 + 2 * size, size), factor),
+      opacity,
+    ]})`
+  }
 
-	if (opacity === "1") return color;
-	if (opacity === "0") return "#0000";
+  if (opacity === '1') return color
+  if (opacity === '0') return '#0000'
 
-	// convert rgb and hsl to alpha variant
-	return color.replace(/^(rgb|hsl)(\([^)]+)\)$/, `$1a$2,${opacity})`);
+  // convert rgb and hsl to alpha variant
+  return color.replace(/^(rgb|hsl)(\([^)]+)\)$/, `$1a$2,${opacity})`)
 }
 
 /**
@@ -68,20 +60,20 @@ export function toColorValue(
  * @returns the dark color if found
  */
 export function autoDarkColor(
-	section: string,
-	key: string,
-	{ theme }: Context<any>,
+  section: string,
+  key: string,
+  { theme }: Context<any>,
 ): ColorValue | Falsey {
-	// 50 -> 900, 100 -> 800, ..., 800 -> 100, 900 -> 50
-	// key: gray-50, gray.50
+  // 50 -> 900, 100 -> 800, ..., 800 -> 100, 900 -> 50
+  // key: gray-50, gray.50
 
-	const replaceKey = key.replace(
-		/\d+$/,
-		(shade) =>
-			// ~~(parseInt(shade, 10) / 100): 50 -> 0, 900 -> 9
-			// (9 - 0) -> 900, (9 - 9) -> 50
-			((9 - ~~(Number.parseInt(shade, 10) / 100) || 0.5) * 100) as any,
-	);
+  const replaceKey = key.replace(
+    /\d+$/,
+    (shade) =>
+      // ~~(parseInt(shade, 10) / 100): 50 -> 0, 900 -> 9
+      // (9 - 0) -> 900, (9 - 9) -> 50
+      ((9 - ~~(Number.parseInt(shade, 10) / 100) || 0.5) * 100) as any,
+  )
 
-	return theme(section as "colors", replaceKey);
+  return theme(section as 'colors', replaceKey)
 }

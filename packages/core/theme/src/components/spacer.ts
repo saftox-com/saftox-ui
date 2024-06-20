@@ -1,6 +1,6 @@
-import type { VariantProps } from "@saftox-ui/variants";
+import type { VariantProps } from '@saftox-ui/variants'
 
-import { tv } from "../utils/tv";
+import { tv } from '../utils/tv'
 
 /**
  * Spacer wrapper **Variants** component
@@ -12,18 +12,18 @@ import { tv } from "../utils/tv";
  * <span classes={styles} />
  */
 const spacer = tv({
-	base: "w-px h-px inline-block",
-	variants: {
-		isInline: {
-			true: "inline-block",
-			false: "block",
-		},
-	},
-	defaultVariants: {
-		isInline: false,
-	},
-});
+  base: 'w-px h-px inline-block',
+  variants: {
+    isInline: {
+      true: 'inline-block',
+      false: 'block',
+    },
+  },
+  defaultVariants: {
+    isInline: false,
+  },
+})
 
-export type SpacerVariantProps = VariantProps<typeof spacer>;
+export type SpacerVariantProps = VariantProps<typeof spacer>
 
-export { spacer };
+export { spacer }

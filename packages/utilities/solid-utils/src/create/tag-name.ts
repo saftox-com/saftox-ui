@@ -1,5 +1,6 @@
-import { createMemo } from "solid-js";
-import { type MaybeAccessor, access } from "../reactivity";
+import { createMemo } from 'solid-js'
+
+import { access, type MaybeAccessor } from '../reactivity'
 
 /**
  * Returns a memoized signal with the tag name of the element.
@@ -11,12 +12,10 @@ import { type MaybeAccessor, access } from "../reactivity";
  * ```
  */
 export const createTagName = (props: {
-	element: MaybeAccessor<HTMLElement | null>;
-	fallback: string;
+  element: MaybeAccessor<HTMLElement | null>
+  fallback: string
 }) => {
-	const tagName = createMemo(
-		() => access(props.element)?.tagName.toLowerCase() ?? props.fallback,
-	);
+  const tagName = createMemo(() => access(props.element)?.tagName.toLowerCase() ?? props.fallback)
 
-	return tagName;
-};
+  return tagName
+}

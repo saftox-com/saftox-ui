@@ -1,1 +1,1 @@
-export { hyphenate, camelize } from "@solidjs-use/shared";
+export { hyphenate, camelize } from '@solidjs-use/shared'

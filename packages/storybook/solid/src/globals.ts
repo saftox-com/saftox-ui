@@ -1,7 +1,7 @@
-import { global } from "@storybook/global";
+import { global } from '@storybook/global'
 
-const { window: globalWindow } = global;
+const { window: globalWindow } = global
 
 if (globalWindow) {
-	globalWindow.STORYBOOK_ENV = "solid";
+  globalWindow.STORYBOOK_ENV = 'solid'
 }

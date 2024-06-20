@@ -1,3 +1,3 @@
-import { viteConfig } from "../../../../configs/vite.config";
+import { viteConfig } from '../../../../configs/vite.config'
 
-export default viteConfig;
+export default viteConfig

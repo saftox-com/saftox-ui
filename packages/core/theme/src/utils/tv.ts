@@ -1,21 +1,22 @@
-import type { TV } from "@saftox-ui/variants";
-import { tv as tvBase } from "@saftox-ui/variants";
+import type { TV } from '@saftox-ui/variants'
 
-import { twMergeConfig } from "./tw-merge-config";
+import { twMergeConfig } from './tw-merge-config'
+
+import { tv as tvBase } from '@saftox-ui/variants'
 
 export const tv: TV = (options, config) =>
-	tvBase(options, {
-		...config,
-		twMerge: config?.twMerge ?? true,
-		twMergeConfig: {
-			...config?.twMergeConfig,
-			theme: {
-				...config?.twMergeConfig?.theme,
-				...twMergeConfig.theme,
-			},
-			classGroups: {
-				...config?.twMergeConfig?.classGroups,
-				...twMergeConfig.classGroups,
-			},
-		},
-	});
+  tvBase(options, {
+    ...config,
+    twMerge: config?.twMerge ?? true,
+    twMergeConfig: {
+      ...config?.twMergeConfig,
+      theme: {
+        ...config?.twMergeConfig?.theme,
+        ...twMergeConfig.theme,
+      },
+      classGroups: {
+        ...config?.twMergeConfig?.classGroups,
+        ...twMergeConfig.classGroups,
+      },
+    },
+  })

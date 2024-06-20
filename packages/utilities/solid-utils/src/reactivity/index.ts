@@ -1,7 +1,4 @@
-import type {
-	MaybeAccessor,
-	MaybeAccessorValue,
-} from "@solid-primitives/utils";
-export type { MaybeAccessor, MaybeAccessorValue };
+import type { MaybeAccessor, MaybeAccessorValue } from '@solid-primitives/utils'
+export type { MaybeAccessor, MaybeAccessorValue }
 
-export * from "./lib";
+export * from './lib'

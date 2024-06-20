@@ -1,1 +1,1 @@
-export { useDebounceFn } from "@solidjs-use/shared";
+export { useDebounceFn } from '@solidjs-use/shared'

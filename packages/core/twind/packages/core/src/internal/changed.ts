@@ -6,5 +6,5 @@
  * @returns are they different
  */
 export function changed(a: string, b: string): boolean {
-	return a !== b && `${a.split(" ").sort()}` !== `${b.split(" ").sort()}`;
+  return a !== b && `${a.split(' ').sort()}` !== `${b.split(' ').sort()}`
 }

@@ -1,1 +1,1 @@
-export { toValue } from "@solidjs-use/shared";
+export { toValue } from '@solidjs-use/shared'
