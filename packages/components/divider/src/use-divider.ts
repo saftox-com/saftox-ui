@@ -2,11 +2,11 @@ import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps, PropGetter } from '@saftox-ui/system-ssc'
 import type { DividerVariantProps } from '@saftox-ui/theme'
 
-import { createSeparator, type SeparatorProps as AriaSeparatorProps } from './create-separator'
-
 import { mergeProps, splitProps } from 'solid-js'
 
 import { divider } from '@saftox-ui/theme'
+
+import { createSeparator, type SeparatorProps as AriaSeparatorProps } from './aria/create-separator'
 
 interface Props extends HTMLSaftoxUIProps<'hr'> {
   /**

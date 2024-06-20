@@ -1,8 +1,6 @@
 import type { UseLinkProps } from './link-types'
 import type { PropGetter } from '@saftox-ui/system'
 
-import { createLink } from './create-link'
-
 import { createSignal, mergeProps, splitProps } from 'solid-js'
 
 import { createFocusRing } from '@saftox-ui/focus'
@@ -10,6 +8,8 @@ import { dataAttr } from '@saftox-ui/shared-utils'
 import { mergeRefs } from '@saftox-ui/solid-utils/reactivity'
 import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
 import { link } from '@saftox-ui/theme'
+
+import { createLink } from './aria/create-link'
 
 export function useLink(originalProps: UseLinkProps) {
   const globalContext = useProviderContext()

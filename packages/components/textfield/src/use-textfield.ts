@@ -1,8 +1,6 @@
 import type { UseTextfieldProps } from './textfield-types'
 import type { PropGetter } from '@saftox-ui/system'
 
-import { createTextField } from './create-textfield'
-
 import { createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
 import { createFocusRing } from '@saftox-ui/focus'
@@ -12,6 +10,8 @@ import { mergeRefs } from '@saftox-ui/solid-utils/reactivity'
 import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
 import { textfield } from '@saftox-ui/theme'
 import { createControllableSignal, filterDOMProps } from '@saftox-ui/utils'
+
+import { createTextField } from './aria/create-textfield'
 
 export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement>(
   originalProps: UseTextfieldProps<T>,

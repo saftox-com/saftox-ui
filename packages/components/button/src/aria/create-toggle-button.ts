@@ -1,4 +1,4 @@
-import type { AriaToggleButtonProps } from './button-types'
+import type { AriaToggleButtonProps } from '../button-types'
 import type { ButtonAria } from './create-button'
 import type { ToggleState } from '@saftox-ui/toggle'
 import type { ElementType } from '@saftox-ui/types'

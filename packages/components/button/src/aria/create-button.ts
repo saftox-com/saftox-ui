@@ -1,4 +1,4 @@
-import type { AriaButtonProps } from './button-types'
+import type { AriaButtonProps } from '../button-types'
 import type { ElementType } from '@saftox-ui/types'
 import type { Accessor, JSX } from 'solid-js'
 

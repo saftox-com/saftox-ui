@@ -1,4 +1,4 @@
-import type { AriaSwitchProps, SwitchAria } from './switch-types'
+import type { AriaSwitchProps, SwitchAria } from '../switch-types'
 import type { Accessor, JSX } from 'solid-js'
 
 import { mergeProps } from 'solid-js'
