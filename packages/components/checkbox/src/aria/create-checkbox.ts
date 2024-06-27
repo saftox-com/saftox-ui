@@ -1,7 +1,6 @@
-import type { FormValidationState } from '@saftox-ui/form'
 import type { AriaToggleProps } from '@saftox-ui/toggle'
 import type { ToggleState, ToggleStates } from '@saftox-ui/toggle'
-import type { DOMAttributes } from '@saftox-ui/types'
+import type { DOMAttributes, ValidationResult } from '@saftox-ui/types'
 import type { Accessor, JSX } from 'solid-js'
 
 import { createEffect, mergeProps, on, onMount } from 'solid-js'
@@ -29,6 +28,8 @@ export interface CheckboxAria {
   inputProps: JSX.InputHTMLAttributes<HTMLInputElement>
   /** The states of the checkbox component. */
   states: ToggleStates
+  //
+  displayValidation: Accessor<ValidationResult>
 }
 
 /**
@@ -51,11 +52,7 @@ export function createCheckbox(
     }),
   )
 
-  const displayValidationProps = pickProps(validationState.displayValidation, [
-    'isInvalid',
-    'validationErrors',
-    'validationDetails',
-  ])
+  const displayValidation = () => validationState.displayValidation()
 
   const { labelProps, inputProps: toggleInputProps, states } = createToggle(props, state, inputRef)
 
@@ -97,12 +94,10 @@ export function createCheckbox(
     required: props.isRequired && props.validationBehavior === 'native',
   })
 
-  return combineProps(
-    {
-      labelProps,
-      inputProps,
-      states,
-    },
-    displayValidationProps,
-  )
+  return {
+    labelProps,
+    inputProps,
+    states,
+    displayValidation,
+  }
 }

@@ -12,7 +12,7 @@ import type {
   ValidationResult,
   ValueBase,
 } from '@saftox-ui/types'
-import type { JSX } from 'solid-js'
+import type { Accessor, JSX } from 'solid-js'
 
 import { createCheckboxGroupState } from './create-checkbox-group-state'
 
@@ -42,7 +42,7 @@ export interface AriaCheckboxGroupProps
   name?: string
 }
 
-interface CheckboxGroupAria extends ValidationResult {
+interface CheckboxGroupAria {
   /** Props for the checkbox group wrapper element. */
   groupProps: DOMAttributes
   /** Props for the checkbox group's visible label (if any). */
@@ -51,6 +51,8 @@ interface CheckboxGroupAria extends ValidationResult {
   descriptionProps: DOMAttributes
   /** Props for the checkbox group error message element, if any. */
   errorMessageProps: DOMAttributes
+  /** */
+  displayValidation: Accessor<ValidationResult>
 }
 
 /**
@@ -62,11 +64,7 @@ export function createCheckboxGroup(
   props: AriaCheckboxGroupProps,
   state: CheckboxGroupState,
 ): CheckboxGroupAria {
-  const displayValidationState = pickProps(state.displayValidation, [
-    'isInvalid',
-    'validationErrors',
-    'validationDetails',
-  ])
+  const displayValidation = () => state.displayValidation()
 
   const { labelProps, fieldProps, descriptionProps, errorMessageProps } = createField(
     mergeProps(props, {
@@ -103,13 +101,11 @@ export function createCheckboxGroup(
     focusWithinProps,
   )
 
-  return combineProps(
-    {
-      groupProps,
-      labelProps,
-      descriptionProps,
-      errorMessageProps,
-    },
-    displayValidationState,
-  )
+  return {
+    groupProps,
+    labelProps,
+    descriptionProps,
+    errorMessageProps,
+    displayValidation,
+  }
 }

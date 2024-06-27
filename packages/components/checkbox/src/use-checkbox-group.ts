@@ -74,14 +74,8 @@ export function useCheckboxGroup(originalProps: UseCheckboxGroupProps) {
 
   const groupState = createCheckboxGroupState(checkboxGroupProps)
 
-  const {
-    labelProps,
-    groupProps,
-    descriptionProps,
-    errorMessageProps,
-    validationErrors,
-    validationDetails,
-  } = createCheckboxGroup(checkboxGroupProps, groupState)
+  const { labelProps, groupProps, descriptionProps, errorMessageProps, displayValidation } =
+    createCheckboxGroup(checkboxGroupProps, groupState)
 
   const properties = {
     get disableAnimation() {
@@ -99,10 +93,14 @@ export function useCheckboxGroup(originalProps: UseCheckboxGroupProps) {
             get isInvalid() {
               return this.isInvalid
             },
-            validationErrors,
-            validationDetails,
+            get validationErrors() {
+              return displayValidation().validationErrors
+            },
+            get validationDetails() {
+              return displayValidation().validationDetails
+            },
           })
-        : local.errorMessage || validationErrors?.join(' ')
+        : local.errorMessage || displayValidation().validationErrors?.join(' ')
     },
     get baseStyle() {
       return clsx(local.classes, local.class)

@@ -1,13 +1,11 @@
 import type { CheckboxGroupProps } from './create-checkbox-group'
 import type { FormValidationState } from '@saftox-ui/form'
-import type { MaybeAccessor } from '@saftox-ui/solid-utils/reactivity'
 import type { ValidationResult, ValidationState } from '@saftox-ui/types'
 import type { Accessor } from 'solid-js'
 
 import { mergeProps } from 'solid-js'
 
 import { createFormValidationState, mergeValidation } from '@saftox-ui/form'
-import { combineProps } from '@saftox-ui/solid-utils/reactivity'
 import { access } from '@saftox-ui/solid-utils/reactivity'
 import { createControllableArraySignal } from '@saftox-ui/utils'
 
@@ -64,7 +62,7 @@ export function createCheckboxGroupState(props: CheckboxGroupProps = {}): Checkb
     }),
   )
 
-  const isInvalid = () => validation.displayValidation.isInvalid
+  const isInvalid = () => validation.displayValidation().isInvalid
 
   const addToSelectedValues = (value: string) => {
     setSelectedValues(selectedValues().concat(value))
@@ -131,20 +129,25 @@ export function createCheckboxGroupState(props: CheckboxGroupProps = {}): Checkb
     validation.updateValidation(mergeValidation(...s.values()))
   }
 
-  return combineProps(validation, {
-    value: selectedValues,
-    isDisabled,
-    isReadOnly,
-    get validationState() {
-      return props.validationState ?? (isInvalid() ? 'invalid' : null)
+  return mergeProps(
+    validation,
+    {
+      value: selectedValues,
+      isDisabled,
+      isReadOnly,
+      isInvalid,
+      isRequired,
+      isSelected,
+      setValue,
+      addValue,
+      removeValue,
+      toggleValue,
+      setInvalid,
     },
-    isInvalid,
-    isRequired,
-    isSelected,
-    setValue,
-    addValue,
-    removeValue,
-    toggleValue,
-    setInvalid,
-  })
+    {
+      get validationState() {
+        return props.validationState ?? (isInvalid() ? 'invalid' : null)
+      },
+    },
+  )
 }

@@ -24,7 +24,7 @@ const Checkbox: Component<CheckboxProps> = (props) => {
 
   const clonedIcon = () => {
     if (typeof icon === 'function') {
-      return icon(getIconProps())
+      return icon(getIconProps() as any)
     }
 
     return icon
