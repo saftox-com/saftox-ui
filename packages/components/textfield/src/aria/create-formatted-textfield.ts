@@ -104,9 +104,7 @@ export function createFormattedTextField(
     inputProps: textFieldProps,
     descriptionProps,
     errorMessageProps,
-    isInvalid,
-    validationErrors,
-    validationDetails,
+    displayValidation,
   } = createTextField(props, inputRef)
 
   let compositionStartState: Pick<
@@ -174,8 +172,6 @@ export function createFormattedTextField(
     labelProps,
     descriptionProps,
     errorMessageProps,
-    isInvalid,
-    validationErrors,
-    validationDetails,
+    displayValidation,
   }
 }
