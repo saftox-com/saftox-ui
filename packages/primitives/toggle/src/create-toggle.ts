@@ -1,4 +1,4 @@
-import type { CreateToggleStateProps, ToggleState } from './create-toggle-state'
+import type { ToggleState } from './create-toggle-state'
 import type {
   AriaLabelingProps,
   AriaValidationProps,
@@ -9,19 +9,39 @@ import type {
 } from '@saftox-ui/types'
 import type { Accessor, JSX } from 'solid-js'
 
-import { createToggleState } from './create-toggle-state'
-
-import { createMemo, mergeProps } from 'solid-js'
+import { mergeProps } from 'solid-js'
 
 import { createFocusable } from '@saftox-ui/focus'
 import { createPress } from '@saftox-ui/interactions'
+import { issueWarning } from '@saftox-ui/shared-utils'
+import { combineProps } from '@saftox-ui/solid-utils/reactivity'
 import { filterDOMProps } from '@saftox-ui/utils'
 
+export interface ToggleProps extends InputBase, Validation<boolean>, FocusableProps {
+  /**
+   * The label for the element.
+   */
+  children?: JSX.Element
+  /**
+   * Whether the element should be selected (uncontrolled).
+   */
+  defaultSelected?: boolean
+  /**
+   * Whether the element should be selected (controlled).
+   */
+  isSelected?: boolean
+  /**
+   * Handler that is called when the element's selection state changes.
+   */
+  onChange?: (isSelected: boolean) => void
+  /**
+   * The value of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue).
+   */
+  value?: string
+}
+
 export interface AriaToggleProps
-  extends Omit<CreateToggleStateProps, 'isReadOnly'>,
-    InputBase,
-    Validation,
-    FocusableProps,
+  extends ToggleProps,
     FocusableDOMProps,
     AriaLabelingProps,
     AriaValidationProps {
@@ -31,36 +51,32 @@ export interface AriaToggleProps
   'aria-controls'?: string
 
   /**
-   * The label for the element.
-   */
-  children?: JSX.Element
-
-  /**
-   * The value of the input element, used when submitting an HTML form.
-   * See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue).
-   */
-  value?: string
-
-  /**
    * The name of the input element, used when submitting an HTML form.
    * See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname).
    */
   name?: string
 }
 
+export interface ToggleStates {
+  /** Whether the toggle is selected. */
+  isSelected: boolean
+  /** Whether the toggle is in a pressed state. */
+  isPressed: boolean
+  /** Whether the toggle is disabled. */
+  isDisabled: boolean
+  /** Whether the toggle is read only. */
+  isReadOnly: boolean
+  /** Whether the toggle is invalid. */
+  isInvalid: boolean
+}
+
 export interface ToggleAria {
-  /**
-   * Props to be spread on the input element.
-   */
+  /** Props to be spread on the label element. */
+  labelProps: JSX.LabelHTMLAttributes<HTMLLabelElement>
+  /** Props to be spread on the input element. */
   inputProps: JSX.InputHTMLAttributes<HTMLInputElement>
-  /**
-   * Whether the target is currently pressed.
-   */
-  isPressed: Accessor<boolean>
-  /**
-   * State for the toggle element, as returned by `createToggleState`.
-   */
-  state: ToggleState
+  /** The states of the toggle component. */
+  states: ToggleStates
 }
 
 /**
@@ -70,49 +86,57 @@ export interface ToggleAria {
  */
 export function createToggle(
   originalProps: AriaToggleProps,
+  state: ToggleState,
   inputRef: Accessor<HTMLInputElement | undefined>,
 ): ToggleAria {
-  const defaultProps: AriaToggleProps = {
+  const defaultProps = {
     isDisabled: false,
+    isReadOnly: false,
     validationState: 'valid',
   }
 
   const props = mergeProps(defaultProps, originalProps)
 
-  const state = createToggleState(props)
-
   const onChange: JSX.EventHandlerUnion<HTMLInputElement, Event> = (event) => {
-    // since we spread props on label, onChange will end up there as well as in here.
-    // so we have to stop propagation at the lowest level that we care about
     event.stopPropagation()
-
     const target = event.target as HTMLInputElement
-
     state.setSelected(target.checked)
 
-    // Unlike in React, inputs `checked` state can be out of sync with our toggle state.
-    // for example a readonly `<input type="checkbox" />` is always "checkable".
-    //
-    // Also even if an input is controlled (ex: `<input type="checkbox" checked={isChecked} />`,
-    // clicking on the input will change its internal `checked` state.
-    //
-    // To prevent this, we need to force the input `checked` state to be in sync with the toggle state.
+    // Ensure input `checked` state is in sync with the toggle state.
     target.checked = state.isSelected()
+  }
+
+  const hasChildren = 'children' in props
+  const hasAriaLabel = 'aria-label' in props || 'ariaLabelledby' in props
+  if (!hasChildren && !hasAriaLabel) {
+    issueWarning('If you do not provide children, you must specify an aria-label for accessibility')
   }
 
   // This handles focusing the input on pointer down, which Safari does not do by default.
   const { pressProps, isPressed } = createPress<HTMLInputElement>({
-    isDisabled: () => props.isDisabled,
+    get isDisabled() {
+      return props.isDisabled
+    },
+  })
+
+  // iOS does not toggle checkboxes if you drag off and back onto the label, so handle it ourselves.
+  const { pressProps: labelPressProps, isPressed: isLabelPressed } = createPress<HTMLLabelElement>({
+    get isDisabled() {
+      return props.isDisabled || props.isReadOnly
+    },
+    onPress() {
+      state.toggle()
+    },
   })
 
   const { focusableProps } = createFocusable(props, inputRef)
-
-  const domProps = mergeProps(createMemo(() => filterDOMProps(props, { labelable: true })))
+  const interactions = mergeProps(pressProps, focusableProps)
+  const domProps = filterDOMProps(props, { labelable: true })
 
   const baseToggleProps: JSX.InputHTMLAttributes<any> = {
     type: 'checkbox',
     get 'aria-invalid'() {
-      return props.validationState === 'invalid' || undefined
+      return props.isInvalid || props.validationState === 'invalid' || undefined
     },
     get 'aria-errormessage'() {
       return props['aria-errormessage']
@@ -138,7 +162,32 @@ export function createToggle(
     onChange,
   }
 
-  const inputProps = mergeProps(domProps, baseToggleProps, pressProps, focusableProps)
+  const inputProps = mergeProps(domProps, baseToggleProps, interactions)
+  const labelProps = mergeProps(labelPressProps, {
+    onClick: (e: Event) => e.preventDefault(),
+  })
 
-  return { inputProps, isPressed, state }
+  const states = {
+    get isPressed() {
+      return isPressed() || isLabelPressed()
+    },
+    get isSelected() {
+      return state.isSelected()
+    },
+    get isDisabled() {
+      return props.isDisabled
+    },
+    get isReadOnly() {
+      return props.isReadOnly
+    },
+    get isInvalid() {
+      return props.isInvalid || props.validationState === 'invalid'
+    },
+  }
+
+  return {
+    labelProps,
+    inputProps,
+    states,
+  }
 }

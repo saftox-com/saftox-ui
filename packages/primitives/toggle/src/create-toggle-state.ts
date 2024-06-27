@@ -1,53 +1,25 @@
-import type { MaybeAccessor } from '@solid-primitives/utils'
+import type { ToggleProps } from './create-toggle'
+import type { MaybeAccessor } from '@saftox-ui/solid-utils/reactivity'
 import type { Accessor } from 'solid-js'
 
-import { access } from '@solid-primitives/utils'
-
+import { access } from '@saftox-ui/solid-utils/reactivity'
 import { createControllableBooleanSignal } from '@saftox-ui/utils'
 
-export interface CreateToggleStateProps {
-  /**
-   * Whether the element should be selected (uncontrolled).
-   */
-  defaultSelected?: MaybeAccessor<boolean | undefined>
-
-  /**
-   * Whether the element should be selected (controlled).
-   */
-  isSelected?: MaybeAccessor<boolean | undefined>
-
-  /**
-   * Whether the element can be selected but not changed by the user.
-   */
-  isReadOnly?: MaybeAccessor<boolean | undefined>
-
-  /**
-   * Handler that is called when the element's selection state changes.
-   */
-  onChange?: (isSelected: boolean) => void
-}
+export interface ToggleStateOptions extends Omit<ToggleProps, 'children'> {}
 
 export interface ToggleState {
-  /**
-   * Whether the toggle is selected.
-   */
-  isSelected: Accessor<boolean>
-
-  /**
-   *  Updates selection state.
-   */
+  /** Whether the toggle is selected. */
+  readonly isSelected: Accessor<boolean>
+  /** Updates selection state. */
   setSelected: (isSelected: boolean) => void
-
-  /**
-   * Toggle the selection state.
-   */
+  /** Toggle the selection state. */
   toggle: () => void
 }
 
 /**
  * Provides state management for toggle components like checkboxes and switches.
  */
-export function createToggleState(props: CreateToggleStateProps = {}): ToggleState {
+export function createToggleState(props: ToggleStateOptions = {}): ToggleState {
   const [isSelected, _setSelected] = createControllableBooleanSignal({
     value: () => access(props.isSelected),
     defaultValue: () => !!access(props.defaultSelected),

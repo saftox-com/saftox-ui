@@ -1,8 +1,8 @@
-import type { Accessor } from 'solid-js'
+import type { Accessor, AccessorArray } from 'solid-js'
 
-import { isServer, noop } from '@solid-primitives/utils'
+import { isServer } from '@solid-primitives/utils'
 
-import { createSignal, createUniqueId, getListener, onCleanup } from 'solid-js'
+import { createEffect, createSignal, createUniqueId, on } from 'solid-js'
 
 export const ID_PREFIX = 'saftox-ui'
 
@@ -16,27 +16,27 @@ export function createId(prefix = ID_PREFIX): string {
 }
 
 /**
- * Create a universal id that will be set to `undefined` if not attached to an element.
- * @param prefix An optional prefix for the generated id.
- * @param deps Dependencies that should trigger an id usage check.
- * @returns An accessor for the generated id.
+ * Used to generate an id, and after render, check if that id is rendered so we know
+ * if we can use it in places such as labelledby.
+ * @param deps - When to recalculate if the id is in the DOM.
  */
 export function createSlotId(
-  prefix?: string,
-): [id: Accessor<string | undefined>, track: VoidFunction] {
-  const id = createId(prefix)
+  deps: Accessor<any> | AccessorArray<any>,
+): [string, Accessor<boolean>] {
+  const id = createId()
 
-  if (isServer) return [() => id, noop]
-
-  const [slotId, setSlotId] = createSignal<string | undefined>(id)
-
-  const updateSlotId = () => setSlotId(document.getElementById(id) ? id : undefined)
-  queueMicrotask(updateSlotId)
-
-  const track = () => {
-    queueMicrotask(updateSlotId)
-    getListener() && onCleanup(updateSlotId)
+  if (isServer) {
+    return [id, () => false]
   }
 
-  return [slotId, track]
+  const [isElementExists, setIsElementExists] = createSignal(false)
+
+  const updateSlotId = () => {
+    const elementExists = Boolean(document.getElementById(id))
+    setIsElementExists(elementExists)
+  }
+
+  createEffect(on(deps, updateSlotId, { defer: true }))
+
+  return [id, isElementExists]
 }
