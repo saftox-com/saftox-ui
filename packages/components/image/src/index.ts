@@ -1,10 +1,10 @@
-import Image from "./image";
+import Image from './image'
 
 // export types
-export type { ImageProps } from "./image";
+export type { ImageProps } from './image'
 
 // export hooks
-export { useImage } from "./use-image";
+export { useImage } from './use-image'
 
 // export component
-export { Image };
+export { Image }

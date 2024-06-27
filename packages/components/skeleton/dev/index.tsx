@@ -1,14 +1,14 @@
-import { render } from "solid-js/web";
-import { Skeleton } from "../src";
+import { render } from 'solid-js/web'
+import { Skeleton } from '../src'
 
 const App = () => {
-	return (
-		<>
-			<Skeleton>
-				<span>Hello Solid</span>
-			</Skeleton>
-		</>
-	);
-};
+  return (
+    <>
+      <Skeleton>
+        <span>Hello Solid</span>
+      </Skeleton>
+    </>
+  )
+}
 
-render(() => <App />, document.getElementById("root")!);
+render(() => <App />, document.getElementById('root')!)

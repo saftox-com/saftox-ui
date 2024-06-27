@@ -1,8 +1,7 @@
-import Textarea from "./textarea";
-import Textfield from "./textfield";
+import Textarea from './textarea'
+import Textfield from './textfield'
+import { useTextfield } from './use-textfield'
 
-import { useTextfield } from "./use-textfield";
-
-export type * from "./textfield-types";
+export type * from './textfield-types'
 // export component
-export { Textfield, Textarea, useTextfield };
+export { Textfield, Textarea, useTextfield }

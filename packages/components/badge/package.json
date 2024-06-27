@@ -1,47 +1,46 @@
 {
-	"name": "@saftox-ui/badge",
-	"author": "Serhii Zaitsev <ceo@saftox.com>",
-	"version": "0.0.1",
-	"description": "Badges are used as a small numerical value or status descriptor for UI elements.",
-	"keywords": ["badge"],
-	"private": true,
-	"main": "./src/index.ts",
-	"sideEffects": false,
-	"files": ["dist"],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/components/badge"
-	},
-	"bugs": {
-		"url": "https://github.com/saftox-com/saftox-ui/issues"
-	},
-	"scripts": {
-		"build": "tsup src --dts",
-		"build:fast": "tsup src",
-		"dev": "pnpm build:fast --watch",
-		"dev:vite": "vite serve dev",
-		"clean": "rimraf dist .turbo",
-		"typecheck": "tsc --noEmit",
-		"prepack": "clean-package",
-		"postpack": "clean-package restore"
-	},
-	"peerDependencies": {
-		"solid-js": ">=1.8.17",
-		"@saftox-ui/theme": "0.0.1",
-		"@saftox-ui/system": "0.0.1"
-	},
-	"dependencies": {
-		"@saftox-ui/shared-utils": "0.0.1",
-		"@saftox-ui/solid-utils": "0.0.1"
-	},
-	"devDependencies": {
-		"@saftox-ui/variants": "0.0.1",
-		"@saftox-ui/avatar": "workspace:*",
-		"@saftox-ui/shared-icons": "workspace:*"
-	},
-	"clean-package": "../../../configs/clean-package.config.json"
+  "name": "@saftox-ui/badge",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "Badges are used as a small numerical value or status descriptor for UI elements.",
+  "keywords": ["badge"],
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/components/badge"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "dev": "pnpm build:fast --watch",
+    "dev:vite": "vite serve dev",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.17",
+    "@saftox-ui/theme": "0.0.1",
+    "@saftox-ui/system": "0.0.1"
+  },
+  "dependencies": {
+    "@saftox-ui/shared-utils": "0.0.1",
+    "@saftox-ui/solid-utils": "0.0.1"
+  },
+  "devDependencies": {
+    "@saftox-ui/variants": "0.0.1",
+    "@saftox-ui/avatar": "workspace:*",
+    "@saftox-ui/shared-icons": "workspace:*"
+  },
+  "clean-package": "../../../configs/clean-package.config.json"
 }

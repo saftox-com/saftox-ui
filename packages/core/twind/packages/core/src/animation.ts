@@ -1,54 +1,51 @@
-import type { CSSObject, CSSProperties, StringLike } from "./types";
+import type { CSSObject, CSSProperties, StringLike } from './types'
 
-import { css } from "./css";
+import { css } from './css'
 
 export type AnimationFunction = (
-	animation: string | CSSProperties,
-	waypoints: StringLike,
-) => StringLike;
+  animation: string | CSSProperties,
+  waypoints: StringLike,
+) => StringLike
 
 export type Animation = AnimationFunction & {
-	[label: string]: AnimationFunction;
-};
+  [label: string]: AnimationFunction
+}
 
 /**
  * @group Class Name Generators
  */
 export const animation = /* #__PURE__ */ new Proxy(
-	function animation(
-		anim: string | CSSProperties,
-		waypoints: StringLike,
-	): StringLike {
-		return animation$("animation", anim, waypoints);
-	} as Animation,
-	{
-		get(target, name) {
-			if (name in target) return target[name as string];
+  function animation(anim: string | CSSProperties, waypoints: StringLike): StringLike {
+    return animation$('animation', anim, waypoints)
+  } as Animation,
+  {
+    get(target, name) {
+      if (name in target) return target[name as string]
 
-			return function namedAnimation(
-				animation: string | CSSProperties,
-				waypoints: StringLike,
-			): StringLike {
-				return animation$(name as string, animation, waypoints);
-			};
-		},
-	},
-);
+      return function namedAnimation(
+        animation: string | CSSProperties,
+        waypoints: StringLike,
+      ): StringLike {
+        return animation$(name as string, animation, waypoints)
+      }
+    },
+  },
+)
 
 function animation$(
-	label: string,
-	animation: string | CSSProperties,
-	waypoints: StringLike,
+  label: string,
+  animation: string | CSSProperties,
+  waypoints: StringLike,
 ): StringLike {
-	return {
-		toString() {
-			return css({
-				label,
-				"@layer components": {
-					...(typeof animation === "object" ? animation : { animation }),
-					animationName: `${waypoints}`,
-				},
-			} as CSSObject);
-		},
-	} as StringLike;
+  return {
+    toString() {
+      return css({
+        label,
+        '@layer components': {
+          ...(typeof animation === 'object' ? animation : { animation }),
+          animationName: `${waypoints}`,
+        },
+      } as CSSObject)
+    },
+  } as StringLike
 }

@@ -1,8 +1,8 @@
-import { render } from "solid-js/web";
-import { Button } from "../src";
+import { render } from 'solid-js/web'
+import { Button } from '../src'
 
 const App = () => {
-	return <Button>Hello Solid</Button>;
-};
+  return <Button>Hello Solid</Button>
+}
 
-render(() => <App />, document.getElementById("root")!);
+render(() => <App />, document.getElementById('root')!)

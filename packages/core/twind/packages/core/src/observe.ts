@@ -1,11 +1,12 @@
-import type { BaseTheme, Twind } from "./types";
+import type { BaseTheme, Twind } from './types'
 
-import { changed } from "./internal/changed";
-import { tw as tw$ } from "./runtime";
+import { tw as tw$ } from './runtime'
+
+import { changed } from './internal/changed'
 
 export interface TwindMutationObserver {
-	observe: (target: Node) => void;
-	disconnect: () => void;
+  observe: (target: Node) => void
+  disconnect: () => void
 }
 
 /**
@@ -16,66 +17,64 @@ export interface TwindMutationObserver {
  * @internal
  */
 export function mo<Theme extends BaseTheme = BaseTheme, Target = unknown>(
-	tw: Twind<Theme, Target>,
+  tw: Twind<Theme, Target>,
 ): TwindMutationObserver {
-	const observer = new MutationObserver(handleMutationRecords);
+  const observer = new MutationObserver(handleMutationRecords)
 
-	return {
-		observe(target) {
-			observer.observe(target, {
-				attributeFilter: ["class"],
-				subtree: true,
-				childList: true,
-			});
+  return {
+    observe(target) {
+      observer.observe(target, {
+        attributeFilter: ['class'],
+        subtree: true,
+        childList: true,
+      })
 
-			// handle class attribute on target
-			handleClassAttributeChange(target as Element);
+      // handle class attribute on target
+      handleClassAttributeChange(target as Element)
 
-			// handle children of target
-			handleMutationRecords([{ target, type: "" }]);
-		},
-		disconnect() {
-			observer.disconnect();
-		},
-	};
+      // handle children of target
+      handleMutationRecords([{ target, type: '' }])
+    },
+    disconnect() {
+      observer.disconnect()
+    },
+  }
 
-	function handleMutationRecords(records: MinimalMutationRecord[]): void {
-		for (const { type, target } of records) {
-			if (type[0] === "a" /* attribute */) {
-				// class attribute has been changed
-				handleClassAttributeChange(target as Element);
-			} else {
-				/* childList */
-				// some nodes have been added — find all with a class attribute
-				const elementsWithClass = Array.from(
-					(target as Element).querySelectorAll("[class]"),
-				);
+  function handleMutationRecords(records: MinimalMutationRecord[]): void {
+    for (const { type, target } of records) {
+      if (type[0] === 'a' /* attribute */) {
+        // class attribute has been changed
+        handleClassAttributeChange(target as Element)
+      } else {
+        /* childList */
+        // some nodes have been added — find all with a class attribute
+        const elementsWithClass = Array.from((target as Element).querySelectorAll('[class]'))
 
-				for (const el of elementsWithClass) {
-					handleClassAttributeChange(el);
-				}
-			}
-		}
+        for (const el of elementsWithClass) {
+          handleClassAttributeChange(el)
+        }
+      }
+    }
 
-		// remove pending mutations — these are triggered by updating the class attributes
-		observer.takeRecords();
-		// XXX maybe we need to handle all pending mutations
-		// observer.takeRecords().forEach(handleMutation)
-	}
+    // remove pending mutations — these are triggered by updating the class attributes
+    observer.takeRecords()
+    // XXX maybe we need to handle all pending mutations
+    // observer.takeRecords().forEach(handleMutation)
+  }
 
-	function handleClassAttributeChange(target: Element): void {
-		// Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
-		// safe guard access to getAttribute because ShadowRoot does not have attribute but child nodes
-		const tokens = target.getAttribute?.("class");
+  function handleClassAttributeChange(target: Element): void {
+    // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
+    // safe guard access to getAttribute because ShadowRoot does not have attribute but child nodes
+    const tokens = target.getAttribute?.('class')
 
-		let className: string;
+    let className: string
 
-		// try do keep classNames unmodified
-		if (tokens && changed(tokens, (className = tw(tokens)))) {
-			// Not using `target.className = ...` as that is read-only for SVGElements
-			target.setAttribute("class", className);
-		}
-	}
+    // try do keep classNames unmodified
+    if (tokens && changed(tokens, (className = tw(tokens)))) {
+      // Not using `target.className = ...` as that is read-only for SVGElements
+      target.setAttribute('class', className)
+    }
+  }
 }
 
 /**
@@ -85,26 +84,24 @@ export function mo<Theme extends BaseTheme = BaseTheme, Target = unknown>(
  * @returns
  */
 export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
-	tw: Twind<Theme, Target> = tw$ as unknown as Twind<Theme, Target>,
-	target: false | Node = typeof document !== "undefined" &&
-		document.documentElement,
+  tw: Twind<Theme, Target> = tw$ as unknown as Twind<Theme, Target>,
+  target: false | Node = typeof document !== 'undefined' && document.documentElement,
 ): Twind<Theme, Target> {
-	if (target) {
-		const observer = mo(tw);
+  if (target) {
+    const observer = mo(tw)
 
-		observer.observe(target);
+    observer.observe(target)
 
-		// monkey patch tw.destroy to disconnect this observer
-		// eslint-disable-next-line @typescript-eslint/unbound-method
-		const { destroy } = tw;
+    // monkey patch tw.destroy to disconnect this observer
+    const { destroy } = tw
 
-		tw.destroy = () => {
-			observer.disconnect();
-			destroy.call(tw);
-		};
-	}
+    tw.destroy = () => {
+      observer.disconnect()
+      destroy.call(tw)
+    }
+  }
 
-	return tw;
+  return tw
 }
 
 /**
@@ -113,6 +110,6 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
  * omit other properties we are not interested in.
  */
 interface MinimalMutationRecord {
-	readonly type: string;
-	readonly target: Node;
+  readonly type: string
+  readonly target: Node
 }

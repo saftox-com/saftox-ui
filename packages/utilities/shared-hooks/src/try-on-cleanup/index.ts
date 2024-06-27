@@ -1,1 +1,1 @@
-export { tryOnCleanup } from "@solidjs-use/shared";
+export { tryOnCleanup } from '@solidjs-use/shared'

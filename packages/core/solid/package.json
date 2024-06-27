@@ -1,42 +1,41 @@
 {
-	"name": "@saftox-ui/solid",
-	"author": "Serhii Zaitsev <ceo@saftox.com>",
-	"version": "0.0.1",
-	"description": "🚀 Beautiful and modern Solid UI library.",
-	"keywords": ["solid"],
-	"private": true,
-	"main": "./src/index.ts",
-	"sideEffects": false,
-	"files": ["dist"],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/core/solid"
-	},
-	"bugs": {
-		"url": "https://github.com/saftox-com/saftox-ui/issues"
-	},
-	"scripts": {
-		"build": "tsup src --dts",
-		"build:fast": "tsup src",
-		"dev": "pnpm build:fast --watch",
-		"dev:vite": "vite serve dev",
-		"clean": "rimraf dist .turbo",
-		"typecheck": "tsc --noEmit",
-		"prepack": "clean-package",
-		"postpack": "clean-package restore"
-	},
-	"peerDependencies": {
-		"solid-js": ">=1.8.17"
-	},
-	"dependencies": {
-		"@saftox-ui/system": "workspace:*",
-		"@saftox-ui/theme": "workspace:*",
-		"@saftox-ui/button": "workspace:*",
-		"@saftox-ui/spinner": "workspace:*"
-	},
-	"clean-package": "../../../configs/clean-package.config.json"
+  "name": "@saftox-ui/solid",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "🚀 Beautiful and modern Solid UI library.",
+  "keywords": ["solid"],
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/core/solid"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "dev": "pnpm build:fast --watch",
+    "dev:vite": "vite serve dev",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.17"
+  },
+  "dependencies": {
+    "@saftox-ui/system": "workspace:*",
+    "@saftox-ui/theme": "workspace:*",
+    "@saftox-ui/button": "workspace:*",
+    "@saftox-ui/spinner": "workspace:*"
+  },
+  "clean-package": "../../../configs/clean-package.config.json"
 }

@@ -1,14 +1,14 @@
-import { render } from "solid-js/web";
-import { Badge } from "../src";
+import { render } from 'solid-js/web'
+import { Badge } from '../src'
 
 const App = () => {
-	return (
-		<>
-			<Badge>
-				<span>Hello Solid</span>
-			</Badge>
-		</>
-	);
-};
+  return (
+    <>
+      <Badge>
+        <span>Hello Solid</span>
+      </Badge>
+    </>
+  )
+}
 
-render(() => <App />, document.getElementById("root")!);
+render(() => <App />, document.getElementById('root')!)

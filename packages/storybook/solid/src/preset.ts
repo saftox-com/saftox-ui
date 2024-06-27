@@ -1,22 +1,20 @@
-import type { PresetProperty } from "@storybook/types";
+import type { PresetProperty } from '@storybook/types'
 
-// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
-import { dirname, join } from "path";
+import { dirname, join } from 'node:path'
 
 // export const addons: PresetProperty<"addons"> = [];
 
-export const previewAnnotations: PresetProperty<"previewAnnotations"> = async (
-	// biome-ignore lint/style/useDefaultParameterLast: <explanation>
-	input = [],
-	options,
+export const previewAnnotations: PresetProperty<'previewAnnotations'> = async (
+  input = [],
+  options,
 ) => {
-	// const docsEnabled =
-	// 	Object.keys(await options.presets.apply("docs", {}, options)).length > 0;
-	const result: string[] = [];
+  // const docsEnabled =
+  // 	Object.keys(await options.presets.apply("docs", {}, options)).length > 0;
+  const result: string[] = []
 
-	return result.concat(input).concat([join(__dirname, "entry-preview.mjs")]);
-	// .concat(docsEnabled ? [join(__dirname, "entry-preview-docs.mjs")] : []);
-};
+  return result.concat(input).concat([join(__dirname, 'entry-preview.mjs')])
+  // .concat(docsEnabled ? [join(__dirname, "entry-preview-docs.mjs")] : []);
+}
 
 /**
  * Try to resolve react and react-dom from the root node_modules of the project

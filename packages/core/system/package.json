@@ -1,47 +1,46 @@
 {
-	"name": "@saftox-ui/system",
-	"author": "Serhii Zaitsev <ceo@saftox.com>",
-	"version": "0.0.1",
-	"description": "Saftox-UI system primitives",
-	"keywords": ["system"],
-	"private": true,
-	"main": "./src/index.ts",
-	"sideEffects": false,
-	"files": ["dist"],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/saftox-com/saftox-ui.git",
-		"directory": "packages/core/system"
-	},
-	"bugs": {
-		"url": "https://github.com/saftox-com/saftox-ui/issues"
-	},
-	"scripts": {
-		"build": "tsup src --dts",
-		"build:fast": "tsup src",
-		"dev": "pnpm build:fast --watch",
-		"dev:vite": "vite serve dev",
-		"clean": "rimraf dist .turbo",
-		"typecheck": "tsc --noEmit",
-		"prepack": "clean-package",
-		"postpack": "clean-package restore"
-	},
-	"peerDependencies": {
-		"solid-js": ">=1.8.17"
-	},
-	"dependencies": {
-		"@saftox-ui/solid-utils": "0.0.1",
-		"@saftox-ui/system-ssc": "0.0.1",
-		"@saftox-ui/i18n": "0.0.1",
-		"@saftox-ui/utils": "0.0.1"
-	},
-	"clean-package": "../../../configs/clean-package.config.json",
-	"tsup": {
-		"clean": true,
-		"target": "es2019",
-		"format": ["cjs", "esm"]
-	}
+  "name": "@saftox-ui/system",
+  "author": "Serhii Zaitsev <ceo@saftox.com>",
+  "version": "0.0.1",
+  "description": "Saftox-UI system primitives",
+  "keywords": ["system"],
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saftox-com/saftox-ui.git",
+    "directory": "packages/core/system"
+  },
+  "bugs": {
+    "url": "https://github.com/saftox-com/saftox-ui/issues"
+  },
+  "scripts": {
+    "build": "tsup src --dts",
+    "build:fast": "tsup src",
+    "dev": "pnpm build:fast --watch",
+    "dev:vite": "vite serve dev",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.8.17"
+  },
+  "dependencies": {
+    "@saftox-ui/solid-utils": "0.0.1",
+    "@saftox-ui/system-ssc": "0.0.1",
+    "@saftox-ui/i18n": "0.0.1",
+    "@saftox-ui/utils": "0.0.1"
+  },
+  "clean-package": "../../../configs/clean-package.config.json",
+  "tsup": {
+    "clean": true,
+    "target": "es2019",
+    "format": ["cjs", "esm"]
+  }
 }

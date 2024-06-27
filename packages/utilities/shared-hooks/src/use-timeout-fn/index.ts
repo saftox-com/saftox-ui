@@ -1,1 +1,1 @@
-export { useTimeoutFn } from "@solidjs-use/shared";
+export { useTimeoutFn } from '@solidjs-use/shared'
