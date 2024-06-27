@@ -1,4 +1,4 @@
-import type { AriaTextFieldProps } from './aria/create-textfield'
+import type { AriaTextFieldOptions } from './aria/textfield-types'
 import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps } from '@saftox-ui/system'
 import type { SlotsToClasses, TextfieldSlots, TextfieldVariantProps } from '@saftox-ui/theme'
@@ -76,7 +76,7 @@ export interface Props<T extends HTMLInputElement | HTMLTextAreaElement = HTMLIn
 
 export type UseTextfieldProps<T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement> =
   Props<T> &
-    Omit<AriaTextFieldProps<'input' | 'textarea'>, 'onChange' | 'onBlur'> &
+    Omit<AriaTextFieldOptions<'input' | 'textarea'>, 'onChange' | 'onBlur'> &
     TextfieldVariantProps
 
 export type NativeTextareaProps = JSX.TextareaHTMLAttributes<HTMLTextAreaElement>

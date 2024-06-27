@@ -1,7 +1,9 @@
 import type { UseTextfieldProps } from './textfield-types'
 import type { PropGetter } from '@saftox-ui/system'
 
-import { createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
+import { createTextField } from './aria'
+
+import { createEffect, createMemo, createSignal, mergeProps, splitProps } from 'solid-js'
 
 import { createFocusRing } from '@saftox-ui/focus'
 import { createFocusWithin, createHover, createPress } from '@saftox-ui/interactions'
@@ -10,8 +12,6 @@ import { mergeRefs } from '@saftox-ui/solid-utils/reactivity'
 import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
 import { textfield } from '@saftox-ui/theme'
 import { createControllableSignal, filterDOMProps } from '@saftox-ui/utils'
-
-import { createTextField } from './aria/create-textfield'
 
 export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement>(
   originalProps: UseTextfieldProps<T>,
@@ -68,8 +68,8 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
   }
 
   const [inputValue, setInputValue] = createControllableSignal({
-    value: rest.value,
-    defaultValue: rest.defaultValue ?? '',
+    value: () => rest.value,
+    defaultValue: () => rest.defaultValue ?? '',
     onChange: handleValueChange,
   })
 
@@ -80,29 +80,33 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
     domRef()?.focus()
   }
 
-  const mergeCreateTextFieldProps = mergeProps(originalProps as any, {
-    autoCapitalize: originalProps.autoCapitalize,
-    get value() {
-      return inputValue()
-    },
-    get 'aria-label'() {
-      return safeAriaLabel(
-        originalProps?.['aria-label'],
-        originalProps?.label,
-        originalProps?.placeholder,
-      )
-    },
-    get inputElementType() {
-      return properties.isMultiline ? 'textarea' : 'input'
-    },
-    onChange: setInputValue,
-    onInput: (e: InputEvent) => setInputValue((e.target as T).value),
-  })
-
-  const { labelProps, inputProps, descriptionProps, errorMessageProps } = createTextField(
-    mergeCreateTextFieldProps,
-    domRef,
-  )
+  const { labelProps, inputProps, descriptionProps, errorMessageProps, displayValidation } =
+    createTextField(
+      mergeProps(originalProps as any, {
+        get validationBehavior() {
+          return local.validationBehavior
+        },
+        get value() {
+          return inputValue()
+        },
+        get autocapitalize() {
+          return originalProps.autocapitalize
+        },
+        get 'aria-label'() {
+          return safeAriaLabel(
+            originalProps?.['aria-label'],
+            originalProps?.label,
+            originalProps?.placeholder,
+          )
+        },
+        get inputElementType() {
+          return properties.isMultiline ? 'textarea' : 'input'
+        },
+        onChange: setInputValue,
+        onInput: (e: InputEvent) => setInputValue((e.target as T).value),
+      }),
+      domRef,
+    )
 
   const { isHovered, hoverProps } = createHover({
     isDisabled: !!originalProps?.isDisabled,
@@ -121,7 +125,9 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
   })
 
   const { pressProps: clearPressProps } = createPress({
-    isDisabled: !!originalProps?.isDisabled,
+    get isDisabled() {
+      return !!originalProps?.isDisabled
+    },
     onPress: handleClear,
   })
 
@@ -132,6 +138,22 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
     get baseStyles() {
       return clsx(local.classes?.base, local.class, this.isFilled && 'is-filled')
     },
+    get labelPlacement() {
+      if (
+        (!originalProps.labelPlacement || originalProps.labelPlacement === 'inside') &&
+        !local.label
+      ) {
+        return 'outside'
+      }
+      return originalProps.labelPlacement ?? 'inside'
+    },
+    get errorMessage() {
+      return typeof props.errorMessage === 'function'
+        ? props.errorMessage(mergeProps(displayValidation, this.isInvalid))
+        : props.errorMessage || displayValidation()?.validationErrors?.join(' ')
+    },
+
+    //
     get isFilledByDefault() {
       return ['date', 'time', 'month', 'week', 'range'].includes(local.type!)
     },
@@ -144,41 +166,15 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
     get isMultiline() {
       return originalProps.isMultiline
     },
-    get errorMessage() {
-      return originalProps.errorMessage
-    },
     get isInvalid() {
-      return local.validationState === 'invalid' || originalProps.isInvalid
-    },
-    get labelPlacement() {
-      if (
-        (!originalProps.labelPlacement || originalProps.labelPlacement === 'inside') &&
-        !local.label
-      ) {
-        return 'outside'
-      }
-      return originalProps.labelPlacement ?? 'inside'
+      return (
+        local.validationState === 'invalid' ||
+        originalProps.isInvalid ||
+        displayValidation()?.isInvalid
+      )
     },
     get isClearable() {
       return !!local.onClear || originalProps.isClearable
-    },
-    get hasElements() {
-      return !!local.label || !!local.description || !!this.errorMessage
-    },
-    get hasPlaceholder() {
-      return !!originalProps.placeholder
-    },
-    get hasLabel() {
-      return !!local.label
-    },
-    get hasHelper() {
-      return !!local.description || !!this.errorMessage
-    },
-    get shouldLabelBeOutside() {
-      return this.labelPlacement === 'outside' || this.labelPlacement === 'outside-left'
-    },
-    get shouldLabelBeInside() {
-      return this.labelPlacement === 'inside'
     },
     get isPlaceholderShown() {
       const domRefValue = domRef()?.value
@@ -191,9 +187,6 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
     get isOutsideLeft() {
       return this.labelPlacement === 'outside-left'
     },
-    get hasStartContent() {
-      return 'startContent' in originalProps
-    },
     get isLabelOutside() {
       return (
         this.shouldLabelBeOutside &&
@@ -205,8 +198,34 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
     get isLabelOutsideAsPlaceholder() {
       return this.labelPlacement === 'outside' && !this.hasPlaceholder && !this.hasStartContent
     },
+
+    //
+    get hasElements() {
+      return !!local.label || !!local.description || !!this.errorMessage
+    },
+    get hasPlaceholder() {
+      return !!originalProps.placeholder
+    },
+    get hasLabel() {
+      return !!local.label
+    },
+    get hasHelper() {
+      return !!local.description || !!this.errorMessage
+    },
+    get hasStartContent() {
+      return 'startContent' in originalProps
+    },
+
     get hasEndContent() {
       return 'endContent' in originalProps
+    },
+
+    //
+    get shouldLabelBeOutside() {
+      return this.labelPlacement === 'outside' || this.labelPlacement === 'outside-left'
+    },
+    get shouldLabelBeInside() {
+      return this.labelPlacement === 'inside'
     },
   }
 
@@ -330,7 +349,6 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
       inputProps,
       focusProps,
       filterDOMProps(rest, {
-        enabled: true,
         labelable: true,
         omitEventNames: new Set(Object.keys(inputProps)),
       }),
@@ -340,8 +358,8 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
         get 'aria-readonly'() {
           return dataAttr(originalProps.isReadOnly)
         },
-        onChange: chain(inputProps.onChange, local.onChange),
-        onInput: chain(inputProps.onInput, local.onInput),
+        onChange: local.onChange,
+        onInput: local.onInput,
       },
     )
   }
@@ -467,6 +485,9 @@ export function useTextfield<T extends HTMLInputElement | HTMLTextAreaElement = 
     Component,
     properties,
     domRef,
+    baseDomRef,
+    inputWrapperRef,
+    innerWrapperRef,
     getBaseProps,
     getLabelProps,
     getInputProps,

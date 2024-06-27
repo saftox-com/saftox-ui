@@ -1,10 +1,12 @@
 import type { ComponentProps, JSX } from 'solid-js'
 import type { Meta, StoryObj } from 'storybook-solidjs'
+import type { TextfieldProps } from '../src/textfield'
 
-import { Show, createMemo, createSignal } from 'solid-js'
+import { Show, createMemo, createSignal, mergeProps } from 'solid-js'
 
 import { Textfield, useTextfield } from '../src'
-import type { TextfieldProps } from '../src/textfield'
+
+import { Button } from '@saftox-ui/button'
 
 import {
   CloseFilledIcon,
@@ -15,9 +17,8 @@ import {
 } from '@saftox-ui/shared-icons'
 import { button, textfield } from '@saftox-ui/theme'
 
-import { createForm } from '@modular-forms/solid'
+import { createForm, required } from '@modular-forms/solid'
 import { Dynamic } from '@saftox-ui/solid-utils/dynamic'
-import { combineProps } from '@saftox-ui/solid-utils/reactivity'
 
 const meta = {
   title: 'Components/Textfield',
@@ -58,6 +59,12 @@ const meta = {
         type: 'boolean',
       },
     },
+    validationBehavior: {
+      control: {
+        type: 'select',
+      },
+      options: ['aria', 'native'],
+    },
   },
   decorators: [
     (Story: any) => (
@@ -90,6 +97,7 @@ const MirrorTemplate = (args: TextfieldProps) => (
 
 const FormTemplate = (args: TextfieldProps) => {
   const hangleSubmit: JSX.EventHandler<HTMLFormElement, Event> = (e) => {
+    e.preventDefault()
     alert(
       `Submitted value: ${
         (
@@ -99,7 +107,6 @@ const FormTemplate = (args: TextfieldProps) => {
         ).example.value
       }`,
     )
-    e.preventDefault()
   }
   return (
     <form class="w-full max-w-xl flex flex-row items-end gap-4" onsubmit={hangleSubmit}>
@@ -409,7 +416,7 @@ const CustomWithHooksTemplate = (props: TextfieldProps) => {
     getErrorMessageProps,
     getClearButtonProps,
   } = useTextfield(
-    combineProps(props, {
+    mergeProps(props, {
       classes: {
         label: 'text-black/50 dark:text-white text-tiny',
         input: [
@@ -488,31 +495,67 @@ const WithModularFormsTemplate = (args: TextfieldProps) => {
     requiredField: string
   }
 
-  const [loginForm, { Form, Field }] = createForm<LoginForm>()
+  const [loginForm, { Form, Field }] = createForm<LoginForm>({
+    initialValues: {
+      withDefaultValue: 'ceo@saftox.com',
+      withoutDefaultValue: '',
+      requiredField: '',
+    },
+  })
 
   const onSubmit = (data: any) => {
     console.log(data)
+    alert(`Submitted value: ${JSON.stringify(data)}`)
   }
 
   return (
     <Form class="flex flex-col gap-4" onSubmit={onSubmit}>
       <Field name="withDefaultValue">
         {(field, props) => (
-          <div>
+          <>
             <Textfield
               {...args}
               {...props}
-              defaultValue="ceo@saftox.com"
+              defaultValue={field.value}
               isClearable
               label="With default value"
-              // value={field.value || ""}
             />
-          </div>
+          </>
         )}
       </Field>
-      <button class={button({ class: 'w-fit' }).base()} type="submit">
+      <Field name="withoutDefaultValue">
+        {(field, props) => (
+          <>
+            <Textfield
+              {...args}
+              {...props}
+              defaultValue={field.value}
+              isClearable
+              label="Without default value"
+            />
+          </>
+        )}
+      </Field>
+      <Field name="requiredField" validate={required('This switch is required')}>
+        {(field, props) => (
+          <>
+            <Textfield
+              {...args}
+              {...props}
+              defaultValue={field.value}
+              isClearable
+              label="Required"
+            />
+            <Show when={field.error}>
+              <span class="text-danger">{field.error}</span>
+            </Show>
+          </>
+        )}
+      </Field>
+
+      <Button type="submit" variant="solid" fullWidth>
         Submit
-      </button>
+      </Button>
     </Form>
   )
 }

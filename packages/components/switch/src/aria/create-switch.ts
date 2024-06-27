@@ -1,4 +1,5 @@
-import type { AriaSwitchProps, SwitchAria } from '../switch-types'
+import type { AriaSwitchProps, SwitchAria } from './index'
+import type { ToggleState } from '@saftox-ui/toggle'
 import type { Accessor, JSX } from 'solid-js'
 
 import { mergeProps } from 'solid-js'
@@ -13,19 +14,20 @@ import { createToggle } from '@saftox-ui/toggle'
  */
 export function createSwitch(
   props: AriaSwitchProps,
+  state: ToggleState,
   inputRef: Accessor<HTMLInputElement | undefined>,
 ): SwitchAria {
-  const { inputProps: toggleInputProps, isPressed, state } = createToggle(props, inputRef)
+  const { labelProps, inputProps: toggleInputProps, states } = createToggle(props, state, inputRef)
 
   const inputProps = mergeProps(toggleInputProps, {
     role: 'switch',
     get checked() {
-      return state.isSelected()
+      return states.isSelected
     },
     get 'aria-checked'() {
-      return state.isSelected()
+      return states.isSelected
     },
   } as JSX.InputHTMLAttributes<HTMLInputElement>)
 
-  return { inputProps, isPressed, state }
+  return { labelProps, inputProps, states }
 }

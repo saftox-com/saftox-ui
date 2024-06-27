@@ -39,6 +39,7 @@
     "@saftox-ui/shared-icons": "^0.0.1",
     "@saftox-ui/interactions": "^0.0.1",
     "@saftox-ui/textarea-autosize": "^0.0.1",
+    "@saftox-ui/form": "^0.0.1",
     "@saftox-ui/label": "^0.0.1",
     "@saftox-ui/focus": "^0.0.1",
     "@saftox-ui/utils": "^0.0.1",
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@modular-forms/solid": "^0.20.0",
     "@saftox-ui/theme": "workspace:*",
+    "@saftox-ui/button": "workspace:*",
     "@saftox-ui/system": "workspace:*",
     "@saftox-ui/variants": "workspace:*"
   },
