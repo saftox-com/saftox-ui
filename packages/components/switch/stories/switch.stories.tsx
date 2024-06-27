@@ -10,6 +10,8 @@ import { createVisuallyHidden } from '@saftox-ui/visually-hidden'
 import { Show, createSignal } from 'solid-js'
 import { Switch, useSwitch } from '../src'
 
+import { Button } from '@saftox-ui/button'
+
 export default {
   title: 'Components/Switch',
   component: Switch,
@@ -210,9 +212,9 @@ const WithModularFormTemplate = (args: SwitchProps) => {
         }}
       </Field>
 
-      <button type="submit" class={button({ class: 'w-fit' }).base()}>
+      <Button type="submit" variant="solid" fullWidth>
         Submit
-      </button>
+      </Button>
     </Form>
   )
 }

@@ -1,26 +1,8 @@
+import type { AriaSwitchProps } from './aria'
 import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps } from '@saftox-ui/system'
 import type { SlotsToClasses, ToggleSlots, ToggleVariantProps } from '@saftox-ui/theme'
-import type { AriaToggleProps, ToggleState } from '@saftox-ui/toggle'
-import type { AriaValidationProps, Validation } from '@saftox-ui/types'
-import type { Accessor, JSX, VoidComponent } from 'solid-js'
-
-export type AriaSwitchProps = Omit<AriaToggleProps, keyof (Validation & AriaValidationProps)>
-
-export interface SwitchAria {
-  /**
-   * Props for the input element.
-   */
-  inputProps: JSX.InputHTMLAttributes<HTMLInputElement>
-  /**
-   * Whether the target is currently pressed.
-   */
-  isPressed: Accessor<boolean>
-  /**
-   * State for the switch, as returned by `createToggleState`.
-   */
-  state: ToggleState
-}
+import type { JSX, VoidComponent } from 'solid-js'
 
 export type SwitchThumbIconProps = {
   width: string

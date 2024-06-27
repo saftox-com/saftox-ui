@@ -1,5 +1,5 @@
 import type { MaybeAccessor } from '@saftox-ui/solid-utils/reactivity'
-import type { AriaLabelingProps, DOMProps, LabelableProps } from '@saftox-ui/types'
+import type { AriaLabelingProps, DOMAttributes, DOMProps, LabelableProps } from '@saftox-ui/types'
 import type { JSX } from 'solid-js'
 
 import { mergeProps, splitProps } from 'solid-js'
@@ -12,17 +12,17 @@ export interface AriaLabelProps extends LabelableProps, DOMProps, AriaLabelingPr
    * @default true
    */
   isHTMLLabelElement?: MaybeAccessor<boolean | undefined>
+  /**
+   * The HTML element used to render the label, e.g. 'label', or 'span'.
+   * @default 'label'
+   */
+  labelElementType?: HTMLElement
 }
 
 export interface LabelAria {
-  /**
-   * Props to apply to the label container element.
-   */
-  labelProps: JSX.LabelHTMLAttributes<HTMLLabelElement>
-
-  /**
-   * Props to apply to the field container element being labeled.
-   */
+  /** Props to apply to the label container element.*/
+  labelProps: DOMAttributes | JSX.LabelHTMLAttributes<HTMLLabelElement>
+  /** Props to apply to the field container element being labeled. */
   fieldProps: DOMProps & AriaLabelingProps
 }
 
@@ -50,7 +50,7 @@ export function createLabel(originalProps: AriaLabelProps): LabelAria {
     'isHTMLLabelElement',
   ])
 
-  const labelProps: JSX.LabelHTMLAttributes<HTMLLabelElement> = {
+  const labelProps: JSX.LabelHTMLAttributes<HTMLLabelElement> | DOMAttributes = {
     get id() {
       return local.label ? labelId : undefined
     },

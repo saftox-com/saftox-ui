@@ -46,6 +46,7 @@
   "devDependencies": {
     "@saftox-ui/theme": "workspace:*",
     "@saftox-ui/system": "workspace:*",
+    "@saftox-ui/button": "workspace:*",
     "@saftox-ui/variants": "workspace:*",
     "@saftox-ui/shared-icons": "workspace:*",
     "@modular-forms/solid": "^0.20.0"

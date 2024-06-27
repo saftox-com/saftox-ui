@@ -1,111 +1,20 @@
 import type {
-  AriaLabelingProps,
-  AriaValidationProps,
-  DOMAttributes,
-  FocusableDOMProps,
-  FocusableProps,
-  HelpTextProps,
-  InputBase,
-  IntrinsicHTMLElements,
-  LabelableProps,
-  TextInputBase,
-  TextInputDOMProps,
-  Validation,
-  ValueBase,
-} from '@saftox-ui/types'
-import type { Accessor, JSX } from 'solid-js'
+  AriaTextFieldOptions,
+  DefaultElementType,
+  TextFieldAria,
+  TextFieldHTMLElementType,
+  TextFieldIntrinsicElements,
+} from './textfield-types'
+import type { DOMAttributes } from '@saftox-ui/types'
+import type { Accessor } from 'solid-js'
 
 import { createMemo, mergeProps } from 'solid-js'
 
 import { createFocusable } from '@saftox-ui/focus'
+import { createFormValidationState } from '@saftox-ui/form'
 import { createField } from '@saftox-ui/label'
-import { callHandler, filterDOMProps } from '@saftox-ui/utils'
-
-type DefaultElementType = 'input'
-
-/**
- * The intrinsic HTML element names that `createTextField` supports; e.g. `input`, `textarea`.
- */
-type TextFieldIntrinsicElements = keyof Pick<IntrinsicHTMLElements, 'input' | 'textarea'>
-
-/**
- * The HTML element interfaces that `createTextField` supports based on what is
- * defined for `TextFieldIntrinsicElements`; e.g. `HTMLInputElement`, `HTMLTextAreaElement`.
- */
-type TextFieldHTMLElementType = Pick<IntrinsicHTMLElements, TextFieldIntrinsicElements>
-
-/**
- * The HTML attributes interfaces that `createTextField` supports based on what
- * is defined for `TextFieldIntrinsicElements`; e.g. `InputHTMLAttributes`, `TextareaHTMLAttributes`.
- */
-type TextFieldHTMLAttributesType = Pick<JSX.IntrinsicElements, TextFieldIntrinsicElements>
-
-/**
- * The type of `inputProps` returned by `createTextField`; e.g. `InputHTMLAttributes`, `TextareaHTMLAttributes`.
- */
-type TextFieldInputProps<T extends TextFieldIntrinsicElements> = TextFieldHTMLAttributesType[T]
-
-export interface AriaTextFieldProps<T extends TextFieldIntrinsicElements>
-  extends InputBase,
-    Validation,
-    HelpTextProps,
-    FocusableProps,
-    TextInputBase,
-    ValueBase<string>,
-    LabelableProps,
-    AriaLabelingProps,
-    FocusableDOMProps,
-    TextInputDOMProps,
-    AriaValidationProps {
-  /**
-   * Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application.
-   * See https://www.w3.org/TR/wai-aria-1.2/#textbox.
-   */
-  'aria-activedescendant'?: string
-
-  /**
-   * Indicates whether inputting text could trigger display of one or more predictions
-   * of the user's intended value for an input
-   * and specifies how predictions would be presented if they are made.
-   */
-  'aria-autocomplete'?: 'none' | 'inline' | 'list' | 'both'
-
-  /**
-   * Indicates the availability and type of interactive popup element,
-   * such as menu or dialog, that can be triggered by an element.
-   */
-  'aria-haspopup'?: boolean | 'false' | 'true' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog'
-
-  /**
-   * The HTML element used to render the input, e.g. 'input', or 'textarea'.
-   * It determines whether certain HTML attributes will be included in `inputProps`.
-   * For example, [`type`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type).
-   * @default 'input'
-   */
-  inputElementType?: T
-}
-
-export interface TextFieldAria<T extends TextFieldIntrinsicElements = DefaultElementType> {
-  /**
-   * Props for the input element.
-   */
-  inputProps: TextFieldInputProps<T>
-
-  /**
-   * Props for the text field's visible label element, if any.
-   */
-  labelProps: JSX.LabelHTMLAttributes<HTMLLabelElement>
-
-  /**
-   * Props for the text field's description element, if any.
-   */
-  descriptionProps: DOMAttributes
-
-  /**
-   * Props for the text field's error message element, if any.
-   */
-  errorMessageProps: DOMAttributes
-}
+import { combineProps, pickProps } from '@saftox-ui/solid-utils/reactivity'
+import { createControllableSignal, filterDOMProps } from '@saftox-ui/utils'
 
 /**
  * Provides the behavior and accessibility implementation for a text field.
@@ -113,26 +22,56 @@ export interface TextFieldAria<T extends TextFieldIntrinsicElements = DefaultEle
  * @param ref - Ref to the HTML input or textarea element.
  */
 export function createTextField<T extends TextFieldIntrinsicElements = DefaultElementType>(
-  originalProps: AriaTextFieldProps<T>,
+  originalProps: AriaTextFieldOptions<T>,
   ref: Accessor<TextFieldHTMLElementType[T] | undefined>,
 ): TextFieldAria<T> {
-  const defaultProps: AriaTextFieldProps<TextFieldIntrinsicElements> = {
-    type: 'text',
-    inputElementType: 'input',
+  const defaultProps: AriaTextFieldOptions<T> = {
+    inputElementType: 'input' as T,
     isDisabled: false,
     isRequired: false,
     isReadOnly: false,
+    type: 'text',
+    validationBehavior: 'aria',
   }
 
-  const props = mergeProps(defaultProps, originalProps) as AriaTextFieldProps<T>
+  const props = mergeProps(defaultProps, originalProps)
 
   const { focusableProps } = createFocusable(props, ref)
-  const { labelProps, fieldProps, descriptionProps, errorMessageProps } = createField(props)
 
-  const domProps = mergeProps(createMemo(() => filterDOMProps(props, { labelable: true })))
+  const [value, setValue] = createControllableSignal<string>({
+    value: () => props.value,
+    defaultValue: () => props.defaultValue || '',
+    onChange: props.onChange,
+  })
 
-  const inputProps: JSX.HTMLAttributes<any> = mergeProps(
-    domProps,
+  const { displayValidation } = createFormValidationState(
+    mergeProps(props, {
+      get value() {
+        return value()
+      },
+    }),
+  )
+
+  const { labelProps, fieldProps, descriptionProps, errorMessageProps } = createField(
+    mergeProps(props, displayValidation, {
+      get errorMessage() {
+        return props.errorMessage || displayValidation().validationErrors
+      },
+    }),
+  )
+
+  const domProps = mergeProps(
+    createMemo(() =>
+      filterDOMProps(props, { labelable: true, omitEventNames: new Set(['onChange']) }),
+    ),
+  )
+
+  // TODO: Finish implementing Form Validation & Reset
+
+  // createFormReset(ref, value, setValue)
+  // createFormValidation(props, validationState, ref())
+
+  const baseInputProps = mergeProps(
     {
       get type() {
         return props.inputElementType === 'input' ? props.type : undefined
@@ -143,35 +82,20 @@ export function createTextField<T extends TextFieldIntrinsicElements = DefaultEl
       get disabled() {
         return props.isDisabled
       },
-      get readOnly() {
+      get readonly() {
         return props.isReadOnly || undefined
       },
-      get 'aria-required'() {
-        return props.isRequired || undefined
-      },
-      get 'aria-invalid'() {
-        return props.validationState === 'invalid' || undefined
-      },
-      get 'aria-errormessage'() {
-        return props['aria-errormessage']
-      },
-      get 'aria-activedescendant'() {
-        return props['aria-activedescendant']
-      },
-      get 'aria-autocomplete'() {
-        return props['aria-autocomplete']
-      },
-      get 'aria-haspopup'() {
-        return props['aria-haspopup']
+      get required() {
+        return props.isRequired && props.validationBehavior === 'native'
       },
       get value() {
-        return props.value
-      },
-      get defaultValue() {
-        return props.value ? undefined : props.defaultValue
+        return value()
       },
       get autocomplete() {
         return props.autocomplete
+      },
+      get autocapitalize() {
+        return props.autocapitalize
       },
       get maxLength() {
         return props.maxLength
@@ -189,36 +113,57 @@ export function createTextField<T extends TextFieldIntrinsicElements = DefaultEl
         return props.inputMode
       },
 
+      // aria attributes
+      get 'aria-required'() {
+        return props.isRequired || undefined
+      },
+      get 'aria-invalid'() {
+        return (props.isRequired && props.validationBehavior === 'native') || undefined
+      },
+      get 'aria-errormessage'() {
+        return props['aria-errormessage']
+      },
+      get 'aria-activedescendant'() {
+        return props['aria-activedescendant']
+      },
+      get 'aria-autocomplete'() {
+        return props['aria-autocomplete']
+      },
+      get 'aria-haspopup'() {
+        return props['aria-haspopup']
+      },
+
       // Change events
-      onChange: (e) => props.onChange?.((e.target as HTMLInputElement).value),
+      onChange: (e: Event) => setValue((e.target as HTMLInputElement).value),
 
       // Clipboard events
-      onCopy: (e) => callHandler(props.onCopy, e),
-      onCut: (e) => callHandler(props.onCut, e),
-      onPaste: (e) => callHandler(props.onPaste, e),
+      onCopy: props.onCopy,
+      onCut: props.onCut,
+      onPaste: props.onPaste,
 
       // Composition events
-      onCompositionEnd: (e) => callHandler(props.onCompositionEnd, e),
-      onCompositionStart: (e) => callHandler(props.onCompositionStart, e),
-      onCompositionUpdate: (e) => callHandler(props.onCompositionUpdate, e),
+      onCompositionEnd: props.onCompositionEnd,
+      onCompositionStart: props.onCompositionStart,
+      onCompositionUpdate: props.onCompositionUpdate,
 
       // Selection events
-      onSelect: (e) => callHandler(props.onSelect, e),
+      onSelect: props.onSelect,
 
       // Input events
-      onBeforeInput: (e) => callHandler(props.onBeforeInput, e),
-      onInput: (e) => callHandler(props.onInput, e),
-    } as JSX.HTMLAttributes<any>,
+      onBeforeInput: props.onBeforeInput,
+      onInput: props.onInput,
+    } as DOMAttributes,
     focusableProps,
     fieldProps,
   )
 
-  // const inputProps = combineProps(domProps, baseInputProps);
+  const inputProps = combineProps(domProps, baseInputProps)
 
   return {
     labelProps,
     inputProps,
     descriptionProps,
     errorMessageProps,
+    displayValidation,
   }
 }

@@ -1,4 +1,4 @@
-import type { AriaTextFieldProps, TextFieldAria } from './create-textfield'
+import type { AriaTextFieldProps, TextFieldAria } from './textfield-types'
 import type { Accessor, JSX } from 'solid-js'
 
 import { createTextField } from './create-textfield'
@@ -21,9 +21,9 @@ function supportsNativeBeforeInputEvent() {
 }
 
 export function createFormattedTextField(
-  props: AriaTextFieldProps<'input'>,
-  inputRef: Accessor<HTMLInputElement | undefined>,
+  props: AriaTextFieldProps,
   state: Accessor<FormattedTextFieldState>,
+  inputRef: Accessor<HTMLInputElement | undefined>,
 ): TextFieldAria {
   createEffect(
     on([inputRef, state], ([input, state]) => {
@@ -44,6 +44,9 @@ export function createFormattedTextField(
           case 'historyRedo':
             // Explicitly allow undo/redo. e.data is null in this case, but there's no need to validate,
             // because presumably the input would have already been validated previously.
+            return
+          case 'insertLineBreak':
+            // Explicitly allow "insertLineBreak" event, to allow onSubmit for "enter" key. e.data is null in this case.
             return
           case 'deleteContent':
           case 'deleteByCut':
@@ -101,6 +104,9 @@ export function createFormattedTextField(
     inputProps: textFieldProps,
     descriptionProps,
     errorMessageProps,
+    isInvalid,
+    validationErrors,
+    validationDetails,
   } = createTextField(props, inputRef)
 
   let compositionStartState: Pick<
@@ -168,5 +174,8 @@ export function createFormattedTextField(
     labelProps,
     descriptionProps,
     errorMessageProps,
+    isInvalid,
+    validationErrors,
+    validationDetails,
   }
 }

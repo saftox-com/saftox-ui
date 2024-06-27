@@ -17,6 +17,7 @@ import { chain, clsx, dataAttr } from '@saftox-ui/shared-utils'
 import { mergeRefs, pickProps } from '@saftox-ui/solid-utils/reactivity'
 import { mapPropsVariants, useProviderContext } from '@saftox-ui/system'
 import { toggle } from '@saftox-ui/theme'
+import { createToggleState } from '@saftox-ui/toggle'
 
 import { createSwitch } from './aria/create-switch'
 
@@ -59,32 +60,29 @@ export function useSwitch(originalProps: UseSwitchProps) {
 
   const labelId = createUniqueId()
 
-  const pickLoclPropsForAriaSwitch = pickProps(local, [
-    'name',
-    'value',
-    'autofocus',
-    'defaultSelected',
-    'isSelected',
-    'isReadOnly',
-  ])
+  const ariaSwitchProps = mergeProps(
+    pickProps(local, ['name', 'value', 'autofocus', 'defaultSelected', 'isSelected', 'isReadOnly']),
+    {
+      children: originalProps.children,
+      get ariaLabel() {
+        return rest['aria-label'] || typeof children() === 'string'
+          ? (children() as string)
+          : undefined
+      },
+      get isDisabled() {
+        return !!rest.isDisabled
+      },
+      get 'aria-label'() {
+        return this.ariaLabel
+      },
+      'aria-labelledby': originalProps['aria-labelledby'] || labelId,
+      onChange: local.onValueChange,
+    },
+  )
 
-  const ariaSwitchProps = mergeProps(pickLoclPropsForAriaSwitch, {
-    get ariaLabel() {
-      return rest['aria-label'] || typeof children() === 'string'
-        ? (children() as string)
-        : undefined
-    },
-    get isDisabled() {
-      return variantProps.isDisabled
-    },
-    get 'aria-label'() {
-      return this.ariaLabel
-    },
-    'aria-labelledby': rest['aria-labelledby'] || labelId,
-    onChange: local.onValueChange,
-  })
+  const toggleState = createToggleState(ariaSwitchProps)
 
-  const { inputProps, isPressed: isPressedSwitch, state } = createSwitch(ariaSwitchProps, inputRef)
+  const { inputProps, states: switchStates } = createSwitch(ariaSwitchProps, toggleState, inputRef)
 
   const { focusProps, isFocused, isFocusVisible } = createFocusRing({
     get autofocus() {
@@ -98,6 +96,8 @@ export function useSwitch(originalProps: UseSwitchProps) {
     },
   })
 
+  // Handle press state for full label. Keyboard press state is returned by useSwitch
+  // since it is handled on the <input> element itself.
   const [isPressed, setPressed] = createSignal(false)
   const { pressProps } = createPress({
     get isDisabled() {
@@ -120,10 +120,10 @@ export function useSwitch(originalProps: UseSwitchProps) {
       return originalProps.disableAnimation ?? globalContext?.disableAnimation ?? false
     },
     get isInteractionDisabled() {
-      return ariaSwitchProps.isDisabled || ariaSwitchProps.isReadOnly
+      return ariaSwitchProps.isDisabled || switchStates.isReadOnly
     },
     get isPressed() {
-      return this.isInteractionDisabled ? false : isPressed() || isPressedSwitch()
+      return this.isInteractionDisabled ? false : isPressed() || switchStates.isPressed
     },
     get isSelected() {
       return inputProps.checked
@@ -143,7 +143,7 @@ export function useSwitch(originalProps: UseSwitchProps) {
     ),
   )
 
-  const getBaseProps: PropGetter = (props) => {
+  const getBaseProps: PropGetter = (props = {}) => {
     return mergeProps(hoverProps, pressProps, rest, props, {
       ref: setDomRef,
       get class() {
@@ -232,7 +232,7 @@ export function useSwitch(originalProps: UseSwitchProps) {
       },
       props.includeStateProps && {
         get isSelected() {
-          return state.isSelected()
+          return switchStates.isSelected
         },
       },
     ) as unknown as SwitchThumbIconProps
@@ -274,11 +274,11 @@ export function useSwitch(originalProps: UseSwitchProps) {
 
   return {
     Component,
+    children,
     local,
-    properties,
     slots,
     domRef,
-    children,
+    properties,
     getBaseProps,
     getWrapperProps,
     getInputProps,

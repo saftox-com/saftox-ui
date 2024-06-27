@@ -1,9 +1,9 @@
 {
-  "name": "@saftox-ui/toggle",
+  "name": "@saftox-ui/form",
   "author": "Serhii Zaitsev <ceo@saftox.com>",
   "version": "0.0.1",
-  "description": "Primitives for building toggle components like checkboxes and switches.",
-  "keywords": ["toggle"],
+  "description": "",
+  "keywords": ["form"],
   "main": "./src/index.ts",
   "sideEffects": false,
   "files": ["dist"],
@@ -13,7 +13,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/saftox-com/saftox-ui.git",
-    "directory": "packages/primitives/toggle"
+    "directory": "packages/primitives/form"
   },
   "bugs": {
     "url": "https://github.com/saftox-com/saftox-ui/issues"
@@ -31,16 +31,15 @@
   "peerDependencies": {
     "solid-js": ">=1.8.17"
   },
-  "devDependencies": {
-    "solid-js": "^1.8.17"
-  },
   "dependencies": {
     "@saftox-ui/shared-utils": "0.0.1",
     "@saftox-ui/solid-utils": "0.0.1",
     "@saftox-ui/interactions": "0.0.1",
     "@saftox-ui/utils": "0.0.1",
-    "@saftox-ui/types": "0.0.1",
-    "@saftox-ui/focus": "0.0.1"
+    "@saftox-ui/types": "0.0.1"
+  },
+  "devDependencies": {
+    "solid-js": "^1.8.17"
   },
   "clean-package": "../../../configs/clean-package.config.json",
   "tsup": {
@@ -49,7 +48,7 @@
     "format": ["cjs", "esm"]
   },
   "primitive": {
-    "name": "toggle",
+    "name": "form",
     "stage": 0,
     "list": [],
     "category": ""

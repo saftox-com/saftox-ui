@@ -1,4 +1,4 @@
-import { type ComponentProps, type JSX, createSignal } from 'solid-js'
+import { type ComponentProps, type JSX, createSignal, Show } from 'solid-js'
 import type { Meta, StoryObj } from 'storybook-solidjs'
 
 import { PlusFilledIcon, SendFilledIcon } from '@saftox-ui/shared-icons'
@@ -51,6 +51,12 @@ export default {
         type: 'boolean',
       },
     },
+    validationBehavior: {
+      control: {
+        type: 'select',
+      },
+      options: ['aria', 'native'],
+    },
   },
   decorators: [
     (Story: any) => (
@@ -101,31 +107,37 @@ const MaxRowsTemplate = (args: TextAreaProps) => (
   </div>
 )
 
-const FormTemplate = (args: TextAreaProps) => (
-  <form
-    class="w-full max-w-xl flex flex-row items-end gap-4"
-    onSubmit={(e) => {
-      alert(
-        `Submitted value: ${
+const FormTemplate = (args: TextAreaProps) => {
+  const [value, setValue] = createSignal('')
+
+  return (
+    <form
+      class="w-full max-w-xl flex flex-row items-end gap-4"
+      onsubmit={(e) => {
+        e.preventDefault()
+        setValue(
           (
             e.target as HTMLInputElement & {
               example: HTMLInputElement
             }
-          ).example.value
-        }`,
-      )
-      e.preventDefault()
-    }}
-  >
-    <div class="w-full max-w-[440px]">
-      <Textarea name="textarea" {...args} />
-    </div>
+          ).example.value,
+        )
+      }}
+    >
+      <div class="w-full max-w-[440px]">
+        <Textarea name="example" {...args} />
 
-    <button class={button({ color: 'primary' }).base()} type="submit">
-      Submit
-    </button>
-  </form>
-)
+        <Show when={value()}>
+          <p class="text-default-500 text-small">Textarea value: {value()}</p>
+        </Show>
+      </div>
+
+      <button class={button({ color: 'primary' }).base()} type="submit">
+        Submit
+      </button>
+    </form>
+  )
+}
 
 export const Default = {
   render: Template,
@@ -257,7 +269,7 @@ export const WithErrorMessageFunction = {
     ...defaultProps,
     isRequired: true,
     minLength: '10',
-    maxLength: '',
+    maxLength: '100',
     label: 'Comment',
     placeholder: 'Enter your comment (10-100 characters)',
     errorMessage: (value: any) => {
