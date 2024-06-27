@@ -1,7 +1,7 @@
 import type { Ref } from '@saftox-ui/solid-utils/dom'
 import type { HTMLSaftoxUIProps } from '@saftox-ui/system'
 import type { ButtonGroupVariantProps, ButtonVariantProps } from '@saftox-ui/theme'
-import type { CreateToggleStateProps } from '@saftox-ui/toggle'
+import type { ToggleProps } from '@saftox-ui/toggle'
 import type {
   AriaLabelingProps,
   ElementType,
@@ -98,7 +98,7 @@ export interface AriaButtonProps<T extends ElementType = 'button'>
     AriaBaseButtonProps {}
 
 export interface AriaToggleButtonProps<T extends ElementType = 'button'>
-  extends CreateToggleStateProps,
+  extends ToggleProps,
     ButtonProps,
     AriaBaseButtonProps,
     AriaButtonElementTypeProps<T> {}

@@ -14,7 +14,6 @@ import { mergeProps } from 'solid-js'
 import { createFocusable } from '@saftox-ui/focus'
 import { createPress } from '@saftox-ui/interactions'
 import { issueWarning } from '@saftox-ui/shared-utils'
-import { combineProps } from '@saftox-ui/solid-utils/reactivity'
 import { filterDOMProps } from '@saftox-ui/utils'
 
 export interface ToggleProps extends InputBase, Validation<boolean>, FocusableProps {

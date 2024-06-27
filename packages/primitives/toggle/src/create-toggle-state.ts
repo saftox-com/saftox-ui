@@ -1,5 +1,4 @@
 import type { ToggleProps } from './create-toggle'
-import type { MaybeAccessor } from '@saftox-ui/solid-utils/reactivity'
 import type { Accessor } from 'solid-js'
 
 import { access } from '@saftox-ui/solid-utils/reactivity'
