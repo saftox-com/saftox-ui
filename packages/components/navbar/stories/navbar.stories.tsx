@@ -7,7 +7,7 @@ import { navbar } from '@saftox-ui/theme'
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '../src'
 
 import { Link } from '@saftox-ui/link'
-import { Button } from '@saftox-ui/Button'
+import { Button } from '@saftox-ui/button'
 
 import { LoremIpsum } from 'lorem-ipsum'
 
