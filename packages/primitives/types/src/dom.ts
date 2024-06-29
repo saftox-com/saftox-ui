@@ -72,6 +72,13 @@ export interface TextInputDOMEvents {
   onInput?: JSX.EventHandlerUnion<HTMLInputElement, InputEvent>
 }
 
+export interface InputDOMProps {
+  /**
+   * The name of the input element, used when submitting an HTML form. See [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname).
+   */
+  name?: string
+}
+
 /**
  * DOM props that apply to all text inputs.
  * Ensure this is synced with useTextField
