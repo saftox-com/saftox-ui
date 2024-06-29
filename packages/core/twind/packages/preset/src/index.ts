@@ -93,6 +93,7 @@ export const themeConfig = (
       {
         ...preflightLayout,
       },
+      utilities,
       preflight,
     ],
     theme: {
@@ -152,7 +153,6 @@ export const themeConfig = (
         ...animations,
       },
     },
-    rules: [...(Object.entries(utilities).map(([key, value]) => [key, value]) as [])],
     ...userConfig,
     presets: [defaultPreset(), ...presets],
   })
