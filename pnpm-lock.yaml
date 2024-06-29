@@ -543,6 +543,55 @@ importers:
         specifier: ^2.0.8
         version: 2.0.8
 
+  packages/components/radio:
+    dependencies:
+      '@saftox-ui/focus':
+        specifier: 0.0.1
+        version: link:../../primitives/focus
+      '@saftox-ui/form':
+        specifier: 0.0.1
+        version: link:../../primitives/form
+      '@saftox-ui/i18n':
+        specifier: 0.0.1
+        version: link:../../primitives/i18n
+      '@saftox-ui/interactions':
+        specifier: 0.0.1
+        version: link:../../primitives/interactions
+      '@saftox-ui/label':
+        specifier: 0.0.1
+        version: link:../../primitives/label
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/types':
+        specifier: 0.0.1
+        version: link:../../primitives/types
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../../primitives/utils
+      '@saftox-ui/visually-hidden':
+        specifier: 0.0.1
+        version: link:../../primitives/visually-hidden
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+    devDependencies:
+      '@saftox-ui/button':
+        specifier: workspace:*
+        version: link:../button
+      '@saftox-ui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@saftox-ui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      '@saftox-ui/variants':
+        specifier: workspace:*
+        version: link:../../core/twind/packages/variants
+
   packages/components/skeleton:
     dependencies:
       '@saftox-ui/shared-utils':
