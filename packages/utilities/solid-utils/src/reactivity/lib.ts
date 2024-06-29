@@ -1,7 +1,7 @@
 import type { Accessor } from 'solid-js'
 
 import { combineProps, combineStyle } from '@solid-primitives/props'
-import { mergeRefs } from '@solid-primitives/refs'
+import { mergeRefs, resolveFirst } from '@solid-primitives/refs'
 import { access, chain, isObject } from '@solid-primitives/utils'
 
 import { createMemo } from 'solid-js'
@@ -105,4 +105,5 @@ export {
   pickProps,
   destructure,
   spread,
+  resolveFirst,
 }

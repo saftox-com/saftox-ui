@@ -87,7 +87,7 @@ export function createCheckboxGroupItem(
   const updateValidation = () => {
     state.setInvalid(
       props.value,
-      realtimeValidation.isInvalid ? realtimeValidation : nativeValidation,
+      realtimeValidation().isInvalid ? realtimeValidation() : nativeValidation,
     )
   }
 
@@ -95,7 +95,7 @@ export function createCheckboxGroupItem(
 
   // combine group and checkbox validation
   const combinedRealtimeValidation = () =>
-    state.realtimeValidation.isInvalid ? state.realtimeValidation : realtimeValidation
+    state.realtimeValidation().isInvalid ? state.realtimeValidation : realtimeValidation()
   const displayValidation = () =>
     validationBehavior === 'native' ? state.displayValidation : combinedRealtimeValidation
 

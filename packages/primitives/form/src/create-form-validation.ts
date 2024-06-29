@@ -22,8 +22,8 @@ export function createFormValidation<T>(
 
     if (props.validationBehavior === 'native' && ref) {
       const errorMessage = () =>
-        state.realtimeValidation.isInvalid
-          ? state.realtimeValidation.validationErrors.join(' ') || 'Invalid value.'
+        state.realtimeValidation().isInvalid
+          ? state.realtimeValidation().validationErrors.join(' ') || 'Invalid value.'
           : ''
 
       ref.setCustomValidity(errorMessage())
@@ -34,7 +34,7 @@ export function createFormValidation<T>(
         ref.title = ''
       }
 
-      if (!state.realtimeValidation.isInvalid) {
+      if (!state.realtimeValidation().isInvalid) {
         state.updateValidation(getNativeValidity(ref))
       }
     }
@@ -43,7 +43,7 @@ export function createFormValidation<T>(
   const onReset = state.resetValidation
   const onChange = state.commitValidation
   const onInvalid = (e: Event) => {
-    if (!state.displayValidation.isInvalid) {
+    if (!state.displayValidation().isInvalid) {
       state.commitValidation()
     }
 

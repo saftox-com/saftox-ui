@@ -20,13 +20,13 @@ importers:
         version: 2.27.5
       '@commitlint/cli':
         specifier: 19.3.0
-        version: 19.3.0(@types/node@20.12.12)(typescript@5.4.5)
+        version: 19.3.0(@types/node@20.12.12)(typescript@5.5.2)
       '@commitlint/config-conventional':
         specifier: 19.2.2
         version: 19.2.2
       '@commitlint/cz-commitlint':
         specifier: 19.2.0
-        version: 19.2.0(@types/node@20.12.12)(commitizen@4.3.0(@types/node@20.12.12)(typescript@5.4.5))(inquirer@9.2.22)(typescript@5.4.5)
+        version: 19.2.0(@types/node@20.12.12)(commitizen@4.3.0(@types/node@20.12.12)(typescript@5.5.2))(inquirer@9.2.22)(typescript@5.5.2)
       '@saftox-ui/storybook-solid':
         specifier: workspace:*
         version: link:packages/storybook/solid
@@ -53,7 +53,7 @@ importers:
         version: 5.14.9
       '@typescript-eslint/parser':
         specifier: ^7.13.1
-        version: 7.13.1(eslint@9.5.0)(typescript@5.4.5)
+        version: 7.13.1(eslint@9.5.0)(typescript@5.5.2)
       babel-preset-solid:
         specifier: ^1.8.17
         version: 1.8.17(@babel/core@7.24.6)
@@ -62,7 +62,7 @@ importers:
         version: 2.2.0
       commitizen:
         specifier: 4.3.0
-        version: 4.3.0(@types/node@20.12.12)(typescript@5.4.5)
+        version: 4.3.0(@types/node@20.12.12)(typescript@5.5.2)
       commitlint-plugin-function-rules:
         specifier: ^4.0.0
         version: 4.0.0(@commitlint/lint@19.2.2)
@@ -80,7 +80,7 @@ importers:
         version: 9.5.0
       eslint-import-resolver-typescript:
         specifier: ^3.6.1
-        version: 3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@9.5.0)
+        version: 3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-plugin-import@2.29.1)(eslint@9.5.0)
       eslint-plugin-no-only-tests:
         specifier: ^3.1.0
         version: 3.1.0
@@ -122,10 +122,10 @@ importers:
         version: 1.0.0-beta.2(babel-preset-solid@1.8.17(@babel/core@7.24.6))(solid-js@1.8.17)
       tsup:
         specifier: ^8.0.2
-        version: 8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5))(typescript@5.4.5)
+        version: 8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2))(typescript@5.5.2)
       tsup-preset-solid:
         specifier: ^2.2.0
-        version: 2.2.0(esbuild@0.21.4)(solid-js@1.8.17)(tsup@8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5))(typescript@5.4.5))
+        version: 2.2.0(esbuild@0.21.4)(solid-js@1.8.17)(tsup@8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2))(typescript@5.5.2))
       tsx:
         specifier: ^4.11.0
         version: 4.11.2
@@ -133,8 +133,8 @@ importers:
         specifier: 1.13.3
         version: 1.13.3
       typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
+        specifier: ^5.5.2
+        version: 5.5.2
       vite:
         specifier: ^5.2.12
         version: 5.2.12(@types/node@20.12.12)
@@ -249,6 +249,67 @@ importers:
         specifier: 1.8.17
         version: 1.8.17
     devDependencies:
+      '@saftox-ui/variants':
+        specifier: 0.0.1
+        version: link:../../core/twind/packages/variants
+
+  packages/components/checkbox:
+    dependencies:
+      '@saftox-ui/focus':
+        specifier: 0.0.1
+        version: link:../../primitives/focus
+      '@saftox-ui/form':
+        specifier: 0.0.1
+        version: link:../../primitives/form
+      '@saftox-ui/interactions':
+        specifier: 0.0.1
+        version: link:../../primitives/interactions
+      '@saftox-ui/label':
+        specifier: 0.0.1
+        version: link:../../primitives/label
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/toggle':
+        specifier: 0.0.1
+        version: link:../../primitives/toggle
+      '@saftox-ui/types':
+        specifier: 0.0.1
+        version: link:../../primitives/types
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../../primitives/utils
+      '@saftox-ui/visually-hidden':
+        specifier: 0.0.1
+        version: link:../../primitives/visually-hidden
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+    devDependencies:
+      '@modular-forms/solid':
+        specifier: ^0.20.0
+        version: 0.20.0(solid-js@1.8.17)
+      '@saftox-ui/chip':
+        specifier: workspace:*
+        version: link:../chip
+      '@saftox-ui/link':
+        specifier: workspace:*
+        version: link:../link
+      '@saftox-ui/shared-icons':
+        specifier: workspace:*
+        version: link:../../utilities/shared-icons
+      '@saftox-ui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@saftox-ui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      '@saftox-ui/user':
+        specifier: workspace:*
+        version: link:../user
       '@saftox-ui/variants':
         specifier: 0.0.1
         version: link:../../core/twind/packages/variants
@@ -427,6 +488,61 @@ importers:
         specifier: 0.0.1
         version: link:../../core/twind/packages/variants
 
+  packages/components/navbar:
+    dependencies:
+      '@saftox-ui/motion-solid':
+        specifier: ^0.0.1
+        version: link:../../utilities/motion-solid
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/use-scroll':
+        specifier: 0.0.1
+        version: link:../../hooks/use-scroll
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../../primitives/utils
+      '@solid-primitives/resize-observer':
+        specifier: ^2.0.25
+        version: 2.0.25(solid-js@1.8.17)
+      motion:
+        specifier: ^10.18.0
+        version: 10.18.0
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+    devDependencies:
+      '@saftox-ui/avatar':
+        specifier: workspace:*
+        version: link:../avatar
+      '@saftox-ui/button':
+        specifier: workspace:*
+        version: link:../button
+      '@saftox-ui/link':
+        specifier: workspace:*
+        version: link:../link
+      '@saftox-ui/shared-icons':
+        specifier: workspace:*
+        version: link:../../utilities/shared-icons
+      '@saftox-ui/system':
+        specifier: workspace:*
+        version: link:../../core/system
+      '@saftox-ui/textfield':
+        specifier: workspace:*
+        version: link:../textfield
+      '@saftox-ui/theme':
+        specifier: workspace:*
+        version: link:../../core/theme
+      '@saftox-ui/variants':
+        specifier: workspace:*
+        version: link:../../core/twind/packages/variants
+      lorem-ipsum:
+        specifier: ^2.0.8
+        version: 2.0.8
+
   packages/components/skeleton:
     dependencies:
       '@saftox-ui/shared-utils':
@@ -566,6 +682,9 @@ importers:
       '@modular-forms/solid':
         specifier: ^0.20.0
         version: 0.20.0(solid-js@1.8.17)
+      '@saftox-ui/button':
+        specifier: workspace:*
+        version: link:../button
       '@saftox-ui/shared-icons':
         specifier: workspace:*
         version: link:../../utilities/shared-icons
@@ -584,6 +703,9 @@ importers:
       '@saftox-ui/focus':
         specifier: ^0.0.1
         version: link:../../primitives/focus
+      '@saftox-ui/form':
+        specifier: ^0.0.1
+        version: link:../../primitives/form
       '@saftox-ui/interactions':
         specifier: ^0.0.1
         version: link:../../primitives/interactions
@@ -615,6 +737,9 @@ importers:
       '@modular-forms/solid':
         specifier: ^0.20.0
         version: 0.20.0(solid-js@1.8.17)
+      '@saftox-ui/button':
+        specifier: workspace:*
+        version: link:../button
       '@saftox-ui/system':
         specifier: workspace:*
         version: link:../../core/system
@@ -717,7 +842,7 @@ importers:
         version: 3.1.3
       distilt:
         specifier: ^0.19.2
-        version: 0.19.2(typescript@5.4.5)
+        version: 0.19.2(typescript@5.5.2)
 
   packages/core/twind/packages/preset:
     dependencies:
@@ -783,6 +908,18 @@ importers:
         specifier: 1.8.17
         version: 1.8.17
 
+  packages/hooks/use-scroll:
+    dependencies:
+      '@saftox-ui/shared-hooks':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-hooks
+      '@saftox-ui/use-event-listener':
+        specifier: 0.0.1
+        version: link:../use-event-listener
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+
   packages/primitives/focus:
     dependencies:
       '@saftox-ui/interactions':
@@ -800,6 +937,28 @@ importers:
       '@solid-primitives/utils':
         specifier: ^6.2.3
         version: 6.2.3(solid-js@1.8.17)
+    devDependencies:
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+
+  packages/primitives/form:
+    dependencies:
+      '@saftox-ui/interactions':
+        specifier: 0.0.1
+        version: link:../interactions
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
+      '@saftox-ui/types':
+        specifier: 0.0.1
+        version: link:../types
+      '@saftox-ui/utils':
+        specifier: 0.0.1
+        version: link:../utils
     devDependencies:
       solid-js:
         specifier: 1.8.17
@@ -876,18 +1035,18 @@ importers:
       '@saftox-ui/interactions':
         specifier: 0.0.1
         version: link:../interactions
+      '@saftox-ui/shared-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/shared-utils
+      '@saftox-ui/solid-utils':
+        specifier: 0.0.1
+        version: link:../../utilities/solid-utils
       '@saftox-ui/types':
         specifier: 0.0.1
         version: link:../types
       '@saftox-ui/utils':
         specifier: 0.0.1
         version: link:../utils
-      '@solid-primitives/props':
-        specifier: ^3.1.11
-        version: 3.1.11(solid-js@1.8.17)
-      '@solid-primitives/utils':
-        specifier: ^6.2.3
-        version: 6.2.3(solid-js@1.8.17)
     devDependencies:
       solid-js:
         specifier: 1.8.17
@@ -957,7 +1116,7 @@ importers:
     devDependencies:
       '@joshwooding/vite-plugin-react-docgen-typescript':
         specifier: ^0.3.1
-        version: 0.3.1(typescript@5.4.5)(vite@5.2.12(@types/node@20.12.12))
+        version: 0.3.1(typescript@5.5.2)(vite@5.2.12(@types/node@20.12.12))
       '@modular-forms/solid':
         specifier: ^0.20.0
         version: 0.20.0(solid-js@1.8.17)
@@ -987,7 +1146,7 @@ importers:
         version: 8.1.5(@types/react@18.3.3)(prettier@3.2.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/builder-vite':
         specifier: ^8.1.5
-        version: 8.1.5(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.12(@types/node@20.12.12))
+        version: 8.1.5(prettier@3.2.5)(typescript@5.5.2)(vite@5.2.12(@types/node@20.12.12))
       '@storybook/manager-api':
         specifier: ^8.1.5
         version: 8.1.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1015,7 +1174,7 @@ importers:
     devDependencies:
       '@storybook/builder-vite':
         specifier: next
-        version: 8.2.0-alpha.5(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.12(@types/node@20.12.12))
+        version: 8.2.0-alpha.5(prettier@3.2.5)(typescript@5.5.2)(vite@5.2.12(@types/node@20.12.12))
       '@storybook/csf':
         specifier: ^0.1.8
         version: 0.1.8
@@ -1048,7 +1207,7 @@ importers:
         version: 0.6.0(esbuild@0.20.2)(solid-js@1.8.17)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5)
+        version: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2)
       type-fest:
         specifier: ^4.19.0
         version: 4.19.0
@@ -1060,7 +1219,7 @@ importers:
         version: link:../solid
       '@storybook/builder-vite':
         specifier: next
-        version: 8.2.0-alpha.5(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.12(@types/node@20.12.12))
+        version: 8.2.0-alpha.5(prettier@3.2.5)(typescript@5.5.2)(vite@5.2.12(@types/node@20.12.12))
       storybook-solidjs:
         specifier: ^1.0.0-beta.2
         version: 1.0.0-beta.2(babel-preset-solid@1.8.17(@babel/core@7.24.6))(solid-js@1.8.17)
@@ -1071,6 +1230,28 @@ importers:
       magic-string:
         specifier: ^0.30.10
         version: 0.30.10
+
+  packages/utilities/motion-solid:
+    dependencies:
+      '@motionone/dom':
+        specifier: ^10.18.0
+        version: 10.18.0
+      '@motionone/utils':
+        specifier: ^10.18.0
+        version: 10.18.0
+      '@saftox-ui/solid-utils':
+        specifier: ^0.0.1
+        version: link:../solid-utils
+      '@solid-primitives/transition-group':
+        specifier: ^1.0.5
+        version: 1.0.5(solid-js@1.8.17)
+      solid-js:
+        specifier: 1.8.17
+        version: 1.8.17
+    devDependencies:
+      csstype:
+        specifier: 3.1.3
+        version: 3.1.3
 
   packages/utilities/shared-hooks:
     dependencies:
@@ -2343,6 +2524,24 @@ packages:
     peerDependencies:
       solid-js: 1.8.17
 
+  '@motionone/animation@10.18.0':
+    resolution: {integrity: sha512-9z2p5GFGCm0gBsZbi8rVMOAJCtw1WqBTIPw3ozk06gDvZInBPIsQcHgYogEJ4yuHJ+akuW8g1SEIOpTOvYs8hw==}
+
+  '@motionone/dom@10.18.0':
+    resolution: {integrity: sha512-bKLP7E0eyO4B2UaHBBN55tnppwRnaE3KFfh3Ps9HhnAkar3Cb69kUCJY9as8LrccVYKgHA+JY5dOQqJLOPhF5A==}
+
+  '@motionone/easing@10.18.0':
+    resolution: {integrity: sha512-VcjByo7XpdLS4o9T8t99JtgxkdMcNWD3yHU/n6CLEz3bkmKDRZyYQ/wmSf6daum8ZXqfUAgFeCZSpJZIMxaCzg==}
+
+  '@motionone/generators@10.18.0':
+    resolution: {integrity: sha512-+qfkC2DtkDj4tHPu+AFKVfR/C30O1vYdvsGYaR13W/1cczPrrcjdvYCj0VLFuRMN+lP1xvpNZHCRNM4fBzn1jg==}
+
+  '@motionone/types@10.17.1':
+    resolution: {integrity: sha512-KaC4kgiODDz8hswCrS0btrVrzyU2CSQKO7Ps90ibBVSQmjkrt2teqta6/sOG59v7+dPnKMAg13jyqtMKV2yJ7A==}
+
+  '@motionone/utils@10.18.0':
+    resolution: {integrity: sha512-3XVF7sgyTSI2KWvTf6uLlBJ5iAgRgmvp3bpuOiQJvInd4nZ19ET8lX5unn30SlmRH7hXbBbH+Gxd0m0klJ3Xtw==}
+
   '@ndelangen/get-tarball@3.0.9':
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==}
 
@@ -2677,6 +2876,11 @@ packages:
     resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
 
+  '@solid-primitives/event-listener@2.3.3':
+    resolution: {integrity: sha512-DAJbl+F0wrFW2xmcV8dKMBhk9QLVLuBSW+TR4JmIfTaObxd13PuL7nqaXnaYKDWOYa6otB00qcCUIGbuIhSUgQ==}
+    peerDependencies:
+      solid-js: 1.8.17
+
   '@solid-primitives/platform@0.1.2':
     resolution: {integrity: sha512-sSxcZfuUrtxcwV0vdjmGnZQcflACzMfLriVeIIWXKp8hzaS3Or3tO6EFQkTd3L8T5dTq+kTtLvPscXIpL0Wzdg==}
     peerDependencies:
@@ -2689,6 +2893,26 @@ packages:
 
   '@solid-primitives/refs@1.0.8':
     resolution: {integrity: sha512-+jIsWG8/nYvhaCoG2Vg6CJOLgTmPKFbaCrNQKWfChalgUf9WrVxWw0CdJb3yX15n5lUcQ0jBo6qYtuVVmBLpBw==}
+    peerDependencies:
+      solid-js: 1.8.17
+
+  '@solid-primitives/resize-observer@2.0.25':
+    resolution: {integrity: sha512-jVDXkt2MiriYRaz4DYs62185d+6jQ+1DCsR+v7f6XMsIJJuf963qdBRFjtZtKXBaxdPNMyuPeDgf5XQe3EoDJg==}
+    peerDependencies:
+      solid-js: 1.8.17
+
+  '@solid-primitives/rootless@1.4.5':
+    resolution: {integrity: sha512-GFJE9GC3ojx0aUKqAUZmQPyU8fOVMtnVNrkdk2yS4kd17WqVSpXpoTmo9CnOwA+PG7FTzdIkogvfLQSLs4lrww==}
+    peerDependencies:
+      solid-js: 1.8.17
+
+  '@solid-primitives/static-store@0.0.8':
+    resolution: {integrity: sha512-ZecE4BqY0oBk0YG00nzaAWO5Mjcny8Fc06CdbXadH9T9lzq/9GefqcSe/5AtdXqjvY/DtJ5C6CkcjPZO0o/eqg==}
+    peerDependencies:
+      solid-js: 1.8.17
+
+  '@solid-primitives/transition-group@1.0.5':
+    resolution: {integrity: sha512-G3FuqvL13kQ55WzWPX2ewiXdZ/1iboiX53195sq7bbkDbXqP6TYKiadwEdsaDogW5rPnPYAym3+xnsNplQJRKQ==}
     peerDependencies:
       solid-js: 1.8.17
 
@@ -3786,6 +4010,10 @@ packages:
     resolution: {integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==}
     engines: {node: '>= 6'}
 
+  commander@9.5.0:
+    resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==}
+    engines: {node: ^12.20.0 || >=14}
+
   commitizen@4.3.0:
     resolution: {integrity: sha512-H0iNtClNEhT0fotHvGV3E9tDejDeS04sN1veIebsKYGMuGscFaswRoYJKmT3eW85eIJAs0F28bG2+a/9wCOfPw==}
     engines: {node: '>= 12'}
@@ -4802,6 +5030,9 @@ packages:
   header-case@2.0.4:
     resolution: {integrity: sha512-H/vuk5TEEVZwrR0lp2zed9OCo1uAILMlx0JEMgC26rzyJJ3N1v6XkwHHXJQdR2doSjcGPM6OKPYoJgf0plJ11Q==}
 
+  hey-listen@1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
+
   homedir-polyfill@1.0.3:
     resolution: {integrity: sha512-eSmmWE5bZTK2Nou4g0AI3zZ9rswp7GRKoKXS1BLUkvPviOqs4YTN1djQIqrXy9k5gEtdLPy86JjRwsNM9tnDcA==}
     engines: {node: '>=0.10.0'}
@@ -5435,6 +5666,11 @@ packages:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
 
+  lorem-ipsum@2.0.8:
+    resolution: {integrity: sha512-5RIwHuCb979RASgCJH0VKERn9cQo/+NcAi2BMe9ddj+gp7hujl6BI+qdOG4nVsLDpwWEJwTVYXNKP6BGgbcoGA==}
+    engines: {node: '>= 8.x', npm: '>= 5.x'}
+    hasBin: true
+
   loupe@2.3.7:
     resolution: {integrity: sha512-zSMINGVYkdpYSOBmLi0D1Uo7JU9nVdQKrHxC8eYlV+9YKK9WePqAlL7lSlorG/U2Fw1w0hTBmaa/jrQ3UbPHtA==}
 
@@ -5623,6 +5859,9 @@ packages:
 
   mlly@1.7.0:
     resolution: {integrity: sha512-U9SDaXGEREBYQgfejV97coK0UL1r+qnF2SyO9A3qcI8MzKnsIFKHNVEkrDyNncQTKQQumsasmeq84eNMdBfsNQ==}
+
+  motion@10.18.0:
+    resolution: {integrity: sha512-MVAZZmwM/cp77BrNe1TxTMldxRPjwBNHheU5aPToqT4rJdZxLiADk58H+a0al5jKLxkB0OdgNq6DiVn11cjvIQ==}
 
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
@@ -6940,8 +7179,8 @@ packages:
     peerDependencies:
       typescript: ^4.7.2 || ^5
 
-  typescript@5.4.5:
-    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+  typescript@5.5.2:
+    resolution: {integrity: sha512-NcRtPEOsPFFWjobJEtfihkLCZCXZt/os3zf8nTxjVH3RvTSxjrCamJpbExGvYOF+tFHc3pA65qpdwPbzjohhew==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -8316,11 +8555,11 @@ snapshots:
   '@colors/colors@1.5.0':
     optional: true
 
-  '@commitlint/cli@19.3.0(@types/node@20.12.12)(typescript@5.4.5)':
+  '@commitlint/cli@19.3.0(@types/node@20.12.12)(typescript@5.5.2)':
     dependencies:
       '@commitlint/format': 19.3.0
       '@commitlint/lint': 19.2.2
-      '@commitlint/load': 19.2.0(@types/node@20.12.12)(typescript@5.4.5)
+      '@commitlint/load': 19.2.0(@types/node@20.12.12)(typescript@5.5.2)
       '@commitlint/read': 19.2.1
       '@commitlint/types': 19.0.3
       execa: 8.0.1
@@ -8339,13 +8578,13 @@ snapshots:
       '@commitlint/types': 19.0.3
       ajv: 8.14.0
 
-  '@commitlint/cz-commitlint@19.2.0(@types/node@20.12.12)(commitizen@4.3.0(@types/node@20.12.12)(typescript@5.4.5))(inquirer@9.2.22)(typescript@5.4.5)':
+  '@commitlint/cz-commitlint@19.2.0(@types/node@20.12.12)(commitizen@4.3.0(@types/node@20.12.12)(typescript@5.5.2))(inquirer@9.2.22)(typescript@5.5.2)':
     dependencies:
       '@commitlint/ensure': 19.0.3
-      '@commitlint/load': 19.2.0(@types/node@20.12.12)(typescript@5.4.5)
+      '@commitlint/load': 19.2.0(@types/node@20.12.12)(typescript@5.5.2)
       '@commitlint/types': 19.0.3
       chalk: 5.3.0
-      commitizen: 4.3.0(@types/node@20.12.12)(typescript@5.4.5)
+      commitizen: 4.3.0(@types/node@20.12.12)(typescript@5.5.2)
       inquirer: 9.2.22
       lodash.isplainobject: 4.0.6
       word-wrap: 1.2.5
@@ -8381,15 +8620,15 @@ snapshots:
       '@commitlint/rules': 19.0.3
       '@commitlint/types': 19.0.3
 
-  '@commitlint/load@19.2.0(@types/node@20.12.12)(typescript@5.4.5)':
+  '@commitlint/load@19.2.0(@types/node@20.12.12)(typescript@5.5.2)':
     dependencies:
       '@commitlint/config-validator': 19.0.3
       '@commitlint/execute-rule': 19.0.0
       '@commitlint/resolve-extends': 19.1.0
       '@commitlint/types': 19.0.3
       chalk: 5.3.0
-      cosmiconfig: 9.0.0(typescript@5.4.5)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.12.12)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5)
+      cosmiconfig: 9.0.0(typescript@5.5.2)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.12.12)(cosmiconfig@9.0.0(typescript@5.5.2))(typescript@5.5.2)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -8660,15 +8899,15 @@ snapshots:
       '@types/yargs': 17.0.32
       chalk: 4.1.2
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.1(typescript@5.4.5)(vite@5.2.12(@types/node@20.12.12))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.1(typescript@5.5.2)(vite@5.2.12(@types/node@20.12.12))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
-      react-docgen-typescript: 2.2.2(typescript@5.4.5)
+      react-docgen-typescript: 2.2.2(typescript@5.5.2)
       vite: 5.2.12(@types/node@20.12.12)
     optionalDependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
@@ -8723,6 +8962,41 @@ snapshots:
   '@modular-forms/solid@0.20.0(solid-js@1.8.17)':
     dependencies:
       solid-js: 1.8.17
+
+  '@motionone/animation@10.18.0':
+    dependencies:
+      '@motionone/easing': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      tslib: 2.6.2
+
+  '@motionone/dom@10.18.0':
+    dependencies:
+      '@motionone/animation': 10.18.0
+      '@motionone/generators': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      hey-listen: 1.0.8
+      tslib: 2.6.2
+
+  '@motionone/easing@10.18.0':
+    dependencies:
+      '@motionone/utils': 10.18.0
+      tslib: 2.6.2
+
+  '@motionone/generators@10.18.0':
+    dependencies:
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      tslib: 2.6.2
+
+  '@motionone/types@10.17.1': {}
+
+  '@motionone/utils@10.18.0':
+    dependencies:
+      '@motionone/types': 10.17.1
+      hey-listen: 1.0.8
+      tslib: 2.6.2
 
   '@ndelangen/get-tarball@3.0.9':
     dependencies:
@@ -9009,6 +9283,11 @@ snapshots:
 
   '@sindresorhus/merge-streams@2.3.0': {}
 
+  '@solid-primitives/event-listener@2.3.3(solid-js@1.8.17)':
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.17)
+      solid-js: 1.8.17
+
   '@solid-primitives/platform@0.1.2(solid-js@1.8.17)':
     dependencies:
       solid-js: 1.8.17
@@ -9021,6 +9300,28 @@ snapshots:
   '@solid-primitives/refs@1.0.8(solid-js@1.8.17)':
     dependencies:
       '@solid-primitives/utils': 6.2.3(solid-js@1.8.17)
+      solid-js: 1.8.17
+
+  '@solid-primitives/resize-observer@2.0.25(solid-js@1.8.17)':
+    dependencies:
+      '@solid-primitives/event-listener': 2.3.3(solid-js@1.8.17)
+      '@solid-primitives/rootless': 1.4.5(solid-js@1.8.17)
+      '@solid-primitives/static-store': 0.0.8(solid-js@1.8.17)
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.17)
+      solid-js: 1.8.17
+
+  '@solid-primitives/rootless@1.4.5(solid-js@1.8.17)':
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.17)
+      solid-js: 1.8.17
+
+  '@solid-primitives/static-store@0.0.8(solid-js@1.8.17)':
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.17)
+      solid-js: 1.8.17
+
+  '@solid-primitives/transition-group@1.0.5(solid-js@1.8.17)':
+    dependencies:
       solid-js: 1.8.17
 
   '@solid-primitives/utils@6.2.3(solid-js@1.8.17)':
@@ -9226,7 +9527,7 @@ snapshots:
       - prettier
       - supports-color
 
-  '@storybook/builder-vite@8.1.5(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.12(@types/node@20.12.12))':
+  '@storybook/builder-vite@8.1.5(prettier@3.2.5)(typescript@5.5.2)(vite@5.2.12(@types/node@20.12.12))':
     dependencies:
       '@storybook/channels': 8.1.5
       '@storybook/client-logger': 8.1.5
@@ -9247,13 +9548,13 @@ snapshots:
       ts-dedent: 2.2.0
       vite: 5.2.12(@types/node@20.12.12)
     optionalDependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
     transitivePeerDependencies:
       - encoding
       - prettier
       - supports-color
 
-  '@storybook/builder-vite@8.2.0-alpha.5(prettier@3.2.5)(typescript@5.4.5)(vite@5.2.12(@types/node@20.12.12))':
+  '@storybook/builder-vite@8.2.0-alpha.5(prettier@3.2.5)(typescript@5.5.2)(vite@5.2.12(@types/node@20.12.12))':
     dependencies:
       '@storybook/channels': 8.2.0-alpha.5
       '@storybook/client-logger': 8.2.0-alpha.5
@@ -9274,7 +9575,7 @@ snapshots:
       ts-dedent: 2.2.0
       vite: 5.2.12(@types/node@20.12.12)
     optionalDependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
     transitivePeerDependencies:
       - encoding
       - prettier
@@ -10091,16 +10392,16 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5)':
+  '@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2)':
     dependencies:
       '@typescript-eslint/scope-manager': 7.13.1
       '@typescript-eslint/types': 7.13.1
-      '@typescript-eslint/typescript-estree': 7.13.1(typescript@5.4.5)
+      '@typescript-eslint/typescript-estree': 7.13.1(typescript@5.5.2)
       '@typescript-eslint/visitor-keys': 7.13.1
       debug: 4.3.5
       eslint: 9.5.0
     optionalDependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
 
@@ -10111,7 +10412,7 @@ snapshots:
 
   '@typescript-eslint/types@7.13.1': {}
 
-  '@typescript-eslint/typescript-estree@7.13.1(typescript@5.4.5)':
+  '@typescript-eslint/typescript-estree@7.13.1(typescript@5.5.2)':
     dependencies:
       '@typescript-eslint/types': 7.13.1
       '@typescript-eslint/visitor-keys': 7.13.1
@@ -10120,9 +10421,9 @@ snapshots:
       is-glob: 4.0.3
       minimatch: 9.0.4
       semver: 7.6.2
-      ts-api-utils: 1.3.0(typescript@5.4.5)
+      ts-api-utils: 1.3.0(typescript@5.5.2)
     optionalDependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
 
@@ -10700,10 +11001,12 @@ snapshots:
 
   commander@6.2.1: {}
 
-  commitizen@4.3.0(@types/node@20.12.12)(typescript@5.4.5):
+  commander@9.5.0: {}
+
+  commitizen@4.3.0(@types/node@20.12.12)(typescript@5.5.2):
     dependencies:
       cachedir: 2.3.0
-      cz-conventional-changelog: 3.3.0(@types/node@20.12.12)(typescript@5.4.5)
+      cz-conventional-changelog: 3.3.0(@types/node@20.12.12)(typescript@5.5.2)
       dedent: 0.7.0
       detect-indent: 6.1.0
       find-node-modules: 2.1.3
@@ -10806,21 +11109,21 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@5.0.0(@types/node@20.12.12)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5):
+  cosmiconfig-typescript-loader@5.0.0(@types/node@20.12.12)(cosmiconfig@9.0.0(typescript@5.5.2))(typescript@5.5.2):
     dependencies:
       '@types/node': 20.12.12
-      cosmiconfig: 9.0.0(typescript@5.4.5)
+      cosmiconfig: 9.0.0(typescript@5.5.2)
       jiti: 1.21.0
-      typescript: 5.4.5
+      typescript: 5.5.2
 
-  cosmiconfig@9.0.0(typescript@5.4.5):
+  cosmiconfig@9.0.0(typescript@5.5.2):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.0
       js-yaml: 4.1.0
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
 
   create-require@1.1.1: {}
 
@@ -10861,16 +11164,16 @@ snapshots:
       csv-stringify: 5.6.5
       stream-transform: 2.1.3
 
-  cz-conventional-changelog@3.3.0(@types/node@20.12.12)(typescript@5.4.5):
+  cz-conventional-changelog@3.3.0(@types/node@20.12.12)(typescript@5.5.2):
     dependencies:
       chalk: 2.4.2
-      commitizen: 4.3.0(@types/node@20.12.12)(typescript@5.4.5)
+      commitizen: 4.3.0(@types/node@20.12.12)(typescript@5.5.2)
       conventional-commit-types: 3.0.0
       lodash.map: 4.6.0
       longest: 2.0.1
       word-wrap: 1.2.5
     optionalDependencies:
-      '@commitlint/load': 19.2.0(@types/node@20.12.12)(typescript@5.4.5)
+      '@commitlint/load': 19.2.0(@types/node@20.12.12)(typescript@5.5.2)
     transitivePeerDependencies:
       - '@types/node'
       - typescript
@@ -11031,7 +11334,7 @@ snapshots:
     dependencies:
       path-type: 4.0.0
 
-  distilt@0.19.2(typescript@5.4.5):
+  distilt@0.19.2(typescript@5.5.2):
     dependencies:
       '@rollup/plugin-commonjs': 23.0.7(rollup@3.29.4)
       '@rollup/plugin-dynamic-import-vars': 2.1.2(rollup@3.29.4)
@@ -11048,8 +11351,8 @@ snapshots:
       globby: 13.2.2
       normalize-package-data: 5.0.0
       rollup: 3.29.4
-      rollup-plugin-dts: 5.3.1(rollup@3.29.4)(typescript@5.4.5)
-      rollup-plugin-tsconfig-paths: 1.5.2(rollup@3.29.4)(typescript@5.4.5)
+      rollup-plugin-dts: 5.3.1(rollup@3.29.4)(typescript@5.5.2)
+      rollup-plugin-tsconfig-paths: 1.5.2(rollup@3.29.4)(typescript@5.5.2)
       semver: 7.6.2
     transitivePeerDependencies:
       - typescript
@@ -11338,13 +11641,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@9.5.0):
+  eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-plugin-import@2.29.1)(eslint@9.5.0):
     dependencies:
       debug: 4.3.5
       enhanced-resolve: 5.17.0
       eslint: 9.5.0
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@9.5.0))(eslint@9.5.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@9.5.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-plugin-import@2.29.1)(eslint@9.5.0))(eslint@9.5.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@9.5.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.13.1
@@ -11355,18 +11658,18 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.8.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@9.5.0))(eslint@9.5.0):
+  eslint-module-utils@2.8.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-plugin-import@2.29.1)(eslint@9.5.0))(eslint@9.5.0):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
-      '@typescript-eslint/parser': 7.13.1(eslint@9.5.0)(typescript@5.4.5)
+      '@typescript-eslint/parser': 7.13.1(eslint@9.5.0)(typescript@5.5.2)
       eslint: 9.5.0
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@9.5.0)
+      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-plugin-import@2.29.1)(eslint@9.5.0)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@9.5.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-import-resolver-typescript@3.6.1)(eslint@9.5.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5
@@ -11376,7 +11679,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.5.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@9.5.0))(eslint@9.5.0)
+      eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.13.1(eslint@9.5.0)(typescript@5.5.2))(eslint-plugin-import@2.29.1)(eslint@9.5.0))(eslint@9.5.0)
       hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3
@@ -11387,7 +11690,7 @@ snapshots:
       semver: 6.3.1
       tsconfig-paths: 3.15.0
     optionalDependencies:
-      '@typescript-eslint/parser': 7.13.1(eslint@9.5.0)(typescript@5.4.5)
+      '@typescript-eslint/parser': 7.13.1(eslint@9.5.0)(typescript@5.5.2)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -12009,6 +12312,8 @@ snapshots:
     dependencies:
       capital-case: 1.0.4
       tslib: 2.6.2
+
+  hey-listen@1.0.8: {}
 
   homedir-polyfill@1.0.3:
     dependencies:
@@ -12646,6 +12951,10 @@ snapshots:
     dependencies:
       js-tokens: 4.0.0
 
+  lorem-ipsum@2.0.8:
+    dependencies:
+      commander: 9.5.0
+
   loupe@2.3.7:
     dependencies:
       get-func-name: 2.0.2
@@ -12808,6 +13117,13 @@ snapshots:
       pathe: 1.1.2
       pkg-types: 1.1.1
       ufo: 1.5.3
+
+  motion@10.18.0:
+    dependencies:
+      '@motionone/animation': 10.18.0
+      '@motionone/dom': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
 
   ms@2.0.0: {}
 
@@ -13188,13 +13504,13 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5)):
+  postcss-load-config@4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2)):
     dependencies:
       lilconfig: 3.1.1
       yaml: 2.4.3
     optionalDependencies:
       postcss: 8.4.38
-      ts-node: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5)
+      ts-node: 10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2)
 
   postcss@8.4.38:
     dependencies:
@@ -13295,9 +13611,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  react-docgen-typescript@2.2.2(typescript@5.4.5):
+  react-docgen-typescript@2.2.2(typescript@5.5.2):
     dependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
 
   react-dom@18.3.1(react@18.3.1):
     dependencies:
@@ -13498,18 +13814,18 @@ snapshots:
     dependencies:
       glob: 10.4.1
 
-  rollup-plugin-dts@5.3.1(rollup@3.29.4)(typescript@5.4.5):
+  rollup-plugin-dts@5.3.1(rollup@3.29.4)(typescript@5.5.2):
     dependencies:
       magic-string: 0.30.10
       rollup: 3.29.4
-      typescript: 5.4.5
+      typescript: 5.5.2
     optionalDependencies:
       '@babel/code-frame': 7.24.6
 
-  rollup-plugin-tsconfig-paths@1.5.2(rollup@3.29.4)(typescript@5.4.5):
+  rollup-plugin-tsconfig-paths@1.5.2(rollup@3.29.4)(typescript@5.5.2):
     dependencies:
       rollup: 3.29.4
-      typescript-paths: 1.5.1(typescript@5.4.5)
+      typescript-paths: 1.5.1(typescript@5.5.2)
     transitivePeerDependencies:
       - typescript
 
@@ -14047,15 +14363,15 @@ snapshots:
 
   trim-newlines@3.0.1: {}
 
-  ts-api-utils@1.3.0(typescript@5.4.5):
+  ts-api-utils@1.3.0(typescript@5.5.2):
     dependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
 
   ts-dedent@2.2.0: {}
 
   ts-interface-checker@0.1.13: {}
 
-  ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5):
+  ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -14069,7 +14385,7 @@ snapshots:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.4.5
+      typescript: 5.5.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
@@ -14086,16 +14402,16 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsup-preset-solid@2.2.0(esbuild@0.21.4)(solid-js@1.8.17)(tsup@8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5))(typescript@5.4.5)):
+  tsup-preset-solid@2.2.0(esbuild@0.21.4)(solid-js@1.8.17)(tsup@8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2))(typescript@5.5.2)):
     dependencies:
       esbuild-plugin-solid: 0.5.0(esbuild@0.21.4)(solid-js@1.8.17)
-      tsup: 8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5))(typescript@5.4.5)
+      tsup: 8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2))(typescript@5.5.2)
     transitivePeerDependencies:
       - esbuild
       - solid-js
       - supports-color
 
-  tsup@8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5))(typescript@5.4.5):
+  tsup@8.1.0(@swc/core@1.5.24)(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2))(typescript@5.5.2):
     dependencies:
       bundle-require: 4.2.1(esbuild@0.21.4)
       cac: 6.7.14
@@ -14105,7 +14421,7 @@ snapshots:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.4.5))
+      postcss-load-config: 4.0.2(postcss@8.4.38)(ts-node@10.9.2(@swc/core@1.5.24)(@types/node@20.12.12)(typescript@5.5.2))
       resolve-from: 5.0.0
       rollup: 4.18.0
       source-map: 0.8.0-beta.0
@@ -14114,7 +14430,7 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.5.24(@swc/helpers@0.4.36)
       postcss: 8.4.38
-      typescript: 5.4.5
+      typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -14220,11 +14536,11 @@ snapshots:
       is-typed-array: 1.1.13
       possible-typed-array-names: 1.0.0
 
-  typescript-paths@1.5.1(typescript@5.4.5):
+  typescript-paths@1.5.1(typescript@5.5.2):
     dependencies:
-      typescript: 5.4.5
+      typescript: 5.5.2
 
-  typescript@5.4.5: {}
+  typescript@5.5.2: {}
 
   ufo@1.5.3: {}
 
