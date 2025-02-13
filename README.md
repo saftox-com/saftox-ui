@@ -7,6 +7,8 @@
   </a>
 </p>
 
+> ⚠️ This repository has been moved to a private monorepository and is no longer maintained as a standalone package. Please refer to [link](https://github.com/saftox-com/saftox/apps/saftox/saftox-ui/solidjs) for further updates and support. ⚠️
+
 ## <p align="center">Modern Collection UI Components, Utiities for <img src="https://www.solidjs.com/img/logo/without-wordmark/logo.png" alt="SaftoxUI" width="24" alt="SolidJS" style="vertical-align: top;"> SolidJS</p>
 
 #### Inspired by the popular [NextUI](https://nextui.org/) and [React Aria](https://react-spectrum.adobe.com/react-aria/)
